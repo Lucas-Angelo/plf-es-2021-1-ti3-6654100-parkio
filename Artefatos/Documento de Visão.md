@@ -38,8 +38,11 @@ Se possível, estudar o funcionamento atual de segurança.
 
 ID | Descrição do Requisito | Prioridade | Complexidade 
 :-:|:-:|:-:|:-:
-1 | O porteiro cadastra os veículos no sistema | Informações: Placa, modelo, cor, bloco, APTO de destino, status (Automaticamente), horário de chegada (Automaticamente), e a classificação (Se trata um visitante ou um prestador de serviço). | Alta | Média 
-2 | O porteiro altera o status do veículo visitante para removido. Informações: Status (Automaticamente), horário de saída (Automaticamente) e avaliação (Bom ou Ruim). | Alta | Média 
+1 | O porteiro cadastra os veículos no sistema. Informações: Placa, Modelo, Cor, Bloco, Apto de Destino, Status, Horário de Chegada e Classificação (Se trata um visitante ou um prestador de serviço). | Alta | Média 
+2 | O sistema deve marcar o campo de Status como 'Dentro' a cada cadastro de veículos. | Alta | Baixa
+3 | O sistema deve gerar automaticamente o campo de Horário de Chegada para cada cadastro de veículos. | Alta | Baixa
+4 | O sistema deve disponibilizar uma configuração padrão de campos para visitantes e prestadores de serviço. | Alta | Média
+2 | O porteiro altera o campo Status do veículo visitante para removido. Informações: Status, horário de saída (Automaticamente) e avaliação (Bom ou Ruim). | Alta | Média 
 3 | A aplicação deve emitir um alerta integrado ao Telegram caso algum veículo ficar determinado tempo dentro do condomínio. Informações: O tempo padrão máximo para veículos de visitantes é de 20 minutos para sair, e o tempo padrão máximo para veículos de prestadores de serviço é de 8 horas para sair. | Alta | Alta 
 4 | O administrador da aplicação poderá criar usuários com diferentes permissões. | Média | Alta 
 5 | A aplicação deverá registrar as ações de cada usuário responsável pelos RF-1 (Requisito Funcional 1) e RF-2 (Requisito Funcional 2). | Média | Média 
@@ -52,7 +55,7 @@ ID | Descrição do Requisito | Prioridade | Complexidade
 :-:|:-:|:-:|:-:
 1 | A aplicação web deve ser responsiva para proporcionar o uso de todas as funcionalidades providas pelos requisitos funcionais em resoluções de 576px até 1080px. | Alta | Média 
 2 | A aplicação deve processar requisições do usuário em no máximo 3 segundos. | Alta | Baixa
-3 | A aplicação deve ser segura, sendo aprovado nos testes unitários de requisições HTTP e autenticação. | Alta | Alta 
+3 | A aplicação deve ser aprovada nos testes unitários de requisições HTTP e autenticação. | Alta | Alta 
 4 | A aplicação deve possuir uma interface web que seja objetiva para o usuário, com no máximo três funcionalidades por página. | Alta | Média
 5 | A aplicação deve ser compatível com sistema operacional Linux, com o objetivo de proporcionar a disponibilidade em nuvem de pelo menos 98% do tempo de atividade (uptime). | Alta | Baixa 
 6 | A aplicação deve ser dimensionada para suportar até 20 usuários conectados ao mesmo tempo. | Média |Baixa 
@@ -61,5 +64,5 @@ ID | Descrição do Requisito | Prioridade | Complexidade
 
 ### Técnica(s) de Elicitação utilizada(s) 
 
-Metodologia Ágil, com divisões em Sprints quinzenais. Desenvolvimento de um sistema web (frontend e backend) com banco de dados relacional. Definição dos requisitos analisando a situação atual da empresa, por meio de conversas e reuniões com o síndico(a) e/ou funcionários de TI do Condomínio do Conjunto Habitacional Santa Terezinha. 
-
+Entrevista com o resposável pelo setor de TI do condomínio, juntamente com um síndico do bloco 34. Além disso, uma visita no condomínio para entender o funcionamento atual da entrada de veículos.
+Ademais, o uso do documento de cadastro de dados de entrada de veículos, para estudar os campos utilizados ao identificar um veículo no controle de entrada e saída.
