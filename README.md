@@ -1,18 +1,19 @@
-# Nome do projeto
+# ParkIO
 
-Escreva um ou dois  parágrafo resumindo o objetivo do seu projeto.
+Desenvolver uma aplicação web que consiga controlar a entrada e saída dos veículos de visitantes no estacionamento comunitário que envolve todos os cinquenta e quatro blocos do Condomínio do Conjunto Habitacional Santa Terezinha. Possibilitando assim, a portaria e/ou a administração saberem quanto tempo cada veículo está dentro do condomínio e para qual bloco cada um foi.
 
 ## Alunos integrantes da equipe
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Guilherme Gabriel Silva Pereira
+* Henrique Penna Forte Monteiro
+* José Maurício Guimarães França
+* Lucas Angelo Oliveira Martins Rocha
+* Victor Boaventura Goes Campos
 
 ## Professores responsáveis
 
-* Nome completo do professor 1
-* Nome completo do professor 2
+* Eveline Alonso Veloso
+* Juliana Amaral Baroni de Carvalho
 
 ## Instruções de utilização
 
