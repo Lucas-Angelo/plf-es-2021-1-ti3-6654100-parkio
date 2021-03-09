@@ -51,9 +51,9 @@ ID | Descrição do Requisito | Prioridade | Complexidade
 11 | O sistema não pode permitir que um veiculo que entra por uma portaria, saia por outra portaria. | Média | Baixa
 12 | O sistema deve atualizar a lista de cadastros de veículos visitantes automaticamente quando um novo registro for criado. | Baixa | Média 
 13 | O sistema deverá possuir um relatório delimitado por um filtro de período de tempo, porteiro e/ou placa do carro, determinado pelo usuário administrador. Informações: O relatório irá conter todas as informações que foram cadastradas na entrada de cada veículo e a quantidade de veículos visitantes cadastradas. | Baixa | Alta 
-14 | O Sistema deve exibir na saída do veículo uma opção de reportar o visitante (pela placa do veículo) e o porteiro deverá escrever o motivo do bloqueio, e caso o veículo volte a tentar entrar no estacionamento aparecer um aviso de bloqueio.
+14 | O Sistema deve exibir na saída do veículo uma opção de reportar o visitante (pela placa do veículo) e o porteiro deverá escrever o motivo do bloqueio, e caso o veículo volte a tentar entrar no estacionamento aparecer um aviso de bloqueio. | Média | Média
 15 | O ronda poderá editar certas informações do veículo do visitante. Informações: Placa, Modelo e Cor | Baixa | Baixa
-16 | O síndico de um bloco, pode ver apenas visitantes destinados ao seu bloco. | Baixa | Média
+16 | O síndico de um bloco pode ver apenas visitantes destinados ao seu próprio bloco. | Baixa | Média
 
 ### Requisitos Não Funcionais 
 
