@@ -97,7 +97,11 @@ O Mapa de Stakeholder pode ser acessado de forma dinâmica pelo link: https://mi
 ___
 
 **3. Projeto da Solução**
-**3.1. Requisitos funcionais**
+
+**3.1 - Wireframes**
+Link para visualização dos wireframes no adobe XD: https://xd.adobe.com/view/717f31eb-109b-42b9-8de2-66d61bce1032-242c/screen/81f73c16-6800-4d69-a21b-f10a0eaa9a1f
+
+**3.2. Requisitos funcionais**
 
 | No.    | Processo/tarefa | Descrição/Informações | Prioridade | Complexidade |
 | :----- |:---------------:| :-------: | :--------: | :----------: |
@@ -118,13 +122,13 @@ ___
 15 | O ronda poderá editar certas informações do veículo do visitante. | Informações: Placa, Modelo e Cor | Baixa | Baixa
 16 | O síndico de um bloco pode ver apenas visitantes destinados ao seu próprio bloco. | Pois sindicos não manipulam os dados, podem apenas visualizar | Baixa | Média
 
-**3.3 - Diagrama de Entidade-Relacionamento** A fazer
+**3.4 - Diagrama de Entidade-Relacionamento** A fazer
 | ![Imagem12](https://exemple.com/img.png "Imagem12") |
 |:--:| 
 | *<sub>Imagem 5 - Diagrama de Entidade e Relacionamento ParkIO.</sub>* |
 
-***3.4. Tecnologias***
-Será desenvolvida uma aplicação web, diante disso, é necessário definir linguagens de marcação, estilização, de programação e um sistema de gerenciamento de banco de dados para suprir toda essa aplicação do ParkIO. Como linguagem de marcação de hipertexto foi escolhido o HTML5 para construção estrutural do site, para estilização utilizaremos CSS3, com auxílio do framework Bootstrap 4.6. Para programação será utilizado JavaScript no frontend e backend PHP com auxílio do framework Lumen, e o SGBD selecionado foi o MySQL por ser relacional e gratuito. A IDE de desenvolvimento escolhida foi o Visual Studio Code. A empresa de hospedagem para a aplicação foi escolhida a SanInternet.com, para hospedar a aplicação. A hospedagem utilizada será com o gerencimento da ferramenta cPanel.
+***3.5. Tecnologias***
+Será desenvolvida uma aplicação web, diante disso, é necessário definir linguagens de marcação, estilização, de programação e um sistema de gerenciamento de banco de dados para suprir toda essa aplicação do ParkIO. Os wireframes foram desenvolvidos utilizando o programa Adobe XD. Como linguagem de marcação de hipertexto foi escolhido o HTML5 para construção estrutural do site, para estilização utilizaremos CSS3, com auxílio do framework Bootstrap 4.6. Para programação será utilizado JavaScript no frontend e backend PHP com auxílio do framework Lumen, e o SGBD selecionado foi o MySQL por ser relacional e gratuito. A IDE de desenvolvimento escolhida foi o Visual Studio Code. A empresa de hospedagem para a aplicação foi escolhida a SanInternet.com, para hospedar a aplicação. A hospedagem utilizada será com o gerencimento da ferramenta cPanel.
 
 | ![Imagem13](https://i.imgur.com/mYCFwLB.png "Imagem13") |
 |:--:| 
