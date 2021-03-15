@@ -128,7 +128,19 @@ Link para visualização dos wireframes no adobe XD: https://xd.adobe.com/view/7
 | *<sub>Imagem 5 - Diagrama de Entidade e Relacionamento ParkIO.</sub>* |
 
 ***3.5. Tecnologias***
-Será desenvolvida uma aplicação web, diante disso, é necessário definir linguagens de marcação, estilização, de programação e um sistema de gerenciamento de banco de dados para suprir toda essa aplicação do ParkIO. Os wireframes foram desenvolvidos utilizando o programa Adobe XD. Como linguagem de marcação de hipertexto foi escolhido o HTML5 para construção estrutural do site, para estilização utilizaremos CSS3, com auxílio do framework Bootstrap 4.6. Para programação será utilizado JavaScript no frontend e backend PHP com auxílio do framework Lumen, e o SGBD selecionado foi o MySQL por ser relacional e gratuito. A IDE de desenvolvimento escolhida foi o Visual Studio Code. A empresa de hospedagem para a aplicação foi escolhida a SanInternet.com, para hospedar a aplicação. A hospedagem utilizada será com o gerencimento da ferramenta cPanel.
+Será desenvolvida uma aplicação web, diante disso, é necessário definir linguagens de marcação, estilização, de programação e um sistema de gerenciamento de banco de dados para suprir toda essa aplicação do ParkIO. Os wireframes foram desenvolvidos utilizando o programa Adobe XD. Como linguagem de marcação de hipertexto foi escolhido o HTML5 para construção estrutural do site, para estilização utilizaremos CSS3, com auxílio do framework Bootstrap 4.6. Para programação será utilizado JavaScript no frontend e no backend PHP com auxílio do framework Lumen, e o SGBD selecionado foi o MySQL por ser relacional e gratuito. A IDE de desenvolvimento escolhida foi o Visual Studio Code. A empresa de hospedagem para a aplicação foi escolhida a SanInternet.com, para hospedar a aplicação. A hospedagem utilizada será com o gerencimento da ferramenta cPanel.
+- Diante disso, as tecnologias definidas foram: 
+    - HTML, CSS, JavaScript e Bootstrap para o Frontend.
+    - PHP e Lumen para o Backend.
+    - MySQL como SGBD.
+    - Adobe XD para criação de wireframes.
+    - Saninternet como nuvem de hospedagem.
+    - Cpanel como ferramenta de administração da hospedagem.
+    - Miro para criação do artefato de Stakeholder map.
+    - MySQL Workbench para criar o modelo lógico EER de SQL (Implementação do modelo de Entidade e Relacionamento).
+    - Markdown para documentação e textos no Github.
+    - IDE Visual Studio Code.
+    - Servidor Apache e MySQL local Wamp ou XAMPP para desenvolvimento.
 
 | ![Imagem13](https://i.imgur.com/mYCFwLB.png "Imagem13") |
 |:--:| 
