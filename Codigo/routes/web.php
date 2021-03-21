@@ -22,6 +22,12 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => '/api'], function () use ($router) {
     $router->post('/users', 'UserController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
     $router->get('/users', 'UserController@getAll');
+
+
+    // responsable to return datas of vehicles passing plates in window create vehicle
+    $router->get('/vehicles/scearch', 'VehicleController@scearch');
+    // responsable to save vehicles
+    $router->post('/vehicles/save', 'VehicleController@create');
 });
 
 
