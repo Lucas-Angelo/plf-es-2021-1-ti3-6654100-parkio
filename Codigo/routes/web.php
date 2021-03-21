@@ -16,14 +16,17 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+/**
+ * API Routes
+ */
 $router->group(['prefix' => '/api'], function () use ($router) {
-    $router->post('/users', 'UserController@create');
-    $router->get('/users', 'UserController@test');
+    $router->post('/users', 'UserController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+    $router->get('/users', 'UserController@getAll');
 });
 
 
 
-
-$router->get('/test', function () use ($router) {
-    return view('test', ['name' => 'Oliveira']);
+/* Web Site Routes */
+$router->get('/test', function () use ($router) { // used in Browser URL
+    return view('test', ['name' => 'Oliveira']); // View Name (Same name as in resources/views), custom parameters
 });

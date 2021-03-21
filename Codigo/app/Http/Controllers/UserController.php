@@ -17,11 +17,25 @@ class UserController extends Controller
         
     }
 
-    public function test(Request $request){
+    /**
+     * Controller function that returns users with pagination
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function getAll(Request $request){
         $us = new UserService();
         return $us->getAll();
     }
 
+    /**
+     * Controller function that creates a new user
+     * It also validates info that the user has sent
+     * For more rules, see: https://laravel.com/docs/7.x/validation#available-validation-rules
+     *
+     * @param Request $request
+     * @return void
+     */
     public function create(Request $request){
         $this->validate($request, [
             'name' => 'required',

@@ -20,10 +20,28 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $table = 'user';
 
+    /**
+     * Primary Key name
+     * If name is "id", this is not required
+     * 
+     * @var string
+     */
     protected $primaryKey = 'id';
 
+    /**
+     * Primary key has auto_increment ?
+     * if true, this is not required
+     *
+     * @var boolean
+     */
     public $incrementing = true;
 
+    /**
+     * This table has created_at and updated_at ? if true, should auto update it ?
+     * if true, this is not required
+     *
+     * @var boolean
+     */
     public $timestamps = true;
 
     /**
