@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     protected $primaryKey = 'id';
 
-    public $incrementing = false;
+    public $incrementing = true;
 
     public $timestamps = true;
 
