@@ -39,21 +39,18 @@ Desenvolver um sistema web que consiga controlar a entrada e saída dos veículo
 ID | Descrição do Requisito | Prioridade | Complexidade
 :-:|:-:|:-:|:-:
 1 | O porteiro deve cadastrar os veículos no sistema.| Alta | Média
-2 | O sistema deve registrar automaticamente o horário de chegada, usuário que permitiu a entrada, de qual portaria entrou e o campo de Status como 'Dentro' para cada cadastro de veículo. | Alta | Baixa
-3 | O porteiro deve definir o Status do veículo visitante para 'Saiu' e marcar uma avaliação de como foi comportamento do condutor quando o veículo visitante sair. | Alta | Média
-4 | O sistema deve registrar automaticamente o horário de saída e o usuário que liberou a saída quando o porteiro registrar que o veículo saiu do estacionamento. | Alta | Baixa
-5 | O administrador do sistema deve cadastrar tipos de visitantes (Ex: Entrega dos Correios, Técnico de Banda Larga, etc...), e definir um tempo recomendado que o visitante fique dentro do condomínio. | Alta | Baixa
-6 | O porteiro poderá aumentar o tempo de permanência do visitante após fazer contato com o morador para verificar o motivo do atraso. | Baixa | Média
-7 | O sistema deve emitir um alerta para um grupo no Telegram contendo os porteiros e os rondas no caso de algum veículo ficar determinado tempo dentro do condomínio. | Alta | Alta
-8 | O administrador do sistema poderá criar usuários com diferentes permissões. | Média | Alta
-9 | O administrador do sistema poderá criar diferentes portarias dentro do sistema. | Média | Baixa
-10 | O porteiro deve escolher qual das portarias ele se encontra no momento após realizar seu login. | Média | Média
-11 | O sistema não pode permitir que um veiculo que entra por uma portaria, saia por outra portaria. | Média | Baixa
-12 | O sistema deve atualizar a lista de cadastros de veículos visitantes automaticamente quando um novo registro for criado. | Baixa | Média
-13 | O sistema deverá possuir um relatório delimitado por um filtro de período de tempo, porteiro e/ou placa do veículo, determinado pelo usuário administrador. | Baixa | Alta
-14 | O sistema deve exibir na saída do veículo uma opção de reportar o visitante (pela placa do veículo) e o porteiro deverá escrever o motivo do bloqueio, e caso o veículo volte a tentar entrar no estacionamento aparecer um aviso de bloqueio. | Média | Média
-15 | O ronda poderá editar certas informações do veículo do visitante. | Baixa | Baixa
-16 | O síndico de um bloco pode ver apenas visitantes destinados ao seu próprio bloco. | Baixa | Média
+2 | O porteiro deve definir o Status do veículo visitante para 'Saiu' e marcar uma avaliação de como foi comportamento do condutor quando o veículo visitante sair. | Alta | Média
+3 | O administrador do sistema deve cadastrar tipos de visitantes (Ex: Entrega dos Correios, Técnico de Banda Larga, etc...), e definir um tempo recomendado que o visitante fique dentro do condomínio. | Alta | Baixa
+4 | O porteiro poderá aumentar o tempo de permanência do visitante após fazer contato com o morador para verificar o motivo do atraso. | Baixa | Média
+5 | O sistema deve emitir um alerta para um grupo no Telegram contendo os porteiros e os rondas no caso de algum veículo ficar determinado tempo dentro do condomínio. | Alta | Alta
+6 | O administrador do sistema poderá criar usuários com diferentes permissões. | Média | Alta
+7 | O administrador do sistema poderá criar diferentes portarias dentro do sistema. | Média | Baixa
+8 | Os usuários de qualquer tipo devem ser capazes de fazer login. | Média | Média
+9 | Os usuários de qualquer tipo devem selecionar uma portaria para utilizar o sistema. | Média | Média
+10 | Os usuários devem poder consultar a lista de veículos. | Baixa | Média
+11 | A administração deverá possuir um relatório delimitado por um filtro de período de tempo, porteiro e/ou placa do veículo. | Baixa | Alta
+12 | O porteiro deverá escrever o motivo do bloqueio de um veículo visitante, caso ocorra algum problema com a visita. | Média | Média
+13 | O ronda poderá editar certas informações do veículo do visitante. | Baixa | Baixa
 
 ### Requisitos Não Funcionais
 
