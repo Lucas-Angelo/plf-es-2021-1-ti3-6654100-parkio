@@ -10,15 +10,15 @@
 |      Nome     |               E-mai              |                 Cargo ou Função – Empresa            |
 |:-------------:|:--------------------------------:|:----------------------------------------------------:|
 |    Jonathan   |   jonathandenisio031@gmail.com   |     Responsável pelo setor de TI do condomínio.      |
-|    Leandro    |   leandro.parreiras@gmail.com    |     Síndico do bloco 34.                             |
+|    Leandro    |   leandro.parreiras@gmail.com    |     Responsável pelo setor financeiro do condomínio. |
 
 ### Descrição do Problema
 ----------------------------------------------------------------------------------------------------------------
-O Condomínio do Conjunto Habitacional Santa Terezinha tem cinquenta e quatro blocos e duas portarias, além de não possuir um estacionamento para cada bloco. Com isso, é difícil de controlar a entrada e saída dos visitantes, dificultando a portaria de fazer o controle de veículos visitantes. Diante disso, o condomínio possui uma demanda de segurança envolvendo o controle da entrada e saída de veículos de não condôminos.
+O Condomínio do Conjunto Habitacional Santa Terezinha tem cinquenta e quatro blocos e duas portarias, além de não possuir um estacionamento exclusivo para cada apartamento. Com isso, é difícil de controlar a entrada e saída dos visitantes, dificultando a portaria de fazer o controle de veículos de visitantes. Diante disso, o condomínio possui uma demanda de segurança envolvendo o controle da entrada e saída de veículos que não possuem tag de entrada.
 
 ### Descrição Geral da Solução (Escopo)
 ----------------------------------------------------------------------------------------------------------------
-Desenvolver um sistema web que consiga controlar a entrada e saída dos veículos nos diversos blocos do conjunto. Possibilitando assim, a portaria e a administração saberem quanto tempo estão dentro do condomínio e para onde foi cada um dos veículos visitantes.
+Desenvolver um sistema web que consiga controlar a entrada e saída dos veículos nos diversos blocos do conjunto. Possibilitando assim, a portaria e a administração saberem quanto tempo estão dentro do condomínio e para onde foi cada um dos veículos de visitantes e prestadores de serviço.
 
 ### Fora do Escopo
 ----------------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ Desenvolver um sistema web que consiga controlar a entrada e saída dos veículo
 
 ### Usuários
 ----------------------------------------------------------------------------------------------------------------
-* A administração do condomínio, terão as permissões de visualizar, cadastrar, alterar e remover veículos, além de poder criar usuários, visualizar os relatórios e alterar configurações do sistema.
+* A administração do condomínio, terá as permissões de visualizar, cadastrar, alterar e remover veículos, além de poder criar usuários, visualizar os relatórios e alterar configurações do sistema.
 
 * Síndicos(as) de cada bloco, terá a permissão de visualizar somente os veículos direcionados ao seu bloco, sem poder fazer alterações no registro.
 
@@ -70,5 +70,5 @@ ID | Descrição do Requisito | Prioridade | Complexidade
 
 ### Técnica(s) de Elicitação utilizada(s)
 
-Entrevista com o resposável pelo setor de TI do condomínio, juntamente com um síndico do bloco 34. Além disso, uma visita no condomínio para entender o funcionamento atual da entrada de veículos.
+Entrevista com o resposável pelo setor de TI do condomínio, juntamente com o resposável pelo setor financeiro. Além disso, uma visita no condomínio para entender o funcionamento atual da entrada de veículos.
 Ademais, o uso do documento de cadastro de dados de entrada de veículos, para estudar os campos utilizados ao identificar um veículo no controle de entrada e saída.
