@@ -8,15 +8,6 @@ use App\Models\VisitorCategory;
 class VisitorCategoryService
 {
 
-    public function verifyVisitorCategory($description, int $time){
-
-      $visitorCategory = VisitorCategory::where('description','=', $description)->first();
-
-      if($visitorCategory!=null)  return $visitorCategory->id;
-      else return $this->createVisitorCategory($description, $time);
-
-
-    }
 
     public function createVisitorCategory($description,int $time){
 

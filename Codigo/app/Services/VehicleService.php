@@ -19,16 +19,10 @@ class VehicleService
         return Vehicle::paginate();
     }
 
-    public function create($driverName, $plate,int $time, $block,int $apartament, $category,
-    int $gateId, $color=null, $score=null, $model=null, $cpf=null  ){
+    public function create($driverName, $plate,int $time,int $destinationId,int $visitorCategoryId,
+    int $gateId, $color=null, $model=null, $cpf=null  ){
 
         $vehicle = new Vehicle();
-        $destination = new DestinationService();
-        $visitorCategory = new VisitorCategoryService();
-        //scearch a destination if don't find, create one and return the id
-        $destinationId = $destination->verifyDestination($block, $apartament);
-        //scearch a category if don't find, create one and return the id
-        $visitorCategoryId = $visitorCategory->verifyVisitorCategory($category, $time);
 
         $vehicle->driver_name = strtoupper($driverName);
         $vehicle->plate = trim(strtoupper($plate));
@@ -38,7 +32,6 @@ class VehicleService
         $vehicle->gate_id = $gateId;
         $vehicle->user_in_id = 1; //While don't have session check in our app
         $vehicle->color = (!empty($color)) ? $color : null;
-        $vehicle->score = (!empty($score)) ? $score : null;
         $vehicle->model = (!empty($model)) ? $model : null;
         $vehicle->cpf = (!empty($cpf)) ? preg_replace('/[^0-9]/', '', $cpf) : null;
         $vehicle->save();
@@ -49,18 +42,14 @@ class VehicleService
         ];
     }
 
-    public function scearch($plate)
+    public function search($plate)
     {
 
       $filtro = strtoupper($plate);
-      $vehicle = DB::table('vehicle')
-                    ->select('plate',
-                             'model',
-                              'color')
-                    ->where('plate','like', "%".$filtro."%")
-                    ->first();
+      $vehicle =Vehicle::where('plate','like', "%".$filtro."%")
+                     ->first(['plate','model','color']);
 
-      return response()->json( ['message'=> 'sucess', 'items'=>$vehicle] );
+      return ['message'=> 'sucess', 'items'=>$vehicle] ;
     }
 
 
