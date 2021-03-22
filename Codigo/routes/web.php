@@ -22,6 +22,10 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => '/api'], function () use ($router) {
     $router->post('/users', 'UserController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
     $router->get('/users', 'UserController@getAll');
+
+
+    $router->get('/vehicles/search', 'VehicleController@search'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
+    $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
 });
 
 
