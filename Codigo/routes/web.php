@@ -28,5 +28,17 @@ $router->group(['prefix' => '/api'], function () use ($router) {
 
 /* Web Site Routes */
 $router->get('/test', function () use ($router) { // used in Browser URL
-    return view('test', ['name' => 'Oliveira']); // View Name (Same name as in resources/views), custom parameters
+    return view('pages.test'); // View Name (Same name as in resources/views), custom parameters
+});
+
+$router->get('/auth', function () use ($router) {
+    return view('pages.login');
+});
+
+$router->get('/gate', function () use ($router) {
+    return view('pages.gate');
+});
+
+$router->get('/vehiclelist', function () use ($router) {
+    return view('pages.vehiclelist');
 });
