@@ -29,20 +29,20 @@ class VehicleController extends Controller
             'driverName' => 'required|max:255',
             'plate' => 'required|max:8',
             'time' => 'required|numeric',
-            'block' => 'required',
-            'apartament' => 'required|numeric',
-            'category' => 'required',
-            'gateId' => 'required|numeric'
+            'categoryId' => 'required|exists:visitor_category,id',
+            'destinationId' => 'required|exists:destination,id',
+            'gateId' => 'required|exists:gate,id'
 
         ]);
 
         //calls the service and the function create passing datas
         $vehicle = new VehicleService();
 
+
         return response()->json(
             $vehicle->create($request->driverName, $request->plate, $request->time,
-              $request->block, $request->apartament,$request->category, $request->gateId,
-              $request->color, $request->score, $request->model,$request->cpf
+              $request->destinationId, $request->categoryId, $request->gateId,
+              $request->color, $request->model, $request->cpf
              )
         );
     }
@@ -50,10 +50,14 @@ class VehicleController extends Controller
     public function search(Request $request)
     {
 
+      $this->validate($request, [
+          'plate' => 'required|max:8'
+      ]);
+
       $vehicle = new VehicleService();
 
       return response()->json(
-          $vehicle->scearch($request->plate)
+          $vehicle->search($request->plate)
       );
     }
 
