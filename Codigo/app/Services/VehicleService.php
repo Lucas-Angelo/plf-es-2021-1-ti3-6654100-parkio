@@ -14,7 +14,11 @@ use App\Models\Vehicle;
 
 class VehicleService
 {
-    //
+    /**
+     * Returns vehicles list with pagination
+     *
+     * @return Collection
+     */
     public function getAll(){
         $v = new Vehicle();
         return $v
@@ -46,14 +50,52 @@ class VehicleService
         ];
     }
 
-    public function search($plate)
-    {
-
+    public function search($plate){
       $filtro = strtoupper($plate);
       $vehicle =Vehicle::where('plate','like', "%".$filtro."%")
                      ->first(['plate','model','color']);
 
       return ['message'=> 'sucess', 'items'=>$vehicle] ;
+    }
+
+    /**
+     * Edit Vehicle Entry
+     *
+     * @param integer $vehicleId Vehicle ID
+     * @param String $score G - Good, B- Bad
+     * @param integer $gateId Gate ID
+     * @param String $plate Vehicle Registration Plate
+     * @param String $model Car Model
+     * @param String $color Car Color
+     * @return array
+     */
+    public function edit(int $vehicleId,String $score = null, int $gateId = null, String $plate = null, String $model = null, String $color = null){
+        $v = Vehicle::find($vehicleId);
+        if(!empty($v)) {
+            // We will need to refactor this code when auth middleware is done.
+            if(!empty($score) && !empty($gateId)) { // Code for doorman's visitor leave function
+                if($gateId != $v->gate_id) { // Cars can't leave on different gates
+                    throw new \Exception("Vehicle can't go out on this gate!", 405);
+                } else if(!empty($v->left_at)) { // Cars can't leave if they already left
+                    throw new \Exception("Vehicle already left", 405);
+                } else {
+                    $v->score = $score;
+                    $v->user_out_id = 1; // While we don't have auth sys
+                    $v->left_at = date("Y-m-d H:i:s");
+                    if($v->save()) {
+                        return ['updated' => true];
+                    } else {
+                        throw new \Exception("Update error!", 500);
+                    }
+                }
+            } else if(!empty($plate) || !empty($model) || !empty($color)){
+                // Code for 'Ronda' edit function, yet to be done
+            } else {
+                throw new \Exception("No Action Done", 405);
+            }
+        } else {
+            throw new \Exception("Vehicle Not Found", 404);
+        }
     }
 
 

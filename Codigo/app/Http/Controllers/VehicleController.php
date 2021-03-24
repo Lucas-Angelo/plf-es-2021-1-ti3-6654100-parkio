@@ -67,5 +67,22 @@ class VehicleController extends Controller
       );
     }
 
-    //
+    public function edit(Request $request, int $id){
+        $this->validate($request, [
+            'plate' => 'nullable|max:8',
+            'gateId' => 'required_with:score|exists:gate,id',
+            'score' => 'required_with:gateId|in:G,B'
+        ]);
+
+        try {
+            $v = new VehicleService();
+            return response()->json(
+                $v->edit($id, $request->score, $request->gateId, $request->plate, $request->model, $request->color)
+            );
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], $this->treatCodeError($e));
+        }
+    }
 }

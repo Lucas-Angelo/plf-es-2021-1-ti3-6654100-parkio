@@ -9,8 +9,10 @@ class Controller extends BaseController
 {
     //
     protected function treatCodeError(Exception $e){
-        if(is_numeric($e->getCode())){
-            if($e->getCode() > 0) return $e->getCode();
+        $code = $e->getCode();
+        if(is_numeric($code)){
+            if($code >= 100 && $code < 600) return $code;
+            else return 500;
         } else return 500;
     }
 }
