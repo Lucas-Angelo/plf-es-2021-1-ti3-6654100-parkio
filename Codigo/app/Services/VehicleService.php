@@ -16,7 +16,11 @@ class VehicleService
 {
     //
     public function getAll(){
-        return Vehicle::paginate();
+        $v = new Vehicle();
+        return $v
+                ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
+                ->orderByDesc('created_at')
+                ->paginate();
     }
 
     public function create($driverName, $plate,int $time,int $destinationId,int $visitorCategoryId,

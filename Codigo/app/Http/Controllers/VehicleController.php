@@ -18,9 +18,15 @@ class VehicleController extends Controller
 
     }
 
-    public function test(Request $request){
-        $v = new VehicleService();
-        $v->getAll();
+    public function getAll(Request $request){
+        try {
+            $v = new VehicleService();
+            return $v->getAll();
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], $this->treatCodeError($e));
+        }
     }
 
     public function create(Request $request){
