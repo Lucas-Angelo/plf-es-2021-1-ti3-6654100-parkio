@@ -11,20 +11,39 @@
         <div class="col-12">
 
             <div id="filtros">
-                <div class="col-2">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                <div id="filtro-placa" class="col-2">
+                    <label>Placa</label>
+                    <label for="inputPlaca"></label>
+                    <input type="text" class="form-control" id="inputPlaca" placeholder="Placa">
+                </div>    
+                <div id="filtro-portaria" class="col-2">
+                    <label>Portaria</label>
+                    <select class="form-select">
+                        <option selected>Selecione</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
                     </select>
+                </div>
+                <div id="filtro-porteiro" class="col-2">
+                    <label>Porteiro</label>
+                    <select class="form-select">
+                        <option selected>Selecione</option>
+                        <option value="1">João</option>
+                        <option value="2">José</option>
+                    </select>
+                </div>
+                <div id="filtro-avancado" class="col-2">
+                    <button class="btn btn-secondary mb-2"><i id="action" class="fas fa-filter"></i></button>
+                </div>
+                <div id="filtro-buscar" class="col-1">
+                    <button class="btn btn-secondary mb-2"><i id="action" class="fas fa-search"></i>Buscar</button>
                 </div>
             </div>
 
             <div id="tabela" class="row">
                 <div class="col-12">
                     <div class="d-flex justify-content-center align-items-center w-100">
-                        <table class="table table-dark sortable" style="border: 1px solid white; vertical-align: middle; text-align:center; position: relative;">
+                        <table class="table table-dark sortable">
                             <thead>
                                 <tr>
                                     <th scope="col">Placa</th>
@@ -47,7 +66,7 @@
                                     <td>05:45</td>
                                     <td>06:30</td>
                                     <td>
-                                        <button><i id="action" class="fas fa-edit"></i></button>
+                                        <button lass="btn btn-secondary"><i id="action" class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                             </tbody>

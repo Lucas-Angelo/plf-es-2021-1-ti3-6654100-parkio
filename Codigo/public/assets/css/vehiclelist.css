@@ -1,3 +1,7 @@
+.container-fluid {
+    background-color: #1F1F26;
+}
+
 #filtros {
     margin-top: 16px;
     margin-bottom: 8px;
@@ -11,10 +15,10 @@
 }
 
 table {
-    border: 1px solid white; 
-    vertical-align: middle; 
-    text-align:center; 
-    position: relative;
+    border: 1px solid white !important; 
+    vertical-align: middle !important; 
+    text-align:center !important; 
+    position: relative !important;
 }
 
 thead {
@@ -22,7 +26,7 @@ thead {
 }
 
 tbody > tr > td {
-    padding: 20px;
+    padding: 20px !important;
 }
 
 td > button {
@@ -31,7 +35,60 @@ td > button {
     padding: 5px;
 }
 
+#filtro-placa {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#filtro-portaria {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#filtro-porteiro {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#filtro-avancado {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#filtro-avancado > button {
+    background-color: #5C5C68; 
+    border-radius: 8px; 
+    padding: 5px;
+}
+
+#filtro-buscar {
+    display: inline-block;
+}
+
+#filtro-buscar > button {
+    background-color: #5C5C68; 
+    border-radius: 8px; 
+    padding: 5px;
+    color: #B4B4B4;
+    padding-right: 20px;
+}
+
 #action {
     color: #B4B4B4; 
     padding: 10px;
+}
+
+.form-select {
+    background-color: #333340;
+    color: #B4B4B4;
+}
+
+.form-control {
+    background-color: #333340;
+    color: #B4B4B4;
+}
+
+.form-control:hover .form-control:after {
+    background-color: #333340;
+    color: #B4B4B4;
 }
