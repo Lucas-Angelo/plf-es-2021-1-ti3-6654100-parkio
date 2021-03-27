@@ -1,12 +1,37 @@
-a {
-    text-decoration: none;
+#filtros {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    padding-left: 5%; 
+    padding-right: 5%;
 }
 
-.container-fluid, .row {
-    margin: 0 !important;
-    padding: 0 !important;
+#tabela {
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
-tbody > tr > th, td {
+table {
+    border: 1px solid white; 
+    vertical-align: middle; 
+    text-align:center; 
+    position: relative;
+}
+
+thead {
+    background-color: #252531;
+}
+
+tbody > tr > td {
     padding: 20px;
+}
+
+td > button {
+    background-color: #5C5C68; 
+    border-radius: 8px; 
+    padding: 5px;
+}
+
+#action {
+    color: #B4B4B4; 
+    padding: 10px;
 }
