@@ -5,6 +5,45 @@
 @endsection
 
 @section('content')
+
+<script>
+    const handleEntranceFormSubmit = (event) =>{
+        event.preventDefault();
+        
+        const plate = document.querySelector('#input-plate').value
+        const driverName = document.querySelector('#input-name').value
+        const block = document.querySelector('#input-block').value
+        const destinationId = document.querySelector('#input-ap').value
+        const categoryId = document.querySelector('#input-type').value
+        const time = document.querySelector('#input-time').value
+        const color = document.querySelector('#input-color').value
+
+        fetch('/api/vehicles/save', {
+            method: 'POST',
+            body: {
+                plate,
+                driverName,
+                block,
+                destinationId,
+                categoryId,
+                time,
+                color
+            }
+        })
+        .then((res)=>{
+            if (res.status !== 200){
+                console.log('deu ruim')
+            }
+            else{
+                console.log('deu bom');
+                document.getElementById('entrance-form').reset();
+            }
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
+</script>
 <div class="container-fluid" id="gate">
     <ul class="nav nav-tabs" id="gateTab" role="tablist">
         <li class="nav-item col-6 col-md-3" role="presentation">
@@ -17,7 +56,7 @@
     <div id="entrance-exit-container">
         <div class="tab-content" id="gateTabContent">
             <div class="tab-pane fade show active" id="entrance" role="tabpanel" aria-labelledby="entrance-tab">
-                <form action="" class="row" id="entrance-form">
+                <form onSubmit="handleEntranceFormSubmit(event)" class="row" id="entrance-form">
                     <div class="mb-3 col-12 col-md-4 col-lg-2">
                         <label for="input-plate" class="form-label">Placa <span class="required">*</span></label>
                         <input type="text" class="form-control" id="input-plate" required>
@@ -35,8 +74,8 @@
                         <input type="text" class="form-control" id="input-ap" required>
                     </div>
                     <div class="mb-3 col-12 col-md-3 col-lg-2">
-                        <label for="input-tipo" class="form-label">Tipo</label>
-                        <select id="input-tipo" class="form-select" aria-label="Default select example">
+                        <label for="input-type" class="form-label">Tipo</label>
+                        <select id="input-type" class="form-select" aria-label="Default select example">
                             <option selected></option>
                             <option value="0">Visitante</option>
                             <option value="1">Prestador de Serviço</option>
@@ -59,7 +98,7 @@
                         <input type="color" class="form-control" id="input-color">
                     </div>
                     <div class="button-div text-center mt-5">
-                        <button class="btn" type="button">Cadastrar</button>
+                        <button class="btn" type="submit">Cadastrar</button>
                     </div>
                     
                 </form>
