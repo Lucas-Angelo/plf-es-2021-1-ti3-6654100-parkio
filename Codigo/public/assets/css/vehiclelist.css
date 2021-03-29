@@ -1,12 +1,58 @@
-.container-fluid {
-    background-color: #1F1F26;
-}
-
 #filtros {
     margin-top: 16px;
     margin-bottom: 8px;
     padding-left: 5%; 
     padding-right: 5%;
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle !important;
+    align-items: flex-end;
+    margin-bottom: 25px;
+}
+
+#placa > input:focus {
+    background-color: #333340;
+    color: #B4B4B4;
+}
+
+.mobile {
+    display: none;
+}
+
+#filtros > #filtro-avancado > button {
+    background-color: #5C5C68 !important; 
+    border-radius: 8px !important; 
+    padding: 5px !important;
+}
+
+#buscar > button {
+    line-height: 20px;
+    background-color: #5C5C68;
+    border: 1px solid #5C5C68;
+    border-radius: 8px; 
+    padding: 5px;
+    color: #B4B4B4;
+    padding-right: 15px;
+}
+
+#botoes {
+    color: #B4B4B4; 
+    padding: 10px;
+}
+
+.form-select {
+    background-color: #333340;
+    color: #B4B4B4;
+}
+
+.form-control {
+    background-color: #333340;
+    color: #B4B4B4;
+}
+
+.form-control:hover .form-control:after {
+    background-color: #333340;
+    color: #B4B4B4;
 }
 
 #tabela {
@@ -27,68 +73,35 @@ thead {
 
 tbody > tr > td {
     padding: 20px !important;
+    font-size: large;
 }
 
 td > button {
     background-color: #5C5C68; 
     border-radius: 8px; 
+    border: 1px solid #5C5C68;
     padding: 5px;
 }
 
-#filtro-placa {
-    display: inline-block;
-    margin-right: 20px;
+@media only screen and (max-width: 900px) {
+    .mobile {
+        display: inline-block;
+    }
+
+    .desktop {
+        display: none;
+    }
+
+    #filtros > #filtro-avancado > button {
+        padding-right: 20px !important;
+    }
 }
 
-#filtro-portaria {
-    display: inline-block;
-    margin-right: 20px;
-}
-
-#filtro-porteiro {
-    display: inline-block;
-    margin-right: 20px;
-}
-
-#filtro-avancado {
-    display: inline-block;
-    margin-right: 20px;
-}
-
-#filtro-avancado > button {
-    background-color: #5C5C68; 
-    border-radius: 8px; 
-    padding: 5px;
-}
-
-#filtro-buscar {
-    display: inline-block;
-}
-
-#filtro-buscar > button {
-    background-color: #5C5C68; 
-    border-radius: 8px; 
-    padding: 5px;
-    color: #B4B4B4;
-    padding-right: 20px;
-}
-
-#action {
-    color: #B4B4B4; 
-    padding: 10px;
-}
-
-.form-select {
-    background-color: #333340;
-    color: #B4B4B4;
-}
-
-.form-control {
-    background-color: #333340;
-    color: #B4B4B4;
-}
-
-.form-control:hover .form-control:after {
-    background-color: #333340;
-    color: #B4B4B4;
+@media only screen and (max-width: 1465px) {
+    .responsive {
+        display: none;
+    }
+    #buscar > button {
+        padding-right: 8px;
+    }
 }
