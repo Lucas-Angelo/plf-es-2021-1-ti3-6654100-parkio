@@ -24,6 +24,13 @@ class Vehicle extends Model implements AuthenticatableContract, AuthorizableCont
 
     public $incrementing = true;
 
+    protected $dateFormat = '';
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -44,4 +51,20 @@ class Vehicle extends Model implements AuthenticatableContract, AuthorizableCont
     protected $hidden = [
 
     ];
+
+    public function gate(){
+        return $this->belongsTo('App\Models\Gate');
+    }
+
+    public function userIn(){
+        return $this->belongsTo('App\Models\User', 'user_in_id');
+    }
+
+    public function userOut(){
+        return $this->belongsTo('App\Models\User', 'user_out_id');
+    }
+
+    public function destination(){
+        return $this->belongsTo('App\Models\Destination');
+    }
 }
