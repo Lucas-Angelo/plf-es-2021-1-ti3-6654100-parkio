@@ -27,7 +27,6 @@
             const [ hora, minutos ] = time.split(':').map(value=>+value)
             time = + hora*60 + minutos
         }
-        console.log(time)
         const color = document.querySelector('#input-color').value
         const gateId = 1;
 
@@ -49,10 +48,8 @@
         })
         .then((res)=>{
             if (res.status !== 200){
-                console.log('deu ruim')
             }
             else{
-                console.log('deu bom');
                 document.getElementById('entrance-form').reset();
             }
         })
