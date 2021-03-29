@@ -14,20 +14,32 @@
         const driverName = document.querySelector('#input-name').value
         const block = document.querySelector('#input-block').value
         const destinationId = document.querySelector('#input-ap').value
-        const categoryId = document.querySelector('#input-type').value
-        const time = document.querySelector('#input-time').value
+        let categoryId = document.querySelector('#input-type').value
+        if (categoryId.length === 0)
+            categoryId = 1;
+        let time = document.querySelector('#input-time').value
+        if (time.length===0){
+            const hora = new Date().getHours()
+            const minutos = new Date().getMinutes()
+            time = hora*60 + minutos
+        }
+        else{
+            const [ hora, minutos ] = time.split(':').map(value=>+value)
+            time = + hora*60 + minutos
+        }
+        console.log(time)
         const color = document.querySelector('#input-color').value
+        const gateId = 1;
 
         const data = {
             plate,
             driverName,
-            destinationId,
+            destinationId: + destinationId,
             categoryId,
             time,
-            color
+            color,
+            gateId
         }
-        console.log(JSON.stringify(data))
-
         fetch('/api/vehicles/save', {
             method: 'POST',
             headers: {
@@ -86,8 +98,8 @@
                         <label for="input-type" class="form-label">Tipo</label>
                         <select id="input-type" class="form-select">
                             <option selected></option>
-                            <option value="0">Visitante</option>
-                            <option value="1">Prestador de Serviço</option>
+                            <option value="1">Visitante</option>
+                            <option value="2">Prestador de Serviço</option>
                         </select>
                     </div>
                     <div class="mb-3 col-12 col-md-3 col-lg-2">
