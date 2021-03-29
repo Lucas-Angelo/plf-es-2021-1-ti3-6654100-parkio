@@ -1,5 +1,5 @@
 #gate{
-    margin-top: 20px;
+    padding-top: 20px;
 }
 
 #gateTab{
@@ -23,7 +23,7 @@
     background-color: var(--input);
     color: var(--color);
 
-    height: 45px;
+    height: 50px;
 
     border-color: var(--border);
     border-radius: .5rem;
@@ -31,6 +31,7 @@
 }
 #entrance-form label{
     color: var(--color);
+    font-size: 1.3rem;
 }
 #entrance-form button{
     background-color: var(--button);

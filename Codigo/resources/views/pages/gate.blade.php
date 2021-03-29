@@ -18,17 +18,22 @@
         const time = document.querySelector('#input-time').value
         const color = document.querySelector('#input-color').value
 
+        const data = {
+            plate,
+            driverName,
+            destinationId,
+            categoryId,
+            time,
+            color
+        }
+        console.log(JSON.stringify(data))
+
         fetch('/api/vehicles/save', {
             method: 'POST',
-            body: {
-                plate,
-                driverName,
-                block,
-                destinationId,
-                categoryId,
-                time,
-                color
-            }
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         })
         .then((res)=>{
             if (res.status !== 200){
@@ -67,15 +72,19 @@
                     </div>
                     <div class="mb-3 col-12 col-md-3 col-lg-2">
                         <label for="input-block" class="form-label">Bloco <span class="required">*</span></label>
-                        <input type="text" class="form-control" id="input-block" required>
+                        <select type="text" class="form-select" id="input-block" required>
+                            <option selected value="1">Bloco 01</option>
+                        </select>
                     </div>
                     <div class="mb-3 col-12 col-md-3 col-lg-2">
                         <label for="input-ap" class="form-label">Apartamento <span class="required">*</span></label>
-                        <input type="text" class="form-control" id="input-ap" required>
+                        <select type="text" class="form-select" id="input-ap" required>
+                            <option value="1">Ap 01</option>
+                        </select>
                     </div>
                     <div class="mb-3 col-12 col-md-3 col-lg-2">
                         <label for="input-type" class="form-label">Tipo</label>
-                        <select id="input-type" class="form-select" aria-label="Default select example">
+                        <select id="input-type" class="form-select">
                             <option selected></option>
                             <option value="0">Visitante</option>
                             <option value="1">Prestador de Serviço</option>
