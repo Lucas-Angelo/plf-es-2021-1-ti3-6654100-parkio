@@ -19,12 +19,7 @@ class Destination extends Model implements AuthenticatableContract, Authorizable
      * @var string
      */
     protected $table = 'destination';
-
-    protected $primaryKey = 'id';
-
-    public $incrementing = true;
-
-    public $timestamps = off;
+    public $timestamps = false;
 
 
     /**
