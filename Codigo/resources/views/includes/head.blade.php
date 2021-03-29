@@ -3,8 +3,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="@yield('meta-description', 'An app to simplify your life.')"/>
-	<meta name="author" content="Zack Webster" />
-	<meta name="copyright" content="Zack Webster" />
 	<meta name="robots" content="@yield('meta-robots','follow')"/>
     <title>@yield('title', config('app.name'))</title>
 	<link rel="stylesheet" href="{{ url('/assets/css/index.css') }}" type="text/css">
