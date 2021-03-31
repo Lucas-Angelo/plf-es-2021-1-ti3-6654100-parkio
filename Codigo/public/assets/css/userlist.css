@@ -71,7 +71,7 @@ td {
         border: 1px solid #62628B;
     }
 
-    .componente button {
+    .componente > button {
         float: right;
     }
 
@@ -91,4 +91,23 @@ td {
         display: inline-flex;
     }
 
+}
+
+.modal-content {
+    padding: 0 20px !important;
+    border-radius: 8px;
+    background-color: var(--bg2) !important;
+}
+
+.modal-header {
+    text-align: center !important;
+    border-bottom: none;
+}
+
+.form-select > * {
+    max-width: 100%;
+}
+
+.modal-footer {
+    border-top: none;
 }
