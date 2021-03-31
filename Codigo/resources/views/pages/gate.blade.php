@@ -101,7 +101,7 @@
                     </div>
                     <div class="mb-3 col-12 col-md-3 col-lg-2">
                         <label for="input-time" class="form-label">Tempo</label>
-                        <input type="time" class="form-control" id="input-time">
+                        <input type="number" min="0" class="form-control" id="input-time">
                     </div>
                     <div class="mb-3 col-12 col-md-6 col-lg-4">
                         <label for="input-cpf" class="form-label">CPF</label>
