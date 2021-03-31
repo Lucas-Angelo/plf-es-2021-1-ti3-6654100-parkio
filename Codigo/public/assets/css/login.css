@@ -1,0 +1,70 @@
+#main {
+  padding: 0;
+  margin-bottom: 0;
+}
+
+#input_form{
+  float:left;
+}
+
+
+#input_form { 
+  position:relative;
+  padding:0;
+  margin:0;
+}
+#input { 
+  height:20px;
+  margin:0;
+  padding-left:30px;
+}
+#input_img {
+  position:absolute;
+  bottom:8px; 
+  left:10px;
+  width:10px;
+  height:10px;
+}
+
+button {
+  background-color: #5C5C68 !important;
+  border: 1px solid #5C5C68 !important;
+}
+
+button:hover {
+  background-color: #d6d6da93 !important;
+}
+
+button, button:focus, button:active, button.active, button:focus:active {
+  background-image: none !important;
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-style: none !important;
+}
+
+button {
+  border-radius: 8px !important; 
+  padding: 5px !important;
+}
+
+#access {
+  display: flex;
+  justify-content: flex-end !important;
+}
+
+#access * {
+  display: inline-flex;
+}
+
+#access > button {
+  border-radius: 8px; 
+  padding: 5px;
+  padding-right: 15px;
+  align-items: baseline;
+}
+
+button {
+  border-radius: 8px;
+  padding: 5px;
+}
