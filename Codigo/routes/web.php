@@ -19,7 +19,9 @@ $router->get('/', function () use ($router) {
 /**
  * API Routes
  */
-$router->group(['prefix' => '/api'], function () use ($router) {
+$router->group(['prefix' => '/api', 'middleware' => ['jwt.auth']], function () use ($router) {
+    $router->post('/auth', 'UserController@auth'); // Login Endpoint
+
     $router->post('/users', 'UserController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
     $router->get('/users', 'UserController@getAll');
 
@@ -30,21 +32,24 @@ $router->group(['prefix' => '/api'], function () use ($router) {
     $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
 });
 
-
-
-/* Web Site Routes */
-$router->get('/test', function () use ($router) { // used in Browser URL
-    return view('pages.test'); // View Name (Same name as in resources/views), custom parameters
-});
+/*Begin - Web Site Routes */
 
 $router->get('/auth', function () use ($router) {
     return view('pages.login');
 });
 
-$router->get('/gate', function () use ($router) {
-    return view('pages.gate');
-});
+// Needed auth routes
+$router->group(['middleware' => ['web.auth']], function() use ($router) {
+    
+    $router->get('/test', function () use ($router) { // used in Browser URL
+        return view('pages.test'); // View Name (Same name as in resources/views), custom parameters
+    });
 
-$router->get('/vehiclelist', function () use ($router) {
-    return view('pages.vehicleslist');
+    $router->get('/gate', function () use ($router) {
+        return view('pages.gate');
+    });
+
+    $router->get('/vehiclelist', function () use ($router) {
+        return view('pages.vehicleslist');
+    });
 });

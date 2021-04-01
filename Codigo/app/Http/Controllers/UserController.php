@@ -51,5 +51,16 @@ class UserController extends Controller
         );
     }
 
-    //
+    public function auth(Request $request) {
+        $this->validate($request, [
+            'login' => 'required',
+            'password' => 'required',
+        ]);
+
+        $us = new UserService();
+
+        return response()->json(
+            $us->auth($request->login,$request->password)
+        );
+    }
 }
