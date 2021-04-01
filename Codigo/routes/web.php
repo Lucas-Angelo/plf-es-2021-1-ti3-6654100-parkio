@@ -19,17 +19,21 @@ $router->get('/', function () use ($router) {
 /**
  * API Routes
  */
-$router->group(['prefix' => '/api', 'middleware' => ['jwt.auth']], function () use ($router) {
+
+
+$router->group(['prefix' => '/api'], function () use ($router) {
     $router->post('/auth', 'UserController@auth'); // Login Endpoint
 
-    $router->post('/users', 'UserController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
-    $router->get('/users', 'UserController@getAll');
+    $router->group(['middleware' => ['jwt.auth']], function () use ($router) {
+        $router->post('/users', 'UserController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+        $router->get('/users', 'UserController@getAll');
 
 
-    $router->get('/vehicles', 'VehicleController@getAll'); // Search for all vehicles entries
-    $router->put('/vehicles/{id}', 'VehicleController@edit'); // Edit one vehicles entries
-    $router->get('/vehicles/search', 'VehicleController@search'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
-    $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
+        $router->get('/vehicles', 'VehicleController@getAll'); // Search for all vehicles entries
+        $router->put('/vehicles/{id}', 'VehicleController@edit'); // Edit one vehicles entries
+        $router->get('/vehicles/search', 'VehicleController@search'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
+        $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
+    });
 });
 
 /*Begin - Web Site Routes */
