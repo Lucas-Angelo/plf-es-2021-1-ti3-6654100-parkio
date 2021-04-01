@@ -18,15 +18,6 @@
         if (categoryId.length === 0)
             categoryId = 1;
         let time = document.querySelector('#input-time').value
-        if (time.length===0){
-            const hora = new Date().getHours()
-            const minutos = new Date().getMinutes()
-            time = hora*60 + minutos
-        }
-        else{
-            const [ hora, minutos ] = time.split(':').map(value=>+value)
-            time = + hora*60 + minutos
-        }
         const color = document.querySelector('#input-color').value
         const gateId = 1;
 
@@ -101,7 +92,7 @@
                     </div>
                     <div class="mb-3 col-12 col-md-3 col-lg-2">
                         <label for="input-time" class="form-label">Tempo</label>
-                        <input type="number" min="0" class="form-control" id="input-time">
+                        <input type="number" min="0" class="form-control" id="input-time" required>
                     </div>
                     <div class="mb-3 col-12 col-md-6 col-lg-4">
                         <label for="input-cpf" class="form-label">CPF</label>
