@@ -111,3 +111,23 @@ td {
 .modal-footer {
     border-top: none;
 }
+
+select {
+    width: 250px;
+}
+  
+option {
+    width: 250px;
+}
+
+#cadastro > div > input, div > select, div > select > option, div > .form-select {
+    background-color: #333340 !important;
+    border: 1px solid #707070 !important;
+    color: #CCCCCC !important;
+}
+
+#cadastro > button {
+    background-color: #5C5C68 !important;
+    border: 1px solid #707070 !important;
+    color: #CCCCCC !important;
+}

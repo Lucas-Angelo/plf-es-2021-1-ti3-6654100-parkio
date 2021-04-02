@@ -72,22 +72,25 @@
                     <h5 class="modal-title" id="modalNovoUsuarioLabel">Criar Novo Usuário</h5>
                 </div>
                 <div class="modal-body justify-content-center">
-                    <form class="justify-content-center">
+                    <form id="cadastro" class="justify-content-center">
                         <div class="mb-3">
-                            <label for=InputUsuario" class="form-label">Usuário</label>
+                            <label for="InputUsuario" class="form-label">Usuário</label>
                             <input type="text" class="form-control" id="InputUsuario">
                         </div>
                         <div class="mb-3">
-                            <label for=InputSenha" class="form-label">Senha</label>
-                            <input type="password" class="form-control" id=InputSenha">
+                            <label for="InputSenha" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="InputSenha">
                         </div>
                         <div class="mb-3">
-                            <label for="activeSelect" class="form-label">Tipo</label>
-                            <select id="activeSelect" class="form-select">
-                                <option>Selecione</option>
+                            <label class="form-label">Tipo</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected value="0">Selecione uma opção</option>
+                                <option value="1">Porteiro</option>
+                                <option value="2">Ronda</option>
+                                <option value="3">Síndico</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 mt-3">Cadastrar</button>
+                        <button type="submit" class="btn btn-primary w-100 mt-2 mb-3">Cadastrar</button>
                     </form>
                 </div>
             </div>
