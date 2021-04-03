@@ -1,4 +1,4 @@
-#container_fluid {
+/*#container_fluid {
   background-color:white;
 }
 
@@ -72,4 +72,55 @@ button {
 button {
   border-radius: 8px;
   padding: 5px;
+}*/
+
+#row{
+  background-color:white;
+}
+
+#form{
+  position: absolute;
+  top:325px;
+  left:300px;
+}  
+
+.inputWithIcon input[type=text] {
+  padding-left:40px;
+
+}
+
+.inputWithIcon {
+  position: relative;
+}
+
+.inputWithIcon i{
+  position: absolute;
+  left:0;
+  padding:9px 8px;
+  color:#707070;
+}
+
+.inputWithIcon input[type=text]:focus + i {
+  color:#707070;
+}
+
+#pass{
+  top:20px;
+}
+
+.btn1{
+  background-color: #707070;
+  color: white;
+  width: 143px;
+  height: 38px;
+  border: 1px solid #707070;
+  top: 433px;
+  left: 126px;
+  opacity: 1;
+}
+
+#main_img{
+  position: relative;
+  left:800px;
+  height:100vh;
 }
