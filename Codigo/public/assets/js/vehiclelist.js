@@ -27,7 +27,7 @@ async function renderVehicles() {
                 htmlSegment =   `<tr>
                                     <td scope="row">${vehicle.plate}</th>
                                     <td>${vehicle.model}</td>
-                                    <td> <span style="backgroud-color: ${vehicle.color};"></span>${vehicle.color}</td>
+                                    <td> <span style="background-color: ${vehicle.color};"></span>${vehicle.color}</td>
                                     <td>${gate}</td>
                                     <td>${vehicle.user_in.name}</td>
                                     <td>${created_at_formatada}</td>
