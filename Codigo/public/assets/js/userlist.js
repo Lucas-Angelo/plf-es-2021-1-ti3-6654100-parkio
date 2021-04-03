@@ -64,8 +64,8 @@ async function renderUsers() {
                 break;
             }
             let data = new Date(user.updated_at);
-            let dataFormatada = ((data.getDate() )) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear() + " " + data.getHours() + ":" + data.getMinutes(); 
-
+            let dataFormatada = ((data.getDate().toString().padStart(2, "0"))) + "/" + ((data.getMonth() + 1).toString().padStart(2, "0")) + "/" + data.getFullYear() + " " + (data.getHours().toString().padStart(2, "0")) + ":" + (data.getMinutes().toString().padStart(2, "0")); 
+            
             var htmlSegment;
             if(width_resolution>800) {
                 htmlSegment =   `<tr>
