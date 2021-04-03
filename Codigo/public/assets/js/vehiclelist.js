@@ -1,48 +1,69 @@
-async function renderUsers() {
+const url = '/api/vehicles';
+
+// Capturar e renderizar veículos de visistantes cadastrados
+async function renderVehicles() {
 
     const width_resolution = window.screen.width;
 
     fetch(url)
     .then(response => response.json()) // retorna uma promise
     .then(result => {
+        console.log(result.data)
+        
         
         let html = '';
-        result.data.forEach(user => {
+        result.data.forEach(vehicle => {
 
-            let data = new Date(user.updated_at);
-            let dataFormatada = ((data.getDate() )) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear() + " " + data.getHours() + ":" + data.getMinutes(); 
+            let created_at = new Date(vehicle.created_at);
+            let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0")); 
+            
+            let left_at = new Date(vehicle.left_at);
+            let left_at_formatada = ((left_at.getDate().toString().padStart(2, "0"))) + "/" + ((left_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + left_at.getFullYear() + " " + (left_at.getHours().toString().padStart(2, "0")) + ":" + (left_at.getMinutes().toString().padStart(2, "0")); 
+            
+            let gate = vehicle.gate.description;          
 
             var htmlSegment;
-            if(width_resolution>1900) {
+            if(width_resolution>900) {
                 htmlSegment =   `<tr>
-                                    <td scope="row">AAA-1111</th>
-                                    <td>Ford Ka</td>
-                                    <td> <span style="backgroud-color: red;"></span> Vermelho</td>
-                                    <td>1</td>
-                                    <td>Porteiro x</td>
-                                    <td>05:45</td>
-                                    <td>06:30</td>
+                                    <td scope="row">${vehicle.plate}</th>
+                                    <td>${vehicle.model}</td>
+                                    <td> <span style="backgroud-color: ${vehicle.color};"></span>${vehicle.color}</td>
+                                    <td>${gate}</td>
+                                    <td>${vehicle.user_in.name}</td>
+                                    <td>${created_at_formatada}</td>
+                                    <td>${left_at_formatada}</td>
                                     <td>
                                         <button lass="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
                                     </td>
                                 </tr>`;
             } else {
                 htmlSegment =   `<div class="componente">
-                                        <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
-                                        <button class="btn btn-secondary"><i class="fas fa-lock"></i></button>
-                                        <div class="usuario">
-                                            <h6>Usuário:</h6>
-                                            <p>${user.name}</p>
-                                        </div>
-                                        <div class="tipo">
-                                            <h6>Tipo:</h6>
-                                            <p>${type}</p>
-                                        </div>
-                                        <div class="ultima">
-                                            <h6>Última vez visto:</h6>
-                                            <p>${dataFormatada}</p>
-                                        </div>
-                                    </div>`;
+                                    <button lass="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
+                                    <div class="placa">
+                                        <h6>Placa:</h6>
+                                        <p>${vehicle.plate}</p>
+                                    </div>
+                                    <div class="modelo">
+                                        <h6>Modelo:</h6>
+                                        <p>${vehicle.model}</p>
+                                    </div>
+                                    <div class="portaria">
+                                        <h6>Portaria:</h6>
+                                        <p>${gate}</p>
+                                    </div>
+                                    <div class="porteiro">
+                                        <h6>Porteiro:</h6>
+                                        <p>${vehicle.user_in.name}</p>
+                                    </div>
+                                    <div class="criadoHora">
+                                        <h6>Horário de entrada:</h6>
+                                        <p>${created_at_formatada}</p>
+                                    </div>
+                                    <div class="atualizadoHora">
+                                        <h6>Horário de saída:</h6>
+                                        <p>${left_at_formatada}</p>
+                                    </div>
+                                </div>`;
             }
     
             html += htmlSegment;
@@ -52,7 +73,7 @@ async function renderUsers() {
         if(width_resolution>900)
             container = document.querySelector('#table-body');
         else
-            container = document.querySelector('#lista-usuario');
+            container = document.querySelector('#lista-veiculo');
         
         container.innerHTML = html;
         
@@ -64,4 +85,4 @@ async function renderUsers() {
 
 }
 
-renderUsers();
+renderVehicles();
