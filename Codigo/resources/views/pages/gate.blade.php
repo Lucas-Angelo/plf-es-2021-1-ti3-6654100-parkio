@@ -27,6 +27,8 @@
             const [ hora, minutos ] = time.split(':').map(value=>+value)
             time = + hora*60 + minutos
         }
+        const model = document.querySelector('#input-model').value
+        const cpf = document.querySelector('#input-cpf').value
         const color = document.querySelector('#input-color').value
         const gateId = 1;
 
@@ -36,9 +38,12 @@
             destinationId: + destinationId,
             categoryId,
             time,
+            model,
+            cpf,
             color,
             gateId
         }
+        console.log(data)
         fetch('/api/vehicles/save', {
             method: 'POST',
             headers: {
