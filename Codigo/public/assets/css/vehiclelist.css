@@ -133,6 +133,17 @@ td > span {
     background: transparent;
 }
 
+.cor span{
+    vertical-align: middle !important;
+}
+
+.cor span {
+    width: 15px; 
+    height: 15px; 
+    display: inline-block; 
+    background: transparent;
+}
+
 @media only screen and (max-width: 900px) {
     .desktop {
         display: none !important;

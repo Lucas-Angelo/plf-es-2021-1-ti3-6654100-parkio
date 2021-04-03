@@ -3,15 +3,12 @@ const url = '/api/vehicles';
 // Capturar e renderizar veículos de visistantes cadastrados
 async function renderVehicles() {
 
-    const width_resolution = window.screen.width;
-
     fetch(url)
     .then(response => response.json()) // retorna uma promise
     .then(result => {
-        console.log(result.data)
-        
         
         let html = '';
+        let htmlSm = '';
         result.data.forEach(vehicle => {
 
             let created_at = new Date(vehicle.created_at);
@@ -22,60 +19,65 @@ async function renderVehicles() {
             
             let gate = vehicle.gate.description;          
 
-            var htmlSegment;
-            if(width_resolution>900) {
-                htmlSegment =   `<tr>
-                                    <td scope="row">${vehicle.plate}</th>
-                                    <td>${vehicle.model}</td>
-                                    <td> <span style="background-color: ${vehicle.color};"></span>${vehicle.color}</td>
-                                    <td>${gate}</td>
-                                    <td>${vehicle.user_in.name}</td>
-                                    <td>${created_at_formatada}</td>
-                                    <td>${left_at_formatada}</td>
-                                    <td>
-                                        <button lass="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
-                                    </td>
-                                </tr>`;
-            } else {
-                htmlSegment =   `<div class="componente">
+            var htmlSegment, htmlSegmentSm;
+            
+            htmlSegment =   `<tr>
+                                <td scope="row">${vehicle.plate}</th>
+                                <td>${vehicle.model}</td>
+                                <td><span style="background-color: ${vehicle.color};"></span> ${vehicle.color}</td>
+                                <td>${gate}</td>
+                                <td>${vehicle.user_in.name}</td>
+                                <td>${created_at_formatada}</td>
+                                <td>${left_at_formatada}</td>
+                                <td>
                                     <button lass="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
-                                    <div class="placa">
-                                        <h6>Placa:</h6>
-                                        <p>${vehicle.plate}</p>
-                                    </div>
-                                    <div class="modelo">
-                                        <h6>Modelo:</h6>
-                                        <p>${vehicle.model}</p>
-                                    </div>
-                                    <div class="portaria">
-                                        <h6>Portaria:</h6>
-                                        <p>${gate}</p>
-                                    </div>
-                                    <div class="porteiro">
-                                        <h6>Porteiro:</h6>
-                                        <p>${vehicle.user_in.name}</p>
-                                    </div>
-                                    <div class="criadoHora">
-                                        <h6>Horário de entrada:</h6>
-                                        <p>${created_at_formatada}</p>
-                                    </div>
-                                    <div class="atualizadoHora">
-                                        <h6>Horário de saída:</h6>
-                                        <p>${left_at_formatada}</p>
-                                    </div>
-                                </div>`;
-            }
+                                </td>
+                            </tr>`;
+
+            htmlSegmentSm =   `<div class="componente">
+                                <button lass="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
+                                <div class="placa">
+                                    <h6>Placa:</h6>
+                                    <p>${vehicle.plate}</p>
+                                </div>
+                                <div class="modelo">
+                                    <h6>Modelo:</h6>
+                                    <p>${vehicle.model}</p>
+                                </div>
+                                <div class="cor">
+                                    <h6>Cor:</h6>
+                                    <span style="background-color: ${vehicle.color};"></span>
+                                    <p>${vehicle.color}</p>
+                                </div>
+                                <div class="portaria">
+                                    <h6>Portaria:</h6>
+                                    <p>${gate}</p>
+                                </div>
+                                <div class="porteiro">
+                                    <h6>Porteiro:</h6>
+                                    <p>${vehicle.user_in.name}</p>
+                                </div>
+                                <div class="criadoHora">
+                                    <h6>Horário de entrada:</h6>
+                                    <p>${created_at_formatada}</p>
+                                </div>
+                                <div class="atualizadoHora">
+                                    <h6>Horário de saída:</h6>
+                                    <p>${left_at_formatada}</p>
+                                </div>
+                            </div>`;
     
             html += htmlSegment;
+            htmlSm += htmlSegmentSm;
         });
 
         let container;
-        if(width_resolution>900)
-            container = document.querySelector('#table-body');
-        else
-            container = document.querySelector('#lista-veiculo');
-        
+
+        container = document.querySelector('#table-body');
         container.innerHTML = html;
+
+        container = document.querySelector('#lista-veiculo');
+        container.innerHTML = htmlSm;
         
     })
     .catch(err => {
