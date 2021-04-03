@@ -55,7 +55,7 @@
                                 <th scope="col">Ações</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="table-body">
                             <tr>
                                 <td scope="row">AAA-1111</th>
                                 <td>Ford Ka</td>
