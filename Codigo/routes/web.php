@@ -46,5 +46,5 @@ $router->get('/gate', function () use ($router) {
 });
 
 $router->get('/vehiclelist', function () use ($router) {
-    return view('pages.vehiclelist');
+    return view('pages.vehicleslist');
 });
