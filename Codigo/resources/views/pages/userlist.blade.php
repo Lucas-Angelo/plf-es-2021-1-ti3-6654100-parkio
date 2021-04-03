@@ -2,6 +2,7 @@
 
 @section('extraassets')
     <link rel="stylesheet" href="{{ url('/assets/css/userlist.css') }}" type="text/css">
+    <script src="{{ url('/assets/js/userlist.js') }}"></script>
 @endsection
 
 @section('content')
@@ -31,16 +32,7 @@
                             <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Lucas Ângelo</th>
-                            <td>Porteiro</td>
-                            <td>31/03/2021 09:00</td>
-                            <td class="acoes">
-                                <button class="btn btn-secondary"><i class="fas fa-lock"></i></button>
-                                <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
+                    <tbody id="table-body">
                     </tbody>
                 </table>
             </div>
@@ -72,24 +64,30 @@
                     <h5 class="modal-title" id="modalNovoUsuarioLabel">Criar Novo Usuário</h5>
                 </div>
                 <div class="modal-body justify-content-center">
-                    <form id="cadastro" class="justify-content-center">
+                    <form onSubmit="handleEntranceFormSubmit(event)" id="cadastro" class="justify-content-center">
                         <div class="mb-3">
-                            <label for="InputUsuario" class="form-label">Usuário</label>
-                            <input type="text" class="form-control" id="InputUsuario">
+                            <label for="input-name" class="form-label">Nome</label>
+                            <input for="input-name" type="text" class="form-control" id="input-name">
                         </div>
                         <div class="mb-3">
-                            <label for="InputSenha" class="form-label">Senha</label>
-                            <input type="password" class="form-control" id="InputSenha">
+                            <label for="input-user" class="form-label">Usuário</label>
+                            <input for="input-user" type="text" class="form-control" id="input-user">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Tipo</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected value="0">Selecione uma opção</option>
-                                <option value="1">Porteiro</option>
-                                <option value="2">Ronda</option>
-                                <option value="3">Síndico</option>
+                            <label for="input-password" class="form-label">Senha</label>
+                            <input for="input-password" type="password" class="form-control" id="input-password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="input-type" class="form-label">Tipo</label>
+                            <select for="input-type" class="form-select" id="input-type">
+                                <option selected></option>
+                                <option value="A">Admin</option>
+                                <option value="P">Porteiro</option>
+                                <option value="R">Ronda</option>
+                                <option value="S">Síndico</option>
                             </select>
                         </div>
+                        <button id="close-modal" type="button" class="btn btn-secondary d-none" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary w-100 mt-2 mb-3">Cadastrar</button>
                     </form>
                 </div>
