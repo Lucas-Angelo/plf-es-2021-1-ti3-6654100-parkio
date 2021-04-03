@@ -28,6 +28,7 @@ const handleEntranceFormSubmit = (event) =>{
         else{
             document.getElementById('cadastro').reset();
             document.getElementById('close-modal').click()
+            location.reload();
         }
     })
     .catch((err)=>{
@@ -35,6 +36,7 @@ const handleEntranceFormSubmit = (event) =>{
     })
 }
 
+// Capturar e renderizar usuários da API
 async function renderUsers() {
 
     const width_resolution = window.screen.width;
@@ -76,7 +78,7 @@ async function renderUsers() {
                                     </td>
                                 </tr>`;
             } else {
-                htmlSegment =   `<div class="componente">
+                htmlSegment =   `<div class="componente mb-2">
                                         <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
                                         <button class="btn btn-secondary"><i class="fas fa-lock"></i></button>
                                         <div class="usuario">

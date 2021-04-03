@@ -37,22 +37,6 @@
                 </table>
             </div>
             <div id="lista-usuario">
-                <div class="componente">
-                    <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
-                    <button class="btn btn-secondary"><i class="fas fa-lock"></i></button>
-                    <div class="usuario">
-                        <h6>Usuário:</h6>
-                        <p>Lucas Ângelo</p>
-                    </div>
-                    <div class="tipo">
-                        <h6>Tipo:</h6>
-                        <p>Porteiro</p>
-                    </div>
-                    <div class="ultima">
-                        <h6>Última vez visto:</h6>
-                        <p>31/03/2021 09:00</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
