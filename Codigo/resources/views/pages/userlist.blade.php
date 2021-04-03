@@ -3,6 +3,7 @@
 @section('extraassets')
     <link rel="stylesheet" href="{{ url('/assets/css/userlist.css') }}" type="text/css">
     <script src="{{ url('/assets/js/userlist.js') }}"></script>
+    <script src="{{ url('/assets/js/sorttable.js') }}"></script> <!-- To sort table by headers -->
 @endsection
 
 @section('content')
@@ -17,7 +18,7 @@
     <div class="row">
         <div class="col-12 p-0 m-0">
             <div id="tabela-usuario">
-                <table class="table">
+                <table class="table sortable">
                     <colgroup>
                         <col span="1" style="width: 45%;">
                         <col span="1" style="width: 20%;">
