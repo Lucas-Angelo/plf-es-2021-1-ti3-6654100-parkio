@@ -38,12 +38,10 @@ const handleEntranceFormSubmit = (event) =>{
 async function renderUsers() {
 
     const width_resolution = window.screen.width;
-    console.log(width_resolution);
 
     fetch(url)
     .then(response => response.json()) // retorna uma promise
     .then(result => {
-        console.log(result.data)
         
         let html = '';
         result.data.forEach(user => {
