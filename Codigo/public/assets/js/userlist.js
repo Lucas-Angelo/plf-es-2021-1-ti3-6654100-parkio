@@ -39,13 +39,13 @@ const handleEntranceFormSubmit = (event) =>{
 // Capturar e renderizar usuários da API
 async function renderUsers() {
 
-    const width_resolution = window.screen.width;
-
     fetch(url)
     .then(response => response.json()) // retorna uma promise
     .then(result => {
+        console.log(result.data)
         
         let html = '';
+        let htmlSm = '';
         result.data.forEach(user => {
 
             let type;
@@ -63,49 +63,49 @@ async function renderUsers() {
                     type = 'Síndico';
                 break;
             }
-            let data = new Date(user.updated_at);
-            let dataFormatada = ((data.getDate().toString().padStart(2, "0"))) + "/" + ((data.getMonth() + 1).toString().padStart(2, "0")) + "/" + data.getFullYear() + " " + (data.getHours().toString().padStart(2, "0")) + ":" + (data.getMinutes().toString().padStart(2, "0")); 
+
+            var htmlSegment, htmlSegmentSm;
+
+            htmlSegment =   `<tr>
+                                <td>${user.name}</th>
+                                <td>${user.login}</td>
+                                <td>${type}</td>
+                                <td class="acoes">
+                                    <button class="btn btn-secondary"><i class="fas fa-lock"></i></button>
+                                    <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>`;
+
+            htmlSegmentSm =   `<div class="componente mb-2">
+                                    <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-secondary"><i class="fas fa-lock"></i></button>
+                                    <div class="usuario">
+                                        <h6>Usuário:</h6>
+                                        <p>${user.name}</p>
+                                    </div>
+                                    <div class="tipo">
+                                        <h6>Tipo:</h6>
+                                        <p>${user.login}</p>
+                                    </div>
+                                    <div class="ultima">
+                                        <h6>Última vez visto:</h6>
+                                        <p>${type}</p>
+                                    </div>
+                                </div>`;
             
-            var htmlSegment;
-            if(width_resolution>800) {
-                htmlSegment =   `<tr>
-                                    <td>${user.name}</th>
-                                    <td>${type}</td>
-                                    <td>${dataFormatada}</td>
-                                    <td class="acoes">
-                                        <button class="btn btn-secondary"><i class="fas fa-lock"></i></button>
-                                        <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
-                                    </td>
-                                </tr>`;
-            } else {
-                htmlSegment =   `<div class="componente mb-2">
-                                        <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
-                                        <button class="btn btn-secondary"><i class="fas fa-lock"></i></button>
-                                        <div class="usuario">
-                                            <h6>Usuário:</h6>
-                                            <p>${user.name}</p>
-                                        </div>
-                                        <div class="tipo">
-                                            <h6>Tipo:</h6>
-                                            <p>${type}</p>
-                                        </div>
-                                        <div class="ultima">
-                                            <h6>Última vez visto:</h6>
-                                            <p>${dataFormatada}</p>
-                                        </div>
-                                    </div>`;
-            }
     
             html += htmlSegment;
+            htmlSm += htmlSegmentSm;
         });
 
         let container;
-        if(width_resolution>800)
-            container = document.querySelector('#table-body');
-        else
-            container = document.querySelector('#lista-usuario');
-        
+
+        container = document.querySelector('#table-body');
         container.innerHTML = html;
+
+        container = document.querySelector('#lista-usuario');
+        container.innerHTML = htmlSm;
+        
         
     })
     .catch(err => {

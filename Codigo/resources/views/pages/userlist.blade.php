@@ -27,9 +27,9 @@
                     </colgroup>
                     <thead>
                         <tr>
+                            <th>Nome</th>
                             <th>Usuário</th>
                             <th>Tipo</th>
-                            <th>Última vez visto</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
