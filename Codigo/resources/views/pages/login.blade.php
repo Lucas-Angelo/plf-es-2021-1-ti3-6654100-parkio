@@ -11,6 +11,8 @@
 
             <div id="form" class="col-12 col-md-0" form="cadastro">
 
+                    <h1 class="login">Log in</h1>
+                    
                 <div id="user" class="inputWithIcon">
                     <input type="text" placeholder="Usuário">
                     <i class="fas fa-user-circle"></i>
@@ -21,13 +23,17 @@
                     <i class="fas fa-lock"></i>
                 </div>
 
-                    <button class="btn1" type="submit" form="cadastro" >Entrar</button>
+                <button class="btn1" type="submit" form="cadastro" >Entrar</button>
 
             </div>
 
-            <div id="main_img" class="d-none d-md-inline col-0 col-md-8">
-                <img src="/assets/img/park.jpeg" alt="park" height=100%>
+
+            <div class="main_img" class="d-none d-md-inline col-0 col-md-8">
+                <img class="park" src="/assets/img/park.jpeg" alt="park" height=100%>
+                <img class="parkio" src="/assets/img/parkiowhite.png" alt="parkio">
             </div>
+
+
 
     </div>
 </div>
