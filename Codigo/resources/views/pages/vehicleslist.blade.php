@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="row gx-5">
+    <div class="row">
         <div class="col-12 offset-0 col-md-10 offset-md-1">
             <div id="filtros" class="row g-3">
                 <div class="col d-none d-md-inline">
