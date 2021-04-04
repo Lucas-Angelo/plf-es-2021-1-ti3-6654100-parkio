@@ -15,12 +15,18 @@ use App\Models\Vehicle;
 class VehicleService
 {
     /**
-     * Returns vehicles list with pagination
+     * Search for all visitors vehicles
      *
+     * @param String|null $plate Vehicle's Plate Filter
      * @return Collection
      */
-    public function getAll(){
+    public function getAll($plate = null){
         $v = new Vehicle();
+
+        // Vehicle Plate Filter
+        if(!empty($plate))
+            $v = $v->where('plate','like','%'.$plate.'%');
+
         return $v
                 ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
                 ->orderByDesc('created_at')
