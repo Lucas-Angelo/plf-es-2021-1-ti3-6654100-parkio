@@ -20,57 +20,17 @@ button, button:focus, button:active, button.active, button:focus:active {
     outline-style: none !important;
 }
 
-#filtros {
-    margin-top: 16px;
-    margin-bottom: 25px;
-    padding-left: 5%; 
-    padding-right: 5%;
-    display: flex;
-    align-items: flex-end;
-}
-
 .mobile {
     display: none;
 }
 
-#filtros > #placa, #porteiro, #portaria {
-    padding-right: 2%;
-}
-
-#filtros > #placa > input:focus {
+#txtPlateFilter:focus {
     background-color: #333340;
     color: #B4B4B4;
 }
 
-#filtros > #filtro-avancado {
-    display: flex !important;
-    justify-content: flex-start;
-}
 
-#filtros > #filtro-avancado > button {
-    border-radius: 8px !important; 
-    padding: 5px !important;
-}
 
-#filtros > #buscar {
-    display: flex;
-    justify-content: flex-end !important;
-}
-
-#filtros > #buscar * {
-    display: inline-flex;
-}
-
-#filtros > #buscar > button {
-    border-radius: 8px; 
-    padding: 5px;
-    padding-right: 15px;
-    align-items: baseline;
-}
-
-.botoes {
-    padding: 10px;
-}
 
 .form-select {
     border: 0.5px solid #62628B !important;
@@ -87,11 +47,6 @@ button, button:focus, button:active, button.active, button:focus:active {
 .form-control:hover .form-control:after {
     background-color: #333340;
     color: #B4B4B4;
-}
-
-#tabela {
-    padding-left: 5%;
-    padding-right: 5%;
 }
 
 table {
