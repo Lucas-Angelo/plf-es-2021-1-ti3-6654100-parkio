@@ -3,16 +3,24 @@
 namespace App\Services;
 
 use App\Models\User;
+use PHPUnit\Framework\MockObject\Rule\Parameters;
 
 class UserService
 {
+    public $model;
+
+    public function __construct()
+    {
+        $this->model = new User();
+    }
+
     /**
      * Returns user list (with pagination)
      *
      * @return void
      */
     public function getAll(){
-        return User::paginate();
+        return $this->model->paginate();
     }
 
     /**
@@ -25,7 +33,7 @@ class UserService
      * @return void
      */
     public function create(String $name, String $login, String $password, String $type){
-        $u = new User();
+        $u = $this->model;
         $u->name = $name;
         $u->login = $login;
         $u->password = md5($password);
@@ -35,5 +43,21 @@ class UserService
             'message' => 'success',
             'created' => true
         ];
+    }
+
+    public function search($parameters) {
+        $data = $this->model;
+
+        if(isset($parameters['name']) && !is_null($parameters['name'])) {
+            $name = $parameters['name'];
+            $data = $data->where('name', 'like', "%$name%");
+        }
+
+        if(isset($parameters['type']) && !is_null($parameters['type'])) {
+            $data = $data->where('type',$parameters['type']);
+        }
+
+        return $data->get();
+
     }
 }

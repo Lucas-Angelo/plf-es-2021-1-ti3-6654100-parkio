@@ -17,10 +17,9 @@
                 </div>
                 <div class="col d-none d-md-inline">
                     <label>Portaria</label>
-                    <select class="form-select">
-                        <option selected>Selecione</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
+                    <select id="gate" class="form-select">
+                        <option vaule="0" selected>Selecione</option>
+                        <option value="1">Portaria 1</option>
                     </select>
                 </div>
                 <div class="col d-none d-md-inline">

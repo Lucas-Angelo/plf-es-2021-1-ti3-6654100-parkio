@@ -6,8 +6,13 @@ window.addEventListener("load", function () {
         let filter = '';
 
         const plate = document.getElementById('txtPlateFilter').value;
+        const gate = document.getElementById('gate').value;
+        console.log(gate);
+
         if(plate)
             filter += `&plate=${plate}`
+        if(gate!=0)
+            filter += `&gate=${gate}`
 
         fetch('/api/vehicles?1=1'+filter)
         .then(response => response.json()) // retorna uma promise
