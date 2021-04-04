@@ -40,7 +40,7 @@
                 <div class="col d-none d-md-inline">
                     <div class="float-end">
                         <label>&nbsp;</label>
-                        <button class="btn btn-secondary desktop d-block">
+                        <button id="btnFilter" class="btn btn-secondary desktop d-block">
                             <i class="fas fa-search botoes d-inline"></i>
                             <b class="d-inline">Buscar</b>
                         </button>
