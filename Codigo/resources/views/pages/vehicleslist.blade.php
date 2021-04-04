@@ -3,6 +3,7 @@
 @section('extraassets')
     <link rel="stylesheet" href="{{ url('/assets/css/vehiclelist.css') }}" type="text/css">
     <script src="{{ url('/assets/js/sorttable.js') }}"></script> <!-- To sort table by headers -->
+    <script src="{{ url('/assets/js/vehiclelist.js') }}"></script>
 @endsection
 
 @section('content')
@@ -42,7 +43,7 @@
 
             <div id="tabela" class="row">
                 <div class="col-12">
-                    <table class="table table-dark sortable">
+                    <table id="tabela-veiculo" class="table table-dark sortable">
                         <thead>
                             <tr>
                                 <th scope="col">Placa</th>
@@ -55,21 +56,11 @@
                                 <th scope="col">Ações</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td scope="row">AAA-1111</th>
-                                <td>Ford Ka</td>
-                                <td> <span style="backgroud-color: red;"></span> Vermelho</td>
-                                <td>1</td>
-                                <td>Porteiro x</td>
-                                <td>05:45</td>
-                                <td>06:30</td>
-                                <td>
-                                    <button lass="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
-                                </td>
-                            </tr>
+                        <tbody id="table-body">
                         </tbody>
                     </table>
+                    <div id="lista-veiculo">
+                    </div>
                 </div>
             </div>
         </div>
