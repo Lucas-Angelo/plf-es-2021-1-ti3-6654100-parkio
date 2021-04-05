@@ -1,0 +1,137 @@
+#novo {
+    margin: 0.5% 0 0 5%;
+}
+
+#novo > button {
+    padding: 15px;
+    font-size: medium;
+}
+
+#novo > button > i  {
+    margin-right: 10px;
+}
+
+#tabela-usuario {
+    margin: 20px 5%;
+    font-size: medium;
+}
+
+#lista-usuario {
+    display: none;
+}
+
+table {
+    color: #CCCCCC !important;
+}
+
+thead, th {
+    background-color: #252531 !important;
+    border: none !important;
+}
+
+tbody {
+    font-size: medium !important;
+}
+
+tr {
+    border: 1px solid #62628B !important;
+}
+
+td {
+    vertical-align: middle;
+    border-bottom: 1px solid #62628B !important;
+}
+
+.acoes i {
+    color: #BFBFBF;
+}
+
+.acoes > button:nth-child(2) {
+    background-color: #C74D5D;
+}
+
+.acoes > button:nth-child(2):hover {
+    background-color: #c93145;
+}
+
+@media only screen and (max-width: 800px) {
+
+    #novo > button {
+        margin-top: 2.5%;
+    }
+    
+    #tabela-usuario {
+        display: none;
+    }
+
+    #lista-usuario {
+        margin: 5%;
+        font-size: medium;
+        display: block;
+    }
+
+    .componente {
+        padding: 15px;
+        border: 1px solid #62628B;
+    }
+
+    .componente > button {
+        float: right;
+    }
+
+    .componente > button:nth-child(1) {
+        background-color: #C74D5D;
+    }
+
+    .componente > button:nth-child(1):hover {
+        background-color: #c93145;
+    }
+
+    .componente > button:nth-child(2) {
+        margin-right: 5px;
+    }
+
+    .componente h6, p {
+        display: inline-flex;
+    }
+
+}
+
+.modal-content {
+    padding: 0 20px !important;
+    border-radius: 8px;
+    background-color: var(--bg2) !important;
+}
+
+.modal-header {
+    text-align: center !important;
+    border-bottom: none;
+}
+
+.form-select > * {
+    max-width: 100%;
+}
+
+.modal-footer {
+    border-top: none;
+}
+
+select {
+    width: 250px;
+}
+  
+option {
+    width: 250px;
+}
+
+#cadastro > div > input, div > select, div > select > option, div > .form-select {
+    background-color: #333340 !important;
+    border: 1px solid #707070 !important;
+    color: #CCCCCC !important;
+}
+
+#cadastro > button {
+    background-color: #5C5C68 !important;
+    border: 1px solid #707070 !important;
+    color: #CCCCCC !important;
+}
