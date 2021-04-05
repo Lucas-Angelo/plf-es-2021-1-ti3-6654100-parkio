@@ -29,18 +29,18 @@ window.addEventListener("load", function () {
                 htmlSegment =   `<tr>
                                     <td scope="row">${vehicle.plate}</th>
                                     <td>${vehicle.model}</td>
-                                    <td><span style="background-color: ${vehicle.color};"></span> ${vehicle.color}</td>
+                                    <td><span class="color-cube" style="background-color: ${vehicle.color};"></span> ${vehicle.color}</td>
                                     <td>${gate}</td>
                                     <td>${vehicle.user_in.name}</td>
                                     <td>${created_at_formatada}</td>
                                     <td>${left_at_formatada}</td>
                                     <td>
-                                        <button lass="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
+                                        <button class="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
                                     </td>
                                 </tr>`;
 
                 htmlSegmentSm =   `<div class="componente">
-                                    <button lass="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
+                                    <button class="btn btn-secondary float-end"><i class="fas fa-edit botoes"></i></button>
                                     <div class="placa">
                                         <h6>Placa:</h6>
                                         <p>${vehicle.plate}</p>
@@ -49,9 +49,9 @@ window.addEventListener("load", function () {
                                         <h6>Modelo:</h6>
                                         <p>${vehicle.model}</p>
                                     </div>
-                                    <div class="cor">
+                                    <div>
                                         <h6>Cor:</h6>
-                                        <span style="background-color: ${vehicle.color};"></span>
+                                        <span class="color-cube" style="background-color: ${vehicle.color};"></span>
                                         <p>${vehicle.color}</p>
                                     </div>
                                     <div class="portaria">
