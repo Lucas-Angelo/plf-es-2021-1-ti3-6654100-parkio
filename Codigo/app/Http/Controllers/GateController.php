@@ -17,7 +17,7 @@ class GateController extends Controller
         $this->service = new GateService();
     }
 
-    public function index(){
+    public function getAll(){
         return $this->service->getAll();
     }
 

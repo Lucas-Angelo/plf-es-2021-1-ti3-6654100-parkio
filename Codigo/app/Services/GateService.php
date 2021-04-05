@@ -20,7 +20,9 @@ class GateService
      */
     
     public function getAll(){
-        return $this->model->all();
+        return $this->model
+            ->orderByDesc('created_at')
+            ->paginate();
     }
 
 }

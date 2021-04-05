@@ -31,7 +31,7 @@ $router->group(['prefix' => '/api'], function () use ($router) {
     $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
 
 
-    $router->get('/gate', 'GateController@index'); // Search for all gates
+    $router->get('/gate', 'GateController@getAll'); // Search for all gates
 });
 
 

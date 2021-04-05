@@ -1,18 +1,23 @@
 window.addEventListener("load", function () {
-    document.getElementById('btnFilter').addEventListener("click", renderVehicles); 
+    document.getElementById('btnFilter').addEventListener("click", renderVehicles);
 
     // Capturar e renderizar veículos de visistantes cadastrados
     function renderVehicles() {
         let filter = '';
 
+        renderUser_in();
+        renderGates();
         const plate = document.getElementById('txtPlateFilter').value;
         const gate = document.getElementById('gate').value;
-        console.log(gate);
+        const user_in = document.getElementById('user_in').value;
+        console.log(plate + " " + gate + " " + user_in)
 
         if(plate)
             filter += `&plate=${plate}`
         if(gate!=0)
             filter += `&gate=${gate}`
+        if(user_in!=0)
+            filter += `&user_in=${user_in}`
 
         fetch('/api/vehicles?1=1'+filter)
         .then(response => response.json()) // retorna uma promise
@@ -34,18 +39,18 @@ window.addEventListener("load", function () {
                 htmlSegment =   `<tr>
                                     <td scope="row">${vehicle.plate}</th>
                                     <td>${vehicle.model}</td>
-                                    <td><span style="background-color: ${vehicle.color};"></span> ${vehicle.color}</td>
+                                    <td><span class="color-cube" style="background-color: ${vehicle.color};"></span> ${vehicle.color}</td>
                                     <td>${gate}</td>
                                     <td>${vehicle.user_in.name}</td>
                                     <td>${created_at_formatada}</td>
                                     <td>${left_at_formatada}</td>
                                     <td>
-                                        <button lass="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
+                                        <button class="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
                                     </td>
                                 </tr>`;
 
                 htmlSegmentSm =   `<div class="componente">
-                                    <button lass="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
+                                    <button class="btn btn-secondary float-end"><i class="fas fa-edit botoes"></i></button>
                                     <div class="placa">
                                         <h6>Placa:</h6>
                                         <p>${vehicle.plate}</p>
@@ -54,9 +59,9 @@ window.addEventListener("load", function () {
                                         <h6>Modelo:</h6>
                                         <p>${vehicle.model}</p>
                                     </div>
-                                    <div class="cor">
+                                    <div>
                                         <h6>Cor:</h6>
-                                        <span style="background-color: ${vehicle.color};"></span>
+                                        <span class="color-cube" style="background-color: ${vehicle.color};"></span>
                                         <p>${vehicle.color}</p>
                                     </div>
                                     <div class="portaria">
@@ -96,4 +101,58 @@ window.addEventListener("load", function () {
     }
 
     renderVehicles();
+
+    function renderGates() {
+        fetch('/api/gate')
+        .then(response => response.json()) // retorna uma promise
+        .then(result => {
+            let html = `<option value="0" selected>Selecione</option>
+            `;
+
+            result.data.forEach(gate => {
+                var htmlSegment;
+                
+                htmlSegment =   `<option value="${gate.id}">${gate.description}</option>`;
+                
+                html += htmlSegment;
+            });
+
+            let container;
+            container = document.querySelector('#gate');
+            container.innerHTML = html;
+            
+        })
+        .catch(err => {
+            console.error('Failed retrieving information', err);
+        });
+    }
+
+    renderGates();
+
+    function renderUser_in () {
+        fetch('/api/users/search?type=p')
+        .then(response => response.json()) // retorna uma promise
+        .then(result => {
+            let html = `<option value="0" selected>Selecione</option>
+            `;
+
+            result.data.forEach(user_in => {
+                var htmlSegment;
+                
+                htmlSegment =   `<option value="${user_in.id}">${user_in.name}</option>`;
+                
+                html += htmlSegment;
+            });
+
+            let container;
+            container = document.querySelector('#user_in');
+            container.innerHTML = html;
+            
+        })
+        .catch(err => {
+            console.error('Failed retrieving information', err);
+        });
+    }
+
+    renderUser_in();
 });

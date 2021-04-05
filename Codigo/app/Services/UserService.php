@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\User;
-use PHPUnit\Framework\MockObject\Rule\Parameters;
 
 class UserService
 {
@@ -57,7 +56,9 @@ class UserService
             $data = $data->where('type',$parameters['type']);
         }
 
-        return $data->get();
+        return $data
+            ->orderByDesc('created_at')
+            ->paginate();
 
     }
 }

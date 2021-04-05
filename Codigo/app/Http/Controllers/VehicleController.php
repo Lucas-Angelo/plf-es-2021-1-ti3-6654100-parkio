@@ -20,13 +20,14 @@ class VehicleController extends Controller
 
     public function getAll(Request $request){
         $this->validate($request, [
-            'plate' => 'nullable|min:7|max:8',
+            'plate' => 'nullable|max:8',
             'gate' => 'nullable|max:255',
+            'user_in' => 'nullable|max:255',
         ]);
 
         try {
             $v = new VehicleService();
-            return $v->getAll($request->plate, $request->gate);
+            return $v->getAll($request->plate, $request->gate, $request->user_in);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()

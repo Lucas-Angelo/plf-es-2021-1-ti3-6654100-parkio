@@ -10,36 +10,33 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 offset-0 col-md-10 offset-md-1">
-            <div id="filtros" class="row g-3">
+            <div class="row g-3">
                 <div class="col d-none d-md-inline">
                     <label for="txtPlateFilter">Placa</label>
-                    <input type="text" class="form-control" id="txtPlateFilter" placeholder="Placa">
+                    <input type="text" class="form-control" id="txtPlateFilter" placeholder="Placa" maxlength="8">
                 </div>
                 <div class="col d-none d-md-inline">
                     <label>Portaria</label>
                     <select id="gate" class="form-select">
-                        <option vaule="0" selected>Selecione</option>
-                        <option value="1">Portaria 1</option>
+                        <option value="0" selected>Selecione</option>
                     </select>
                 </div>
                 <div class="col d-none d-md-inline">
                     <label>Porteiro</label>
-                    <select class="form-select">
-                        <option selected>Selecione</option>
-                        <option value="1">João</option>
-                        <option value="2">José</option>
+                    <select id="user_in" class="form-select">
+                        <option value="0" selected>Selecione</option>
                     </select>
                 </div>
                 <div class="col">
                     <div id="filtro-avancado">
                         <label>&nbsp;</label>
-                        <button class="btn btn-secondary d-block"><i class="fas fa-filter botoes"></i><b class="mobile">Filtro Avançado</b></button>
+                        <button class="btn btn-secondary d-block"><i class="fas fa-filter botoes"></i><b class="d-inline d-md-none">Filtro Avançado</b></button>
                     </div>
                 </div>
                 <div class="col d-none d-md-inline">
                     <div class="float-end">
                         <label>&nbsp;</label>
-                        <button id="btnFilter" class="btn btn-secondary desktop d-block">
+                        <button id="btnFilter" class="btn btn-secondary d-none d-md-block">
                             <i class="fas fa-search botoes d-inline"></i>
                             <b class="d-inline">Buscar</b>
                         </button>
@@ -48,23 +45,25 @@
             </div>
             <div id="tabela" class="row mt-3">
                 <div class="col-12">
-                    <table id="tabela-veiculo" class="table table-dark sortable">
-                        <thead>
-                            <tr>
-                                <th scope="col">Placa</th>
-                                <th scope="col">Modelo</th>
-                                <th scope="col">Cor</th>
-                                <th scope="col">Portaria</th>
-                                <th scope="col">Porteiro</th>
-                                <th scope="col">Hora de Entrada</th>
-                                <th scope="col">Hora de Saída</th>
-                                <th scope="col">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-body">
-                        </tbody>
-                    </table>
-                    <div id="lista-veiculo">
+                    <div class="d-none d-md-inline">
+                        <table id="tabela-veiculo" class="table table-dark sortable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Placa</th>
+                                    <th scope="col">Modelo</th>
+                                    <th scope="col">Cor</th>
+                                    <th scope="col">Portaria</th>
+                                    <th scope="col">Porteiro</th>
+                                    <th scope="col">Hora de Entrada</th>
+                                    <th scope="col">Hora de Saída</th>
+                                    <th scope="col">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="lista-veiculo" class="d-inline d-md-none">
                     </div>
                 </div>
             </div>
