@@ -26,6 +26,14 @@ class VehicleService
                 ->orderByDesc('created_at')
                 ->paginate();
     }
+    public function getAllInside(){
+        $v = new Vehicle();
+        return $v
+            ->where('left_at', null )
+            ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
+            ->orderByDesc('created_at')
+            ->paginate();
+    }
 
     public function create($driverName, $plate,int $time,int $destinationId,int $visitorCategoryId,
     int $gateId, $color=null, $model=null, $cpf=null  ){

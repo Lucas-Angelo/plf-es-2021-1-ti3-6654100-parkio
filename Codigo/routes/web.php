@@ -25,6 +25,7 @@ $router->group(['prefix' => '/api'], function () use ($router) {
 
 
     $router->get('/vehicles', 'VehicleController@getAll'); // Search for all vehicles entries
+    $router->get('/vehicles/inside', 'VehicleController@getAllInside'); // Search for all vehicles inside the apartment complex
     $router->put('/vehicles/{id}', 'VehicleController@edit'); // Edit one vehicles entries
     $router->get('/vehicles/search', 'VehicleController@search'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
     $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
