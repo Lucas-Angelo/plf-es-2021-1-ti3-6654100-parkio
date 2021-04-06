@@ -26,6 +26,9 @@ class VehicleService
                 ->orderByDesc('created_at')
                 ->paginate();
     }
+    /**
+     * Return vehicles that haven't left yet
+     */
     public function getAllInside(){
         $v = new Vehicle();
         return $v
