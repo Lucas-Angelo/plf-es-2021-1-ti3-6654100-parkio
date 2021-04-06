@@ -1,23 +1,18 @@
 body {
-  overflow: hidden; /* Hide scrollbars */
+  overflow-x: hidden;
 }
-
-#row{
+#line{
   background-color:white;
 }
 
 #form{
-  position: absolute;
-  top:325px;
-  left:120px;
-}  
+  margin-top: 50vh;
+  transform: translateY(-100%);
+  text-align:center;
+}
 
 .login {
-  position: relative;
-  left:180px;
-  bottom:60px;
   color:#707070;
-  border:#707070;
   font-size: 20px;
   font-family: Nirmala UI;
 }
@@ -33,56 +28,51 @@ body {
 
 .inputWithIcon i{
   position: absolute;
-  left:0;
-  padding:9px 8px;
+  left:10px;
+  font-size: 1.2rem;
+  top: 0;
   color:#707070;
+}
+
+#user, #pass{
+  display: inline;
+  position: relative;
+}
+#user > input, #pass > input{
+  padding: 10px 50px;
 }
 
 .inputWithIcon input[type=text]:focus + i {
   color:#707070;
 }
 
-#user{
-  left:100px;
-}
-
-#pass{
-  top:70px;
-  left:100px;
-}
-
-.btn1{
+#main_img {
   position:relative;
-  background-color: #707070;
-  color: white;
-  width: 143px;
-  height: 38px;
-  border: 1px solid #707070;
-  top: 150px;
-  left: 150px;  
-  font-weight: bold;
-  font-size:13px;
-  font-family:Segoe UI;
-  border-radius: 10px;
 }
 
-.main_img{
-  position: relative;
-  left:600px;
-  height:100vh;
+#main_img_mobile {
+
 }
 
-
-.park {
-  position:relative;
-  top:0;
-  left:0;
-}
 
 .parkio {
   position:absolute;
-  top: 479px;
-  width: 451px;
-  left: 30px;
+  bottom: 150px;
+  left: 80px;
   height: 194px;
-}  
+  width:451px;
+}
+.park{
+  width:100%;
+  height:100vh;
+}
+
+.park_mobile{
+  width:104%;
+  height:40vh;
+}
+
+.parkio_mobile{
+  position:absolute;
+  top:100px;
+}
