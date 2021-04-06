@@ -3,186 +3,41 @@
     font-size: large;
 }
 
-button {
-    background-color: #5C5C68 !important;
-    border: 1px solid #5C5C68 !important;
-}
-
-button:hover {
-    background-color: #d6d6da93 !important;
-}
-
-#lista-veiculo{
-    display: none;
-}
-
-button, button:focus, button:active, button.active, button:focus:active {
-    background-image: none !important;
-    outline: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    outline-style: none !important;
-}
-
-#filtros {
-    margin-top: 16px;
-    margin-bottom: 25px;
-    padding-left: 5%; 
-    padding-right: 5%;
-    display: flex;
-    align-items: flex-end;
-}
-
-.mobile {
-    display: none;
-}
-
-#filtros > #placa, #porteiro, #portaria {
-    padding-right: 2%;
-}
-
-#filtros > #placa > input:focus {
-    background-color: #333340;
-    color: #B4B4B4;
-}
-
-#filtros > #filtro-avancado {
-    display: flex !important;
-    justify-content: flex-start;
-}
-
-#filtros > #filtro-avancado > button {
-    border-radius: 8px !important; 
-    padding: 5px !important;
-    align-items: center;
-}
-
-#filtros > #buscar {
-    display: flex;
-    justify-content: flex-end !important;
-}
-
-#filtros > #buscar * {
-    display: inline-flex;
-}
-
-#filtros > #buscar > button {
-    border-radius: 8px; 
-    padding: 5px;
-    padding-right: 15px;
-    align-items: baseline;
-}
-
-.botoes {
-    padding: 10px;
-}
-
-.form-select {
-    border: 0.5px solid #62628B !important;
-    background-color: #333340;
-    color: #B4B4B4;
-}
-
-.form-control {
-    border: 0.5px solid #62628B !important;
-    background-color: #333340;
-    color: #B4B4B4;
-}
-
-.form-control:hover .form-control:after {
-    background-color: #333340;
-    color: #B4B4B4;
-}
-
-#tabela {
-    padding-left: 5%;
-    padding-right: 5%;
-}
-
-table {
-    border: 0.5px solid #62628B !important;
-    vertical-align: middle !important;
-}
-
 thead, th {
-    padding-left: 0;
     text-align: left;
-    background-color: #252531 !important;
 }
 
 tbody > tr > td {
     text-align: left;
     padding: 10px !important;
     font-size: large;
-    background-color: #1F1F26 !important;
 }
 
 th, td {
     border-bottom: 0.5px solid #62628B !important;
 }
 
-td > button {
-    border-radius: 8px;
-    padding: 5px;
-}
-
-td > span {
-    width: 15px; 
-    height: 15px; 
-    display: inline-block; 
-    background: transparent;
-}
-
-.cor span{
+.color-cube{
     vertical-align: middle !important;
-}
-
-.cor span {
     width: 15px; 
     height: 15px; 
     display: inline-block; 
     background: transparent;
+}
+
+#txtPlateFilter:not(:placeholder-shown) {
+    text-transform: uppercase;
 }
 
 @media only screen and (max-width: 900px) {
-    .desktop {
-        display: none !important;
-    }
-    #filtro-avancado > * {
-        display: inline-flex !important;
-    }
-    #filtro-avancado > button > .mobile {
-        display: inline-flex;
-    }
-    #filtros {
-        margin-bottom: 0;
-    }
-    #filtro-avancado {
-        margin-left: 5%;
-        min-width: 110%;
-    }
-    #filtros > #filtro-avancado > button {
-        padding: 10px !important;
-    }
-    
-    #tabela-veiculo {
-        display: none;
-    }
-
     #lista-veiculo {
         margin: 5%;
         font-size: medium;
-        display: block;
     }
 
     .componente {
         padding: 15px;
         border: 1px solid #62628B;
-    }
-
-    .componente > button {
-        float: right;
-        border-radius: 8px;
     }
 
     .componente h6, p {

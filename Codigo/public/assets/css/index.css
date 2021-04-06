@@ -14,3 +14,17 @@ html, body, .container-fluid{
     background: var(--bg);
     color: var(--color);
 }
+
+table {
+    border: 0.5px solid #62628B !important;
+    vertical-align: middle !important;
+}
+
+thead, th {
+    padding-left: 0;
+    background-color: #252531 !important;
+}
+
+tbody > tr > td {
+    background-color: #1F1F26 !important;
+}

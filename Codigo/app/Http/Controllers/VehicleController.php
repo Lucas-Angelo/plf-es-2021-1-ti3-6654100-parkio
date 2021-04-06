@@ -19,9 +19,13 @@ class VehicleController extends Controller
     }
 
     public function getAll(Request $request){
+        $this->validate($request, [
+            'plate' => 'nullable|max:8',
+        ]);
+
         try {
             $v = new VehicleService();
-            return $v->getAll();
+            return $v->getAll($request->plate);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
@@ -33,7 +37,7 @@ class VehicleController extends Controller
         //validate essencials fields
         $this->validate($request, [
             'driverName' => 'required|max:255',
-            'plate' => 'required|max:8',
+            'plate' => 'required|min:7|max:8',
             'time' => 'required|numeric',
             'categoryId' => 'required|exists:visitor_category,id',
             'destinationId' => 'required|exists:destination,id',
