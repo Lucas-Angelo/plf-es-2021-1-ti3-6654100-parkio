@@ -30,9 +30,13 @@ class VehicleService
         if(!empty($gate))
             $v = $v->where('gate_id',$gate);
 
-        if(!empty($user))
-            $v = $v->where('user_in_id',$user)->orWhere('user_out_id', $user);;
-
+        if(!empty($user)) {
+            $v->where(function ($v) use($user) {
+                $v->where('user_in_id', $user)
+                    ->orWhere('user_out_id', $user);
+            });
+        }
+        
         return $v
                 ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
                 ->orderByDesc('created_at')
