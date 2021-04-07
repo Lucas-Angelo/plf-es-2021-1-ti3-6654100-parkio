@@ -32,6 +32,16 @@ class VehicleController extends Controller
             ], $this->treatCodeError($e));
         }
     }
+    public function getAllInside(Request $request){
+        try {
+            $v = new VehicleService();
+            return $v->getAllInside();
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], $this->treatCodeError($e));
+        }
+    }
 
     public function create(Request $request){
         //validate essencials fields
