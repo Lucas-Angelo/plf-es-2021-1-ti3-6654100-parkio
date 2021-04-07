@@ -9,7 +9,7 @@ class VisitorCategoryService
 {
 
 
-    public function createVisitorCategory($description,int $time){
+    public function create($description,int $time){
 
       $visitorCategory = new VisitorCategory();
       $visitorCategory->description = strtoupper($description);

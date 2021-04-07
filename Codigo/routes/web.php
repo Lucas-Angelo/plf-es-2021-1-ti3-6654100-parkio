@@ -34,6 +34,9 @@ $router->group(['prefix' => '/api'], function () use ($router) {
     //gates
     $router->post('/gate', 'GateController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
 
+    //visitors
+    $router->post('/visitorCategory', 'VisitorCategoryController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+    
 });
 
 
@@ -57,4 +60,7 @@ $router->get('/vehiclelist', function () use ($router) {
 
 $router->get('/userlist', function () use ($router) {
     return view('pages.userlist');
+});
+$router->get('/visitorCategory', function () use ($router) {
+    return view('pages.visitorCategory');
 });

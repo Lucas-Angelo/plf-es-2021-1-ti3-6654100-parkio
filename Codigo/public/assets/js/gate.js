@@ -27,7 +27,6 @@ const handleEntranceFormSubmit = (event) =>{
         color,
         gateId
     }
-    console.log(data)
     fetch('/api/vehicles/save', {
         method: 'POST',
         headers: {
