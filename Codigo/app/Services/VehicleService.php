@@ -20,7 +20,7 @@ class VehicleService
      * @param String|null $plate Vehicle's Plate Filter
      * @return Collection
      */
-    public function getAll($plate = null, $gate = null, $user_in = null){
+    public function getAll($plate = null, $gate = null, $user = null){
         $v = new Vehicle();
 
         // Vehicle Plate Filter
@@ -30,8 +30,8 @@ class VehicleService
         if(!empty($gate))
             $v = $v->where('gate_id',$gate);
 
-        if(!empty($user_in))
-            $v = $v->where('user_in_id',$user_in);
+        if(!empty($user))
+            $v = $v->where('user_in_id',$user)->orWhere('user_out_id', $user);;
 
         return $v
                 ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])

@@ -10,8 +10,7 @@ window.addEventListener("load", function () {
         const plate = document.getElementById('txtPlateFilter').value;
         const gate = document.getElementById('gate').value;
         const user_in = document.getElementById('user_in').value;
-        console.log(plate + " " + gate + " " + user_in)
-
+        
         if(plate)
             filter += `&plate=${plate}`
         if(gate!=0)

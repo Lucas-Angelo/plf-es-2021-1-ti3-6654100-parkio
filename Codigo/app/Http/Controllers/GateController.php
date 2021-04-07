@@ -7,18 +7,21 @@ use App\Services\GateService;
 
 class GateController extends Controller
 {
-    public $service;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct() {
-        $this->service = new GateService();
-    }
 
     public function getAll(){
-        return $this->service->getAll();
+        try {
+            $v = new GateService();
+            return $v->getAll();
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], $this->treatCodeError($e));
+        }
     }
 
     //

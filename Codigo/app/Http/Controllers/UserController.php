@@ -7,15 +7,14 @@ use App\Services\UserService;
 
 class UserController extends Controller
 {
-    public $service;
-
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct() {
-        $this->service = new UserService();
+    public function __construct()
+    {
+        
     }
 
     /**
@@ -24,8 +23,9 @@ class UserController extends Controller
      * @param Request $request
      * @return void
      */
-    public function getAll(){
-        return $this->service->getAll();
+    public function getAll(Request $request){
+        $us = new UserService();
+        return $us->getAll();
     }
 
     /**
@@ -44,13 +44,16 @@ class UserController extends Controller
             'type' => 'required|in:A,M,R,D'
         ]);
 
+        $us = new UserService();
+
         return response()->json(
-            $this->service->create($request->name, $request->login,$request->password, $request->type)
+            $us->create($request->name, $request->login,$request->password, $request->type)
         );
     }
 
     public function search(Request $request) {
-        return $this->service->search($request->all());
+        $us = new UserService();
+        return $us->search($request->all());
     }
 
     //

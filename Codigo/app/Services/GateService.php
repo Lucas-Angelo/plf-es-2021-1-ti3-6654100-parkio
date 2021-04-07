@@ -6,13 +6,6 @@ use App\Models\Gate;
 
 class GateService
 {
-
-    public $model;
-
-    public function __construct() {
-        $this->model = new Gate();
-    }
-
     /**
      * Returns Gate list (with pagination)
      *
@@ -20,9 +13,7 @@ class GateService
      */
     
     public function getAll(){
-        return $this->model
-            ->orderByDesc('created_at')
-            ->paginate();
+        return Gate::paginate();
     }
 
 }

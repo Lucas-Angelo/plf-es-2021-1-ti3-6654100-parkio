@@ -6,20 +6,13 @@ use App\Models\User;
 
 class UserService
 {
-    public $model;
-
-    public function __construct()
-    {
-        $this->model = new User();
-    }
-
     /**
      * Returns user list (with pagination)
      *
      * @return void
      */
     public function getAll(){
-        return $this->model->paginate();
+        return User::paginate();
     }
 
     /**
@@ -32,7 +25,7 @@ class UserService
      * @return void
      */
     public function create(String $name, String $login, String $password, String $type){
-        $u = $this->model;
+        $u = new User();
         $u->name = $name;
         $u->login = $login;
         $u->password = md5($password);
@@ -45,7 +38,7 @@ class UserService
     }
 
     public function search($parameters) {
-        $data = $this->model;
+        $data = new User();
 
         if(isset($parameters['name']) && !is_null($parameters['name'])) {
             $name = $parameters['name'];
@@ -56,9 +49,7 @@ class UserService
             $data = $data->where('type',$parameters['type']);
         }
 
-        return $data
-            ->orderByDesc('created_at')
-            ->paginate();
+        return $data->orderByDesc('created_at')->paginate();
 
     }
 }
