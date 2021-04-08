@@ -37,16 +37,15 @@ class UserService
         ];
     }
 
-    public function search($parameters) {
+    public function search(String $type = null) {
         $data = new User();
 
-        if(isset($parameters['name']) && !is_null($parameters['name'])) {
-            $name = $parameters['name'];
-            $data = $data->where('name', 'like', "%$name%");
+        if(isset($type)) {
+            $data = $data->where('type',$type);
         }
 
-        if(isset($parameters['type']) && !is_null($parameters['type'])) {
-            $data = $data->where('type',$parameters['type']);
+        if(isset($type)) {
+            $data = $data->where('type',$type);
         }
 
         return $data->orderByDesc('created_at')->paginate();
