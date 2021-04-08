@@ -44,10 +44,6 @@ class UserService
             $data = $data->where('type',$type);
         }
 
-        if(isset($type)) {
-            $data = $data->where('type',$type);
-        }
-
         return $data->orderByDesc('created_at')->paginate();
 
     }
