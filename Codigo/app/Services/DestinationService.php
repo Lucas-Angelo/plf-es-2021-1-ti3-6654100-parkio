@@ -3,13 +3,20 @@
 namespace App\Services;
 
 use App\Models\Destination;
+use Illuminate\Support\Facades\DB;
 
 
 class DestinationService
 {
     
-    public function getAll(){
-        return Destination::paginate();
+    public function getAll($search = null){
+      $d = new Destination();
+
+      if(!empty($search)) {
+        $d = $d->where(DB::raw("CONCAT(block,' ',apartament)"), 'LIKE' , '%'.$search.'%');
+      }
+
+      return $d->paginate(200);
     }
 
 

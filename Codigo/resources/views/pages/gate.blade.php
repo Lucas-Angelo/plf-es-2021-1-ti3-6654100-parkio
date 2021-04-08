@@ -2,11 +2,13 @@
 
 @section('extraassets')
     <link rel="stylesheet" href="{{ url('/assets/css/gate.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('/assets/css/select2.css') }}" type="text/css">
+    <script src="{{ url('assets/js/gate.js') }}"></script>
+    <script src="{{ url('assets/js/select2.min.js') }}"></script>
 @endsection
 
 @section('content')
 
-<script src="{{ url('assets/js/gate.js') }}"></script>
 <div class="container-fluid" id="gate">
     <ul class="nav nav-tabs" id="gateTab" role="tablist">
         <li class="nav-item col-6 col-md-3" role="presentation">
@@ -28,17 +30,9 @@
                         <label for="input-name" class="form-label">Nome do condutor <span class="required">*</span></label>
                         <input type="text" class="form-control" id="input-name" required>
                     </div>
-                    <div class="mb-3 col-12 col-md-3 col-lg-2">
-                        <label for="input-block" class="form-label">Bloco <span class="required">*</span></label>
-                        <select type="text" class="form-select" id="input-block" required>
-                            <option selected value="1">Bloco 01</option>
-                        </select>
-                    </div>
-                    <div class="mb-3 col-12 col-md-3 col-lg-2">
-                        <label for="input-ap" class="form-label">Apartamento <span class="required">*</span></label>
-                        <select type="text" class="form-select" id="input-ap" required>
-                            <option value="1">Ap 01</option>
-                        </select>
+                    <div class="mb-3 col-12 col-md-6 col-lg-4">
+                        <label for="txtDestination" class="form-label">Destino <span class="required">*</span></label>
+                        <select id="selDestination" class="select2 form-select d-block" required></select>
                     </div>
                     <div class="mb-3 col-12 col-md-3 col-lg-2">
                         <label for="input-type" class="form-label">Tipo</label>

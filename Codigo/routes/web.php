@@ -34,6 +34,8 @@ $router->group(['prefix' => '/api'], function () use ($router) {
     //gates
     $router->post('/gate', 'GateController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
 
+    $router->get('/destinations', 'DestinationController@getAll');
+
 });
 
 
