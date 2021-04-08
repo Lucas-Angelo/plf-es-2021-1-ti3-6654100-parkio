@@ -24,7 +24,6 @@ const handleEntranceFormSubmit = (event) => {
         color,
         gateId,
     };
-    console.log(data);
     fetch("/api/vehicles/save", {
         method: "POST",
         headers: {
@@ -56,7 +55,6 @@ window.addEventListener("load", function () {
                 return query;
             },
             processResults: function (res) {
-                console.log(res.data);
                 let destiniesArray = [];
                 res.data.forEach((item, index) => {
                     destiniesArray.push({
