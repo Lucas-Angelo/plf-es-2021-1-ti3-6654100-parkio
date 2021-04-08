@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ url('/assets/css/select2.css') }}" type="text/css">
     <script src="{{ url('assets/js/gate.js') }}"></script>
     <script src="{{ url('assets/js/select2.min.js') }}"></script>
+    <script src="{{ url('assets/js/vanilla-masker.min.js') }}"></script>
 @endsection
 
 @section('content')
@@ -24,14 +25,14 @@
                 <form onSubmit="handleEntranceFormSubmit(event)" class="row" id="entrance-form">
                     <div class="mb-3 col-12 col-md-4 col-lg-2">
                         <label for="input-plate" class="form-label">Placa <span class="required">*</span></label>
-                        <input type="text" class="form-control" id="input-plate" required>
+                        <input minlength="7" maxlength="8" type="text" class="form-control" id="input-plate" required>
                     </div>
                     <div class="mb-3 col-12 col-md-8 col-lg-6">
                         <label for="input-name" class="form-label">Nome do condutor <span class="required">*</span></label>
                         <input type="text" class="form-control" id="input-name" required>
                     </div>
                     <div class="mb-3 col-12 col-md-6 col-lg-4">
-                        <label for="txtDestination" class="form-label">Destino <span class="required">*</span></label>
+                        <label for="txtDestination" class="form-label d-block">Destino <span class="required">*</span></label>
                         <select id="selDestination" class="select2 form-select d-block" required></select>
                     </div>
                     <div class="mb-3 col-12 col-md-3 col-lg-2">
@@ -47,7 +48,7 @@
                     </div>
                     <div class="mb-3 col-12 col-md-6 col-lg-4">
                         <label for="input-cpf" class="form-label">CPF</label>
-                        <input type="text" class="form-control" id="input-cpf">
+                        <input type="text" class="form-control" id="input-cpf" minlength="7" maxlength="8">
                     </div>
                     <div class="mb-3 col-12 col-md-4 col-lg-3">
                         <label for="input-model" class="form-label">Modelo</label>
