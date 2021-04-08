@@ -31,7 +31,7 @@ class VehicleService
             $v = $v->where('gate_id',$gate);
 
         if(!empty($user)) {
-            $v->where(function ($v) use($user) {
+            $v = $v->where(function ($v) use($user) {
                 $v->where('user_in_id', $user)
                     ->orWhere('user_out_id', $user);
             });
