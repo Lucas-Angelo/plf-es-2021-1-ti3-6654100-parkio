@@ -58,3 +58,7 @@ $router->get('/vehiclelist', function () use ($router) {
 $router->get('/userlist', function () use ($router) {
     return view('pages.userlist');
 });
+
+$router->get('/vehicleParkedList', function () use ($router) {
+    return view('pages.vehicleParkedList');
+});
