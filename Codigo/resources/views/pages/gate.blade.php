@@ -42,9 +42,8 @@
                     </div>
                     <div class="mb-3 col-12 col-md-3 col-lg-2">
                         <label for="input-type" class="form-label">Tipo</label>
-                        <select id="input-type" class="form-select">
-                            <option value="1">Visitante</option>
-                            <option value="2">Prestador de Serviço</option>
+                        <select onChange="handleSelectChange(event)" id="input-type" class="form-select">
+                            <option value="0"></option>
                         </select>
                     </div>
                     <div class="mb-3 col-12 col-md-3 col-lg-2">

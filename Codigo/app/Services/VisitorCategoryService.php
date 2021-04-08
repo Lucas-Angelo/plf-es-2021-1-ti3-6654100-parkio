@@ -19,6 +19,14 @@ class VisitorCategoryService
       return $visitorCategory->id;
     }
 
+    public function getAll(){
+      $v = VisitorCategory::all();
+      
+      return $v;/*
+      return $v
+            ->orderByDesc('id');*/
+  }
+
 
 
 

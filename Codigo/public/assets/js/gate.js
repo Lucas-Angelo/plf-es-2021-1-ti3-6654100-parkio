@@ -5,7 +5,7 @@ const handleEntranceFormSubmit = (event) =>{
     const driverName = document.querySelector('#input-name').value
     const block = document.querySelector('#input-block').value
     const destinationId = document.querySelector('#input-ap').value
-    let categoryId = document.querySelector('#input-type').value
+    let categoryId = document.querySelector('#input-type').value.split('|')[0]
     if (categoryId.length === 0)
         categoryId = 1;
     let time = document.querySelector('#input-time').value
@@ -39,6 +39,44 @@ const handleEntranceFormSubmit = (event) =>{
         }
         else{
             document.getElementById('entrance-form').reset();
+        }
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}
+
+const setTime = (time) =>{
+    document.querySelector('#input-time').value = time;
+}
+
+const handleSelectChange = (event) =>{
+    const time = event.target.value.split('|')[1];
+    setTime(time);
+}
+
+window.onload = () =>{
+    fetch('/api/visitorCategory', { method: 'GET' })
+    .then( res=>{
+        if (res.status === 200){
+            return res.json();
+        }
+    })
+    .then( jsonRes=>{
+        if (jsonRes){
+
+            const HTMLOptions = `
+                ${
+                    jsonRes.map(category=>{
+                        return(
+                            `<option value="${category.id}|${category.time}">${category.description}</option>`
+                        )
+                    })
+                }
+                
+            `
+            document.querySelector('#input-type').innerHTML = HTMLOptions;
+            setTime(jsonRes[0].time);
         }
     })
     .catch((err)=>{

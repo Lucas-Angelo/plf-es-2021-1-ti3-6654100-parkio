@@ -26,12 +26,23 @@ class VisitorCategoryController extends Controller
         ]);
 
         //calls the service and the function create passing datas
-        $visitor = new visitorCategoryService();
+        $visitor = new VisitorCategoryService();
 
 
         return response()->json(
             $visitor->create( $request->description, $request->time )
         );
+    }
+
+    public function getAll(Request $request){
+        try {
+            $v = new VisitorCategoryService();
+            return $v->getAll();
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], $this->treatCodeError($e));
+        }
     }
 
 }
