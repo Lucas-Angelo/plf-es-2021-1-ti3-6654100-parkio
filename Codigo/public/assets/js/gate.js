@@ -46,3 +46,42 @@ const handleEntranceFormSubmit = (event) =>{
         console.log(err)
     })
 }
+
+const handleExitFormSubmit = (event) =>{
+    event.preventDefault();
+    
+    const plate = document.querySelector('#input-plate-exit').value
+
+    const data = {
+        plate
+    }
+
+    fetch('/api/vehicles/search?plate='+plate)
+    .then(response => response.json()) // retorna uma promise
+    .then(result => {
+        const vehicle = result.items;
+
+        if(vehicle.plate==plate.toUpperCase()){
+            fetch(`/api/vehicles/${vehicle.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then((res)=>{
+                if (res.status !== 200){
+                }
+                else{
+                    document.getElementById('exit-form').reset();
+                }
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+        }
+    })
+    .catch(err => {
+        console.error('Failed retrieving information', err);
+    });
+}

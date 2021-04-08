@@ -72,8 +72,8 @@
             <div class="tab-pane fade" id="exit" role="tabpanel" aria-labelledby="exit-tab">
                 <form onSubmit="handleExitFormSubmit(event)" class="row" id="exit-form">
                     <div class="mb-3 col-12 col-md-4 col-lg-2">
-                        <label for="input-plate" class="form-label">Placa <span class="required">*</span></label>
-                        <input type="text" class="form-control" id="input-plate" required>
+                        <label for="input-plate-exit" class="form-label">Placa <span class="required">*</span></label>
+                        <input type="text" class="form-control" id="input-plate-exit" required>
                     </div>
                     <div class="button-div text-center mt-5">
                         <button class="btn" type="submit">Atualizar</button>
