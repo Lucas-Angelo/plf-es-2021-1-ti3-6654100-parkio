@@ -5,8 +5,6 @@ window.addEventListener("load", function () {
     function renderVehicles() {
         let filter = '';
 
-        renderUser_in();
-        renderGates();
         const plate = document.getElementById('txtPlateFilter').value;
         const gate = document.getElementById('gate').value;
         const user_in = document.getElementById('user_in').value;
