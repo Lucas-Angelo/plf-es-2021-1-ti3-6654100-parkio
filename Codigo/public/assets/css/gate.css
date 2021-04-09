@@ -92,3 +92,59 @@
         padding: 1rem 0;
     }
 }
+
+.modal-content {
+    padding: 0 20px !important;
+    border-radius: 8px;
+    background-color: var(--bg2) !important;
+}
+.modal-header {
+    text-align: center !important;
+    border-bottom: none;
+}
+.modal-footer {
+    border-top: none;
+}
+#modal-score * {
+    font-size: x-large;
+    display: inline-flex;
+    vertical-align: middle;
+}
+#modal-score button {
+    background-color: transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+#modal-score #good-score {
+    color: #78A46E;
+}
+#modal-score #good-score:focus {
+  color: lightgreen !important;
+}
+#modal-score #bad-score {
+  color: #5c5c68 !important;
+}
+#modal-score #bad-score:focus {
+  color: #5c5c684f !important;
+}
+#modal-score button {
+    padding: 0.5rem 0.5rem !important;
+}
+#modal-buttons button {
+    display: inline-flex;
+    vertical-align: middle;
+    background-color: #5C5C68 !important;
+    border: 1px solid #707070 !important;
+    color: #CCCCCC !important;
+    padding: 1rem 1.2rem;
+}
+#modal-buttons > #reportar {
+    background-color: #AE4444 !important;
+}
+#modal-buttons label {
+    font-size: x-small;
+    vertical-align: bottom;
+}

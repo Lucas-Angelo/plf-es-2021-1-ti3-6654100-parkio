@@ -76,7 +76,33 @@
                         <input type="text" class="form-control" id="input-plate-exit" required>
                     </div>
                     <div class="button-div text-center mt-5">
-                        <button class="btn" type="submit">Atualizar</button>
+                        <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#modalNovoUsuario">Atualizar</button>
+                    </div>
+                    <div class="modal fade" id="modalNovoUsuario" tabindex="-1" aria-labelledby="modalNovoUsuarioLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header justify-content-left">
+                                    <h5 class="modal-title" id="modalNovoUsuarioLabel"><i class="fas fa-exclamation-triangle"></i>&nbsp;Confirmar saída do veículo AAA-1111?</h5>
+                                </div>
+                                <div class="modal-body justify-content-center">
+                                    <form onSubmit="handleEntranceFormSubmit(event)" id="exit-modal" class="justify-content-center">
+                                        <div id="modal-score" class="mb-5 d-flex">
+                                            <label for="input-name" class="form-label">Comportamento do visitante:&nbsp;</label>
+                                            <form id="form-score">
+                                                <button type="button" id="good-score" value="G"><i class="far fa-thumbs-up"></i></button>
+                                                &nbsp;
+                                                <button type="button" id="bad-score" value="B"><i class="far fa-thumbs-down"></i></button>
+                                            </form>
+                                        </div>
+                                        <div id="modal-buttons" class="mb-3 d-flex justify-content-between">
+                                            <button id="reportar" type="submit" class="btn btn-primary align-items-center">Reportar</button>
+                                            <button id="close-modal" type="button" class="btn btn-secondary align-items-center" data-bs-dismiss="modal">Não&nbsp;<label>(cancelar)</label></button>
+                                            <button id="atualizar" type="submit" class="btn btn-primary align-items-center">Sim&nbsp;<label>(Enter)</label></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
