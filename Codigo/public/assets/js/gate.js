@@ -47,41 +47,45 @@ const handleEntranceFormSubmit = (event) =>{
     })
 }
 
+var tempScore;
+window.onload=function(){
+    document.getElementById("good-score").addEventListener("click", function() {
+        tempScore = "G";
+    });
+  
+    document.getElementById("bad-score").addEventListener("click", function() {
+            tempScore = "B";
+    });
+}
+  
 const handleExitFormSubmit = (event) =>{
     event.preventDefault();
     
-    const plate = document.querySelector('#input-plate-exit').value
+    const id = 1;
+    const score = tempScore;
+    const gateId = "1";
 
     const data = {
-        plate
+        id,
+        score,
+        gateId
     }
 
-    fetch('/api/vehicles/search?plate='+plate)
-    .then(response => response.json()) // retorna uma promise
-    .then(result => {
-        const vehicle = result.items;
-
-        if(vehicle.plate==plate.toUpperCase()){
-            fetch(`/api/vehicles/${vehicle.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then((res)=>{
-                if (res.status !== 200){
-                }
-                else{
-                    document.getElementById('exit-form').reset();
-                }
-            })
-            .catch((err)=>{
-                console.log(err)
-            })
+    fetch(`/api/vehicles/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then((res)=>{
+        if (res.status !== 200){
+        }
+        else{
+            document.getElementById('exit-form').reset();
         }
     })
-    .catch(err => {
-        console.error('Failed retrieving information', err);
-    });
+    .catch((err)=>{
+        console.log(err)
+    })
 }
