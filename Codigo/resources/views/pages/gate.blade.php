@@ -6,49 +6,7 @@
 
 @section('content')
 
-<script>
-    const handleEntranceFormSubmit = (event) =>{
-        event.preventDefault();
-        
-        const plate = document.querySelector('#input-plate').value
-        const driverName = document.querySelector('#input-name').value
-        const block = document.querySelector('#input-block').value
-        const destinationId = document.querySelector('#input-ap').value
-        let categoryId = document.querySelector('#input-type').value
-        if (categoryId.length === 0)
-            categoryId = 1;
-        let time = document.querySelector('#input-time').value
-        const color = document.querySelector('#input-color').value
-        const gateId = 1;
-
-        const data = {
-            plate,
-            driverName,
-            destinationId: + destinationId,
-            categoryId,
-            time,
-            color,
-            gateId
-        }
-        fetch('/api/vehicles/save', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then((res)=>{
-            if (res.status !== 200){
-            }
-            else{
-                document.getElementById('entrance-form').reset();
-            }
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-    }
-</script>
+<script src="{{ url('assets/js/gate.js') }}"></script>
 <div class="container-fluid" id="gate">
     <ul class="nav nav-tabs" id="gateTab" role="tablist">
         <li class="nav-item col-6 col-md-3" role="presentation">
@@ -85,14 +43,13 @@
                     <div class="mb-3 col-12 col-md-3 col-lg-2">
                         <label for="input-type" class="form-label">Tipo</label>
                         <select id="input-type" class="form-select">
-                            <option selected></option>
                             <option value="1">Visitante</option>
                             <option value="2">Prestador de Serviço</option>
                         </select>
                     </div>
                     <div class="mb-3 col-12 col-md-3 col-lg-2">
-                        <label for="input-time" class="form-label">Tempo</label>
-                        <input type="number" min="0" class="form-control" id="input-time" required>
+                        <label for="input-time" class="form-label">Tempo (minutos)</label>
+                        <input type="number" min="0" class="form-control" id="input-time">
                     </div>
                     <div class="mb-3 col-12 col-md-6 col-lg-4">
                         <label for="input-cpf" class="form-label">CPF</label>
