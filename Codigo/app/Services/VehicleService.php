@@ -20,13 +20,23 @@ class VehicleService
      * @param String|null $plate Vehicle's Plate Filter
      * @return Collection
      */
-    public function getAll($plate = null){
+    public function getAll($plate = null, $gate = null, $user = null){
         $v = new Vehicle();
 
         // Vehicle Plate Filter
         if(!empty($plate))
             $v = $v->where('plate','like','%'.$plate.'%');
 
+        if(!empty($gate))
+            $v = $v->where('gate_id',$gate);
+
+        if(!empty($user)) {
+            $v = $v->where(function ($v) use($user) {
+                $v->where('user_in_id', $user)
+                    ->orWhere('user_out_id', $user);
+            });
+        }
+        
         return $v
                 ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
                 ->orderByDesc('created_at')

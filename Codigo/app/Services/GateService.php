@@ -7,12 +7,13 @@ use App\Models\Gate;
 class GateService
 {
     /**
-     * Returns user list (with pagination)
+     * Returns Gate list (with pagination)
      *
      * @return void
      */
+    
     public function getAll(){
-        return User::paginate();
+        return Gate::paginate();
     }
 
     /**
