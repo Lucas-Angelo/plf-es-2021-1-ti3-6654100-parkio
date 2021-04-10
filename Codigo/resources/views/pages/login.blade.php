@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid p-0">
+<div class="container-fluid p-0 bg-white">
 
     <div id="main_img_mobile" class="d-md-none col-12 p-0">
             <img class="park_mobile" src="/assets/img/park.jpeg" alt="park">
