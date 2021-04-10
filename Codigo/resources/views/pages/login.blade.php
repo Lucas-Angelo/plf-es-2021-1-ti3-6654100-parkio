@@ -10,6 +10,7 @@
     <div id="main_img_mobile" class="d-md-none col-12 p-0">
             <img class="park_mobile" src="/assets/img/park.jpeg" alt="park">
             <img class="parkio_mobile" src="/assets/img/parkiowhite.png" alt="parkio">
+            <div class="parkCover"></div>
     </div>
 
         <div id="line" class="row">
@@ -49,6 +50,7 @@
             <div id="main_img" class="d-none d-md-inline col-0 col-md-8 p-0">
                 <img class="park" src="/assets/img/park.jpeg" alt="park">
                 <img class="parkio" src="/assets/img/parkiowhite.png" alt="parkio">
+                <div class="parkCover"></div>
             </div>
 
         </div>
