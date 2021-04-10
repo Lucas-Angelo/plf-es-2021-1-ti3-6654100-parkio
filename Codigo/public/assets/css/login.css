@@ -1,0 +1,92 @@
+body {
+  overflow-x: hidden;
+  height: 100vh;
+  background-color:white !important;
+}
+
+
+#form{
+  margin-top: 50px;
+  text-align:center;
+}
+
+@media (min-width: 576px) {
+  #form{
+    margin-top: 50vh;
+    transform: translateY(-50%);
+  }
+}
+
+.login {
+  color:#707070;
+  font-size: 20px;
+  font-family: Nirmala UI;
+}
+
+.inputWithIcon input[type=text] {
+  padding-left:40px;
+
+}
+
+.inputWithIcon {
+  position: relative;
+}
+
+.inputWithIcon i{
+  position: absolute;
+  left:10px;
+  font-size: 1.2rem;
+  top: 0;
+  color:#707070;
+}
+
+#user, #pass{
+  display: inline;
+  position: relative;
+}
+#user > input, #pass > input{
+  padding: 10px 50px;
+}
+
+.inputWithIcon input[type=text]:focus + i {
+  color:#707070;
+}
+
+#main_img, #main_img_mobile {
+  position:relative;
+}
+
+
+
+.parkio {
+  position:absolute;
+  bottom: 50px;
+  left: 80px;
+  width:300px;
+  z-index: 3;
+}
+.park{
+  width:100%;
+  height:100vh;
+}
+
+.parkCover{
+  left: 0;
+  top: 0;
+  position:absolute;
+  width:100%;
+  height:100%;
+  background: #1F1F26;
+  z-index: 2;
+  opacity: .6;
+}
+
+.park_mobile{
+  width:104%;
+  height:40vh;
+}
+
+.parkio_mobile{
+  position:absolute;
+  top:100px;
+}
