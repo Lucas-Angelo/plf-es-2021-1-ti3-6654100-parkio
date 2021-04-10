@@ -69,7 +69,41 @@
                     
                 </form>
             </div>
-            <div class="tab-pane fade" id="exit" role="tabpanel" aria-labelledby="exit-tab">Saída</div>
+
+            <div class="tab-pane fade" id="exit" role="tabpanel" aria-labelledby="exit-tab">
+
+
+            <div class="d-flex justify-content-center">
+
+                 <i class="fas fa-chevron-down fa-5x"></i>
+
+            </div>
+            
+
+
+                <div id="tabela" class="row">
+                    <div class="col-12">
+                        <table id="tabela-veiculo" class="table table-dark sortable">
+                            <thead>
+                                <tr>
+                                    <th class="col">Placa</th>
+                                    <th class="col">Modelo</th>
+                                    <th class="col">Cor</th>
+                                    <th class="col">Hora de Entrada</th>
+                                    <th class="col-2">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                            </tbody>
+                        </table>
+                        <div id="lista-veiculo">
+                        </div>
+                    </div>
+                </div>
+
+                
+
+
         </div>
     </div>
     

@@ -1,60 +1,199 @@
-#gate{
+#gate {
     padding-top: 20px;
 }
 
-#gateTab{
-    border-style:none ;
+#gateTab {
+    border-style: none;
 }
-#gateTab .nav-link{
+
+#gateTab .nav-link {
     background-color: var(--bg2);
     color: var(--color);
 }
-#gateTab .nav-link.active{
+
+#gateTab .nav-link.active {
     background-color: var(--tab);
     border-color: transparent;
 }
 
-#entrance-exit-container{
+#entrance-exit-container {
     background-color: var(--bg2);
     padding: 25px 15px;
 }
 
-#entrance-form input, #entrance-form select{
+#entrance-form input,
+#entrance-form select {
     background-color: var(--input);
     color: var(--color);
-
     height: 50px;
-
     border-color: var(--border);
     border-radius: .5rem;
-
 }
-#entrance-form label{
+
+#entrance-form label {
     color: var(--color);
     font-size: 1.3rem;
 }
-#entrance-form button{
+
+#entrance-form button {
     background-color: var(--button);
     color: var(--color);
     font-size: 1.5rem;
-
     border: 1px solid var(--color);
     border-radius: 15px;
-
     padding: 1rem 4.2rem;
 }
-#entrance-form button:hover{
+
+#entrance-form button:hover {
     background-color: var(--bg2);
     border-color: var(--button);
     color: var(--button);
 }
-.required{
+
+.required {
     color: red;
 }
 
-@media (max-width: 400px){
-    #entrance-form button{
+@media (max-width: 400px) {
+    #entrance-form button {
         width: 100%;
         padding: 1rem 0;
+    }
+}
+
+
+/* vehicle list */
+
+* {
+    color: #CCCCCC !important;
+    font-size: large;
+}
+
+#tabela>button:hover {
+    background-color: #d6d6da93 !important;
+}
+
+#lista-veiculo {
+    display: none;
+}
+
+#tabela>button,
+#tabela>button:focus,
+#tabela>button:active,
+#tabela>button.active,
+#tabela>button:focus:active {
+    background-image: none !important;
+    outline: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-style: none !important;
+}
+
+.mobile {
+    display: none;
+}
+
+button.btn-danger {
+    background-color: #C74D5D !important;
+}
+
+.form-select {
+    border: 0.5px solid #62628B !important;
+    background-color: #333340;
+    color: #B4B4B4;
+}
+
+.form-control {
+    border: 0.5px solid #62628B !important;
+    background-color: #333340;
+    color: #B4B4B4;
+}
+
+.form-control:hover .form-control:after {
+    background-color: #333340;
+    color: #B4B4B4;
+}
+
+#tabela {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+table {
+    border: 0.5px solid #62628B !important;
+    vertical-align: middle !important;
+}
+
+thead,
+th {
+    padding-left: 0;
+    text-align: left;
+    background-color: #252531 !important;
+}
+
+tbody>tr>td {
+    text-align: left;
+    padding: 10px !important;
+    font-size: large;
+    background-color: #1F1F26 !important;
+}
+
+th,
+td {
+    border-bottom: 0.5px solid #62628B !important;
+}
+
+td>button {
+    width: 3vw !important;
+    border-radius: 8px;
+    padding: 4px !important;
+}
+
+td>span {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    background: transparent;
+}
+
+.cor span {
+    vertical-align: middle !important;
+}
+
+.cor span {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    background: transparent;
+}
+
+@media only screen and (max-width: 900px) {
+    .desktop {
+        display: none !important;
+    }
+    #tabela-veiculo {
+        display: none;
+    }
+    #lista-veiculo {
+        margin: 5%;
+        font-size: medium;
+        display: block;
+    }
+    .componente {
+        padding: 15px;
+        border: 1px solid #62628B;
+    }
+    .componente>button {
+        margin: 3px;
+        padding: 10px !important;
+        float: right;
+        border-radius: 8px;
+    }
+    .componente>button.btn-danger {
+        background-color: #C74D5D !important;
+    }
+    .componente h6,
+    p {
+        display: inline-flex;
     }
 }
