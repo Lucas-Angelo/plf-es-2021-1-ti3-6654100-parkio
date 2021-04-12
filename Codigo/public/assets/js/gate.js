@@ -93,32 +93,38 @@ const handleExitFormSubmit = (event) =>{
     .then(response => response.json())
     .then(result => {
         var vehicle = result.items;
-        if(vehicle.left_at==null) {
-            var id = vehicle.id;
-            fetch(`/api/vehicles/${id}`, { // Atualizar dados do carro com essa placa
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then((res)=>{
-                if (res.status !== 200){
-                    document.getElementById('toast-msg').innerHTML = 'Veículo já removido ou não encontrado.';
+        if(vehicle!=null) {
+            if(vehicle.left_at==null) {
+                var id = vehicle.id;
+                fetch(`/api/vehicles/${id}`, { // Atualizar dados do carro com essa placa
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then((res)=>{
+                    if (res.status !== 200){
+                        document.getElementById('toast-msg').innerHTML = 'Não foi possível remover o veículo.';
+                        document.getElementById('liveToastBtn').click();
+                    }
+                    else{
+                        document.getElementById('exit-form').reset();
+                        document.getElementById('close-modal').click();
+                        document.getElementById('toast-msg').innerHTML = 'Veículo removido com sucesso!';
+                        document.getElementById('liveToastBtn').click();
+                    }
+                })
+                .catch((err)=>{
+                    document.getElementById('toast-msg').innerHTML = 'Ocorreu um erro.';
                     document.getElementById('liveToastBtn').click();
-                }
-                else{
-                    document.getElementById('exit-form').reset();
-                    document.getElementById('close-modal').click();
-                    document.getElementById('toast-msg').innerHTML = 'Veículo removido com sucesso!';
-                    document.getElementById('liveToastBtn').click();
-                }
-            })
-            .catch((err)=>{
-                document.getElementById('toast-msg').innerHTML = 'Ocorreu um erro.';
-                document.getElementById('liveToastBtn').click();
-                console.log(err)
-            })
+                    console.log(err)
+                })
+            }  
+        } else {
+            document.getElementById('close-modal').click();
+            document.getElementById('toast-msg').innerHTML = 'Veículo não encontrado.';
+            document.getElementById('liveToastBtn').click();
         }
     })
     .catch((err)=>{

@@ -115,15 +115,23 @@
     color: #aaaaaa;
 }
 #modal-buttons button {
+    background-color: var(--button);
+    color: var(--color);
+    border: 1px solid var(--color);
     display: inline-flex;
     vertical-align: middle;
-    background-color: #5C5C68 !important;
-    border: 1px solid #707070 !important;
-    color: #CCCCCC !important;
     padding: 1rem 1.2rem;
+}
+#modal-buttons button:hover {
+    background-color: var(--bg2);
+    border-color: var(--button);
+    color: var(--button);
 }
 #modal-buttons > #reportar {
     background-color: #AE4444 !important;
+}
+#modal-buttons > #reportar:hover {
+    background-color: #7c1111 !important;
 }
 #modal-buttons label {
     font-size: x-small;
@@ -148,4 +156,14 @@
         padding: 10px !important;
         margin-top: 16px;
     }
+}
+
+#liveToast {
+    background-color: var(--bg);
+    color: var(--color);
+    border: 1px solid var(--border);
+}
+
+#toast-header {
+    color: var(--color);
 }

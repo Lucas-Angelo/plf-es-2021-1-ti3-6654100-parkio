@@ -114,10 +114,10 @@
         </div>
     </div>
     
-    <button type="button" class="btn btn-primary d-none" id="liveToastBtn">Toast</button>
+    <button type="button" class="btn btn-secondary d-none" id="liveToastBtn"></button>
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5;">
-        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" style="background-color: var(--bg1); border-color: var(--border);">
-            <div class="toast-header" style="background-color: var(--bg2);">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
                 <strong class="me-auto">ParkIO</strong>
                 <small>Agora</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
