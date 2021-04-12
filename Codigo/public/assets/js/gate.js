@@ -48,44 +48,85 @@ const handleEntranceFormSubmit = (event) =>{
 }
 
 var tempScore;
-window.onload=function(){
-    document.getElementById("good-score").addEventListener("click", function() {
-        tempScore = "G";
+window.onload = function(){
+    document.querySelector("#button-att").addEventListener("click", function(){ 
+        document.querySelector("#span-plate").innerHTML = `${document.querySelector("#input-plate-exit").value}`;
     });
-  
-    document.getElementById("bad-score").addEventListener("click", function() {
-            tempScore = "B";
-    });
+
+    document.getElementById("liveToastBtn").onclick = function() {
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function(toastEl) {
+          return new bootstrap.Toast(toastEl)
+        });
+       toastList.forEach(toast => toast.show());
+    };
 }
-  
+
+const handleScoreForm = (event) =>{
+    event.preventDefault();
+    
+    var scoreInput = document.querySelector('input[name = scores]:checked').value;
+    tempScore = scoreInput;
+    if(scoreInput=="G") {
+        document.getElementById("label-good").style.color = "lightgreen";
+        document.getElementById("label-bad").style.color = "#5c5c68";
+    } 
+    if(scoreInput=="B") {
+        document.getElementById("label-bad").style.color = "#aaaaaa";
+        document.getElementById("label-good").style.color = "#78a46e81";
+    }
+}
+
 const handleExitFormSubmit = (event) =>{
     event.preventDefault();
     
-    const id = 1;
+    const plate = document.querySelector("#input-plate-exit").value;
     const score = tempScore;
     const gateId = "1";
 
     const data = {
-        id,
         score,
         gateId
     }
 
-    fetch(`/api/vehicles/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then((res)=>{
-        if (res.status !== 200){
-        }
-        else{
-            document.getElementById('exit-form').reset();
+    fetch(`/api/vehicles/search?plate=${plate}`) // Buscar id da placa
+    .then(response => response.json())
+    .then(result => {
+        var vehicle = result.items;
+        if(vehicle.left_at==null) {
+            var id = vehicle.id;
+            fetch(`/api/vehicles/${id}`, { // Atualizar dados do carro com essa placa
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then((res)=>{
+                if (res.status !== 200){
+                    document.getElementById('toast-msg').innerHTML = 'Veículo já removido ou não encontrado.';
+                    document.getElementById('liveToastBtn').click();
+                }
+                else{
+                    document.getElementById('exit-form').reset();
+                    document.getElementById('close-modal').click();
+                    document.getElementById('toast-msg').innerHTML = 'Veículo removido com sucesso!';
+                    document.getElementById('liveToastBtn').click();
+                }
+            })
+            .catch((err)=>{
+                document.getElementById('toast-msg').innerHTML = 'Ocorreu um erro.';
+                document.getElementById('liveToastBtn').click();
+                console.log(err)
+            })
         }
     })
     .catch((err)=>{
-        console.log(err)
+        console.log(err);
     })
 }
+
+var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+var toastList = toastElList.map(function (toastEl) {
+    return new bootstrap.Toast(toastEl, option)
+})

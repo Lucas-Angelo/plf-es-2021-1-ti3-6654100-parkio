@@ -70,7 +70,7 @@ class VehicleService
     public function search($plate){
       $filtro = strtoupper($plate);
       $vehicle =Vehicle::where('plate','like', "%".$filtro."%")
-                     ->first(['id','plate','model','color']);
+                     ->first(['id','plate','model','color','created_at','left_at']);
 
       return ['message'=> 'sucess', 'items'=>$vehicle] ;
     }

@@ -105,33 +105,14 @@
 .modal-footer {
     border-top: none;
 }
-#modal-score * {
-    font-size: x-large;
-    display: inline-flex;
-    vertical-align: middle;
+[type='radio'] {
+    display: none; 
 }
-#modal-score button {
-    background-color: transparent;
-    background-repeat:no-repeat;
-    border: none;
-    cursor:pointer;
-    overflow: hidden;
-    outline:none;
+#label-good {
+    color: #78a46e81;
 }
-#modal-score #good-score {
-    color: #78A46E;
-}
-#modal-score #good-score:focus {
-  color: lightgreen !important;
-}
-#modal-score #bad-score {
-  color: #5c5c68 !important;
-}
-#modal-score #bad-score:focus {
-  color: #5c5c684f !important;
-}
-#modal-score button {
-    padding: 0.5rem 0.5rem !important;
+#label-bad {
+    color: #aaaaaa;
 }
 #modal-buttons button {
     display: inline-flex;
@@ -147,4 +128,24 @@
 #modal-buttons label {
     font-size: x-small;
     vertical-align: bottom;
+}
+
+@media only screen and (max-width: 900px) {
+    #entrance-exit-container {
+        padding-bottom: 25px;
+    }
+    #modal-score {
+        display: block !important;
+    }
+    #modal-score > label {
+        display: block;
+    }
+    #modal-buttons {
+        display: block !important;
+    }
+    #modal-buttons button {
+        display: block;
+        padding: 10px !important;
+        margin-top: 16px;
+    }
 }

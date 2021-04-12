@@ -2,11 +2,11 @@
 
 @section('extraassets')
     <link rel="stylesheet" href="{{ url('/assets/css/gate.css') }}" type="text/css">
+    <script src="{{ url('assets/js/gate.js') }}"></script>
 @endsection
 
 @section('content')
 
-<script src="{{ url('assets/js/gate.js') }}"></script>
 <div class="container-fluid" id="gate">
     <ul class="nav nav-tabs" id="gateTab" role="tablist">
         <li class="nav-item col-6 col-md-3" role="presentation">
@@ -73,25 +73,30 @@
                 <form onSubmit="handleExitFormSubmit(event)" class="row" id="exit-form">
                     <div class="mb-3 col-12 col-md-4 col-lg-2">
                         <label for="input-plate-exit" class="form-label">Placa <span class="required">*</span></label>
-                        <input type="text" class="form-control" id="input-plate-exit" required>
+                        <input type="text" class="form-control" id="input-plate-exit" oninvalid="this.setCustomValidity('É necessário informar a placa.')" required>
                     </div>
                     <div class="button-div text-center mt-5">
-                        <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#modalNovoUsuario">Atualizar</button>
+                        <button id="button-att" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#modalNovoUsuario">Atualizar</button>
                     </div>
                     <div class="modal fade" id="modalNovoUsuario" tabindex="-1" aria-labelledby="modalNovoUsuarioLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header justify-content-left">
-                                    <h5 class="modal-title" id="modalNovoUsuarioLabel"><i class="fas fa-exclamation-triangle"></i>&nbsp;Confirmar saída do veículo AAA-1111?</h5>
+                                    <h5 class="modal-title" id="modalNovoUsuarioLabel"><i class="fas fa-exclamation-triangle"></i>&nbsp;Confirmar saída do veículo <span id="span-plate"></span>?</h5>
                                 </div>
                                 <div class="modal-body justify-content-center">
                                     <form onSubmit="handleEntranceFormSubmit(event)" id="exit-modal" class="justify-content-center">
                                         <div id="modal-score" class="mb-5 d-flex">
                                             <label for="input-name" class="form-label">Comportamento do visitante:&nbsp;</label>
-                                            <form id="form-score">
-                                                <button type="button" id="good-score" value="G"><i class="far fa-thumbs-up"></i></button>
-                                                &nbsp;
-                                                <button type="button" id="bad-score" value="B"><i class="far fa-thumbs-down"></i></button>
+                                            <form id="form-score" name="form-score">
+                                                <div class="form-check form-check-inline">
+                                                    <input onclick="handleScoreForm(event)" class="form-check-input" type="radio" name="scores" id="good-score" value="G">
+                                                    <label id="label-good" class="form-check-label" for="good-score"><i class="far fa-thumbs-up"></i></label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input onclick="handleScoreForm(event)" class="form-check-input" type="radio" name="scores" id="bad-score" value="B">
+                                                    <label id="label-bad" class="form-check-label" for="bad-score"><i class="far fa-thumbs-down"></i></label>
+                                                </div>
                                             </form>
                                         </div>
                                         <div id="modal-buttons" class="mb-3 d-flex justify-content-between">
@@ -109,5 +114,19 @@
         </div>
     </div>
     
+    <button type="button" class="btn btn-primary d-none" id="liveToastBtn">Toast</button>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5;">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" style="background-color: var(--bg1); border-color: var(--border);">
+            <div class="toast-header" style="background-color: var(--bg2);">
+                <strong class="me-auto">ParkIO</strong>
+                <small>Agora</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        <div class="toast-body">
+            <span id="toast-msg"></span>
+        </div>
+    </div>
+</div>
+
 </div>
 @endsection
