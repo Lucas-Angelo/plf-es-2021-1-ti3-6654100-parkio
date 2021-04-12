@@ -63,7 +63,6 @@
 
 }
 #exit-form label{
-    color: var(--color);
     font-size: 1.3rem;
 }
 #exit-form button{
@@ -109,10 +108,10 @@
     display: none; 
 }
 #label-good {
-    color: #78a46e81;
+    color: lightgreen;
 }
 #label-bad {
-    color: #aaaaaa;
+    color: #5c5c68;
 }
 #modal-buttons button {
     background-color: var(--button);

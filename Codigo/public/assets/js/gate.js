@@ -79,8 +79,10 @@ const handleScoreForm = (event) =>{
 
 const handleExitFormSubmit = (event) =>{
     event.preventDefault();
-    
+
     const plate = document.querySelector("#input-plate-exit").value;
+    if(tempScore==undefined)
+        tempScore = "G";
     const score = tempScore;
     const gateId = "1";
 
@@ -105,26 +107,41 @@ const handleExitFormSubmit = (event) =>{
                 })
                 .then((res)=>{
                     if (res.status !== 200){
+                        document.getElementById('exit-form').reset();
+                        document.getElementById('close-modal').click();
                         document.getElementById('toast-msg').innerHTML = 'Não foi possível remover o veículo.';
                         document.getElementById('liveToastBtn').click();
+                        tempScore = "G";
                     }
                     else{
                         document.getElementById('exit-form').reset();
                         document.getElementById('close-modal').click();
                         document.getElementById('toast-msg').innerHTML = 'Veículo removido com sucesso!';
                         document.getElementById('liveToastBtn').click();
+                        tempScore = "G";
                     }
                 })
                 .catch((err)=>{
+                    document.getElementById('exit-form').reset();
+                    document.getElementById('close-modal').click();
                     document.getElementById('toast-msg').innerHTML = 'Ocorreu um erro.';
                     document.getElementById('liveToastBtn').click();
+                    tempScore = "G";
                     console.log(err)
                 })
+            } else {
+                document.getElementById('exit-form').reset();
+                document.getElementById('close-modal').click();
+                document.getElementById('toast-msg').innerHTML = 'Veículo já removido anteriormente.';
+                document.getElementById('liveToastBtn').click();
+                tempScore = "G";
             }  
         } else {
+            document.getElementById('exit-form').reset();
             document.getElementById('close-modal').click();
             document.getElementById('toast-msg').innerHTML = 'Veículo não encontrado.';
             document.getElementById('liveToastBtn').click();
+            tempScore = "G";
         }
     })
     .catch((err)=>{
