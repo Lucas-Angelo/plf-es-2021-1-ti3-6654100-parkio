@@ -1,0 +1,46 @@
+* {
+    color: #CCCCCC !important;
+    font-size: large;
+}
+
+thead, th {
+    text-align: left;
+}
+
+tbody > tr > td {
+    text-align: left;
+    padding: 10px !important;
+    font-size: large;
+}
+
+th, td {
+    border-bottom: 0.5px solid #62628B !important;
+}
+
+.color-cube{
+    vertical-align: middle !important;
+    width: 15px; 
+    height: 15px; 
+    display: inline-block; 
+    background: transparent;
+}
+
+#txtPlateFilter:not(:placeholder-shown) {
+    text-transform: uppercase;
+}
+
+@media only screen and (max-width: 900px) {
+    #lista-veiculo {
+        margin: 5%;
+        font-size: medium;
+    }
+
+    .componente {
+        padding: 15px;
+        border: 1px solid #62628B;
+    }
+
+    .componente h6, p {
+        display: inline-flex;
+    }
+}

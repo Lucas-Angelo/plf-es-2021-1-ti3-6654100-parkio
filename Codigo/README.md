@@ -1,3 +1,7 @@
-# Código do Projeto
+# PARKIO
 
-Mantenha neste diretório todo o código do projeto. Se necessário, descreva neste arquivo aspectos relevantes da estrutura de diretórios criada para organização do código.
+PARKIO Description (Yet to be made)
+
+## License
+
+The ParkIO Project is open-sourced software licensed under the [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).

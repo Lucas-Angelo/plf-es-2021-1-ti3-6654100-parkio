@@ -1,0 +1,30 @@
+/* BE CAREFUL THIS STYLESHEET IS SET ON ALL PAGES */
+
+:root{
+    --bg: #1F1F26;
+    --color: #CCCCCC;
+    --bg2: #252531;
+    --input: #333340;
+    --tab: #3d3d4e;
+    --border: #616163;
+    --button: #5c5c68;
+}
+html, body, .container-fluid{
+    background-color: var(--bg);
+    background: var(--bg);
+    color: var(--color);
+}
+
+table {
+    border: 0.5px solid #62628B !important;
+    vertical-align: middle !important;
+}
+
+thead, th {
+    padding-left: 0;
+    background-color: #252531 !important;
+}
+
+tbody > tr > td {
+    background-color: #1F1F26 !important;
+}
