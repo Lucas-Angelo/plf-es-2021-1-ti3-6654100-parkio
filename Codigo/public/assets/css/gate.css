@@ -104,6 +104,10 @@
 .modal-footer {
     border-top: none;
 }
+#close-modal{
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
 [type='radio'] {
     display: none; 
 }
@@ -137,7 +141,7 @@
     vertical-align: bottom;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 400px) {
     #entrance-exit-container {
         padding-bottom: 25px;
     }
@@ -154,6 +158,10 @@
         display: block;
         padding: 10px !important;
         margin-top: 16px;
+    }
+    #close-modal{
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
 }
 

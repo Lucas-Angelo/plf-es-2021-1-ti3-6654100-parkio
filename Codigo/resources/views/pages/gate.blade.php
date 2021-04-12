@@ -79,7 +79,7 @@
                         <button id="button-att" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#modalNovoUsuario">Atualizar</button>
                     </div>
                     <div class="modal fade" id="modalNovoUsuario" tabindex="-1" aria-labelledby="modalNovoUsuarioLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-dialog modal-dialog-centered modal-md">
                             <div class="modal-content">
                                 <div class="modal-header justify-content-left">
                                     <h5 class="modal-title" id="modalNovoUsuarioLabel"><i class="fas fa-exclamation-triangle"></i>&nbsp;Confirmar saída do veículo <span id="span-plate"></span>?</h5>
@@ -99,9 +99,9 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        <div id="modal-buttons" class="mb-3 d-flex justify-content-between">
+                                        <div id="modal-buttons" class="mb-3 d-flex justify-content-center">
                                             <button id="reportar" type="submit" class="btn btn-primary align-items-center">Reportar</button>
-                                            <button id="close-modal" type="button" class="btn btn-secondary align-items-center" data-bs-dismiss="modal">Não&nbsp;<label>(cancelar)</label></button>
+                                            <button id="close-modal" type="button" class="btn btn-secondary align-items-center " data-bs-dismiss="modal">Não&nbsp;<label>(cancelar)</label></button>
                                             <button id="atualizar" type="submit" class="btn btn-primary align-items-center">Sim&nbsp;<label>(Enter)</label></button>
                                         </div>
                                     </form>
