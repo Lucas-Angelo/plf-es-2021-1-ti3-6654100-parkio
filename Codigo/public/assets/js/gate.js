@@ -107,41 +107,26 @@ const handleExitFormSubmit = (event) =>{
                 })
                 .then((res)=>{
                     if (res.status !== 200){
-                        document.getElementById('exit-form').reset();
-                        document.getElementById('close-modal').click();
                         document.getElementById('toast-msg').innerHTML = 'Não foi possível remover o veículo.';
-                        document.getElementById('liveToastBtn').click();
-                        tempScore = "G";
+                        resetExitForm();
                     }
                     else{
-                        document.getElementById('exit-form').reset();
-                        document.getElementById('close-modal').click();
                         document.getElementById('toast-msg').innerHTML = 'Veículo removido com sucesso!';
-                        document.getElementById('liveToastBtn').click();
-                        tempScore = "G";
+                        resetExitForm();
                     }
                 })
                 .catch((err)=>{
-                    document.getElementById('exit-form').reset();
-                    document.getElementById('close-modal').click();
                     document.getElementById('toast-msg').innerHTML = 'Ocorreu um erro.';
-                    document.getElementById('liveToastBtn').click();
-                    tempScore = "G";
+                    resetExitForm();
                     console.log(err)
                 })
             } else {
-                document.getElementById('exit-form').reset();
-                document.getElementById('close-modal').click();
                 document.getElementById('toast-msg').innerHTML = 'Veículo já removido anteriormente.';
-                document.getElementById('liveToastBtn').click();
-                tempScore = "G";
+                resetExitForm();
             }  
         } else {
-            document.getElementById('exit-form').reset();
-            document.getElementById('close-modal').click();
             document.getElementById('toast-msg').innerHTML = 'Veículo não encontrado.';
-            document.getElementById('liveToastBtn').click();
-            tempScore = "G";
+            resetExitForm();
         }
     })
     .catch((err)=>{
@@ -153,3 +138,12 @@ var toastElList = [].slice.call(document.querySelectorAll('.toast'))
 var toastList = toastElList.map(function (toastEl) {
     return new bootstrap.Toast(toastEl, option)
 })
+
+function resetExitForm() {
+    document.getElementById('exit-form').reset();
+    document.getElementById('close-modal').click();
+    document.getElementById('liveToastBtn').click();
+    document.getElementById("label-good").style.color = "lightgreen";
+    document.getElementById("label-bad").style.color = "#5c5c68";
+    tempScore = "G";
+}

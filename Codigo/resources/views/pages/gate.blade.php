@@ -100,7 +100,7 @@
                                             </form>
                                         </div>
                                         <div id="modal-buttons" class="mb-3 d-flex justify-content-center">
-                                            <button id="reportar" type="submit" class="btn btn-primary align-items-center">Reportar</button>
+                                            <button id="reportar" type="button" class="btn btn-primary align-items-center">Reportar</button>
                                             <button id="close-modal" type="button" class="btn btn-secondary align-items-center " data-bs-dismiss="modal">Não&nbsp;<label>(cancelar)</label></button>
                                             <button id="atualizar" type="submit" class="btn btn-primary align-items-center">Sim&nbsp;<label>(Enter)</label></button>
                                         </div>
