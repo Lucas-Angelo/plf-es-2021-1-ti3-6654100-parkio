@@ -51,5 +51,10 @@ class UserController extends Controller
         );
     }
 
+    public function search(Request $request) {
+        $us = new UserService();
+        return $us->search($request->type);
+    }
+
     //
 }

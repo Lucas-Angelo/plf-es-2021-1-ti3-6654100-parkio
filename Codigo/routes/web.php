@@ -23,6 +23,7 @@ $router->group(['prefix' => '/api'], function () use ($router) {
     //users
     $router->post('/users', 'UserController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
     $router->get('/users', 'UserController@getAll');
+    $router->get('/users/search', 'UserController@search');
 
     //vehicles
     $router->get('/vehicles', 'VehicleController@getAll'); // Search for all vehicles entries
@@ -32,13 +33,16 @@ $router->group(['prefix' => '/api'], function () use ($router) {
     $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
 
     //gates
+    $router->get('/gate', 'GateController@getAll'); // Search for all gates
     $router->post('/gate', 'GateController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
 
     //visitors
     $router->get('/visitorCategory', 'VisitorCategoryController@getAll'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
     $router->post('/visitorCategory', 'VisitorCategoryController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
     
+    $router->get('/destinations', 'DestinationController@getAll');
 });
+
 
 
 

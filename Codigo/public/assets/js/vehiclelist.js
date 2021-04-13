@@ -1,13 +1,20 @@
 window.addEventListener("load", function () {
-    document.getElementById('btnFilter').addEventListener("click", renderVehicles); 
+    document.getElementById('btnFilter').addEventListener("click", renderVehicles);
 
     // Capturar e renderizar veículos de visistantes cadastrados
     function renderVehicles() {
         let filter = '';
 
         const plate = document.getElementById('txtPlateFilter').value;
+        const gate = document.getElementById('gate').value;
+        const user_in = document.getElementById('user_in').value;
+        
         if(plate)
             filter += `&plate=${plate}`
+        if(gate!=0)
+            filter += `&gate=${gate}`
+        if(user_in!=0)
+            filter += `&user_in=${user_in}`
 
         fetch('/api/vehicles?1=1'+filter)
         .then(response => response.json()) // retorna uma promise
@@ -91,4 +98,58 @@ window.addEventListener("load", function () {
     }
 
     renderVehicles();
+
+    function renderGates() {
+        fetch('/api/gate')
+        .then(response => response.json()) // retorna uma promise
+        .then(result => {
+            let html = `<option value="0" selected>Selecione</option>
+            `;
+
+            result.data.forEach(gate => {
+                var htmlSegment;
+                
+                htmlSegment =   `<option value="${gate.id}">${gate.description}</option>`;
+                
+                html += htmlSegment;
+            });
+
+            let container;
+            container = document.querySelector('#gate');
+            container.innerHTML = html;
+            
+        })
+        .catch(err => {
+            console.error('Failed retrieving information', err);
+        });
+    }
+
+    renderGates();
+
+    function renderUser_in () {
+        fetch('/api/users/search?type=p')
+        .then(response => response.json()) // retorna uma promise
+        .then(result => {
+            let html = `<option value="0" selected>Selecione</option>
+            `;
+
+            result.data.forEach(user_in => {
+                var htmlSegment;
+                
+                htmlSegment =   `<option value="${user_in.id}">${user_in.name}</option>`;
+                
+                html += htmlSegment;
+            });
+
+            let container;
+            container = document.querySelector('#user_in');
+            container.innerHTML = html;
+            
+        })
+        .catch(err => {
+            console.error('Failed retrieving information', err);
+        });
+    }
+
+    renderUser_in();
 });

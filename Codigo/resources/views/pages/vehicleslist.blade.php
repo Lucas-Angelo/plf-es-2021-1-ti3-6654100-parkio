@@ -17,18 +17,14 @@
                 </div>
                 <div class="col d-none d-md-inline">
                     <label>Portaria</label>
-                    <select class="form-select">
-                        <option selected value="">Selecione</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
+                    <select id="gate" class="form-select">
+                        <option value="0" selected>Selecione</option>
                     </select>
                 </div>
                 <div class="col d-none d-md-inline">
                     <label>Porteiro</label>
-                    <select class="form-select">
-                        <option selected>Selecione</option>
-                        <option value="1">João</option>
-                        <option value="2">José</option>
+                    <select id="user_in" class="form-select">
+                        <option value="0" selected>Selecione</option>
                     </select>
                 </div>
                 <div class="col">
