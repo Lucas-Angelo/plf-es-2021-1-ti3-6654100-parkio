@@ -23,7 +23,7 @@ class UserService
      * @param String $name User name
      * @param String $login User nickname
      * @param String $password User Password
-     * @param String $type User type (A - Admin, M - Apartament/Block Manager, R - Ronda??, D - Doorman)
+     * @param String $type User type (A - Admin, S - Apartament/Block Manager, R - Ronda??, P - Doorman)
      * @return array
      */
     public function create(String $name, String $login, String $password, String $type){

@@ -41,7 +41,7 @@ class UserController extends Controller
             'name' => 'required',
             'login' => 'required|unique:user',
             'password' => 'required',
-            'type' => 'required|in:A,M,R,D'
+            'type' => 'required|in:A,S,R,P'
         ]);
 
         $us = new UserService();
