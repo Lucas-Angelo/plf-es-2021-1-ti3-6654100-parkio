@@ -8,6 +8,7 @@
     --tab: #3d3d4e;
     --border: #616163;
     --button: #5c5c68;
+    --activeTab: #411357;
 }
 html, body, .container-fluid{
     background-color: var(--bg);

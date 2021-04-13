@@ -62,6 +62,6 @@ $router->get('/vehiclelist', function () use ($router) {
 $router->get('/userlist', function () use ($router) {
     return view('pages.userlist');
 });
-$router->get('/visitorCategory', function () use ($router) {
-    return view('pages.visitorCategory');
+$router->get('/admin', function () use ($router) {
+    return view('pages.admin');
 });
