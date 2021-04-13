@@ -43,14 +43,14 @@ const handleEntranceFormSubmit = (event) => {
         .catch((err) => {
             console.log(err)
         })
-}
+};
 
 const url = '/api/vehicles/inside';
-
 // Capturar e renderizar veículos de visistantes cadastrados
 async function renderVehicles() {
-
-    fetch(url)
+    fetch('/api/vehicles/inside', {
+            method: 'GET'
+        })
         .then(response => response.json()) // retorna uma promise
         .then(result => {
 
@@ -60,11 +60,6 @@ async function renderVehicles() {
 
                 let created_at = new Date(vehicle.created_at);
                 let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
-
-                let left_at = new Date(vehicle.left_at);
-                let left_at_formatada = ((left_at.getDate().toString().padStart(2, "0"))) + "/" + ((left_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + left_at.getFullYear() + " " + (left_at.getHours().toString().padStart(2, "0")) + ":" + (left_at.getMinutes().toString().padStart(2, "0"));
-
-                let gate = vehicle.gate.description;
 
                 var htmlSegment, htmlSegmentSm;
 
@@ -121,4 +116,4 @@ async function renderVehicles() {
 
 }
 
-renderVehicles();
+window.onload = renderVehicles();
