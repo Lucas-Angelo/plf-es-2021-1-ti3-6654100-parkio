@@ -27,8 +27,7 @@ const handleEntranceFormSubmit = (event) =>{
         }
         else{
             document.getElementById('cadastro').reset();
-            document.getElementById('close-modal').click()
-            location.reload();
+            document.getElementById('close-modal').click();
         }
     })
     .catch((err)=>{
