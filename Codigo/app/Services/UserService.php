@@ -58,4 +58,15 @@ class UserService
             throw new \Exception("User or pass incorrect", 405);
         }
     }
+    
+    public function search(String $type = null) {
+        $data = new User();
+
+        if(isset($type)) {
+            $data = $data->where('type',$type);
+        }
+
+        return $data->orderByDesc('created_at')->paginate();
+
+    }
 }

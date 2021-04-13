@@ -15,16 +15,43 @@ use App\Models\Vehicle;
 class VehicleService
 {
     /**
-     * Returns vehicles list with pagination
+     * Search for all visitors vehicles
      *
+     * @param String|null $plate Vehicle's Plate Filter
      * @return Collection
      */
-    public function getAll(){
+    public function getAll($plate = null, $gate = null, $user = null){
         $v = new Vehicle();
+
+        // Vehicle Plate Filter
+        if(!empty($plate))
+            $v = $v->where('plate','like','%'.$plate.'%');
+
+        if(!empty($gate))
+            $v = $v->where('gate_id',$gate);
+
+        if(!empty($user)) {
+            $v = $v->where(function ($v) use($user) {
+                $v->where('user_in_id', $user)
+                    ->orWhere('user_out_id', $user);
+            });
+        }
+        
         return $v
                 ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
                 ->orderByDesc('created_at')
                 ->paginate();
+    }
+    /**
+     * Return vehicles that haven't left yet
+     */
+    public function getAllInside(){
+        $v = new Vehicle();
+        return $v
+            ->where('left_at', null )
+            ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
+            ->orderByDesc('created_at')
+            ->paginate();
     }
 
     public function create($driverName, $plate,int $time,int $destinationId,int $visitorCategoryId,
@@ -53,7 +80,7 @@ class VehicleService
     public function search($plate){
       $filtro = strtoupper($plate);
       $vehicle =Vehicle::where('plate','like', "%".$filtro."%")
-                     ->first(['plate','model','color']);
+                     ->first(['id','plate','model','color','created_at','left_at']);
 
       return ['message'=> 'sucess', 'items'=>$vehicle] ;
     }

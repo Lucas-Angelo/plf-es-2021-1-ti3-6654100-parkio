@@ -63,4 +63,11 @@ class UserController extends Controller
             $us->auth($request->login,$request->password)
         );
     }
+    
+    public function search(Request $request) {
+        $us = new UserService();
+        return $us->search($request->type);
+    }
+
+    //
 }
