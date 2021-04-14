@@ -41,7 +41,7 @@ class UserController extends Controller
             'name' => 'required',
             'login' => 'required|unique:user',
             'password' => 'required',
-            'type' => 'required|in:A,M,R,D'
+            'type' => 'required|in:A,S,R,P'
         ]);
 
         $us = new UserService();
@@ -51,6 +51,19 @@ class UserController extends Controller
         );
     }
 
+    public function auth(Request $request) {
+        $this->validate($request, [
+            'login' => 'required',
+            'password' => 'required',
+        ]);
+
+        $us = new UserService();
+
+        return response()->json(
+            $us->auth($request->login,$request->password)
+        );
+    }
+    
     public function search(Request $request) {
         $us = new UserService();
         return $us->search($request->type);

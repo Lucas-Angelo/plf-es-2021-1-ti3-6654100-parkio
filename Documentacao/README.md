@@ -105,22 +105,20 @@ Link para visualização dos wireframes no adobe XD: https://xd.adobe.com/view/7
 
 | No.    | Processo/tarefa | Descrição/Informações | Prioridade | Complexidade |
 | :----- |:---------------:| :-------: | :--------: | :----------: |
-1 | O porteiro cadastra os veículos na aplicação. | Informações: Placa, Modelo, Cor, Bloco, Apto de Destino, tempo de permanência, nome do visitante, CPF, tipo de visitante. | Alta | Média
-2 | A aplicação deve registrar os dados automáticos | A aplicação deve registrar automaticamente o horário de chegada, usuário que permitiu a entrada, de qual portaria entrou e o campo de Status como 'Dentro' para cada cadastro de veículo. | Alta | Baixa
-3 | A aplicação deve possibilitar marcar o veículo como 'Saiu' | O porteiro ao informar que o o veículo deixou o estacionamento deve definir o Status do veículo visitante para 'Saiu' e marcar uma avaliação de como foi comportamento do condutor. Informações: Status, e avaliação (Bom ou Ruim). | Alta | Média
-4 | A aplicação deve inserir dados no momento que um veículo for removido | A aplicação deve registrar automaticamente o horário de saída e o usuário que liberou a saída quando o porteiro registrar que o veículo saiu do estacionamento | Alta | Baixa
-5 | O administrador da aplicação deve cadastrar tipos de visitantes | (Ex: Entrega dos Correios, Técnico de Banda Larga, etc...), e definir um tempo recomendado que o visitante fique dentro do condomínio | Alta | Baixa
-6 | O porteiro poderá aumentar o tempo de permanência do visitante | Após fazer contato com o morador para verificar o motivo do atraso. O adiamento necessita de uma justificativa redigida pelo porteiro. | Baixa | Média
-7 | A aplicação deve emitir um alerta para um grupo no Telegram contendo os porteiros e os rondas | No caso de algum veículo ficar determinado tempo dentro do condomínio. Informações: O tempo padrão máximo para veículos de visitantes é de 20 minutos para sair, e o tempo padrão máximo para veículos de prestadores de serviço é de 8 horas para sair, podendo ser alterado pela administração do condomínio. | Alta | Alta
-8 | O administrador da aplicação poderá criar usuários com diferentes permissões. | Para que por exemplo, um sindico não possa alterar que um veículo saiu, apenas porteiros | Média | Alta
-9 | O administrador da aplicação poderá criar diferentes portarias dentro da aplicação. | Pois o condomínio tem mais de uma portaria | Média | Baixa
-10 | O porteiro deve escolher qual das portarias ele se encontra no momento após realizar seu login. | Pois um porteiro pode trabalhar nas duas portarias, porém, estar em apenas uma de cada vez | Média | Média
-11 | A aplicação não pode permitir que um veiculo que entra por uma portaria, saia por outra portaria. | Isso garante o controle da entrada e saída de veículos visitantes | Média | Baixa
-12 | A aplicação deve atualizar a lista de cadastros de veículos visitantes automaticamente | Quando um novo registro for criado, para que a lista esteja sempre atualizada para os porteiros. | Baixa | Média
-13 | A aplicação deverá possuir um relatório delimitado por um filtro de período de tempo, porteiro e/ou placa do carro, determinado pelo usuário administrador. | Informações: O relatório irá conter todas as informações que foram cadastradas na entrada de cada veículo e a quantidade de veículos visitantes cadastradas. | Baixa | Alta
-14 | A aplicação deve exibir na saída do veículo uma opção de reportar o visitante (pela placa do veículo) | O porteiro deverá escrever o motivo do bloqueio, e caso o veículo volte a tentar entrar no estacionamento aparecer um aviso de bloqueio. | Média | Média
-15 | O ronda poderá editar certas informações do veículo do visitante. | Informações: Placa, Modelo e Cor | Baixa | Baixa
-16 | O síndico de um bloco pode ver apenas visitantes destinados ao seu próprio bloco. | Pois sindicos não manipulam os dados, podem apenas visualizar | Baixa | Média
+1 | O porteiro deve cadastrar os veículos no sistema. | Informações: Placa, Modelo, Cor, Bloco, Apto de Destino, tempo de permanência, nome do visitante, CPF, tipo de visitante. | Alta | Média
+2 | O porteiro deve definir o Status do veículo visitante para 'Saiu' e marcar uma avaliação de como foi comportamento do condutor quando o veículo visitante sair. | Informações: Status, e avaliação (Bom ou Ruim). | Alta | Média
+3 | O administrador do sistema deve cadastrar tipos de visitantes. | (Ex: Entrega dos Correios, Técnico de Banda Larga, etc...), e definir um tempo recomendado que o visitante fique dentro do condomínio. | Alta | Baixa
+4 | O porteiro poderá aumentar o tempo de permanência do visitante. | Após fazer contato com o morador para verificar o motivo do atraso. O adiamento necessita de uma justificativa redigida pelo porteiro. | Baixa | Média
+5 | O sistema deve emitir um alerta para um grupo no Telegram contendo os porteiros e os rondas. | No caso de algum veículo ficar determinado tempo dentro do condomínio. Informações: O tempo padrão máximo para veículos de visitantes é de 20 minutos para sair, e o tempo padrão máximo para veículos de prestadores de serviço é de 8 horas para sair, podendo ser alterado pela administração do condomínio. | Alta | Alta
+6 | O administrador do sistema poderá criar usuários com diferentes permissões. | Para que por exemplo, um sindico não possa alterar que um veículo saiu, apenas porteiros. | Média | Alta
+7 | O administrador do sistema poderá criar diferentes portarias dentro do sistema. | Pois o condomínio tem mais de uma portaria. | Média | Baixa
+8 | Os usuários de qualquer tipo devem ser capazes de fazer login. | Para que consigam acessar o sistema. | Alta | Baixa
+9 | Os usuários de qualquer tipo devem selecionar uma portaria para utilizar o sistema. | Pois um porteiro, por exemplo, pode trabalhar nas duas portarias, porém, estar em apenas uma de cada. | Média | Média
+10 | Os usuários devem poder consultar a lista de veículos. | Isso deve ser possível para fins de monitoramento por parte dos usuários. | Baixa | Média
+11 | A administração deverá possuir um relatório delimitado por um filtro de período de tempo, porteiro e/ou placa do veículo. | Informações: O relatório irá conter todas as informações que foram cadastradas na entrada de cada veículo e a quantidade de veículos visitantes cadastradas. | Baixa | Alta
+12 | O porteiro deverá escrever o motivo do bloqueio de um veículo visitante, caso ocorra algum problema com a visita. | Caso algum veículo reportado volte a tentar entrar no estacionamento, deve aparecer um aviso de bloqueio. | Média | Média
+13 | O ronda poderá editar certas informações do veículo do visitante. | Informações: Placa, Modelo e Cor. | Baixa | Baixa
+
 
 **3.4 - Diagrama de Entidade-Relacionamento** A fazer
 | ![Imagem12](https://exemple.com/img.png "Imagem12") |

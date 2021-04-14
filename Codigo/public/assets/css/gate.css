@@ -21,8 +21,33 @@
     padding: 25px 15px;
 }
 
-#entrance-form input,
-#entrance-form select {
+#entrance-form input, #entrance-form select{
+    height: 50px;
+}
+#entrance-form label{
+    color: var(--color);
+    font-size: 1.3rem;
+}
+#entrance-form button{
+    background-color: var(--button);
+    color: var(--color);
+    font-size: 1.5rem;
+
+    border: 1px solid var(--color);
+    border-radius: 15px;
+
+    padding: 1rem 4.2rem;
+}
+#entrance-form button:hover{
+    background-color: var(--bg2);
+    border-color: var(--button);
+    color: var(--button);
+}
+.required{
+    color: red;
+}
+
+#exit-form input{
     background-color: var(--input);
     color: var(--color);
     height: 50px;
@@ -35,7 +60,10 @@
     font-size: 1.3rem;
 }
 
-#entrance-form button {
+#exit-form label{
+    font-size: 1.3rem;
+}
+#exit-form button, #entrance-form button{
     background-color: var(--button);
     color: var(--color);
     font-size: 1.5rem;
@@ -43,15 +71,25 @@
     border-radius: 15px;
     padding: 1rem 4.2rem;
 }
-
-#entrance-form button:hover {
+#exit-form button:hover, #entrance-form button:hover{
     background-color: var(--bg2);
     border-color: var(--button);
     color: var(--button);
 }
 
 .required {
-    color: red;
+    color: red !important;
+}
+.gate-select2{
+    height: 50px !important;
+    font-size: 1rem;
+}
+.gate-select2 > .select2-selection__rendered{
+    line-height: 45px !important;
+}
+
+#input-plate{
+    text-transform: uppercase;
 }
 
 @media (max-width: 400px) {
@@ -64,7 +102,7 @@
 
 /* vehicle list */
 
-* {
+#tabela > * {
     color: #CCCCCC !important;
     font-size: large;
 }
@@ -196,4 +234,91 @@ td>span {
     p {
         display: inline-flex;
     }
+    #exit-form button{
+        width: 100%;
+        padding: 1rem 0;
+    }
+}
+
+.modal-content {
+    padding: 0 20px !important;
+    border-radius: 8px;
+    background-color: var(--bg2) !important;
+}
+.modal-header {
+    text-align: center !important;
+    border-bottom: none;
+}
+.modal-footer {
+    border-top: none;
+}
+#close-modal{
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+[type='radio'] {
+    display: none; 
+}
+#label-good {
+    color: lightgreen;
+}
+#label-bad {
+    color: #5c5c68;
+}
+#modal-buttons button {
+    background-color: var(--button);
+    color: var(--color);
+    border: 1px solid var(--color);
+    display: inline-flex;
+    vertical-align: middle;
+    padding: 1rem 1.2rem;
+}
+#modal-buttons button:hover {
+    background-color: var(--bg2);
+    border-color: var(--button);
+    color: var(--button);
+}
+#modal-buttons > #reportar {
+    background-color: #AE4444 !important;
+}
+#modal-buttons > #reportar:hover {
+    background-color: #7c1111 !important;
+}
+#modal-buttons label {
+    font-size: x-small;
+    vertical-align: bottom;
+}
+
+@media only screen and (max-width: 400px) {
+    #entrance-exit-container {
+        padding-bottom: 25px;
+    }
+    #modal-score {
+        display: block !important;
+    }
+    #modal-score > label {
+        display: block;
+    }
+    #modal-buttons {
+        display: block !important;
+    }
+    #modal-buttons button {
+        display: block;
+        padding: 10px !important;
+        margin-top: 16px;
+    }
+    #close-modal{
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+#liveToast {
+    background-color: var(--bg);
+    color: var(--color);
+    border: 1px solid var(--border);
+}
+
+#toast-header {
+    color: var(--color);
 }
