@@ -30,6 +30,7 @@ const handleEntranceFormSubmit = (event) => {
         data: data,
         success: function(data, status){
             document.getElementById("entrance-form").reset();
+            renderVehicles();
             return false
         },
         error: function(data, status){
@@ -67,25 +68,6 @@ window.addEventListener("load", function () {
         },
     });
 });
-
-var tempScore;
-window.onload = function () {
-    document
-        .querySelector("#button-att")
-        .addEventListener("click", function () {
-            document.querySelector("#span-plate").innerHTML = `${
-                document.querySelector("#input-plate-exit").value
-            }`;
-        });
-
-    document.getElementById("liveToastBtn").onclick = function () {
-        var toastElList = [].slice.call(document.querySelectorAll(".toast"));
-        var toastList = toastElList.map(function (toastEl) {
-            return new bootstrap.Toast(toastEl);
-        });
-        toastList.forEach((toast) => toast.show());
-    };
-};
 
 const handleScoreForm = (event) => {
     event.preventDefault();
@@ -139,6 +121,7 @@ const handleExitFormSubmit = (event) => {
                                 document.getElementById("toast-msg").innerHTML =
                                     "Veículo removido com sucesso!";
                                 resetExitForm();
+                                renderVehicles();
                             }
                         },
                         error: function(err, status){
@@ -178,3 +161,92 @@ function resetExitForm() {
     document.getElementById("label-bad").style.color = "#5c5c68";
     tempScore = "G";
 }
+
+const url = '/api/vehicles/inside';
+// Capturar e renderizar veículos de visistantes cadastrados
+async function renderVehicles() {
+    $.ajax({
+        url: `/api/vehicles/inside`,
+        type: "GET",
+        success: function(result, status){
+            let html = '';
+            let htmlSm = '';
+            result.data.forEach(vehicle => {
+
+                let created_at = new Date(vehicle.created_at);
+                let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
+
+                var htmlSegment, htmlSegmentSm;
+
+                htmlSegment = `<tr>
+                                <td scope="row">${vehicle.plate}</th>
+                                <td>${vehicle.model}</td>
+                                <td><span style="background-color: ${vehicle.color};"></span> ${vehicle.color}</td>
+                                <td>${created_at_formatada}</td>
+                                <td>
+                                <button class="btn btn-secondary"><i class="fas fa-clock"></i></button>
+                                <button class="btn btn-danger"><i class="fas fa-sign-out-alt "></i></button>
+                                </td>
+                            </tr>`;
+
+                htmlSegmentSm = `<div class="componente">
+                              <button class="btn btn-danger"><i class="fas fa-sign-out-alt"></i></button>
+                              <button class="btn btn-secondary"><i class="fas fa-clock "></i></button>
+                                <div class="placa">
+                                    <h6>Placa:</h6>
+                                    <p>${vehicle.plate}</p>
+                                </div>
+                                <div class="modelo">
+                                    <h6>Modelo:</h6>
+                                    <p>${vehicle.model}</p>
+                                </div>
+                                <div class="cor">
+                                    <h6>Cor:</h6>
+                                    <span style="background-color: ${vehicle.color};"></span>
+                                    <p>${vehicle.color}</p>
+                                </div>
+                                <div class="criadoHora">
+                                    <h6>Horário de entrada:</h6>
+                                    <p>${created_at_formatada}</p>
+                                </div>
+                            </div>`;
+
+                html += htmlSegment;
+                htmlSm += htmlSegmentSm;
+            });
+
+            let container;
+
+            container = document.querySelector('#table-body');
+            container.innerHTML = html;
+
+            container = document.querySelector('#lista-veiculo');
+            container.innerHTML = htmlSm;
+        },
+        error: function(err, status){
+            console.error('Failed retrieving information', err);
+        },
+    })
+}
+
+
+var tempScore;
+window.onload = function () {
+    renderVehicles();
+    document
+        .querySelector("#button-att")
+        .addEventListener("click", function () {
+            document.querySelector("#span-plate").innerHTML = `${
+                document.querySelector("#input-plate-exit").value
+            }`;
+        });
+
+    document.getElementById("liveToastBtn").onclick = function () {
+        var toastElList = [].slice.call(document.querySelectorAll(".toast"));
+        var toastList = toastElList.map(function (toastEl) {
+            return new bootstrap.Toast(toastEl);
+        });
+        toastList.forEach((toast) => toast.show());
+    };
+    
+};
