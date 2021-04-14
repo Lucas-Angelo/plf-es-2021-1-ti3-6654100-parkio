@@ -24,22 +24,19 @@ const handleEntranceFormSubmit = (event) => {
         color,
         gateId,
     };
-    fetch("/api/vehicles/save", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
+    $.ajax({
+        url: "/api/vehicles",
+        type: "POST",
+        data: data,
+        success: function(data, status){
+            document.getElementById("entrance-form").reset();
+            return false
         },
-        body: JSON.stringify(data),
-    })
-        .then((res) => {
-            if (res.status !== 200) {
-            } else {
-                document.getElementById("entrance-form").reset();
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+        error: function(data, status){
+            alert("Erro ao cadastrar");
+            return false
+        },
+    });
 };
 
 window.addEventListener("load", function () {
@@ -119,23 +116,22 @@ const handleExitFormSubmit = (event) => {
         gateId,
     };
 
-    fetch(`/api/vehicles/search?plate=${plate}`) // Buscar id da placa
-        .then((response) => response.json())
-        .then((result) => {
+    $.ajax({
+        url: `/api/vehicles/search?plate=${plate}`,
+        type: "GET",
+        data: JSON.stringify(data),
+        success: function(result, status){
             var vehicle = result.items;
             if (vehicle != null) {
                 if (vehicle.left_at == null) {
                     var id = vehicle.id;
-                    fetch(`/api/vehicles/${id}`, {
-                        // Atualizar dados do carro com essa placa
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(data),
-                    })
-                        .then((res) => {
-                            if (res.status !== 200) {
+                    $.ajax({
+                        url: `/api/vehicles/${id}`,
+                        type: "PUT",
+                        data: data,
+                        success: function(res, status){
+                            console.log(res, status)
+                            if (status !== "success") {
                                 document.getElementById("toast-msg").innerHTML =
                                     "Não foi possível remover o veículo.";
                                 resetExitForm();
@@ -144,13 +140,14 @@ const handleExitFormSubmit = (event) => {
                                     "Veículo removido com sucesso!";
                                 resetExitForm();
                             }
-                        })
-                        .catch((err) => {
+                        },
+                        error: function(err, status){
                             document.getElementById("toast-msg").innerHTML =
                                 "Ocorreu um erro.";
                             resetExitForm();
                             console.log(err);
-                        });
+                        },
+                    });
                 } else {
                     document.getElementById("toast-msg").innerHTML =
                         "Veículo já removido anteriormente.";
@@ -161,10 +158,11 @@ const handleExitFormSubmit = (event) => {
                     "Veículo não encontrado.";
                 resetExitForm();
             }
-        })
-        .catch((err) => {
+        },
+        error: function(err, status){
             console.log(err);
-        });
+        },
+    });
 };
 
 var toastElList = [].slice.call(document.querySelectorAll(".toast"));

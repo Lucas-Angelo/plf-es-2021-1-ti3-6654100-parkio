@@ -63,7 +63,7 @@ class VehicleController extends Controller
 
         return response()->json(
             $vehicle->create($request->driverName, $request->plate, $request->time,
-              $request->destinationId, $request->categoryId, $request->gateId,
+              $request->destinationId, $request->categoryId, $request->gateId, $request->auth->id,
               $request->color, $request->model, $request->cpf
              )
         );
@@ -93,7 +93,7 @@ class VehicleController extends Controller
         try {
             $v = new VehicleService();
             return response()->json(
-                $v->edit($id, $request->score, $request->gateId, $request->plate, $request->model, $request->color)
+                $v->edit($id, $request->auth->id, $request->score, $request->gateId, $request->plate, $request->model, $request->color)
             );
         } catch (\Exception $e) {
             return response()->json([

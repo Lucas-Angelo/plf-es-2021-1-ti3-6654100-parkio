@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="{{ url('/assets/css/select2.css') }}" type="text/css">
     <script src="{{ url('assets/js/gate.js') }}"></script>
     <script src="{{ url('assets/js/select2.min.js') }}"></script>
-    <script src="{{ url('assets/js/vanilla-masker.min.js') }}"></script>
 @endsection
 
 @section('content')

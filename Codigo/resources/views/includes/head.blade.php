@@ -10,5 +10,6 @@
 	<link rel="stylesheet" href="{{ url('/assets/css/fontawesome.min.css') }}" type="text/css">
 	<script src="{{ url('/assets/js/bootstrap.min.js') }}"></script>
 	<script src="{{ url('/assets/js/jquery-3.5.1.min.js') }}"></script>
+	<script src="{{ url('/assets/js/index.js') }}"></script>
 	@yield('extraassets')
 </head>
