@@ -4,7 +4,7 @@ const handleEntranceFormSubmit = (event) => {
     const plate = document.querySelector("#input-plate").value;
     const driverName = document.querySelector("#input-name").value;
     const destinationId = document.querySelector("#selDestination").value;
-    let categoryId = document.querySelector("#input-type").value;
+    let categoryId = document.querySelector('#input-type').value.split('|')[0];
     if (categoryId.length === 0) categoryId = 1;
     let time = document.querySelector("#input-time").value;
     if (!time) time = categoryId == 1 ? 60 : 120;
@@ -31,7 +31,7 @@ const handleEntranceFormSubmit = (event) => {
         },
         body: JSON.stringify(data),
     })
-        .then((res) => {
+  .then((res) => {
             if (res.status !== 200) {
             } else {
                 document.getElementById("entrance-form").reset();
@@ -41,6 +41,45 @@ const handleEntranceFormSubmit = (event) => {
             console.log(err);
         });
 };
+
+const setTime = (time) =>{
+    document.querySelector('#input-time').value = time;
+}
+
+const handleSelectChange = (event) =>{
+    const time = event.target.value.split('|')[1];
+    setTime(time);
+}
+
+window.onload = () =>{
+    fetch('/api/visitorCategory', { method: 'GET' })
+    .then( res=>{
+        if (res.status === 200){
+            return res.json();
+        }
+    })
+    .then( jsonRes=>{
+        if (jsonRes){
+
+            const HTMLOptions = `
+                ${
+                    jsonRes.map(category=>{
+                        return(
+                            `<option value="${category.id}|${category.time}">${category.description}</option>`
+                        )
+                    })
+                }
+                
+            `
+            document.querySelector('#input-type').innerHTML = HTMLOptions;
+            setTime(jsonRes[0].time);
+        }
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+}
+        
 
 window.addEventListener("load", function () {
     $(".select2").select2({

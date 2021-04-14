@@ -1,0 +1,58 @@
+.menu{
+    height: 100%;
+}
+.admin-nav-title, .mobile-menu-button{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.admin-nav-item button, .admin-nav-title, .mobile-menu-button{
+    width: 100%;
+    padding: 10px 20px;
+
+    border: 1px solid var(--border);
+
+    background-color: transparent;
+    color: var(--color);
+
+    text-align: start;
+
+    transition: background-color 0.3s;
+}
+.admin-nav-item button:hover{
+    background-color: var(--bg2);
+}
+.admin-nav-item button.active{
+    background-color: var(--activeTab);
+    border-color: var(--activeTab);
+}
+
+/*mobile*/
+.mobile-menu-button{
+    font-size: 1.5rem;
+
+    background-color: transparent;
+    border: 0 none;
+    box-shadow: 0;
+}
+
+/*modal*/
+.admin-new-button button{
+    background-color: var(--button);
+    color: var(--color);
+    font-size: 1rem;
+
+    border-radius: 7px;
+
+    padding: .8rem 1.5rem;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.customModal .modal-header{
+    background-color: var(--bg2);
+}
+.customModal .modal-body{
+    background-color: var(--bg);
+}
