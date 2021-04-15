@@ -1,0 +1,97 @@
+#visitorCategory {
+    padding-top: 20px;
+}
+
+#visitorCategory-container {
+    background-color: var(--bg2);
+    padding: 25px 15px;
+}
+
+#gate-form input,
+#gate-form select {
+    background-color: var(--input);
+    color: var(--color);
+    height: 50px;
+    border-color: var(--border);
+    border-radius: .5rem;
+}
+
+#gate-form label {
+    color: var(--color);
+    font-size: 1.3rem;
+}
+
+#gate-form button {
+    background-color: var(--button);
+    color: var(--color);
+    font-size: 1.5rem;
+    border: 1px solid var(--color);
+    border-radius: 15px;
+    padding: 1rem 4.2rem;
+}
+
+#gate-form button:hover {
+    background-color: var(--bg2);
+    border-color: var(--button);
+    color: var(--button);
+}
+
+.required {
+    color: red;
+}
+
+@media (max-width: 400px) {
+    #gate-form button {
+        width: 100%;
+        padding: 1rem 0;
+    }
+}
+
+#visitorCategory {
+    padding-top: 20px;
+}
+
+#visitorCategory-container {
+    background-color: var(--bg2);
+    padding: 25px 15px;
+}
+
+#gate-form input,
+#gate-form select {
+    background-color: var(--input);
+    color: var(--color);
+    height: 50px;
+    border-color: var(--border);
+    border-radius: .5rem;
+}
+
+#gate-form label {
+    color: var(--color);
+    font-size: 1.3rem;
+}
+
+#gate-form button {
+    background-color: var(--button);
+    color: var(--color);
+    font-size: 1.5rem;
+    border: 1px solid var(--color);
+    border-radius: 15px;
+    padding: 1rem 4.2rem;
+}
+
+#gate-form button:hover {
+    background-color: var(--bg2);
+    border-color: var(--button);
+    color: var(--button);
+}
+
+.required {
+    color: red;
+}
+
+@media (max-width: 400px) {
+    #gate-form button {
+        width: 100%;
+        padding: 1rem 0;
+    }
+}

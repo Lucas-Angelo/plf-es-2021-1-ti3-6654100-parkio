@@ -13,7 +13,7 @@ class GateService
      */
     
     public function getAll(){
-        return Gate::paginate();
+        return Gate::all();
     }
 
     /**

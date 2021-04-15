@@ -67,9 +67,6 @@ $router->get('/userlist', function () use ($router) {
     return view('pages.userlist');
 });
 
-$router->get('/vehicleParkedList', function () use ($router) {
-    return view('pages.vehicleParkedList');
-});
 
 $router->get('/admin', function () use ($router) {
     return view('pages.admin');
