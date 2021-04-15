@@ -208,14 +208,14 @@ async function renderVehicles() {
                                 <td><span class="square" style="background-color: ${color.hex};"></span> ${color.name}</td>
                                 <td>${created_at_formatada}</td>
                                 <td>
-                                <button class="btn btn-secondary"><i class="fas fa-clock"></i></button>
-                                <button class="btn btn-danger"><i class="fas fa-sign-out-alt "></i></button>
+                                <button disabled class="btn btn-secondary"><i class="fas fa-clock"></i></button>
+                                <button disabled class="btn btn-danger"><i class="fas fa-sign-out-alt "></i></button>
                                 </td>
                             </tr>`;
 
                 htmlSegmentSm = `<div class="componente">
-                              <button class="btn btn-danger"><i class="fas fa-sign-out-alt"></i></button>
-                              <button class="btn btn-secondary"><i class="fas fa-clock "></i></button>
+                              <button disabled class="btn btn-danger"><i class="fas fa-sign-out-alt"></i></button>
+                              <button disabled class="btn btn-secondary"><i class="fas fa-clock "></i></button>
                                 <div class="placa">
                                     <h6>Placa:</h6>
                                     <p>${vehicle.plate}</p>

@@ -52,12 +52,12 @@ window.addEventListener("load", function () {
                                         <td>${created_at_formatada}</td>
                                         <td>${left_at_formatada}</td>
                                         <td>
-                                            <button class="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
+                                            <button disabled class="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
                                         </td>
                                     </tr>`;
 
                     htmlSegmentSm =   `<div class="componente">
-                                        <button class="btn btn-secondary float-end"><i class="fas fa-edit botoes"></i></button>
+                                        <button disabled class="btn btn-secondary float-end"><i class="fas fa-edit botoes"></i></button>
                                         <div class="placa">
                                             <h6>Placa:</h6>
                                             <p>${vehicle.plate}</p>

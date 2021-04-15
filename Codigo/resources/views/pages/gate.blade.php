@@ -135,7 +135,7 @@
                         <div id="modal-buttons" class="mb-3">
                             <div class="row">
                                 <div class="col-4">
-                                    <button id="reportar" type="button" class="btn btn-danger w-100">Reportar</button>
+                                    <button id="reportar" disabled type="button" class="btn btn-danger w-100">Reportar</button>
                                 </div>
                                 <div class="col-4">
                                     <button id="close-modal" type="button" class="btn btn-secondary w-100 " data-bs-dismiss="modal">Não&nbsp;<small>(cancelar)</small></button>

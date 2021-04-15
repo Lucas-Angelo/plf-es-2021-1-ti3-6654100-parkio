@@ -30,7 +30,7 @@
                 <div class="col">
                     <div id="filtro-avancado">
                         <label>&nbsp;</label>
-                        <button class="btn btn-secondary d-block"><i class="fas fa-filter botoes"></i><b class="d-inline d-md-none">Filtro Avançado</b></button>
+                        <button class="btn btn-secondary d-block" disabled><i class="fas fa-filter botoes"></i><b class="d-inline d-md-none">Filtro Avançado</b></button>
                     </div>
                 </div>
                 <div class="col d-none d-md-inline">
