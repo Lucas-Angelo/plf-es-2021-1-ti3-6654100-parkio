@@ -1,4 +1,6 @@
 window.addEventListener("load", function () {
+    let colors = []
+
     document.getElementById('btnFilter').addEventListener("click", renderVehicles);
 
     // Capturar e renderizar veículos de visistantes cadastrados
@@ -23,6 +25,13 @@ window.addEventListener("load", function () {
                 let html = '';
                 let htmlSm = '';
                 result.data.forEach(vehicle => {
+                    let color = colors.find(function(c){ return c.hex == vehicle.color})
+                    if(!color) {
+                        color = {
+                            hex: vehicle.color,
+                            name: vehicle.color,
+                        }
+                    }
 
                     let created_at = new Date(vehicle.created_at);
                     let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0")); 
@@ -37,7 +46,7 @@ window.addEventListener("load", function () {
                     htmlSegment =   `<tr>
                                         <td scope="row">${vehicle.plate}</th>
                                         <td>${vehicle.model}</td>
-                                        <td><span class="color-cube" style="background-color: ${vehicle.color};"></span> ${vehicle.color}</td>
+                                        <td><span class="color-cube" style="background-color: ${color.hex};"></span> ${color.name}</td>
                                         <td>${gate}</td>
                                         <td>${vehicle.user_in.name}</td>
                                         <td>${created_at_formatada}</td>
@@ -59,8 +68,8 @@ window.addEventListener("load", function () {
                                         </div>
                                         <div>
                                             <h6>Cor:</h6>
-                                            <span class="color-cube" style="background-color: ${vehicle.color};"></span>
-                                            <p>${vehicle.color}</p>
+                                            <span class="color-cube" style="background-color: ${color.hex};"></span>
+                                            <p>${color.name}</p>
                                         </div>
                                         <div class="portaria">
                                             <h6>Portaria:</h6>
@@ -147,6 +156,11 @@ window.addEventListener("load", function () {
             },
         });
     }
+
+    $.getJSON("/assets/json/colors.json", function(json) {
+        colors = json;
+        renderVehicles();
+    });
 
     renderVehicles();
     renderGates();

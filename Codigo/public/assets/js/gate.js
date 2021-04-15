@@ -1,3 +1,6 @@
+let colors = [];
+var tempScore;
+
 const handleEntranceFormSubmit = (event) => {
     event.preventDefault();
 
@@ -67,6 +70,47 @@ window.addEventListener("load", function () {
             },
         },
     });
+
+    $.getJSON("/assets/json/colors.json", function(json) {
+        colors = json;
+        let coloursArray = [];
+        json.forEach((item, index) => {
+            coloursArray.push({
+                id: item.hex,
+                text: item.name,
+            });
+        });
+        $('.gate-inputcolor').select2({
+            selectionCssClass: "gate-select2",
+            templateResult: formatState,
+            data: coloursArray
+        });
+        renderVehicles();
+    });
+
+    function formatState (color) {
+        var $color = $(
+          '<span> <span class="square" style="background-color: '+color.id+'"></span> ' + color.text +' </span>'
+        );
+        return $color;
+    };
+
+    document
+        .querySelector("#button-att")
+        .addEventListener("click", function () {
+            document.querySelector("#span-plate").innerHTML = `${
+                document.querySelector("#input-plate-exit").value
+            }`;
+        });
+
+    document.getElementById("liveToastBtn").onclick = function () {
+        var toastElList = [].slice.call(document.querySelectorAll(".toast"));
+        var toastList = toastElList.map(function (toastEl) {
+            return new bootstrap.Toast(toastEl);
+        });
+        toastList.forEach((toast) => toast.show());
+    };
+    
 });
 
 const handleScoreForm = (event) => {
@@ -162,7 +206,6 @@ function resetExitForm() {
     tempScore = "G";
 }
 
-const url = '/api/vehicles/inside';
 // Capturar e renderizar veículos de visistantes cadastrados
 async function renderVehicles() {
     $.ajax({
@@ -172,6 +215,13 @@ async function renderVehicles() {
             let html = '';
             let htmlSm = '';
             result.data.forEach(vehicle => {
+                let color = colors.find(function(c){ return c.hex == vehicle.color})
+                if(!color) {
+                    color = {
+                        hex: vehicle.color,
+                        name: vehicle.color,
+                    }
+                }
 
                 let created_at = new Date(vehicle.created_at);
                 let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
@@ -181,7 +231,7 @@ async function renderVehicles() {
                 htmlSegment = `<tr>
                                 <td scope="row">${vehicle.plate}</th>
                                 <td>${vehicle.model}</td>
-                                <td><span style="background-color: ${vehicle.color};"></span> ${vehicle.color}</td>
+                                <td><span style="background-color: ${color.hex};"></span> ${color.name}</td>
                                 <td>${created_at_formatada}</td>
                                 <td>
                                 <button class="btn btn-secondary"><i class="fas fa-clock"></i></button>
@@ -202,8 +252,8 @@ async function renderVehicles() {
                                 </div>
                                 <div class="cor">
                                     <h6>Cor:</h6>
-                                    <span style="background-color: ${vehicle.color};"></span>
-                                    <p>${vehicle.color}</p>
+                                    <span style="background-color: ${color.hex};"></span>
+                                    <p>${color.name}</p>
                                 </div>
                                 <div class="criadoHora">
                                     <h6>Horário de entrada:</h6>
@@ -228,25 +278,3 @@ async function renderVehicles() {
         },
     })
 }
-
-
-var tempScore;
-window.onload = function () {
-    renderVehicles();
-    document
-        .querySelector("#button-att")
-        .addEventListener("click", function () {
-            document.querySelector("#span-plate").innerHTML = `${
-                document.querySelector("#input-plate-exit").value
-            }`;
-        });
-
-    document.getElementById("liveToastBtn").onclick = function () {
-        var toastElList = [].slice.call(document.querySelectorAll(".toast"));
-        var toastList = toastElList.map(function (toastEl) {
-            return new bootstrap.Toast(toastEl);
-        });
-        toastList.forEach((toast) => toast.show());
-    };
-    
-};

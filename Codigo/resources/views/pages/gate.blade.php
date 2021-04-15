@@ -49,13 +49,16 @@
                         <label for="input-cpf" class="form-label">CPF</label>
                         <input type="text" class="form-control" id="input-cpf" minlength="7" maxlength="8">
                     </div>
-                    <div class="mb-3 col-12 col-md-4 col-lg-3">
+                    <div class="mb-3 col-12 col-md-4 col-lg-2">
                         <label for="input-model" class="form-label">Modelo</label>
                         <input type="text" class="form-control" id="input-model">
                     </div>
-                    <div class="mb-3 col-12 col-md-2 col-lg-1">
+                    <div class="mb-3 col-12 col-md-2 col-lg-2">
                         <label for="input-color" class="form-label">Cor</label>
-                        <input type="color" class="form-control" id="input-color">
+                        <!--<input type="color" class="form-control" id="input-color">-->
+                        <select class="gate-inputcolor form-select d-block">
+                            <option selected value="">Indefinido</option>
+                        </select>
                     </div>
                     <div class="button-div text-center mt-5">
                         <button class="btn" type="submit">Cadastrar</button>
