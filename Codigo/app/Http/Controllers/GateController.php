@@ -51,7 +51,26 @@ class GateController extends Controller{
             'error' => 'missing id'
         ]);
 
-      
+    }
+
+    public function edit(Request $request, int $id){
+        if(!empty($id)){
+
+            try {
+                $g = new GateService();
+                //dd($g->edit($id));
+                return response()->json($g->edit($id));
+                
+            } catch (\Exception $e) {
+                return response()->json([
+                    'error' => $e->getMessage()
+                ], $this->treatCodeError($e));
+            }
+
+        }else return response()->json([
+            'error' => 'missing id'
+        ]);
+
     }
 
 }

@@ -45,14 +45,14 @@ const updateEntraceTable = () => {
                                 <td>${gate.description}</th>
                                 <td>${created_at_formatada}</th>
                                 <td class="acoes">
-                                    <button class="btn btn-secondary"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-secondary" onclick="edit(${gate.id})"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-secondary" onclick="remover(${gate.id})"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>`;
 
                 htmlSegmentSm = `<div class="componente mb-2">
                                     <button class="btn btn-secondary" onclick="remover(${gate.id})"><i class="fas fa-trash-alt"></i></button>
-                                    <button class="btn btn-secondary"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-secondary" onclick="edit(${gate.id})"> <i class="fas fa-edit"></i></button>
                                     <div class="type">
                                         <h6>Identificação:</h6>
                                         <p>${gate.description}</p>
@@ -105,5 +105,46 @@ function remover(gate) {
             })
     }
 }
+
+ function edit(gate){
+        
+        console.log("teste");
+        fetch('/api/gate/' + gate, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((res) => {
+                if (res.status !== 200) {} else {
+                 return res.json();
+                }
+            }).then((data) =>{
+                var myModal = Document.getElementById("CreateGateModal");
+
+                console.log(myModal);
+                console.log(data);
+                Document.getElementById("gate-description").value(data.description);
+
+                myModal.modal({show:true});
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    
+
+        // now get the values from the table
+        //var firstName = $(this).closest('tr').find('td.firstName').html();
+        //var lastName = $(this).closest('tr').find('td.lastName').html();
+        //console.log(gate.description);
+        //console.log(lastName);
+        // and set them in the modal:
+        //$('.firstName', myModal).val(firstName);
+        //$('.lastNameName', myModal).val(lastName);
+        // and finally show the modal
+        // myModal.modal({ show: true });
+
+        return false;
+    };
 
 window.onload = updateEntraceTable;

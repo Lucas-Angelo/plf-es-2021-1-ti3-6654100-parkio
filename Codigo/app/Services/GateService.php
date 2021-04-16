@@ -47,4 +47,18 @@ class GateService
         }
 
     }
+
+    public function edit(int $id)
+    {
+        $gate = Gate::find($id);
+
+        if(!empty($gate)){
+
+            return $gate;
+
+        }else {
+            throw new \Exception("Gate Not Found", 404);
+        }
+
+    }
 }

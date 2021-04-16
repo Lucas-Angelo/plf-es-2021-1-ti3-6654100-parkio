@@ -173,15 +173,15 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form onSubmit="handleGateFormSubmit(event)" class="row" id="gate-form">
+                        <form onSubmit="handleGateFormSubmit(event)" class="row align-items-center justify-content-center" id="gate-form">
 
-                        <div class="mb-3 col-12 col-lg-6">
+                        <div class="mb-3 col-12 col-lg-12">
                                 <label for="gate-description" class="form-label">Descrição<span class="required">*</span></label>
                                 <input type="text" class="form-control" id="gate-description" required autocomplete="false">
                             </div>
 
                             <div class="button-div text-center mt-3">
-                            <button class="btn" type="submit">Cadastrar</button>
+                            <button class="btn" type="submit">Gravar</button>
                             </div>
 
                         </form>
