@@ -25,12 +25,33 @@ class GateController extends Controller{
         ]);
 
         //calls the service and the function create passing datas
-        $vehicle = new GateService();
+        $g = new GateService();
 
 
         return response()->json(
-            $vehicle->create($request->description)
+            $g->create($request->description)
         );
+    }
+
+    public function delete(Request $request, int $id){
+        if(!empty($id)){
+
+            try {
+                $g = new GateService();
+                return response()->json(
+                    $g->delete($id)
+                );
+            } catch (\Exception $e) {
+                return response()->json([
+                    'error' => $e->getMessage()
+                ], $this->treatCodeError($e));
+            }
+
+        }else return response()->json([
+            'error' => 'missing id'
+        ]);
+
+      
     }
 
 }

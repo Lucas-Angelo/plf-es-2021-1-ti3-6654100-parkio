@@ -39,7 +39,6 @@ const updateEntraceTable = () => {
                 let created_at = new Date(gate.created_at);
                 let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
 
-
                 var htmlSegment, htmlSegmentSm;
 
                 htmlSegment = `<tr>
@@ -47,13 +46,13 @@ const updateEntraceTable = () => {
                                 <td>${created_at_formatada}</th>
                                 <td class="acoes">
                                     <button class="btn btn-secondary"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-secondary" onclick="remover(${gate.id})"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>`;
 
                 htmlSegmentSm = `<div class="componente mb-2">
-                                    <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
-                                    <button class="btn btn-secondary" onclick="edit(${gate.id})"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-secondary" onclick="remover(${gate.id})"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-secondary"><i class="fas fa-edit"></i></button>
                                     <div class="type">
                                         <h6>Identificação:</h6>
                                         <p>${gate.description}</p>
@@ -86,8 +85,25 @@ const updateEntraceTable = () => {
 
 }
 
-function edit(gate) {
-    console.log(gate);
+function remover(gate) {
+
+    var result = confirm("Você deseja excluir a portaria ? Essa ação é irreversível!");
+    if (result) {
+        fetch('/api/gate/' + gate, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((res) => {
+                if (res.status !== 200) {} else {
+                    updateEntraceTable();
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 }
 
 window.onload = updateEntraceTable;

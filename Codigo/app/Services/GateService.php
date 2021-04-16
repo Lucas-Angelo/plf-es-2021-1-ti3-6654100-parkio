@@ -28,4 +28,23 @@ class GateService
             'created' => true
         ];
     }
+
+    public function delete(int $id)
+    {
+        $gate = Gate::find($id);
+
+        if(!empty($gate)){
+
+            $gate->delete();
+
+            return [
+                'message' => 'success',
+                'deleted' => true
+            ];
+
+        }else {
+            throw new \Exception("Gate Not Found", 404);
+        }
+
+    }
 }

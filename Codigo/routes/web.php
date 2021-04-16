@@ -33,6 +33,7 @@ $router->group(['prefix' => '/api'], function () use ($router) {
     $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
 
     //gates
+    $router->delete('/gate/{id}', 'GateController@delete');
     $router->get('/gate', 'GateController@getAll'); // Search for all gates
     $router->post('/gate', 'GateController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
 
@@ -66,7 +67,6 @@ $router->get('/vehiclelist', function () use ($router) {
 $router->get('/userlist', function () use ($router) {
     return view('pages.userlist');
 });
-
 
 $router->get('/admin', function () use ($router) {
     return view('pages.admin');
