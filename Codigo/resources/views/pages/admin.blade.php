@@ -56,7 +56,7 @@
                     <div class="row">
                         <div class="col-12 p-0 m-0">
                             <div id="novo">
-                                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateCategoryModal"><i class="fas fa-plus"></i>Novo Usuário</button>
+                                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateCategoryModal"><i class="fas fa-plus"></i>Nova Categoria</button>
                             </div>
                         </div>
                     </div>
@@ -101,16 +101,16 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="CreateCategoryModalLabel">Cadastro de Categoria de Visitantes</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button id="closeCategoryRegisterModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form onSubmit="handleVisitorCategoryFormSubmit(event)" class="row" id="visitorCategory-form">
 
-                            <div class="mb-3 col-12 col-lg-6">
+                            <div class="mb-3 col-12">
                                 <label for="input-description" class="form-label">Descrição<span class="required">*</span></label>
                                 <input type="text" class="form-control" id="input-description" required autocomplete="false">
                             </div>
-                            <div class="mb-3 col-12 col-lg-6">
+                            <div class="mb-3 col-12">
                                 <label for="input-time" class="form-label">Tempo padrão (minutos)<span class="required">*</span></label>
                                 <input type="number" min="0" class="form-control" id="input-time" required>
                             </div>
@@ -124,6 +124,9 @@
                 </div>
             </div>
         </div>
+        <script>
+            var ModalVisitors = new bootstrap.Modal(document.getElementById('CreateCategoryModal'));
+        </script>
         
     </div>
 @endsection

@@ -1,3 +1,5 @@
+
+
 const handleVisitorCategoryFormSubmit = (event) =>{
     event.preventDefault();
     
@@ -21,6 +23,7 @@ const handleVisitorCategoryFormSubmit = (event) =>{
         else{
             document.getElementById('visitorCategory-form').reset();
             updateVisitorCategoryTable();
+            ModalVisitors.hide();
         }
     })
     .catch((err)=>{
@@ -34,7 +37,6 @@ const updateVisitorCategoryTable = () =>{
     .then(res => res.json())
     .then(jsonRes => {
         const result = jsonRes;
-        console.log(result)
         
         let html = '';
         let htmlSm = '';
@@ -70,7 +72,6 @@ const updateVisitorCategoryTable = () =>{
         });
 
         let container;
-        console.log(html, htmlSm)
         container = document.querySelector('#category-table-body');
         container.innerHTML = html;
 
