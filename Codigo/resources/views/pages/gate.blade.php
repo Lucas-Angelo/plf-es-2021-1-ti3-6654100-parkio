@@ -20,6 +20,7 @@
     </ul>
     <div id="entrance-exit-container">
         <div class="tab-content" id="gateTabContent">
+            <!-- Vehicle Input  -->
             <div class="tab-pane fade show active" id="entrance" role="tabpanel" aria-labelledby="entrance-tab">
                 <form onSubmit="handleEntranceFormSubmit(event)" class="row" id="entrance-form">
                     <div class="mb-3 col-12 col-md-4 col-lg-2">
@@ -46,15 +47,17 @@
                     </div>
                     <div class="mb-3 col-12 col-md-6 col-lg-4">
                         <label for="input-cpf" class="form-label">CPF</label>
-                        <input type="text" class="form-control" id="input-cpf" minlength="7" maxlength="8">
+                        <input type="text" class="form-control" id="input-cpf" maxlength="14">
                     </div>
-                    <div class="mb-3 col-12 col-md-4 col-lg-3">
+                    <div class="mb-3 col-12 col-md-4 col-lg-2">
                         <label for="input-model" class="form-label">Modelo</label>
                         <input type="text" class="form-control" id="input-model">
                     </div>
-                    <div class="mb-3 col-12 col-md-2 col-lg-1">
+                    <div class="mb-3 col-12 col-md-2 col-lg-2">
                         <label for="input-color" class="form-label">Cor</label>
-                        <input type="color" class="form-control" id="input-color">
+                        <select class="gate-inputcolor form-select d-block" id="input-color">
+                            <option selected value="">Indefinido</option>
+                        </select>
                     </div>
                     <div class="button-div text-center mt-5">
                         <button class="btn" type="submit">Cadastrar</button>
@@ -62,50 +65,21 @@
                     
                 </form>
             </div>
+            <!--  Vehicle Output -->
             <div class="tab-pane fade" id="exit" role="tabpanel" aria-labelledby="exit-tab">
                 <form onSubmit="handleExitFormSubmit(event)" class="row" id="exit-form">
                     <div class="mb-3 col-12 col-md-4 col-lg-2">
                         <label for="input-plate-exit" class="form-label">Placa <span class="required">*</span></label>
-                        <input type="text" class="form-control" id="input-plate-exit" oninvalid="this.setCustomValidity('É necessário informar a placa.')" required>
+                        <input type="text" class="form-control" id="input-plate-exit" required>
                     </div>
                     <div class="button-div text-center mt-5">
-                        <button id="button-att" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#modalNovoUsuario">Atualizar</button>
-                    </div>
-                    <div class="modal fade" id="modalNovoUsuario" tabindex="-1" aria-labelledby="modalNovoUsuarioLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-md">
-                            <div class="modal-content">
-                                <div class="modal-header justify-content-left">
-                                    <h5 class="modal-title" id="modalNovoUsuarioLabel"><i class="fas fa-exclamation-triangle"></i>&nbsp;Confirmar saída do veículo <span id="span-plate"></span>?</h5>
-                                </div>
-                                <div class="modal-body justify-content-center">
-                                    <form onSubmit="handleEntranceFormSubmit(event)" id="exit-modal" class="justify-content-center">
-                                        <div id="modal-score" class="mb-5 d-flex">
-                                            <label for="input-name" class="form-label">Comportamento do visitante:&nbsp;</label>
-                                            <form id="form-score" name="form-score">
-                                                <div class="form-check form-check-inline">
-                                                    <input onclick="handleScoreForm(event)" class="form-check-input" type="radio" name="scores" id="good-score" value="G">
-                                                    <label id="label-good" class="form-check-label" for="good-score"><i class="far fa-thumbs-up"></i></label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input onclick="handleScoreForm(event)" class="form-check-input" type="radio" name="scores" id="bad-score" value="B">
-                                                    <label id="label-bad" class="form-check-label" for="bad-score"><i class="far fa-thumbs-down"></i></label>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div id="modal-buttons" class="mb-3 d-flex justify-content-center">
-                                            <button id="reportar" type="button" class="btn btn-primary align-items-center">Reportar</button>
-                                            <button id="close-modal" type="button" class="btn btn-secondary align-items-center " data-bs-dismiss="modal">Não&nbsp;<label>(cancelar)</label></button>
-                                            <button id="atualizar" type="submit" class="btn btn-primary align-items-center">Sim&nbsp;<label>(Enter)</label></button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        <button id="button-att" class="btn" type="submit">Atualizar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <!-- Inside Vehicles Table -->
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-center">
@@ -133,7 +107,48 @@
         </div>
     </div>
     
-    <button type="button" class="btn btn-secondary d-none" id="liveToastBtn"></button>
+    <!-- Modal Exit -->
+    <div class="modal fade" id="modalNovoUsuario" tabindex="-1" aria-labelledby="modalNovoUsuarioLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+                <div class="modal-header justify-content-left border-0">
+                    <h5 class="modal-title" id="modalNovoUsuarioLabel"><i class="fas fa-exclamation-triangle"></i>&nbsp;Confirmar saída do veículo <span id="span-plate"></span>?</h5>
+                </div>
+                <div class="modal-body justify-content-center">
+                    <form onSubmit="handleExitModal(event)" id="exit-modal" class="justify-content-center">
+                        <div id="modal-score" class="mb-5 d-flex">
+                            <label for="input-name" class="form-label">Comportamento do visitante:&nbsp;</label>
+                            <div class="form-check form-check-inline">
+                                <label id="label-good" class="form-check-label" for="good-score">
+                                    <input class="form-check-input d-none" type="radio" checked name="scores" id="good-score" value="G">
+                                    <i class="far fa-thumbs-up goodcheckmark"></i>
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <label id="label-bad" class="form-check-label" for="bad-score">
+                                    <input class="form-check-input d-none" type="radio" name="scores" id="bad-score" value="B">
+                                    <i class="far fa-thumbs-down badcheckmark"></i>
+                                </label>
+                            </div>
+                        </div>
+                        <div id="modal-buttons" class="mb-3">
+                            <div class="row">
+                                <div class="col-4">
+                                    <button id="reportar" disabled type="button" class="btn btn-danger w-100">Reportar</button>
+                                </div>
+                                <div class="col-4">
+                                    <button id="close-modal" type="button" class="btn btn-secondary w-100 " data-bs-dismiss="modal">Não&nbsp;<small>(cancelar)</small></button>
+                                </div>
+                                <div class="col-4">
+                                    <button id="atualizar" type="submit" class="btn btn-secondary w-100">Sim&nbsp;<small>(Enter)</small></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5;">
         <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
