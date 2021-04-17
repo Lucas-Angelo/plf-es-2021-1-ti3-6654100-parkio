@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="{{ url('/assets/css/select2.css') }}" type="text/css">
     <script src="{{ url('assets/js/gate.js') }}"></script>
     <script src="{{ url('assets/js/select2.min.js') }}"></script>
-    <script src="{{ url('assets/js/vanilla-masker.min.js') }}"></script>
 @endsection
 
 @section('content')
@@ -63,9 +62,90 @@
                     
                 </form>
             </div>
-            <div class="tab-pane fade" id="exit" role="tabpanel" aria-labelledby="exit-tab">Saída</div>
+            <div class="tab-pane fade" id="exit" role="tabpanel" aria-labelledby="exit-tab">
+                <form onSubmit="handleExitFormSubmit(event)" class="row" id="exit-form">
+                    <div class="mb-3 col-12 col-md-4 col-lg-2">
+                        <label for="input-plate-exit" class="form-label">Placa <span class="required">*</span></label>
+                        <input type="text" class="form-control" id="input-plate-exit" oninvalid="this.setCustomValidity('É necessário informar a placa.')" required>
+                    </div>
+                    <div class="button-div text-center mt-5">
+                        <button id="button-att" class="btn" type="button" data-bs-toggle="modal" data-bs-target="#modalNovoUsuario">Atualizar</button>
+                    </div>
+                    <div class="modal fade" id="modalNovoUsuario" tabindex="-1" aria-labelledby="modalNovoUsuarioLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-md">
+                            <div class="modal-content">
+                                <div class="modal-header justify-content-left">
+                                    <h5 class="modal-title" id="modalNovoUsuarioLabel"><i class="fas fa-exclamation-triangle"></i>&nbsp;Confirmar saída do veículo <span id="span-plate"></span>?</h5>
+                                </div>
+                                <div class="modal-body justify-content-center">
+                                    <form onSubmit="handleEntranceFormSubmit(event)" id="exit-modal" class="justify-content-center">
+                                        <div id="modal-score" class="mb-5 d-flex">
+                                            <label for="input-name" class="form-label">Comportamento do visitante:&nbsp;</label>
+                                            <form id="form-score" name="form-score">
+                                                <div class="form-check form-check-inline">
+                                                    <input onclick="handleScoreForm(event)" class="form-check-input" type="radio" name="scores" id="good-score" value="G">
+                                                    <label id="label-good" class="form-check-label" for="good-score"><i class="far fa-thumbs-up"></i></label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input onclick="handleScoreForm(event)" class="form-check-input" type="radio" name="scores" id="bad-score" value="B">
+                                                    <label id="label-bad" class="form-check-label" for="bad-score"><i class="far fa-thumbs-down"></i></label>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div id="modal-buttons" class="mb-3 d-flex justify-content-center">
+                                            <button id="reportar" type="button" class="btn btn-primary align-items-center">Reportar</button>
+                                            <button id="close-modal" type="button" class="btn btn-secondary align-items-center " data-bs-dismiss="modal">Não&nbsp;<label>(cancelar)</label></button>
+                                            <button id="atualizar" type="submit" class="btn btn-primary align-items-center">Sim&nbsp;<label>(Enter)</label></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-center">
+                <i class="fas fa-chevron-down fa-5x"></i>
+            </div>
+            <div id="tabela" class="row">
+                <div class="col-12">
+                    <table id="tabela-veiculo" class="table table-dark sortable">
+                        <thead>
+                            <tr>
+                                <th class="col">Placa</th>
+                                <th class="col">Modelo</th>
+                                <th class="col">Cor</th>
+                                <th class="col">Hora de Entrada</th>
+                                <th class="col-2">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                        </tbody>
+                    </table>
+                    <div id="lista-veiculo">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
+    <button type="button" class="btn btn-secondary d-none" id="liveToastBtn"></button>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5;">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">ParkIO</strong>
+                <small>Agora</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        <div class="toast-body">
+            <span id="toast-msg"></span>
+        </div>
+    </div>
+</div>
+
 </div>
 @endsection

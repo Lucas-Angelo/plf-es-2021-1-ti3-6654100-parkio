@@ -16,6 +16,11 @@ class UsersTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
         DB::table('user')->insert([[
+            'name' => 'Administrator',
+            'login' => 'admin',
+            'type' => 'A',
+            'password' => md5('admin')
+        ],[
             'name' => $faker->name,
             'login' => $faker->userName,
             'type' => 'A',

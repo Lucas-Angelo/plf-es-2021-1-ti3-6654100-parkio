@@ -19,53 +19,72 @@ $router->get('/', function () use ($router) {
 /**
  * API Routes
  */
+
+
 $router->group(['prefix' => '/api'], function () use ($router) {
-    //users
-    $router->post('/users', 'UserController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
-    $router->get('/users', 'UserController@getAll');
-    $router->get('/users/search', 'UserController@search');
-
-    //vehicles
-    $router->get('/vehicles', 'VehicleController@getAll'); // Search for all vehicles entries
-    $router->get('/vehicles/inside', 'VehicleController@getAllInside'); // Search for all vehicles inside the apartment complex
-    $router->put('/vehicles/{id}', 'VehicleController@edit'); // Edit one vehicles entries
-    $router->get('/vehicles/search', 'VehicleController@search'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
-    $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
-
-    //gates
-    $router->get('/gate', 'GateController@getAll'); // Search for all gates
-    $router->post('/gate', 'GateController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
-
-    //visitors
-    $router->get('/visitorCategory', 'VisitorCategoryController@getAll'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
-    $router->post('/visitorCategory', 'VisitorCategoryController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+    $router->post('/auth', 'UserController@auth'); // Login Endpoint
     
-    $router->get('/destinations', 'DestinationController@getAll');
+    $router->group(['middleware' => ['jwt.auth']], function () use ($router) {
+        $router->post('/users', 'UserController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+        $router->get('/users', 'UserController@getAll');
+        //users
+        $router->post('/users', 'UserController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+        $router->get('/users', 'UserController@getAll');
+        $router->get('/users/search', 'UserController@search');
+
+        //vehicles
+        $router->get('/vehicles', 'VehicleController@getAll'); // Search for all vehicles entries
+        $router->get('/vehicles/inside', 'VehicleController@getAllInside'); // Search for all vehicles inside the apartment complex
+        $router->put('/vehicles/{id}', 'VehicleController@edit'); // Edit one vehicles entries
+        $router->get('/vehicles/search', 'VehicleController@search'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
+        $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
+
+        //gates
+        $router->get('/gate', 'GateController@getAll'); // Search for all gates
+        $router->post('/gate', 'GateController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+
+        $router->get('/destinations', 'DestinationController@getAll');
+
+        $router->get('/visitorCategory', 'VisitorCategoryController@getAll'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+        $router->post('/visitorCategory', 'VisitorCategoryController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+
+        $router->get('/vehicles', 'VehicleController@getAll'); // Search for all vehicles entries
+        $router->put('/vehicles/{id}', 'VehicleController@edit'); // Edit one vehicles entries
+        $router->get('/vehicles/search', 'VehicleController@search'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
+        $router->post('/vehicles', 'VehicleController@create'); // For saving incoming vehicles
+    });
 });
-
-
-
 
 /* Web Site Routes */
 $router->get('/test', function () use ($router) { // used in Browser URL
     return view('pages.test'); // View Name (Same name as in resources/views), custom parameters
 });
 
+/*Begin - Web Site Routes */
 $router->get('/auth', function () use ($router) {
     return view('pages.login');
 });
 
-$router->get('/gate', function () use ($router) {
-    return view('pages.gate');
-});
+// Needed auth routes
+$router->group(['middleware' => ['web.auth']], function() use ($router) {
+    $router->get('/test', function () use ($router) { // used in Browser URL
+        return view('pages.test'); // View Name (Same name as in resources/views), custom parameters
+    });
 
-$router->get('/vehiclelist', function () use ($router) {
-    return view('pages.vehicleslist');
-});
+    $router->get('/gate', function () use ($router) {
+        return view('pages.gate');
+    });
 
-$router->get('/userlist', function () use ($router) {
-    return view('pages.userlist');
-});
-$router->get('/admin', function () use ($router) {
-    return view('pages.admin');
+    $router->get('/vehiclelist', function () use ($router) {
+        return view('pages.vehicleslist');
+    });
+
+    $router->get('/userlist', function () use ($router) {
+        return view('pages.userlist');
+    }); 
+
+    $router->get('/admin', function () use ($router) {
+        return view('pages.admin');
+    });
+    
 });
