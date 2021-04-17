@@ -47,39 +47,32 @@ const setTime = (time) =>{
 const handleSelectChange = (event) =>{
     const time = event.target.value.split('|')[1];
     setTime(time);
-}
-
-window.onload = () =>{
-    fetch('/api/visitorCategory', { method: 'GET' })
-    .then( res=>{
-        if (res.status === 200){
-            return res.json();
-        }
-    })
-    .then( jsonRes=>{
-        if (jsonRes){
-
-            const HTMLOptions = `
-                ${
-                    jsonRes.map(category=>{
-                        return(
-                            `<option value="${category.id}|${category.time}">${category.description}</option>`
-                        )
-                    })
-                }
-                
-            `
-            document.querySelector('#input-type').innerHTML = HTMLOptions;
-            setTime(jsonRes[0].time);
-        }
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
-}
-        
+}    
 
 window.addEventListener("load", function () {
+    $.ajax({
+        url: "/api/visitorCategory",
+        type: "GET",
+        success: function(jsonRes){
+            if (jsonRes){
+                const HTMLOptions = `
+                    ${
+                        jsonRes.map(category=>{
+                            return(
+                                `<option value="${category.id}|${category.time}">${category.description}</option>`
+                            )
+                        })
+                    }
+                `
+                document.querySelector('#input-type').innerHTML = HTMLOptions;
+                setTime(jsonRes[0].time);
+            }
+        },
+        error: function(err, status){
+            console.log(err)
+        },
+    });
+    
     $(".select2").select2({
         selectionCssClass: "gate-select2",
         ajax: {
