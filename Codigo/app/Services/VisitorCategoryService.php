@@ -9,7 +9,7 @@ class VisitorCategoryService
 {
 
 
-    public function createVisitorCategory($description,int $time){
+    public function create($description,int $time){
 
       $visitorCategory = new VisitorCategory();
       $visitorCategory->description = strtoupper($description);
@@ -18,6 +18,14 @@ class VisitorCategoryService
 
       return $visitorCategory->id;
     }
+
+    public function getAll(){
+      $v = VisitorCategory::all();
+      
+      return $v;/*
+      return $v
+            ->orderByDesc('id');*/
+  }
 
 
 

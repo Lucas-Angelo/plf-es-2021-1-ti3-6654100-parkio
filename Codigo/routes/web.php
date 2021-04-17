@@ -45,6 +45,9 @@ $router->group(['prefix' => '/api'], function () use ($router) {
 
         $router->get('/destinations', 'DestinationController@getAll');
 
+        $router->get('/visitorCategory', 'VisitorCategoryController@getAll'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+        $router->post('/visitorCategory', 'VisitorCategoryController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+
         $router->get('/vehicles', 'VehicleController@getAll'); // Search for all vehicles entries
         $router->put('/vehicles/{id}', 'VehicleController@edit'); // Edit one vehicles entries
         $router->get('/vehicles/search', 'VehicleController@search'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
@@ -79,5 +82,9 @@ $router->group(['middleware' => ['web.auth']], function() use ($router) {
     $router->get('/userlist', function () use ($router) {
         return view('pages.userlist');
     }); 
-});
 
+    $router->get('/admin', function () use ($router) {
+        return view('pages.admin');
+    });
+    
+});

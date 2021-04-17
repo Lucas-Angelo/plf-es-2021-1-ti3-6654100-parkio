@@ -1,6 +1,38 @@
 let colors = [];
 
+const setTime = (time) =>{
+    document.querySelector('#input-time').value = time;
+}
+
+const handleSelectChange = (event) =>{
+    const time = event.target.value.split('|')[1];
+    setTime(time);
+}    
+
 window.addEventListener("load", function () {
+    $.ajax({
+        url: "/api/visitorCategory",
+        type: "GET",
+        success: function(jsonRes){
+            if (jsonRes){
+                const HTMLOptions = `
+                    ${
+                        jsonRes.map(category=>{
+                            return(
+                                `<option value="${category.id}|${category.time}">${category.description}</option>`
+                            )
+                        })
+                    }
+                `
+                document.querySelector('#input-type').innerHTML = HTMLOptions;
+                setTime(jsonRes[0].time);
+            }
+        },
+        error: function(err, status){
+            console.log(err)
+        },
+    });
+    
     $(".select2").select2({
         selectionCssClass: "gate-select2",
         ajax: {
@@ -126,7 +158,7 @@ const handleEntranceFormSubmit = (event) => {
     const plate = document.querySelector("#input-plate").value;
     const driverName = document.querySelector("#input-name").value;
     const destinationId = document.querySelector("#selDestination").value;
-    let categoryId = document.querySelector("#input-type").value;
+    let categoryId = document.querySelector('#input-type').value.split('|')[0];
     if (categoryId.length === 0) categoryId = 1;
     let time = document.querySelector("#input-time").value;
     if (!time) time = categoryId == 1 ? 60 : 120;
@@ -134,6 +166,7 @@ const handleEntranceFormSubmit = (event) => {
     const cpf = document.querySelector("#input-cpf").value;
     const color = document.querySelector("#input-color").value;
     const gateId = 1;
+
 
     const data = {
         plate,
