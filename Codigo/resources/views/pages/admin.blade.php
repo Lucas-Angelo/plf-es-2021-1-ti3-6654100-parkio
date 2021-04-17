@@ -84,7 +84,7 @@
                             </div>
                         </div>
                     </div>
-                            
+
                 </div>
 
                 <div class="tab-pane fade" id="reported" role="tabpanel" aria-labelledby="reported-tab">Veículos Reportados</div>
@@ -93,11 +93,11 @@
 
             </main>
         </div>
-        
+
 
         <!--Modais-->
         <div class="modal fade" id="CreateCategoryModal" tabindex="-1" aria-labelledby="CreateCategoryModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-md modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="CreateCategoryModalLabel">Cadastro de Categoria de Visitantes</h5>
@@ -127,6 +127,6 @@
         <script>
             var ModalVisitors = new bootstrap.Modal(document.getElementById('CreateCategoryModal'));
         </script>
-        
+
     </div>
 @endsection
