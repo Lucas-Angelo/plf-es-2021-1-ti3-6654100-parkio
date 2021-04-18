@@ -1,29 +1,3 @@
-const handleGateFormSubmit = (event) => {
-    event.preventDefault();
-
-    const description = document.querySelector('#gate-description').value
-
-    const data = {
-        description
-    }
-    fetch('/api/gate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then((res) => {
-            if (res.status !== 200) {} else {
-                document.getElementById('gate-form').reset();
-                updateEntraceTable();
-            }
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-}
-
 const updateEntraceTable = () => {
     fetch('/api/gate', {
             method: 'GET'
@@ -45,14 +19,14 @@ const updateEntraceTable = () => {
                                 <td>${gate.description}</th>
                                 <td>${created_at_formatada}</th>
                                 <td class="acoes">
-                                    <button class="btn btn-secondary" onclick="edit(${gate.id})"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-secondary" onclick="modalEditGate(${gate.id})"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-secondary" onclick="remover(${gate.id})"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>`;
 
                 htmlSegmentSm = `<div class="componente mb-2">
                                     <button class="btn btn-secondary" onclick="remover(${gate.id})"><i class="fas fa-trash-alt"></i></button>
-                                    <button class="btn btn-secondary" onclick="edit(${gate.id})"> <i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-secondary" onclick="modalEditGate(${gate.id})"> <i class="fas fa-edit"></i></button>
                                     <div class="type">
                                         <h6>Identificação:</h6>
                                         <p>${gate.description}</p>
@@ -85,9 +59,45 @@ const updateEntraceTable = () => {
 
 }
 
+
+const handleGateFormSubmit = (event) => {
+    event.preventDefault();
+
+    const id = $("#gateId").val();
+    const description = $("#gate-description").val();
+    var request = 'POST'
+        // by default request is POST unless the modal has id of any gate
+    const data = {
+        description
+    }
+
+    if (id != null && id != "") {
+        request = 'PUT';
+        data.id = id;
+    }
+
+    fetch('/api/gate', {
+            method: request,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then((res) => {
+            if (res.status !== 200) {} else {
+                $('#gate-form').val("");
+                updateEntraceTable();
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+
 function remover(gate) {
 
-    var result = confirm("Você deseja excluir a portaria ? Essa ação é irreversível!");
+    var result = confirm("Você deseja excluir esta portaria ? Essa ação é irreversível!");
     if (result) {
         fetch('/api/gate/' + gate, {
                 method: 'DELETE',
@@ -106,45 +116,43 @@ function remover(gate) {
     }
 }
 
- function edit(gate){
-        
-        console.log("teste");
-        fetch('/api/gate/' + gate, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then((res) => {
-                if (res.status !== 200) {} else {
-                 return res.json();
-                }
-            }).then((data) =>{
-                var myModal = Document.getElementById("CreateGateModal");
+//call the search API and fill the modal input forms
+function modalEditGate(gate) {
 
-                console.log(myModal);
-                console.log(data);
-                Document.getElementById("gate-description").value(data.description);
+    fetch('/api/gate/' + gate, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((res) => {
+            if (res.status !== 200) {} else {
+                return res.json();
+            }
+        }).then((data) => {
+            var myModal = $("#CreateGateModal");
+            myModal.find(".modal-title").text("Editar Portaria");
+            myModal.find('#gateId').val(data.id);
+            myModal.find('#gate-description').val(data.description);
+            myModal.find(".btn").text("Editar");
+            myModal.modal('show');
+        })
+        .catch((err) => {
+            console.log(err)
+        })
 
-                myModal.modal({show:true});
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    
+};
 
-        // now get the values from the table
-        //var firstName = $(this).closest('tr').find('td.firstName').html();
-        //var lastName = $(this).closest('tr').find('td.lastName').html();
-        //console.log(gate.description);
-        //console.log(lastName);
-        // and set them in the modal:
-        //$('.firstName', myModal).val(firstName);
-        //$('.lastNameName', myModal).val(lastName);
-        // and finally show the modal
-        // myModal.modal({ show: true });
 
-        return false;
-    };
+$(document).ready(function() {
 
-window.onload = updateEntraceTable;
+    updateEntraceTable();
+
+    // clean the modal after closed
+    $('#CreateGateModal').on('hidden.bs.modal', function(e) {
+        $(this).find(".modal-title").text("Cadastrar Portaria");
+        $(this).find(".btn").text("Cadastrar");
+        $(".form-control").val("");
+    })
+
+})

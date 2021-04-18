@@ -53,13 +53,12 @@ class GateController extends Controller{
 
     }
 
-    public function edit(Request $request, int $id){
+    public function search(Request $request, int $id){
         if(!empty($id)){
 
             try {
                 $g = new GateService();
-                //dd($g->edit($id));
-                return response()->json($g->edit($id));
+                return response()->json($g->search($id));
                 
             } catch (\Exception $e) {
                 return response()->json([
@@ -71,6 +70,21 @@ class GateController extends Controller{
             'error' => 'missing id'
         ]);
 
+    }
+
+        public function update(Request $request){
+        //validate essencials fields
+        $this->validate($request, [
+            'id' => 'required',
+            'description' => 'required|max:255'
+        ]);
+
+        //calls the service and the function create passing datas
+        $g = new GateService();
+
+        return response()->json(
+            $g->update($request->id, $request->description)
+        );
     }
 
 }

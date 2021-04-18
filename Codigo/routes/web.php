@@ -36,8 +36,8 @@ $router->group(['prefix' => '/api'], function () use ($router) {
     $router->delete('/gate/{id}', 'GateController@delete');
     $router->get('/gate', 'GateController@getAll'); // Search for all gates
     $router->post('/gate', 'GateController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
-    $router->get('/gate/{id}', 'GateController@edit');
-    $router->put('/gate/{id}', 'GateController@update');
+    $router->get('/gate/{id}', 'GateController@search'); // Find and return a gate
+    $router->put('/gate', 'GateController@update'); // Update a gate
 
     //visitors
     $router->get('/visitorCategory', 'VisitorCategoryController@getAll'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name

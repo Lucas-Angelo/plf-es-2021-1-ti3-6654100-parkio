@@ -48,7 +48,7 @@ class GateService
 
     }
 
-    public function edit(int $id)
+    public function search(int $id)
     {
         $gate = Gate::find($id);
 
@@ -56,6 +56,24 @@ class GateService
 
             return $gate;
 
+        }else {
+            throw new \Exception("Gate Not Found", 404);
+        }
+
+    }
+
+    public function update(int $id, String $description){
+        $gate = Gate::find($id);
+
+        if(!empty($gate)){
+
+            $gate->description = strtoupper($description);
+            $gate->update();
+            return [
+                'message' => 'success',
+                'updated' => true
+            ];
+        
         }else {
             throw new \Exception("Gate Not Found", 404);
         }

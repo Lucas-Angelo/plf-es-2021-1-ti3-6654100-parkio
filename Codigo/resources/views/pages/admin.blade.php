@@ -173,7 +173,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form onSubmit="handleGateFormSubmit(event)" class="row align-items-center justify-content-center" id="gate-form">
+                        <form onSubmit="handleGateFormSubmit(event)" class="row align-items-center justify-content-center" id="gate-form" novalidate>
+
+                            <div class="mb-3 col-12 col-lg-12 d-none">
+                                <label for="gateId" class="form-label">Id</label>
+                                <input type="text" class="form-control" value="" id="gateId" required autocomplete="false">
+                            </div>
 
                         <div class="mb-3 col-12 col-lg-12">
                                 <label for="gate-description" class="form-label">Descrição<span class="required">*</span></label>
@@ -181,7 +186,7 @@
                             </div>
 
                             <div class="button-div text-center mt-3">
-                            <button class="btn" type="submit">Gravar</button>
+                            <button class="btn" type="submit">Cadastrar</button>
                             </div>
 
                         </form>
@@ -189,6 +194,8 @@
                 </div>
             </div>
         </div>
+
+
 
 
 
