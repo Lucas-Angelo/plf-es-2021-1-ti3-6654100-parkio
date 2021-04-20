@@ -54,15 +54,14 @@
 
             <main class="col-12 col-md-9 tab-content">
                 <div class="tab-pane fade show active" id="gates" role="tabpanel" aria-labelledby="gates-tab">
-
-
-                <div class="row">
+                    <div class="row">
                         <div class="col-12 p-0 m-0">
-                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateGateModal"><i class="fas fa-plus"></i>Nova Portaria</button>
+                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateGateModal"><i class="fas fa-plus"></i> Nova Portaria</button>
                         </div>
                     </div>
+                    <br>
                     <div class="row">
-                        <div class="col-12 p-3 m-0">
+                        <div class="col-11 p-0 m-0">
                             <div id="tabela-gate" class="d-none d-md-block">
                                 <table class="table sortable">
                                     <colgroup>
@@ -93,13 +92,14 @@
                     <div class="row">
                         <div class="col-12 p-0 m-0">
                             <div id="createGate">
-                                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateCategoryModal"><i class="fas fa-plus"></i>Novo Usuário</button>
+                                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateCategoryModal"><i class="fas fa-plus"></i> Novo Usuário</button>
                             </div>
                         </div>
                     </div>
+                    <br>
                     <div class="row">
-                        <div class="col-12 p-0 m-0">
-                            <div id="tabela-usuario" class="d-none d-md-block">
+                        <div class="col-11 p-0 m-0">
+                            <div class="d-none d-md-block">
                                 <table class="table sortable">
                                     <colgroup>
                                         <col span="1" style="width: 40%;">
@@ -134,20 +134,20 @@
 
         <!--Modais-->
         <div class="modal fade" id="CreateCategoryModal" tabindex="-1" aria-labelledby="CreateCategoryModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-md modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="CreateCategoryModalLabel">Cadastro de Categoria de Visitantes</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button id="closeCategoryRegisterModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form onSubmit="handleVisitorCategoryFormSubmit(event)" class="row" id="visitorCategory-form">
 
-                            <div class="mb-3 col-12 col-lg-6">
+                            <div class="mb-3 col-12">
                                 <label for="input-description" class="form-label">Descrição<span class="required">*</span></label>
                                 <input type="text" class="form-control" id="input-description" required autocomplete="false">
                             </div>
-                            <div class="mb-3 col-12 col-lg-6">
+                            <div class="mb-3 col-12">
                                 <label for="input-time" class="form-label">Tempo padrão (minutos)<span class="required">*</span></label>
                                 <input type="number" min="0" class="form-control" id="input-time" required>
                             </div>
@@ -164,7 +164,7 @@
 
 
         <div class="modal fade" id="CreateGateModal" tabindex="-1" aria-labelledby="CreateGateModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-md modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="CreateGateModalLabel">Cadastro de Portaria</h5>
@@ -196,6 +196,9 @@
 
 
 
+        <script>
+            var ModalVisitors = new bootstrap.Modal(document.getElementById('CreateCategoryModal'));
+        </script>
 
     </div>
 @endsection

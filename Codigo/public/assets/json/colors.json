@@ -1,0 +1,39 @@
+[
+    {
+        "hex": "#000",
+        "name": "Preto"
+    }, {
+        "hex": "#fff",
+        "name": "Branco"
+    }, {
+        "hex": "#c9d4cc",
+        "name": "Prata"
+    }, {
+        "hex": "#747a76",
+        "name": "Cinza"
+    }, {
+        "hex": "#f51b22",
+        "name": "Vermelho"
+    },{
+        "hex": "#a38256",
+        "name": "Marrom"
+    }, {
+        "hex": "#5693f5",
+        "name": "Azul"
+    },{
+        "hex": "#2f8235",
+        "name": "Verde"
+    }, {
+        "hex": "#fa87f0",
+        "name": "Rosa"
+    }, {
+        "hex": "#f9ff4a",
+        "name": "Amarelo"
+    }, {
+        "hex": "#ffa32b",
+        "name": "Laranja"
+    }, {
+        "hex": "#742f91",
+        "name": "Roxo"
+    }
+]

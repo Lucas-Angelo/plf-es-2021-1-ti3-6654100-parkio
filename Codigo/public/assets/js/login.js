@@ -8,21 +8,22 @@ const handleSubmit = (event) =>{
         user,
         pass
     }
-    console.log(data)
-    fetch(`/api/users`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then((res)=>{
-        if (res.status !== 200){
-        }
-        else{
-            document.getElementById('form').reset();
-        }
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
+    $.ajax({
+        url: "/api/auth",
+        type: "POST",
+        data: {
+            login: user,
+            password: pass
+        },
+        success: function(data, status){
+            document.cookie = "X-token=" + data.token;
+            location.href = "./gate"
+            return false
+        },
+        error: function(data, status){
+            alert("Erro ao cadastrar");
+            return false
+        },
+    });
+
 }

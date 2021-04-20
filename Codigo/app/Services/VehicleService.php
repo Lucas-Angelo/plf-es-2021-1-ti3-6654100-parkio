@@ -54,8 +54,7 @@ class VehicleService
             ->paginate();
     }
 
-    public function create($driverName, $plate,int $time,int $destinationId,int $visitorCategoryId,
-    int $gateId, $color=null, $model=null, $cpf=null  ){
+    public function create($driverName, $plate, int $time,int $destinationId,int $visitorCategoryId, int $gateId, int $userId, $color=null, $model=null, $cpf=null){
 
         $vehicle = new Vehicle();
 
@@ -65,7 +64,7 @@ class VehicleService
         $vehicle->destination_id = $destinationId;
         $vehicle->visitor_category_id = $visitorCategoryId;
         $vehicle->gate_id = $gateId;
-        $vehicle->user_in_id = 1; //While don't have session check in our app
+        $vehicle->user_in_id = $userId;
         $vehicle->color = (!empty($color)) ? $color : null;
         $vehicle->model = (!empty($model)) ? $model : null;
         $vehicle->cpf = (!empty($cpf)) ? preg_replace('/[^0-9]/', '', $cpf) : null;
@@ -80,7 +79,8 @@ class VehicleService
     public function search($plate){
       $filtro = strtoupper($plate);
       $vehicle =Vehicle::where('plate','like', "%".$filtro."%")
-                     ->first(['plate','model','color']);
+                    ->orderByDesc('created_at')
+                    ->first(['id','plate','model','color','created_at','left_at']);
 
       return ['message'=> 'sucess', 'items'=>$vehicle] ;
     }
@@ -96,7 +96,7 @@ class VehicleService
      * @param String $color Car Color
      * @return array
      */
-    public function edit(int $vehicleId,String $score = null, int $gateId = null, String $plate = null, String $model = null, String $color = null){
+    public function edit(int $vehicleId, int $userId,String $score = null, int $gateId = null, String $plate = null, String $model = null, String $color = null){
         $v = Vehicle::find($vehicleId);
         if(!empty($v)) {
             // We will need to refactor this code when auth middleware is done.
@@ -107,7 +107,7 @@ class VehicleService
                     throw new \Exception("Vehicle already left", 405);
                 } else {
                     $v->score = $score;
-                    $v->user_out_id = 1; // While we don't have auth sys
+                    $v->user_out_id = $userId;
                     $v->left_at = date("Y-m-d H:i:s");
                     if($v->save()) {
                         return ['updated' => true];
