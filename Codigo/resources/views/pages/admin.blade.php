@@ -58,9 +58,7 @@
 
                 <div class="row">
                         <div class="col-12 p-0 m-0">
-                            <div id="novo">
-                                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateGateModal"><i class="fas fa-plus"></i>Nova Portaria</button>
-                            </div>
+                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateGateModal"><i class="fas fa-plus"></i>Nova Portaria</button>
                         </div>
                     </div>
                     <div class="row">
