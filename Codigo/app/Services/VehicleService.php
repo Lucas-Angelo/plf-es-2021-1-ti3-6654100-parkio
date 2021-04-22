@@ -20,7 +20,7 @@ class VehicleService
      * @param String|null $plate Vehicle's Plate Filter
      * @return Collection
      */
-    public function getAll($plate = null, $gate = null, $user = null){
+    public function getAll($plate = null, $gate = null, $user = null, $inside = null){
         $v = new Vehicle();
 
         // Vehicle Plate Filter
@@ -36,22 +36,17 @@ class VehicleService
                     ->orWhere('user_out_id', $user);
             });
         }
+
+        if(!empty($inside)) {
+            if($inside)
+                $v = $v->whereNull('left_at');
+        }
+            
         
         return $v
                 ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
                 ->orderByDesc('created_at')
                 ->paginate();
-    }
-    /**
-     * Return vehicles that haven't left yet
-     */
-    public function getAllInside(){
-        $v = new Vehicle();
-        return $v
-            ->where('left_at', null )
-            ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
-            ->orderByDesc('created_at')
-            ->paginate();
     }
 
     public function create($driverName, $plate, int $time,int $destinationId,int $visitorCategoryId, int $gateId, int $userId, $color=null, $model=null, $cpf=null){

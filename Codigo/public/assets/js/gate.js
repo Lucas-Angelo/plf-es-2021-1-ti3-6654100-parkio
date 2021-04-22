@@ -94,8 +94,8 @@ const handleExitFormSubmit = (event) => {
 const handleExitModal = (event) => {
     event.preventDefault();
     const plate = document.querySelector("#input-plate-exit").value;
-    const score = document.querySelector('input[name="scores"]:checked').value;;
-    const gateId = "1";
+    const score = document.querySelector('input[name="scores"]:checked').value;
+    const gateId = location.pathname.split('/')[2]; //Gate ID
 
     const data = {
         score,
@@ -165,7 +165,7 @@ const handleEntranceFormSubmit = (event) => {
     const model = document.querySelector("#input-model").value;
     const cpf = document.querySelector("#input-cpf").value;
     const color = document.querySelector("#input-color").value;
-    const gateId = 1;
+    const gateId = location.pathname.split('/')[2]; //Gate ID
 
 
     const data = {
@@ -214,71 +214,80 @@ function resetExitForm() {
 
 // Capturar e renderizar veículos de visistantes cadastrados
 async function renderVehicles() {
+    let gId = location.pathname.split('/')[2]; //Gate ID
     document.querySelector('#table-body').innerHTML = '<tr><td colspan="5" class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></td></tr>'
     $.ajax({
-        url: `/api/vehicles/inside`,
+        url: `/api/vehicles?inside=1&gate=${gId}`,
         type: "GET",
-        success: function(result, status){
+        success: function(result){
             let html = '';
             let htmlSm = '';
-            result.data.forEach(vehicle => {
-                let color = colors.find(function(c){ return c.hex == vehicle.color})
-                if(!color) {
-                    color = {
-                        hex: vehicle.color,
-                        name: vehicle.color,
+            if(result.data.length > 0) {
+                result.data.forEach(vehicle => {
+                    let color = colors.find(function(c){ return c.hex == vehicle.color})
+                    if(!color) {
+                        color = {
+                            hex: vehicle.color,
+                            name: vehicle.color,
+                        }
                     }
-                }
+    
+                    let created_at = new Date(vehicle.created_at);
+                    let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
+    
+                    var htmlSegment, htmlSegmentSm;
+    
+                    htmlSegment = `<tr>
+                                    <td scope="row">${vehicle.plate}</th>
+                                    <td>${vehicle.model}</td>
+                                    <td><span class="square" style="background-color: ${color.hex};"></span> ${color.name}</td>
+                                    <td>${created_at_formatada}</td>
+                                    <td>
+                                    <button disabled class="btn btn-secondary"><i class="fas fa-clock"></i></button>
+                                    <button disabled class="btn btn-danger"><i class="fas fa-sign-out-alt "></i></button>
+                                    </td>
+                                </tr>`;
+    
+                    htmlSegmentSm = `<div class="componente">
+                                  <button disabled class="btn btn-danger"><i class="fas fa-sign-out-alt"></i></button>
+                                  <button disabled class="btn btn-secondary"><i class="fas fa-clock "></i></button>
+                                    <div class="placa">
+                                        <h6>Placa:</h6>
+                                        <p>${vehicle.plate}</p>
+                                    </div>
+                                    <div class="modelo">
+                                        <h6>Modelo:</h6>
+                                        <p>${vehicle.model}</p>
+                                    </div>
+                                    <div>
+                                        <h6>Cor:</h6>
+                                        <span class="square" style="background-color: ${color.hex};"></span>
+                                        <p>${color.name}</p>
+                                    </div>
+                                    <div class="criadoHora">
+                                        <h6>Horário de entrada:</h6>
+                                        <p>${created_at_formatada}</p>
+                                    </div>
+                                </div>`;
+    
+                    html += htmlSegment;
+                    htmlSm += htmlSegmentSm;
+                });
 
-                let created_at = new Date(vehicle.created_at);
-                let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
+                let container;
 
-                var htmlSegment, htmlSegmentSm;
+                container = document.querySelector('#table-body');
+                container.innerHTML = html;
 
-                htmlSegment = `<tr>
-                                <td scope="row">${vehicle.plate}</th>
-                                <td>${vehicle.model}</td>
-                                <td><span class="square" style="background-color: ${color.hex};"></span> ${color.name}</td>
-                                <td>${created_at_formatada}</td>
-                                <td>
-                                <button disabled class="btn btn-secondary"><i class="fas fa-clock"></i></button>
-                                <button disabled class="btn btn-danger"><i class="fas fa-sign-out-alt "></i></button>
-                                </td>
-                            </tr>`;
+                container = document.querySelector('#lista-veiculo');
+                container.innerHTML = htmlSm;
+            } else {
+                document.querySelector('#table-body').innerHTML = '<tr><td colspan="5" class="text-center">Nenhum visitante registado </td></tr>'
+                document.querySelector('#lista-veiculo').innerHTML = '<div class="componente"> Nenhum visitante registado </div>'
+            }
+            
 
-                htmlSegmentSm = `<div class="componente">
-                              <button disabled class="btn btn-danger"><i class="fas fa-sign-out-alt"></i></button>
-                              <button disabled class="btn btn-secondary"><i class="fas fa-clock "></i></button>
-                                <div class="placa">
-                                    <h6>Placa:</h6>
-                                    <p>${vehicle.plate}</p>
-                                </div>
-                                <div class="modelo">
-                                    <h6>Modelo:</h6>
-                                    <p>${vehicle.model}</p>
-                                </div>
-                                <div>
-                                    <h6>Cor:</h6>
-                                    <span class="square" style="background-color: ${color.hex};"></span>
-                                    <p>${color.name}</p>
-                                </div>
-                                <div class="criadoHora">
-                                    <h6>Horário de entrada:</h6>
-                                    <p>${created_at_formatada}</p>
-                                </div>
-                            </div>`;
-
-                html += htmlSegment;
-                htmlSm += htmlSegmentSm;
-            });
-
-            let container;
-
-            container = document.querySelector('#table-body');
-            container.innerHTML = html;
-
-            container = document.querySelector('#lista-veiculo');
-            container.innerHTML = htmlSm;
+            
         },
         error: function(err, status){
             console.error('Failed retrieving information', err);

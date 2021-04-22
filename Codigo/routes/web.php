@@ -12,9 +12,6 @@
 Lumen Documentation: https://lumen.laravel.com/docs/7.x/routing
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
 
 /**
  * API Routes
@@ -34,7 +31,6 @@ $router->group(['prefix' => '/api'], function () use ($router) {
 
         //vehicles
         $router->get('/vehicles', 'VehicleController@getAll'); // Search for all vehicles entries
-        $router->get('/vehicles/inside', 'VehicleController@getAllInside'); // Search for all vehicles inside the apartment complex
         $router->put('/vehicles/{id}', 'VehicleController@edit'); // Edit one vehicles entries
         $router->get('/vehicles/search', 'VehicleController@search'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
         $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
@@ -67,11 +63,16 @@ $router->get('/auth', function () use ($router) {
 
 // Needed auth routes
 $router->group(['middleware' => ['web.auth']], function() use ($router) {
+    $router->get('/', function () use ($router) {
+        return view('pages.menu');
+    });
+
+    
     $router->get('/test', function () use ($router) { // used in Browser URL
         return view('pages.test'); // View Name (Same name as in resources/views), custom parameters
     });
 
-    $router->get('/gate', function () use ($router) {
+    $router->get('/gate/{id}', function () use ($router) {
         return view('pages.gate');
     });
 

@@ -12,8 +12,13 @@
         <div class="col-4">
             <span class="float-end p-2">
                 <i class="far fa-user-circle text-muted"></i>
-                Meu Usuário
+                <span id="userName"></span>
             </span>
         </div>
     </div>
 </div>
+<script>
+    let uinfo = JSON.parse(getCookie('PARKIO_UIF'))
+    $("#userName").text(uinfo.n)
+
+</script>
