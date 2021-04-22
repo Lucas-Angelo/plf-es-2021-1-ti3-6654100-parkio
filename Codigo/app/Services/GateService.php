@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Gate;
+use App\Models\Vehicle;
 
 class GateService
 {
@@ -20,38 +21,42 @@ class GateService
      * Creates a new Gate
      */
     public function create(String $description){
+        $message = 'Portaria criada com sucesso';
         $gate = new Gate();
         $gate->description = strtoupper($description);
         $gate->save();
         return [
-            'message' => 'success',
+            'message' => $message,
             'created' => true
         ];
     }
 
     public function delete(int $id)
     {
-        $gate = Gate::find($id);
+        $message = 'Portaria removida com sucesso';
+        $deleted = true;
+        $gate = $this->search($id);
 
-        if(!empty($gate)){
-
-            $gate->delete();
-
-            return [
-                'message' => 'success',
-                'deleted' => true
-            ];
-
-        }else {
-            throw new \Exception("Gate Not Found", 404);
+        if( Vehicle::where('gate_id', $id)->get()->count() > 0  ){
+            $message = 'Remoção não concluída, essa portaria ainda contém veículos.';
+            $deleted = false;
         }
+        else $gate->delete();
+
+        return [
+            'message' => $message,
+            'deleted' => $deleted 
+        ];
+
+
 
     }
+
 
     public function search(int $id)
     {
         $gate = Gate::find($id);
-
+        
         if(!empty($gate)){
 
             return $gate;
@@ -63,20 +68,17 @@ class GateService
     }
 
     public function update(int $id, String $description){
-        $gate = Gate::find($id);
+        $message = 'Portaria editada com sucesso';
+    
+        $gate = $this->search($id);
 
-        if(!empty($gate)){
-
-            $gate->description = strtoupper($description);
-            $gate->update();
-            return [
-                'message' => 'success',
-                'updated' => true
-            ];
-        
-        }else {
-            throw new \Exception("Gate Not Found", 404);
-        }
+        $gate->description = strtoupper($description);
+        $gate->update();
+        return [
+            'message' => $message,
+            'updated' => true
+        ];
+    
 
     }
 }

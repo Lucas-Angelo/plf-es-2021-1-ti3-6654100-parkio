@@ -2,7 +2,7 @@ const updateEntraceTable = () => {
     $.ajax({
         url: "/api/gate",
         type: "GET",
-        success: function(jsonRes){
+        success: function(jsonRes) {
             const result = jsonRes;
 
             let html = '';
@@ -50,7 +50,7 @@ const updateEntraceTable = () => {
             container = document.querySelector('#lista-gate');
             container.innerHTML = htmlSm;
         },
-        error: function(err, status){
+        error: function(err, status) {
             console.log(err)
         },
     });
@@ -77,13 +77,14 @@ const handleGateFormSubmit = (event) => {
         url: "/api/gate",
         type: request,
         data: data,
-        success: function(res){
+        success: function(res) {
+            alert(res.message);
             $('#gate-form').val("");
             updateEntraceTable();
             var myModal = $("#CreateGateModal");
             myModal.modal('hide');
         },
-        error: function(err, status){
+        error: function(err, status) {
             console.log(err)
         },
     });
@@ -93,15 +94,16 @@ const handleGateFormSubmit = (event) => {
 function remover(gate) {
 
     var result = confirm("Você deseja excluir esta portaria ? Essa ação é irreversível!");
-    
+
     if (result) {
         $.ajax({
             url: '/api/gate/' + gate,
             type: 'DELETE',
-            success: function(res){
+            success: function(res) {
+                alert(res.message)
                 updateEntraceTable();
             },
-            error: function(err, status){
+            error: function(err, status) {
                 console.log(err)
             },
         });
@@ -113,7 +115,7 @@ function modalEditGate(gate) {
     $.ajax({
         url: '/api/gate/' + gate,
         type: 'GET',
-        success: function(data){
+        success: function(data) {
             var myModal = $("#CreateGateModal");
             myModal.find(".modal-title").text("Editar Portaria");
             myModal.find('#gateId').val(data.id);
@@ -121,7 +123,7 @@ function modalEditGate(gate) {
             myModal.find(".btn").text("Editar");
             myModal.modal('show');
         },
-        error: function(err, status){
+        error: function(err, status) {
             console.log(err)
         },
     });
