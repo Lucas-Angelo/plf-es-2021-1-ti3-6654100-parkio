@@ -35,6 +35,9 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         $router->get('/vehicles/search', 'VehicleController@search'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
         $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
 
+        //complains
+        $router->post('/complain', 'ComplainController@create');
+
         //gates
         $router->get('/gate', 'GateController@getAll'); // Search for all gates
         $router->post('/gate', 'GateController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
