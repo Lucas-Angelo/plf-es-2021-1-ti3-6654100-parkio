@@ -77,8 +77,19 @@ const handleGateFormSubmit = (event) => {
         url: "/api/gate",
         type: request,
         data: data,
-        success: function(res) {
-            alert(res.message);
+        success: function(res, status) {
+
+            if (status !== "success") {
+                document.getElementById("toast-msg").innerHTML =
+                    re.message;
+                resetExitForm();
+            } else {
+                document.getElementById("toast-msg").innerHTML =
+                     re.message;
+                resetExitForm();
+                renderVehicles();
+            }
+            
             $('#gate-form').val("");
             updateEntraceTable();
             var myModal = $("#CreateGateModal");
