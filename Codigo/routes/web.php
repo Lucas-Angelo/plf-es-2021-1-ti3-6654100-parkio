@@ -42,6 +42,9 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         //gates
         $router->get('/gate', 'GateController@getAll'); // Search for all gates
         $router->post('/gate', 'GateController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+        $router->delete('/gate/{id}', 'GateController@delete');
+        $router->get('/gate/{id}', 'GateController@search'); // Find and return a gate
+        $router->put('/gate', 'GateController@update'); // Update a gate
 
         $router->get('/destinations', 'DestinationController@getAll');
 
