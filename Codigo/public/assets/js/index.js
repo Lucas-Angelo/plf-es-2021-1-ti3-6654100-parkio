@@ -16,6 +16,12 @@ $.ajaxSetup({
     }
 })
 
+function logout(){
+    delete_cookie('PARKIO_UIF')
+    delete_cookie('X-token')
+    location.href = "./auth"
+}
+
 function getCookie(cname) {
   var name = cname + "=";
   var ca = decodeURIComponent(document.cookie).split(';');
@@ -27,4 +33,11 @@ function getCookie(cname) {
           return c.substring(name.length, c.length);
   }
   return "";
+}
+function delete_cookie( name, path ) {
+    if( getCookie( name ) ) {
+      document.cookie = name + "=" +
+        ((path) ? ";path="+path:"")+
+        ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    }
 }

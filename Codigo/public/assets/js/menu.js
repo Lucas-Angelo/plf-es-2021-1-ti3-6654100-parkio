@@ -31,18 +31,8 @@ window.addEventListener("load", function () {
         $('#btnList').removeClass('d-none')
     
 
-    function delete_cookie( name, path ) {
-        if( getCookie( name ) ) {
-          document.cookie = name + "=" +
-            ((path) ? ";path="+path:"")+
-            ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
-        }
-      }
+    
 
-    document.getElementById('btnLogout').addEventListener('click', function(){
-        delete_cookie('PARKIO_UIF')
-        delete_cookie('X-token')
-        location.href = "./auth"
-    })
+    document.getElementById('btnLogout').addEventListener('click', logout)
 
 })
