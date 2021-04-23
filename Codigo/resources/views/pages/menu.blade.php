@@ -23,25 +23,25 @@
         </div>
         <div class="col-12 py-3 px-5 rounded menu-container">
             <div class="row">
-                <a href="/vehiclelist" class="col-6 col-sm-6 col-lg-2 menu-container-item rounded text-decoration-none d-none" id="btnList">
+                <a href="/vehiclelist" class="col-12 col-sm-6 col-lg-2 menu-container-item rounded text-decoration-none d-none" id="btnList">
                     <div class="px-3 py-2">
                         <i class="far fa-list-alt menu-icon d-block text-center"></i>
                         <p class="w-100 d-block text-center">Lista De Veículos</p>
                     </div>
                 </a>
-                <a href="/userlist" class="col-6 col-sm-6 col-lg-2 menu-container-item rounded text-decoration-none d-none" id="btnUsers">
+                <a href="/userlist" class="col-12 col-sm-6 col-lg-2 menu-container-item rounded text-decoration-none d-none" id="btnUsers">
                     <div class="px-3 py-2">
                         <i class="far fa-user-circle menu-icon d-block text-center"></i>
                         <p class="w-100 d-block text-center">Usuários</p>
                     </div>
                 </a>
-                <a href="/admin" class="col-6 col-sm-6 col-lg-2 menu-container-item rounded text-decoration-none d-none" id="btnConfig">
+                <a href="/admin" class="col-12 col-sm-6 col-lg-2 menu-container-item rounded text-decoration-none d-none" id="btnConfig">
                     <div class="px-3 py-2">
                         <i class="fas fa-cogs menu-icon d-block text-center"></i>
                         <p class="w-100 d-block text-center">Configurações</p>
                     </div>
                 </a>
-                <div class="col-6 col-sm-6 col-lg-2 menu-container-item rounded text-decoration-none" id="btnLogout">
+                <div class="col-12 col-sm-6 col-lg-2 menu-container-item rounded text-decoration-none" id="btnLogout">
                     <div class="px-3 py-2">
                         <i class="fas fa-sign-out-alt menu-icon d-block text-center"></i>
                         <p class="w-100 d-block text-center">Sair</p>

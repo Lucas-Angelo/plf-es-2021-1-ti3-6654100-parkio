@@ -9,7 +9,7 @@ window.addEventListener("load", function () {
                 let html = ``;
                 result.data.forEach(gate => {  
                     html += `
-                    <a href="/gate/${gate.id}" class="col-6 col-sm-6 col-lg-2 menu-container-item rounded text-decoration-none">
+                    <a href="/gate/${gate.id}" class="col-12 col-sm-6 col-lg-2 menu-container-item rounded text-decoration-none">
                         <div class="px-3">
                             <img class="gate-icon d-block m-auto" src="/assets/img/gate.svg"  />
                             <p>${gate.description}</p>
