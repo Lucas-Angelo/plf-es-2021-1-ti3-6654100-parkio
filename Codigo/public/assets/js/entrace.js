@@ -79,24 +79,15 @@ const handleGateFormSubmit = (event) => {
         data: data,
         success: function(res, status) {
 
-            if (status !== "success") {
-                document.getElementById("toast-msg").innerHTML =
-                    re.message;
-                resetExitForm();
-            } else {
-                document.getElementById("toast-msg").innerHTML =
-                     re.message;
-                resetExitForm();
-                renderVehicles();
-            }
-            
+            showToast(res.message);
             $('#gate-form').val("");
             updateEntraceTable();
             var myModal = $("#CreateGateModal");
             myModal.modal('hide');
         },
         error: function(err, status) {
-            console.log(err)
+            showToast(err);
+
         },
     });
 }
@@ -111,11 +102,11 @@ function remover(gate) {
             url: '/api/gate/' + gate,
             type: 'DELETE',
             success: function(res) {
-                alert(res.message)
+                showToast(res.message);
                 updateEntraceTable();
             },
             error: function(err, status) {
-                console.log(err)
+                showToast(err);
             },
         });
     }

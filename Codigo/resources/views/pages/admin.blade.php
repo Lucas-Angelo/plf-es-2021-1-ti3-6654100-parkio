@@ -193,7 +193,6 @@
             </div>
         </div>
 
-        @include('includes.toast')
 
         <script>
             var ModalVisitors = new bootstrap.Modal(document.getElementById('CreateCategoryModal'));

@@ -150,7 +150,6 @@
         </div>
     </div>
     
-    @include('includes.toast')
 
 </div>
 
