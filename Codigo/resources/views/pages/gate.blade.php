@@ -7,6 +7,10 @@
     <script src="{{ url('assets/js/select2.min.js') }}"></script>
 @endsection
 
+@section('pagename')
+    Portaria
+@endsection
+
 @section('content')
 
 <div class="container-fluid" id="gate">

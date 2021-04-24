@@ -21,23 +21,14 @@ class VehicleController extends Controller
     public function getAll(Request $request){
         $this->validate($request, [
             'plate' => 'nullable|max:8',
-            'gate' => 'nullable|max:255',
+            'gate' => 'nullable|exists:gate,id',
             'user_in' => 'nullable|max:255',
+            'inside' => 'nullable'
         ]);
 
         try {
             $v = new VehicleService();
-            return $v->getAll($request->plate, $request->gate, $request->user_in);
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ], $this->treatCodeError($e));
-        }
-    }
-    public function getAllInside(Request $request){
-        try {
-            $v = new VehicleService();
-            return $v->getAllInside();
+            return $v->getAll($request->plate, $request->gate, $request->user_in, $request->inside, $request->gate_id);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()

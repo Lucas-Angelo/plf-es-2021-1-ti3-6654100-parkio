@@ -4,6 +4,7 @@ use Closure;
 use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\ExpiredException;
+use Symfony\Component\HttpFoundation\Cookie;
 
 class WebMiddleware
 {
@@ -16,8 +17,12 @@ class WebMiddleware
             return redirect('/auth');
         }
         try {
-            JWT::decode($token, env('JWTSECRET'), ['HS256']);
-            return $next($request);
+            $decode = JWT::decode($token, env('JWTSECRET'), ['HS256']);
+            $res = $next($request);
+            return $res->withCookie(new Cookie('PARKIO_UIF', json_encode([
+                't' => $decode->tip,
+                'n' => $decode->nm
+            ]), 0, '/', null, null, false));
         } catch(ExpiredException $e) {
             return redirect('/auth'); //Expired Token
         } catch(Exception $e) {

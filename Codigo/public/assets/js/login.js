@@ -17,7 +17,7 @@ const handleSubmit = (event) =>{
         },
         success: function(data, status){
             document.cookie = "X-token=" + data.token;
-            location.href = "./gate"
+            location.href = "./"
             return false
         },
         error: function(data, status){
