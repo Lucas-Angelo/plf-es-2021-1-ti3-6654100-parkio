@@ -129,8 +129,10 @@ const handleExitModal = (event) => {
                             }
                         },
                         error: function(err, status){
-                            document.getElementById("toast-msg").innerHTML =
-                                "Ocorreu um erro.";
+                            if(err.responseJSON.error == "Vehicle can't go out on this gate!")
+                                document.getElementById("toast-msg").innerHTML = "O Veículo entrou por outra portaria.";
+                            else 
+                                document.getElementById("toast-msg").innerHTML = "Ocorreu um erro.";
                             resetExitForm();
                             console.log(err);
                         },
@@ -187,8 +189,8 @@ const handleEntranceFormSubmit = (event) => {
             document.getElementById("entrance-form").reset();
             $(".select2").val(null).trigger('change');
             $(".gate-inputcolor").val(null).trigger('change');
-
             renderVehicles();
+            showToast("Entrada de veículo registrada com sucesso!")
             return false
         },
         error: function(data, status){

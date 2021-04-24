@@ -6,6 +6,10 @@
     <script src="{{ url('/assets/js/sorttable.js') }}"></script> <!-- To sort table by headers -->
 @endsection
 
+@section('pagename')
+    Usuários
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
