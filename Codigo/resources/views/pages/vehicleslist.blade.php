@@ -6,6 +6,10 @@
     <script src="{{ url('/assets/js/vehiclelist.js') }}"></script>
 @endsection
 
+@section('pagename')
+    Lista de Veículos
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row">

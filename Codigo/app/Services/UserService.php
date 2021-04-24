@@ -50,7 +50,8 @@ class UserService
                 "nbf" => time(),
                 "exp" => time() + 86400, //(60*60*24) - 1 day
                 "uid" => $user->id,
-                "tip" => $user->type
+                "tip" => $user->type,
+                "nm" => $user->name
             );
             $jwt = JWT::encode($payload, $key);
             return ['token' => $jwt];

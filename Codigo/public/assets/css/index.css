@@ -29,3 +29,6 @@ thead, th {
 tbody > tr > td {
     background-color: #1F1F26 !important;
 }
+.cursor-pointer{
+    cursor: pointer;
+}

@@ -1,0 +1,23 @@
+.menu-container{
+    background-color: var(--bg2);
+}
+.menu-container p{
+    text-align: center;
+    color: #fff;
+}
+.gate-items p {
+    transform: translateX(-16px);
+}
+.menu-container-item:hover{
+    background-color: rgb(71, 5, 102);
+    cursor: pointer;
+}
+
+.gate-icon{
+    filter: invert(100%);
+    width: 100px;
+}
+.menu-icon{
+    color: #fff;
+    font-size: 4rem;
+}
