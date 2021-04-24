@@ -8,6 +8,10 @@
 
 @endsection
 
+@section('pagename')
+    Configurações
+@endsection
+
 @section('content')
 <script src="{{ url('/assets/js/visitorCategory.js') }}"></script>
 <script src="{{ url('/assets/js/entrace.js') }}"></script>

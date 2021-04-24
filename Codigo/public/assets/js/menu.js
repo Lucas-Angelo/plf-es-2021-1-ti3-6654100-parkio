@@ -7,7 +7,7 @@ window.addEventListener("load", function () {
             type: "GET",
             success: function(result){
                 let html = ``;
-                result.data.forEach(gate => {  
+                result.forEach(gate => {  
                     html += `
                     <a href="/gate/${gate.id}" class="col-12 col-sm-6 col-lg-2 menu-container-item rounded text-decoration-none">
                         <div class="px-3">

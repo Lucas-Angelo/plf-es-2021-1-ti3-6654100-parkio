@@ -114,7 +114,7 @@ window.addEventListener("load", function () {
             success: function(result){
                 let html = `<option value="0" selected>Selecione</option>`;
 
-                result.data.forEach(gate => {
+                result.forEach(gate => {
                     var htmlSegment;
                     
                     htmlSegment =   `<option value="${gate.id}">${gate.description}</option>`;
