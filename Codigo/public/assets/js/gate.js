@@ -187,8 +187,8 @@ const handleEntranceFormSubmit = (event) => {
             document.getElementById("entrance-form").reset();
             $(".select2").val(null).trigger('change');
             $(".gate-inputcolor").val(null).trigger('change');
-
             renderVehicles();
+            showToast("Entrada de veículo registrada com sucesso!")
             return false
         },
         error: function(data, status){
