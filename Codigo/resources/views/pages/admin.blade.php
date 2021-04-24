@@ -96,7 +96,7 @@
                     <div class="row">
                         <div class="col-12 p-0 m-0">
                             <div id="createGate">
-                                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateCategoryModal"><i class="fas fa-plus"></i> Novo Usuário</button>
+                                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateCategoryModal"><i class="fas fa-plus"></i> Nova Categoria</button>
                             </div>
                         </div>
                     </div>
@@ -196,20 +196,6 @@
                 </div>
             </div>
         </div>
-
-
-
-        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5;">
-            <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <strong class="me-auto">ParkIO</strong>
-                    <small>Agora</small>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-            <div class="toast-body">
-                <span id="toast-msg"></span>
-            </div>
-         </div>
 
 
         <script>

@@ -19,9 +19,11 @@ const handleVisitorCategoryFormSubmit = (event) =>{
             document.getElementById('visitorCategory-form').reset();
             updateVisitorCategoryTable();
             ModalVisitors.hide();
+            showToast("Categoria de Visitante cadastrada com sucesso!")
         },
         error: function(err, status){
             console.log(err)
+            showToast(err)
         },
     });
 }
