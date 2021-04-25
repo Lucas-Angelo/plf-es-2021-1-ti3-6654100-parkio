@@ -74,6 +74,17 @@ class VehicleController extends Controller
       );
     }
 
+
+    public function get(Request $request, int $id)
+    {
+  
+      $vehicle = new VehicleService();
+
+      return response()->json(
+          $vehicle->get($id)
+      );
+    }
+
     public function edit(Request $request, int $id){
         $this->validate($request, [
             'plate' => 'nullable|max:8',

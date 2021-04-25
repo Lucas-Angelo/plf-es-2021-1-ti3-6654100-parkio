@@ -138,7 +138,8 @@
                         <div id="modal-buttons" class="mb-3">
                             <div class="row">
                                 <div class="col-4">
-                                    <button id="reportar" disabled type="button" class="btn btn-danger w-100">Reportar</button>
+                                    <button id="reportar" type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#reportModal">Reportar</button>
+                                    
                                 </div>
                                 <div class="col-4">
                                     <button id="close-modal" type="button" class="btn btn-secondary w-100 " data-bs-dismiss="modal">Não&nbsp;<small>(cancelar)</small></button>
@@ -153,9 +154,56 @@
             </div>
         </div>
     </div>
+
+<!-- Modal Report -->
+
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">Reportar </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form onSubmit="handleComplainModal(event)" class="row align-items-center justify-content-center" id="report-form" novalidate>
+
+                        <div class="mb-3 col-12 col-lg-12 d-none">
+                            <label for="vehicleId" class="form-label">Id vehicle</label>
+                            <input type="text" class="form-control" value="" id="vehicleId" required autocomplete="false">
+                        </div>
+
+                        <div class="mb-3 col-12 col-lg-12 d-none">
+                            <label for="vehiclePlate" class="form-label">Plate</label>
+                            <input type="text" class="form-control" value="" id="vehiclePlate" required autocomplete="false">
+                        </div>
+
+                         <div class="mb-3 col-12 col-lg-12">
+                            <label for="report-description" class="form-label">Motivo<span class="required">*</span></label>
+                            <textarea  cols="10" rows="4" type="text" class="form-control" id="report-description"> </textarea>
+                        </div>
+
+
+                        <div id="modal-buttons" class="mb-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <button id="close-modal" type="button" class="btn btn-secondary w-100 " data-bs-dismiss="modal">Cancelar</button>
+                                </div>
+                                <div class="col-6">
+                                    <button id="atualizar" type="submit" class="btn btn-secondary w-100">Reportar</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     
 
 </div>
+
 
 </div>
 @endsection

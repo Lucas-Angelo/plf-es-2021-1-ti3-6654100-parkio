@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Services\ComplainService;
 
@@ -41,13 +40,12 @@ class ComplainController extends Controller
             'plate' => 'required',
             'description' => 'required',
             'vehicleId' => 'required',
-            'userId' => 'required'
         ]);
 
-        $cs = new ComplainService();
+        $cs = new ComplainService();      
 
         return response()->json(
-            $cs->create($request->description, $request->plate,$request->vehicleId, $request->userId)
+            $cs->create($request->description, $request->plate,$request->vehicleId, $request->auth->id, $request->gateId)
         );
     }
 

@@ -33,6 +33,7 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         $router->get('/vehicles', 'VehicleController@getAll'); // Search for all vehicles entries
         $router->put('/vehicles/{id}', 'VehicleController@edit'); // Edit one vehicles entries
         $router->get('/vehicles/search', 'VehicleController@search'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
+        $router->get('/vehicles/{id}', 'VehicleController@get'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
         $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
 
         //complains
