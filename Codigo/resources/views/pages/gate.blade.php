@@ -189,7 +189,7 @@
                                     <button id="close-modal" type="button" class="btn btn-secondary w-100 " data-bs-dismiss="modal">Cancelar</button>
                                 </div>
                                 <div class="col-6">
-                                    <button id="atualizar" type="submit" class="btn btn-secondary w-100">Reportar</button>
+                                    <button id="reportar" type="submit" class="btn btn-danger w-100" >Reportar</button>
                                 </div>
                             </div>
                         </div>
