@@ -80,6 +80,15 @@ class VehicleService
       return ['message'=> 'sucess', 'items'=>$vehicle] ;
     }
 
+    public function get($id){
+      $message = 'sucess';
+      $vehicle = Vehicle::where('id',$id)->first(['id','plate','model','color','created_at','left_at']);
+
+      if(empty($vehicle)) $message = "Vehicle not found";
+
+      return ['message'=> $message, 'items'=>$vehicle] ;
+    }
+
     /**
      * Edit Vehicle Entry
      *

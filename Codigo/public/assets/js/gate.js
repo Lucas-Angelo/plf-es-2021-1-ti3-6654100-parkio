@@ -1,21 +1,21 @@
 let colors = [];
 
-const setTime = (time) =>{
+const setTime = (time) => {
     document.querySelector('#input-time').value = time;
 }
 
-const handleSelectChange = (event) =>{
+const handleSelectChange = (event) => {
     const time = event.target.value.split('|')[1];
     setTime(time);
-}    
+}
 
-window.addEventListener("load", function () {
-    $.ajax({
-        url: "/api/visitorCategory",
-        type: "GET",
-        success: function(jsonRes){
-            if (jsonRes){
-                const HTMLOptions = `
+window.addEventListener("load", function() {
+            $.ajax({
+                        url: "/api/visitorCategory",
+                        type: "GET",
+                        success: function(jsonRes) {
+                                if (jsonRes) {
+                                    const HTMLOptions = `
                     ${
                         jsonRes.map(category=>{
                             return(
@@ -84,16 +84,114 @@ window.addEventListener("load", function () {
 });
 
 
-const handleExitFormSubmit = (event) => {
+const handleExitFormSubmit = async (event) => {
     event.preventDefault();
-    document.querySelector("#span-plate").innerHTML = `${document.querySelector("#input-plate-exit").value}`;
+    
+    var vehicle = await search($("#input-plate-exit").val());
+
+    $("#span-plate").html(vehicle.plate);
+    $("#vehicleId").val(vehicle.id);
+    $("#vehiclePlate").val(vehicle.plate);
+
     const modal = new bootstrap.Modal(document.getElementById('modalNovoUsuario'));
     modal.toggle();
 };
 
-const handleExitModal = (event) => {
+const handleComplainModal = (event) => {
+
     event.preventDefault();
-    const plate = document.querySelector("#input-plate-exit").value;
+
+    const plate = $("#vehiclePlate").val();
+    const vehicleId =  $("#vehicleId").val();
+    const description = $("#report-description").val();
+    const gateId = location.pathname.split('/')[2]; //Gate ID
+
+    const data = {
+        gateId,
+        plate,
+        vehicleId,
+        description
+    }
+
+        $.ajax({
+            url: "/api/complain",
+            type: "POST",
+            data: data,
+            success:  function(result, status){
+                showToast(result.message);
+
+                var myModal = $("#reportModal");
+                myModal.find("#vehicleId").val("");
+                myModal.find("#vehiclePlate").val("");
+                myModal.find("#report-description").val("");
+                myModal.modal('hide');
+                $("#modalNovoUsuario").modal('hide');
+                renderVehicles();
+
+            },
+            error:  function(err, status){
+                showToast(err);
+                renderVehicles();
+
+            },
+
+        });
+
+}
+
+async function dynamicExitModal(vehicleId){
+
+    var vehicle = await searchById(vehicleId);
+
+    $("#span-plate").html(vehicle.plate);
+    $("#vehicleId").val(vehicle.id);
+    $("#vehiclePlate").val(vehicle.plate);
+
+    const modal = new bootstrap.Modal(document.getElementById('modalNovoUsuario'));
+    modal.toggle();
+    
+};
+
+
+ function searchById(id){
+
+    return new Promise(resolve => {
+        $.ajax({
+            url: `/api/vehicles/${id}`,
+            type: "GET",
+            success:  function(result, status){
+                    resolve(result.items);
+            },
+            error:  function(err, status){
+                showToast(err);
+            },
+        });
+
+    });
+};
+
+ function search(plate){
+
+    return new Promise(resolve => {
+        $.ajax({
+            url: `/api/vehicles/search?plate=${plate}`,
+            type: "GET",
+            success:  function(result, status){
+                    resolve(result.items);
+
+            },
+            error:  function(err, status){
+                showToast(err);
+            },
+        });
+
+    });
+};
+
+const handleExitModal = async (event) => {
+    event.preventDefault();
+
+    const plate = $("#span-plate").text()
     const score = document.querySelector('input[name="scores"]:checked').value;
     const gateId = location.pathname.split('/')[2]; //Gate ID
 
@@ -102,56 +200,51 @@ const handleExitModal = (event) => {
         gateId,
     };
 
-    $.ajax({
-        url: `/api/vehicles/search?plate=${plate}`,
-        type: "GET",
-        data: data,
-        success: function(result, status){
-            var vehicle = result.items;
-            if (vehicle != null) {
-                if (vehicle.left_at == null) {
-                    var id = vehicle.id;
-                    $.ajax({
-                        url: `/api/vehicles/${id}`,
-                        type: "PUT",
-                        data: data,
-                        success: function(res, status){
-                            console.log(res, status)
-                            if (status !== "success") {
-                                document.getElementById("toast-msg").innerHTML =
-                                    "Não foi possível remover o veículo.";
-                                resetExitForm();
-                            } else {
-                                document.getElementById("toast-msg").innerHTML =
-                                    "Veículo removido com sucesso!";
-                                resetExitForm();
-                                renderVehicles();
-                            }
-                        },
-                        error: function(err, status){
-                            if(err.responseJSON.error == "Vehicle can't go out on this gate!")
-                                document.getElementById("toast-msg").innerHTML = "O Veículo entrou por outra portaria.";
-                            else 
-                                document.getElementById("toast-msg").innerHTML = "Ocorreu um erro.";
-                            resetExitForm();
-                            console.log(err);
-                        },
-                    });
-                } else {
-                    document.getElementById("toast-msg").innerHTML =
-                        "Veículo já removido anteriormente.";
+    var vehicle = await search(plate);
+
+    if (vehicle != null) {
+        if (vehicle.left_at == null) {
+            var id = vehicle.id;
+            $.ajax({
+                url: `/api/vehicles/${id}`,
+                type: "PUT",
+                data: data,
+                success: function(res, status){
+                    console.log(res, status)
+                    if (status !== "success") {
+                        document.getElementById("toast-msg").innerHTML =
+                            "Não foi possível remover o veículo.";
+                        resetExitForm();
+                    } else {
+                        document.getElementById("toast-msg").innerHTML =
+                            "Veículo removido com sucesso!";
+                        resetExitForm();
+                        renderVehicles();
+                    }
+                },
+                error: function(err, status){
+                    if(err.responseJSON.error == "Vehicle can't go out on this gate!")
+                        document.getElementById("toast-msg").innerHTML = "O Veículo entrou por outra portaria.";
+                    else 
+                        document.getElementById("toast-msg").innerHTML = "Ocorreu um erro.";
                     resetExitForm();
-                }
-            } else {
-                document.getElementById("toast-msg").innerHTML =
-                    "Veículo não encontrado.";
-                resetExitForm();
-            }
-        },
-        error: function(err, status){
-            console.log(err);
-        },
-    });
+                    console.log(err);
+                },
+            });
+        } else {
+            document.getElementById("toast-msg").innerHTML =
+                "Veículo já removido anteriormente.";
+            resetExitForm();
+        }
+    } else {
+        document.getElementById("toast-msg").innerHTML =
+            "Veículo não encontrado.";
+        resetExitForm();
+    }
+
+    
+
+        
 };
 
 const handleEntranceFormSubmit = (event) => {
@@ -233,7 +326,7 @@ async function renderVehicles() {
                             name: vehicle.color,
                         }
                     }
-    
+                    let plate = vehicle.plate;
                     let created_at = new Date(vehicle.created_at);
                     let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
     
@@ -246,12 +339,12 @@ async function renderVehicles() {
                                     <td>${created_at_formatada}</td>
                                     <td>
                                     <button disabled class="btn btn-secondary"><i class="fas fa-clock"></i></button>
-                                    <button disabled class="btn btn-danger"><i class="fas fa-sign-out-alt "></i></button>
+                                    <button class="btn btn-danger" onclick="dynamicExitModal(${vehicle.id})" ><i class="fas fa-sign-out-alt "></i></button>
                                     </td>
                                 </tr>`;
     
                     htmlSegmentSm = `<div class="componente">
-                                  <button disabled class="btn btn-danger"><i class="fas fa-sign-out-alt"></i></button>
+                                  <button class="btn btn-danger" onclick="dynamicExitModal(${vehicle.id})" ><i class="fas fa-sign-out-alt"></i></button>
                                   <button disabled class="btn btn-secondary"><i class="fas fa-clock "></i></button>
                                     <div class="placa">
                                         <h6>Placa:</h6>
