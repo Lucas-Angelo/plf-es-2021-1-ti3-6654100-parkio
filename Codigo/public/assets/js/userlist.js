@@ -1,14 +1,14 @@
 const url = '/api/users';
 
 // Cadastrar usuário
-const handleEntranceFormSubmit = (event) =>{
+const handleEntranceFormSubmit = (event) => {
     event.preventDefault();
-    
+
     const name = document.querySelector('#input-name').value
     const login = document.querySelector('#input-user').value
     const password = document.querySelector('#input-password').value
     const type = document.querySelector('#input-type').value
-    
+
     const data = {
         name,
         login,
@@ -19,12 +19,13 @@ const handleEntranceFormSubmit = (event) =>{
         url: url,
         type: "POST",
         data: data,
-        success: function(data, status){
+        success: function(data, status) {
             document.getElementById('cadastro').reset();
             document.getElementById('close-modal').click();
             renderUsers();
+            showToast(data.message);
         },
-        error: function(data, status){
+        error: function(data, status) {
             console.log(err)
         },
     });
@@ -36,30 +37,30 @@ async function renderUsers() {
     $.ajax({
         url: url,
         type: "GET",
-        success: function(result, status){
+        success: function(result, status) {
             let html = '';
             let htmlSm = '';
             result.data.forEach(user => {
 
                 let type;
-                switch(user.type) {
+                switch (user.type) {
                     case 'A':
                         type = 'Admin';
-                    break;
+                        break;
                     case 'P':
                         type = 'Porteiro';
-                    break;
+                        break;
                     case 'R':
                         type = 'Ronda';
-                    break;
+                        break;
                     case 'S':
                         type = 'Síndico';
-                    break;
+                        break;
                 }
 
                 var htmlSegment, htmlSegmentSm;
 
-                htmlSegment =   `<tr>
+                htmlSegment = `<tr>
                                     <td>${user.name}</th>
                                     <td>${user.login}</td>
                                     <td>${type}</td>
@@ -69,7 +70,7 @@ async function renderUsers() {
                                     </td>
                                 </tr>`;
 
-                htmlSegmentSm =   `<div class="componente mb-2">
+                htmlSegmentSm = `<div class="componente mb-2">
                                         <button disabled class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
                                         <button disabled class="btn btn-secondary"><i class="fas fa-lock"></i></button>
                                         <div class="usuario">
@@ -85,8 +86,8 @@ async function renderUsers() {
                                             <p>${type}</p>
                                         </div>
                                     </div>`;
-                
-        
+
+
                 html += htmlSegment;
                 htmlSm += htmlSegmentSm;
             });
@@ -99,7 +100,7 @@ async function renderUsers() {
             container = document.querySelector('#lista-usuario');
             container.innerHTML = htmlSm;
         },
-        error: function(err, status){
+        error: function(err, status) {
             console.error('Failed retrieving information', err);
         },
     });

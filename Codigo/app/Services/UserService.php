@@ -34,7 +34,7 @@ class UserService
         $u->type = $type;
         $u->save();
         return [
-            'message' => 'success',
+            'message' => 'Usuario criado com sucesso',
             'created' => true
         ];
     }
