@@ -15,6 +15,7 @@
 @section('content')
 <script src="{{ url('/assets/js/visitorCategory.js') }}"></script>
 <script src="{{ url('/assets/js/entrace.js') }}"></script>
+<script src="{{ url('/assets/js/complain.js') }}"></script>
 
 <div class="container-fluid" id="admin">
 
@@ -128,7 +129,34 @@
 
                 </div>
 
-                <div class="tab-pane fade" id="reported" role="tabpanel" aria-labelledby="reported-tab">Veículos Reportados</div>
+                <div class="tab-pane fade" id="reported" role="tabpanel" aria-labelledby="reported-tab">
+                    <div class="row">
+                        <div class="col-11 p-0 m-0">
+                            <div class="d-none d-md-block">
+                                <table class="table sortable">
+                                    <colgroup>
+                                        <col span="1" style="width: 15%;">
+                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 40%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>Veículo</th>
+                                            <th>Delator</th>
+                                            <th>Data</th>
+                                            <th>Razão</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="complain-table-body">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="lista-complain" class="d-md-none mt-3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 
