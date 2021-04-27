@@ -70,7 +70,7 @@ async function renderUsers() {
                                     </td>
                                 </tr>`;
 
-                htmlSegmentSm = `<div class="componente mb-2">
+                htmlSegmentSm = `<div class="usercard mb-2">
                                         <button disabled class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
                                         <button disabled class="btn btn-secondary"><i class="fas fa-lock"></i></button>
                                         <div class="usuario">
