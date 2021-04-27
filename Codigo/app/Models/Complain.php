@@ -45,4 +45,13 @@ class Complain extends Model
     protected $hidden = [
 
     ];
+
+    public function vehicle(){
+        return $this->belongsTo('App\Models\Vehicle');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
+
 }
