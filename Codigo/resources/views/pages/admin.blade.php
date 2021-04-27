@@ -135,17 +135,15 @@
                             <div class="d-none d-md-block">
                                 <table class="table sortable">
                                     <colgroup>
-                                        <col span="1" style="width: 15%;">
                                         <col span="1" style="width: 20%;">
-                                        <col span="1" style="width: 20%;">
-                                        <col span="1" style="width: 40%;">
+                                        <col span="1" style="width: 70%;">
+                                        <col span="1" style="width: 10%;">
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th>Veículo</th>
-                                            <th>Delator</th>
-                                            <th>Data</th>
-                                            <th>Razão</th>
+                                            <th>Placa</th>
+                                            <th>Motivo</th>
+                                            <th>Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody id="complain-table-body">

@@ -1,45 +1,33 @@
 
 const updateComplainTable = () =>{
-console.log('fez a req')
     $.ajax({
         url: "/api/complain",
         type: "GET",
         success: function(jsonRes){
             const result = jsonRes.data;
-            console.log(result)
             let html = '';
             let htmlSm = '';
             result.forEach(complain => {
 
                 var htmlSegment, htmlSegmentSm;
 
-                let created_at = new Date(complain.created_at);
-                let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
-
-
                 htmlSegment =   `<tr>
-                                    <td>${complain.vehicle.plate}</th>
-                                    <td>${complain.user.name}</td>
-                                    <td>${created_at_formatada}</td>
+                                    <td>${complain.plate}</th>
                                     <td>${complain.description}</td>
+                                    <td class="acoes">
+                                        <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
                                 </tr>`;
 
                 htmlSegmentSm =   `<div class="componente mb-2">
+                                        <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
                                         <div>
-                                            <h6>Veículo:</h6>
-                                            <p>${complain.vehicle.plate}</p>
+                                            <h6>Placa:</h6>
+                                            <p>${complain.plate}</p>
                                         </div>
                                         <div>
-                                            <h6>Delator:</h6>
-                                            <p>${complain.user.name}</p>
-                                        </div>
-                                        <div>
-                                            <h6>Data:</h6>
-                                            <p>${created_at_formatada} min</p>
-                                        </div>
-                                        <div>
-                                            <h6>Denúncia:</h6>
-                                            <p>${complain.description} min</p>
+                                            <h6>Motivo:</h6>
+                                            <p>${complain.description}s</p>
                                         </div>
                                     </div>`;
                 
