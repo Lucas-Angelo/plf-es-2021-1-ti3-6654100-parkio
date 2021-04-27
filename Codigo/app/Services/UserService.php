@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Models\Vehicle;
 use Illuminate\Support\Facades\DB;
 use Firebase\JWT\JWT;
 
@@ -59,15 +60,43 @@ class UserService
             throw new \Exception("User or pass incorrect", 405);
         }
     }
-    
-    public function search(String $type = null) {
+
+    public function search(String $login = null, String $type = null) {
         $data = new User();
 
         if(isset($type)) {
             $data = $data->where('type',$type);
         }
+        if(isset($login)) {
+            $data = $data->where('login',$login);
+        }
 
         return $data->orderByDesc('created_at')->paginate();
+
+    }
+
+    public function delete(int $id) {
+
+        $message = 'Usuário removido com sucesso';
+        $deleted = true;
+
+        try {
+            $user = User::find($id);
+
+            if( Vehicle::where('user_in_id', $id)->get()->count() > 0 || Vehicle::where('user_out_id', $id)->get()->count() > 0  ){
+                $message = 'Remoção não concluída, esse usuário contém veículos.';
+                $deleted = false;
+            }
+            else $user->delete();
+        } catch (\Throwable $th) {
+            $message = 'Remoção não concluída, esse usuário não existe.';
+            $deleted = false;
+        }
+
+        return [
+            'message' => $message,
+            'deleted' => $deleted
+        ];
 
     }
 }
