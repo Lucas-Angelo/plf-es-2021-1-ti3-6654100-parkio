@@ -1,4 +1,5 @@
 let colors = [];
+var defaultTime = 30;
 
 const setTime = (time) => {
     document.querySelector('#input-time').value = time;
@@ -11,21 +12,22 @@ const handleSelectChange = (event) => {
 
 window.addEventListener("load", function() {
             $.ajax({
-                        url: "/api/visitorCategory",
-                        type: "GET",
-                        success: function(jsonRes) {
-                                if (jsonRes) {
-                                    const HTMLOptions = `
-                    ${
-                        jsonRes.map(category=>{
-                            return(
-                                `<option value="${category.id}|${category.time}">${category.description}</option>`
-                            )
-                        })
-                    }
-                `
-                document.querySelector('#input-type').innerHTML = HTMLOptions;
-                setTime(jsonRes[0].time);
+                url: "/api/visitorCategory",
+                type: "GET",
+                success: function(jsonRes) {
+                    if (jsonRes) {
+                        const HTMLOptions = `
+                        ${
+                            jsonRes.map(category=>{
+                                return(
+                                    `<option value="${category.id}|${category.time}">${category.description}</option>`
+                                )
+                            })
+                        }
+                    `
+                    document.querySelector('#input-type').innerHTML = HTMLOptions;
+                    setTime(jsonRes[0].time);
+                    defaultTime = jsonRes[0].time;
             }
         },
         error: function(err, status){
@@ -210,7 +212,6 @@ const handleExitModal = async (event) => {
                 type: "PUT",
                 data: data,
                 success: function(res, status){
-                    console.log(res, status)
                     if (status !== "success") {
                         document.getElementById("toast-msg").innerHTML =
                             "Não foi possível remover o veículo.";
@@ -280,6 +281,7 @@ const handleEntranceFormSubmit = (event) => {
         data: data,
         success: function(data, status){
             document.getElementById("entrance-form").reset();
+            setTime(defaultTime);
             $(".select2").val(null).trigger('change');
             $(".gate-inputcolor").val(null).trigger('change');
             renderVehicles();
