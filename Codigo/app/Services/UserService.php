@@ -77,19 +77,19 @@ class UserService
 
     public function delete(int $id) {
 
-        $message = 'Usuário removido com sucesso';
+        $message = 'Usuário removido com sucesso!';
         $deleted = true;
 
         try {
             $user = User::find($id);
 
             if( Vehicle::where('user_in_id', $id)->get()->count() > 0 || Vehicle::where('user_out_id', $id)->get()->count() > 0  ){
-                $message = 'Remoção não concluída, esse usuário contém veículos.';
+                $message = 'Remoção não concluída, este usuário contém veículos.';
                 $deleted = false;
             }
             else $user->delete();
         } catch (\Throwable $th) {
-            $message = 'Remoção não concluída, esse usuário não existe.';
+            $message = 'Remoção não concluída, este usuário não existe.';
             $deleted = false;
         }
 
