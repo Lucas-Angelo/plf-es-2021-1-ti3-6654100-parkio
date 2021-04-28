@@ -66,12 +66,12 @@ async function renderUsers() {
                                     <td>${type}</td>
                                     <td class="acoes">
                                         <button disabled class="btn btn-secondary"><i class="fas fa-lock"></i></button>
-                                        <button class="btn btn-secondary" onclick="remover(${user.id})"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-danger" onclick="remover(${user.id})"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`;
 
                 htmlSegmentSm = `<div class="usercard mb-2">
-                                        <button class="btn btn-secondary" onclick="remover(${user.id})"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-danger" onclick="remover(${user.id})"><i class="fas fa-trash-alt"></i></button>
                                         <button disabled class="btn btn-secondary"><i class="fas fa-lock"></i></button>
                                         <div class="usuario">
                                             <h6>Usuário:</h6>

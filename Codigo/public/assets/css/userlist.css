@@ -1,15 +1,3 @@
-.btn,
-.btn:focus,
-.btn:active,
-.btn.active,
-.btn:focus:active {
-    background-image: none !important;
-    outline: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    outline-style: none !important;
-}
-
 .required {
     color: red !important;
 }
@@ -25,13 +13,6 @@
 }
 #lista-usuario {
     display: none;
-}
-
-.acoes > button:nth-child(2) {
-    background-color: #C74D5D;
-}
-.acoes > button:nth-child(2):hover {
-    background-color: #c93145;
 }
 
 @media only screen and (max-width: 800px) {
@@ -59,12 +40,6 @@
     .usercard > button {
         float: right;
     }
-    .usercard > button:nth-child(1) {
-        background-color: #C74D5D;
-    }
-    .usercard > button:nth-child(1):hover {
-        background-color: #c93145;
-    }
     .usercard > button:nth-child(2) {
         margin-right: 5px;
     }
@@ -72,26 +47,11 @@
 }
 
 .modal-content {
-    padding: 0 20px !important;
-    border-radius: 8px;
-    background-color: var(--bg2) !important;
+    padding: 0 20px;
 }
 .modal-header {
-    text-align: center !important;
+    text-align: center;
     border-bottom: none;
-}
-.modal-footer {
-    border-top: none;
-}
-
-.form-select > * {
-    max-width: 100%;
-}
-select {
-    width: 250px;
-}
-option {
-    width: 250px;
 }
 
 #btn-cadastrar {

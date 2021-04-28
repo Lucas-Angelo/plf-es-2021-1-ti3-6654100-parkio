@@ -10,7 +10,7 @@ window.addEventListener("load", function () {
         const plate = document.getElementById('txtPlateFilter').value;
         const gate = document.getElementById('gate').value;
         const user_in = document.getElementById('user_in').value;
-        
+
         if(plate)
             filter += `&plate=${plate}`
         if(gate!=0)
@@ -34,15 +34,15 @@ window.addEventListener("load", function () {
                     }
 
                     let created_at = new Date(vehicle.created_at);
-                    let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0")); 
-                    
+                    let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
+
                     let left_at = new Date(vehicle.left_at);
-                    let left_at_formatada = ((left_at.getDate().toString().padStart(2, "0"))) + "/" + ((left_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + left_at.getFullYear() + " " + (left_at.getHours().toString().padStart(2, "0")) + ":" + (left_at.getMinutes().toString().padStart(2, "0")); 
-                    
-                    let gate = vehicle.gate.description;          
+                    let left_at_formatada = ((left_at.getDate().toString().padStart(2, "0"))) + "/" + ((left_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + left_at.getFullYear() + " " + (left_at.getHours().toString().padStart(2, "0")) + ":" + (left_at.getMinutes().toString().padStart(2, "0"));
+
+                    let gate = vehicle.gate.description;
 
                     var htmlSegment, htmlSegmentSm;
-                    
+
                     htmlSegment =   `<tr>
                                         <td scope="row">${vehicle.plate}</th>
                                         <td>${vehicle.model}</td>
@@ -56,7 +56,7 @@ window.addEventListener("load", function () {
                                         </td>
                                     </tr>`;
 
-                    htmlSegmentSm =   `<div class="componente">
+                    htmlSegmentSm =   `<div class="card-veiculo">
                                         <button disabled class="btn btn-secondary float-end"><i class="fas fa-edit botoes"></i></button>
                                         <div class="placa">
                                             <h6>Placa:</h6>
@@ -88,7 +88,7 @@ window.addEventListener("load", function () {
                                             <p>${left_at_formatada}</p>
                                         </div>
                                     </div>`;
-            
+
                     html += htmlSegment;
                     htmlSm += htmlSegmentSm;
                 });
@@ -116,9 +116,9 @@ window.addEventListener("load", function () {
 
                 result.forEach(gate => {
                     var htmlSegment;
-                    
+
                     htmlSegment =   `<option value="${gate.id}">${gate.description}</option>`;
-                    
+
                     html += htmlSegment;
                 });
 
@@ -141,9 +141,9 @@ window.addEventListener("load", function () {
 
                 result.data.forEach(user_in => {
                     var htmlSegment;
-                    
+
                     htmlSegment =   `<option value="${user_in.id}">${user_in.name}</option>`;
-                    
+
                     html += htmlSegment;
                 });
 
@@ -166,3 +166,4 @@ window.addEventListener("load", function () {
     renderGates();
     renderUser_in();
 });
+
