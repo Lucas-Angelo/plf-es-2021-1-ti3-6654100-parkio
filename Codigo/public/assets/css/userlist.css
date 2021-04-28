@@ -27,13 +27,6 @@
     display: none;
 }
 
-.acoes > button:nth-child(2) {
-    background-color: #C74D5D;
-}
-.acoes > button:nth-child(2):hover {
-    background-color: #c93145;
-}
-
 @media only screen and (max-width: 800px) {
 
     #btn-NovoUsuario {
@@ -58,12 +51,6 @@
     }
     .usercard > button {
         float: right;
-    }
-    .usercard > button:nth-child(1) {
-        background-color: #C74D5D;
-    }
-    .usercard > button:nth-child(1):hover {
-        background-color: #c93145;
     }
     .usercard > button:nth-child(2) {
         margin-right: 5px;
