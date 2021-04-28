@@ -47,26 +47,11 @@
 }
 
 .modal-content {
-    padding: 0 20px !important;
-    border-radius: 8px;
-    background-color: var(--bg2) !important;
+    padding: 0 20px;
 }
 .modal-header {
-    text-align: center !important;
+    text-align: center;
     border-bottom: none;
-}
-.modal-footer {
-    border-top: none;
-}
-
-.form-select > * {
-    max-width: 100%;
-}
-select {
-    width: 250px;
-}
-option {
-    width: 250px;
 }
 
 #btn-cadastrar {
