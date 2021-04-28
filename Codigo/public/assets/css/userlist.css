@@ -1,15 +1,3 @@
-.btn,
-.btn:focus,
-.btn:active,
-.btn.active,
-.btn:focus:active {
-    background-image: none !important;
-    outline: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    outline-style: none !important;
-}
-
 .required {
     color: red !important;
 }
