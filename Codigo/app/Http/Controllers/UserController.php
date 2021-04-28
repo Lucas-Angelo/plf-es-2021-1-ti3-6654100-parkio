@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        
+
     }
 
     /**
@@ -63,10 +63,31 @@ class UserController extends Controller
             $us->auth($request->login,$request->password)
         );
     }
-    
+
     public function search(Request $request) {
         $us = new UserService();
-        return $us->search($request->type);
+        return $us->search($request->login, $request->type);
+    }
+
+    public function delete(Request $request, int $id) {
+
+        if(!empty($id)){
+
+            try {
+                $u = new UserService();
+                return response()->json(
+                    $u->delete($id)
+                );
+            } catch (\Exception $e) {
+                return response()->json([
+                    'error' => $e->getMessage()
+                ], $this->treatCodeError($e));
+            }
+
+        }else return response()->json([
+            'error' => 'missing id'
+        ]);
+
     }
 
     //

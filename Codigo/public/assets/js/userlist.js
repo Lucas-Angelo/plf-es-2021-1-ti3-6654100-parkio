@@ -66,12 +66,12 @@ async function renderUsers() {
                                     <td>${type}</td>
                                     <td class="acoes">
                                         <button disabled class="btn btn-secondary"><i class="fas fa-lock"></i></button>
-                                        <button disabled class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-secondary" onclick="remover(${user.id})"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`;
 
-                htmlSegmentSm = `<div class="componente mb-2">
-                                        <button disabled class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
+                htmlSegmentSm = `<div class="usercard mb-2">
+                                        <button class="btn btn-secondary" onclick="remover(${user.id})"><i class="fas fa-trash-alt"></i></button>
                                         <button disabled class="btn btn-secondary"><i class="fas fa-lock"></i></button>
                                         <div class="usuario">
                                             <h6>Usuário:</h6>
@@ -104,6 +104,25 @@ async function renderUsers() {
             console.error('Failed retrieving information', err);
         },
     });
+}
+
+function remover(user) {
+
+    var result = confirm("Você deseja excluir este usuário ? Essa ação é irreversível!");
+
+    if (result) {
+        $.ajax({
+            url: '/api/users/' + user,
+            type: 'DELETE',
+            success: function(res) {
+                showToast(res.message);
+                renderUsers();
+            },
+            error: function(err, status) {
+                showToast(err);
+            },
+        });
+    }
 }
 
 renderUsers();
