@@ -10,6 +10,7 @@
     --button: #5c5c68;
     --activeTab: #411357;
 }
+
 html, body, .container-fluid{
     background-color: var(--bg);
     background: var(--bg);
@@ -24,11 +25,14 @@ table {
 thead, th {
     padding-left: 0;
     background-color: #252531 !important;
+    border-bottom: 0.5px solid #62628B !important;
 }
 
 tbody > tr > td {
     background-color: #1F1F26 !important;
+    border-bottom: 0.5px solid #62628B !important;
 }
+
 .cursor-pointer{
     cursor: pointer;
 }

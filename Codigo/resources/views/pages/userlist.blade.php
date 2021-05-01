@@ -14,9 +14,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 p-0 m-0">
-            <div id="novo">
-                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalNovoUsuario"><i class="fas fa-plus"></i>Novo Usuário</button>
-            </div>
+            <button id="btn-NovoUsuario" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalNovoUsuario"><i class="fas fa-plus"></i>&nbsp;Novo Usuário</button>
         </div>
     </div>
     <div class="row">
@@ -55,20 +53,20 @@
                 <div class="modal-body justify-content-center">
                     <form onSubmit="handleEntranceFormSubmit(event)" id="cadastro" class="justify-content-center">
                         <div class="mb-3">
-                            <label for="input-name" class="form-label">Nome</label>
-                            <input for="input-name" type="text" class="form-control" id="input-name">
+                            <label for="input-name" class="form-label">Nome <span class="required">*</span></label>
+                            <input for="input-name" type="text" class="form-control" id="input-name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="input-user" class="form-label">Usuário</label>
-                            <input for="input-user" type="text" class="form-control" id="input-user">
+                            <label for="input-user" class="form-label">Usuário <span class="required">*</span></label>
+                            <input for="input-user" type="text" class="form-control" id="input-user" required>
                         </div>
                         <div class="mb-3">
-                            <label for="input-password" class="form-label">Senha</label>
-                            <input for="input-password" type="password" class="form-control" id="input-password">
+                            <label for="input-password" class="form-label">Senha <span class="required">*</span></label>
+                            <input for="input-password" type="password" class="form-control" id="input-password" required>
                         </div>
                         <div class="mb-3">
-                            <label for="input-type" class="form-label">Tipo</label>
-                            <select for="input-type" class="form-select" id="input-type">
+                            <label for="input-type" class="form-label">Tipo <span class="required">*</span></label>
+                            <select for="input-type" class="form-select" id="input-type" required>
                                 <option selected></option>
                                 <option value="A">Admin</option>
                                 <option value="P">Porteiro</option>
@@ -77,7 +75,7 @@
                             </select>
                         </div>
                         <button id="close-modal" type="button" class="btn btn-secondary d-none" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary w-100 mt-2 mb-3">Cadastrar</button>
+                        <button id="btn-cadastrar" type="submit" class="btn btn-primary w-100 mt-2 mb-3">Cadastrar</button>
                     </form>
                 </div>
             </div>
@@ -85,4 +83,6 @@
     </div>
 
 </div>
+
 @endsection
+
