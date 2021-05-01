@@ -9,7 +9,6 @@ use App\Models\Complain;
 use App\Models\Vehicle;
 
 
-
 class ComplainService
 {
 
@@ -51,6 +50,13 @@ class ComplainService
             'created' => $created
         ];
         
+    }
+
+    public function getAll(){
+        $c = new Complain();
+        return $c
+            ->orderByDesc('created_at')
+            ->paginate();
     }
 
 

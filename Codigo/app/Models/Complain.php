@@ -45,4 +45,5 @@ class Complain extends Model
     protected $hidden = [
 
     ];
+    
 }

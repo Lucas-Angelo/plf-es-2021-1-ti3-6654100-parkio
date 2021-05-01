@@ -37,6 +37,7 @@ $router->group(['prefix' => '/api'], function () use ($router) {
 
         //complains
         $router->post('/complain', 'ComplainController@create');
+        $router->get('/complain', 'ComplainController@getAll');
 
         //gates
         $router->get('/gate', 'GateController@getAll'); // Search for all gates
