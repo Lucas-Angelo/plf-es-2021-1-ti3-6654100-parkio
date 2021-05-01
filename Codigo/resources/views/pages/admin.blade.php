@@ -14,6 +14,7 @@
 @section('content')
 <script src="{{ url('/assets/js/visitorCategory.js') }}"></script>
 <script src="{{ url('/assets/js/entrace.js') }}"></script>
+<script src="{{ url('/assets/js/complain.js') }}"></script>
 
 <div class="container-fluid" id="admin">
 
@@ -93,7 +94,7 @@
                 <div id="category" class="tab-pane fade" role="tabpanel" aria-labelledby="category-tab">
 
                     <div class="row">
-                        <div class="col-12 p-0 m-0">
+                        <div class="col-12 p-0 m-2 mt-md-0">
                             <div id="createGate">
                                 <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateCategoryModal"><i class="fas fa-plus"></i> Nova Categoria</button>
                             </div>
@@ -127,7 +128,32 @@
 
                 </div>
 
-                <div class="tab-pane fade" id="reported" role="tabpanel" aria-labelledby="reported-tab">Veículos Reportados</div>
+                <div class="tab-pane fade" id="reported" role="tabpanel" aria-labelledby="reported-tab">
+                    <div class="row">
+                        <div class="col-11 p-0 m-0">
+                            <div class="d-none d-md-block">
+                                <table class="table sortable">
+                                    <colgroup>
+                                        <col span="1" style="width: 20%;">
+                                        <col span="1" style="width: 70%;">
+                                        <col span="1" style="width: 10%;">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>Placa</th>
+                                            <th>Motivo</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="complain-table-body">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="lista-complain" class="d-md-none mt-3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 
