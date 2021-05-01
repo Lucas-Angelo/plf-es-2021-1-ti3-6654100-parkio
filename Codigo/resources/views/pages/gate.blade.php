@@ -116,7 +116,7 @@
         <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content">
                 <div class="modal-header justify-content-left border-0">
-                    <h5 class="modal-title" id="modalNovoUsuarioLabel"><i class="fas fa-exclamation-triangle"></i>&nbsp;Confirmar saída do veículo <span id="span-plate"></span>?</h5>
+                    <h5 class="modal-title" id="modalNovoUsuarioLabel"><i class="fas fa-exclamation-triangle"></i>&nbsp;Confirmar saída do veículo <span class="span-plate"></span>?</h5>
                 </div>
                 <div class="modal-body justify-content-center">
                     <form onSubmit="handleExitModal(event)" id="exit-modal" class="justify-content-center">
@@ -161,7 +161,7 @@
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="reportModalLabel">Reportar </h5>
+                    <h5 class="modal-title" id="reportModalLabel">Reportar veículo <span class="span-plate"></span> </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
