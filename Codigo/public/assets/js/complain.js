@@ -15,12 +15,12 @@ const updateComplainTable = () =>{
                                     <td>${complain.plate}</th>
                                     <td>${complain.description}</td>
                                     <td class="acoes">
-                                        <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-danger" disabled><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`;
 
                 htmlSegmentSm =   `<div class="componente mb-2">
-                                        <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-danger" disabled><i class="fas fa-trash-alt"></i></button>
                                         <div>
                                             <h6>Placa:</h6>
                                             <p>${complain.plate}</p>
