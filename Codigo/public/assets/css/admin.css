@@ -1,6 +1,9 @@
 .menu{
     height: 100%;
 }
+#adminMenuTab {
+    border-bottom: none;
+}
 .admin-nav-title, .mobile-menu-button{
     display: flex;
     align-items: center;
