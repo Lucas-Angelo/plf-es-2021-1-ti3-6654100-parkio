@@ -94,7 +94,7 @@
                 <div id="category" class="tab-pane fade" role="tabpanel" aria-labelledby="category-tab">
 
                     <div class="row">
-                        <div class="col-12 p-0 m-2 mt-md-0">
+                        <div class="col-12 p-0 mt-md-0">
                             <div id="createGate">
                                 <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateCategoryModal"><i class="fas fa-plus"></i> Nova Categoria</button>
                             </div>
