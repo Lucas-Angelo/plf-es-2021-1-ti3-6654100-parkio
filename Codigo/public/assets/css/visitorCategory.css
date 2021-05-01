@@ -1,48 +1,72 @@
-#visitorCategory{
+#visitorCategory {
     padding-top: 20px;
 }
 
-#visitorCategory-container{
+#visitorCategory-container {
     background-color: var(--bg2);
     padding: 25px 15px;
 }
 
-#visitorCategory-form input, #visitorCategory-form select{
+#visitorCategory-form input,
+#visitorCategory-form select {
     background-color: var(--input);
     color: var(--color);
-
     height: 50px;
-
     border-color: var(--border);
     border-radius: .5rem;
-
 }
-#visitorCategory-form label{
+
+#visitorCategory-form label {
     color: var(--color);
     font-size: 1.3rem;
 }
-#visitorCategory-form button{
+
+#visitorCategory-form button {
     background-color: var(--button);
     color: var(--color);
     font-size: 1.5rem;
-
     border: 1px solid var(--color);
     border-radius: 15px;
-
     padding: 1rem 4.2rem;
 }
-#visitorCategory-form button:hover{
+
+#visitorCategory-form button:hover {
     background-color: var(--bg2);
     border-color: var(--button);
     color: var(--button);
 }
-.required{
+
+.required {
     color: red;
 }
 
-@media (max-width: 400px){
-    #visitorCategory-form button{
+@media (max-width: 800px) {
+    #visitorCategory-form button {
         width: 100%;
         padding: 1rem 0;
+    }
+    @media (max-width: 800px) {
+        #gate-form button {
+            width: 100%;
+            padding: 1rem 0;
+        }
+        #createGate {
+            margin-top: 1rem !important;
+            margin-left: 1rem !important;
+        }
+        .visitorCategoryCard {
+            margin-left: 1rem;
+            padding: 15px;
+            border: 1px solid #62628B;
+        }
+        .visitorCategoryCard p {
+            display: inline-flex;
+        }
+        .visitorCategoryCard button {
+            float: right;
+        }
+        .visitorCategoryCard>button:nth-child(2) {
+            margin-right: 5px;
+        }
     }
 }

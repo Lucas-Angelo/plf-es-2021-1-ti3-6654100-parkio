@@ -1,8 +1,6 @@
-
-
-const handleVisitorCategoryFormSubmit = (event) =>{
+const handleVisitorCategoryFormSubmit = (event) => {
     event.preventDefault();
-    
+
     const description = document.querySelector('#input-description').value
     const time = document.querySelector('#input-time').value
 
@@ -15,25 +13,25 @@ const handleVisitorCategoryFormSubmit = (event) =>{
         url: "/api/visitorCategory",
         type: "POST",
         data: data,
-        success: function(res){
+        success: function(res) {
             document.getElementById('visitorCategory-form').reset();
             updateVisitorCategoryTable();
             ModalVisitors.hide();
             showToast("Categoria de Visitante cadastrada com sucesso!")
         },
-        error: function(err, status){
+        error: function(err, status) {
             console.log(err)
             showToast(err)
         },
     });
 }
 
-const updateVisitorCategoryTable = () =>{
+const updateVisitorCategoryTable = () => {
 
     $.ajax({
         url: "/api/visitorCategory",
         type: "GET",
-        success: function(jsonRes){
+        success: function(jsonRes) {
             const result = jsonRes;
             let html = '';
             let htmlSm = '';
@@ -41,17 +39,17 @@ const updateVisitorCategoryTable = () =>{
 
                 var htmlSegment, htmlSegmentSm;
 
-                htmlSegment =   `<tr>
+                htmlSegment = `<tr>
                                     <td>${category.description}</th>
                                     <td>${category.time} min</td>
                                     <td class="acoes">
                                         <button class="btn btn-secondary"><i class="fas fa-edit"></i></button>
-                                        <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`;
 
-                htmlSegmentSm =   `<div class="componente mb-2">
-                                        <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i></button>
+                htmlSegmentSm = `<div class="visitorCategoryCard mb-2">
+                                        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                         <button class="btn btn-secondary"><i class="fas fa-edit"></i></button>
                                         <div class="type">
                                             <h6>Tipo:</h6>
@@ -62,8 +60,8 @@ const updateVisitorCategoryTable = () =>{
                                             <p>${category.time} min</p>
                                         </div>
                                     </div>`;
-                
-        
+
+
                 html += htmlSegment;
                 htmlSm += htmlSegmentSm;
             });
@@ -75,7 +73,7 @@ const updateVisitorCategoryTable = () =>{
             container = document.querySelector('#lista-category');
             container.innerHTML = htmlSm;
         },
-        error: function(err, status){
+        error: function(err, status) {
             console.error('Failed retrieving information', err);
         },
     });

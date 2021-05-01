@@ -3,7 +3,6 @@
 @section('extraassets')
     <link rel="stylesheet" href="{{ url('/assets/css/visitorCategory.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url('/assets/css/admin.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url('/assets/css/userlist.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url('/assets/css/entrace.css') }}" type="text/css">
 
 @endsection
@@ -59,7 +58,7 @@
             <main class="col-12 col-md-9 tab-content">
                 <div class="tab-pane fade show active" id="gates" role="tabpanel" aria-labelledby="gates-tab">
                     <div class="row">
-                        <div class="col-12 p-0 m-0">
+                        <div class="col-12 p-0 ms-0" id="newGateDivButton">
                             <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateGateModal"><i class="fas fa-plus"></i> Nova Portaria</button>
                         </div>
                     </div>
