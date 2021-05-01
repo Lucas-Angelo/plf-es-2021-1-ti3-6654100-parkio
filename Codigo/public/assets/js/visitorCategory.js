@@ -37,7 +37,7 @@ function removerCategoria(category) {
             type: 'DELETE',
             success: function(res) {
                 showToast(res.message);
-                updateEntraceTable();
+                updateVisitorCategoryTable();
             },
             error: function(err, status) {
                 showToast(err);
