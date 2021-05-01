@@ -45,4 +45,24 @@ class VisitorCategoryController extends Controller
         }
     }
 
+    public function delete(Request $request, int $id){
+        if(!empty($id)){
+
+            try {
+                $visitor = new VisitorCategoryService();
+                return response()->json(
+                    $visitor->delete($id)
+                );
+            } catch (\Exception $e) {
+                return response()->json([
+                    'error' => $e->getMessage()
+                ], $this->treatCodeError($e));
+            }
+
+        }else return response()->json([
+            'error' => 'missing id'
+        ]);
+
+    }
+
 }

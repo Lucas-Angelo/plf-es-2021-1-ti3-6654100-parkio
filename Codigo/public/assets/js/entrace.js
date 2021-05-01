@@ -19,12 +19,12 @@ const updateEntraceTable = () => {
                                 <td>${created_at_formatada}</th>
                                 <td class="acoes">
                                     <button class="btn btn-secondary" onclick="modalEditGate(${gate.id})"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-danger" onclick="remover(${gate.id})"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-danger" onclick="removerPortaria(${gate.id})"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>`;
 
                 htmlSegmentSm = `<div class="gateCard mb-2">
-                                    <button class="btn btn-danger" onclick="remover(${gate.id})"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-danger" onclick="removerPortaria(${gate.id})"><i class="fas fa-trash-alt"></i></button>
                                     <button class="btn btn-secondary" onclick="modalEditGate(${gate.id})"> <i class="fas fa-edit"></i></button>
                                     <div class="type">
                                         <h6>Identificação:</h6>
@@ -93,7 +93,7 @@ const handleGateFormSubmit = (event) => {
 }
 
 
-function remover(gate) {
+function removerPortaria(gate) {
 
     var result = confirm("Você deseja excluir esta portaria ? Essa ação é irreversível!");
 

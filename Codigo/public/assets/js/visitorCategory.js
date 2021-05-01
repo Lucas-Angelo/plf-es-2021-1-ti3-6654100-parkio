@@ -26,6 +26,27 @@ const handleVisitorCategoryFormSubmit = (event) => {
     });
 }
 
+
+function removerCategoria(category) {
+
+    var result = confirm("Você deseja excluir esta categoria ? Essa ação é irreversível!");
+
+    if (result) {
+        $.ajax({
+            url: '/api/visitorCategory/' + category,
+            type: 'DELETE',
+            success: function(res) {
+                showToast(res.message);
+                updateEntraceTable();
+            },
+            error: function(err, status) {
+                showToast(err);
+            },
+        });
+    }
+}
+
+
 const updateVisitorCategoryTable = () => {
 
     $.ajax({
@@ -44,12 +65,12 @@ const updateVisitorCategoryTable = () => {
                                     <td>${category.time} min</td>
                                     <td class="acoes">
                                         <button class="btn btn-secondary"><i class="fas fa-edit"></i></button>
-                                        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-danger" onclick="removerCategoria(${category.id})"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`;
 
                 htmlSegmentSm = `<div class="visitorCategoryCard mb-2">
-                                        <button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-danger" onclick="removerCategoria(${category.id})"><i class="fas fa-trash-alt"></i></button>
                                         <button class="btn btn-secondary"><i class="fas fa-edit"></i></button>
                                         <div class="type">
                                             <h6>Tipo:</h6>
