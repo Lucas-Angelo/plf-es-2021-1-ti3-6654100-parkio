@@ -91,7 +91,7 @@ const handleExitFormSubmit = async (event) => {
     
     var vehicle = await search($("#input-plate-exit").val());
 
-    $("#span-plate").html(vehicle.plate);
+    $(".span-plate").html(vehicle.plate);
     $("#vehicleId").val(vehicle.id);
     $("#vehiclePlate").val(vehicle.plate);
 
@@ -145,7 +145,7 @@ async function dynamicExitModal(vehicleId){
 
     var vehicle = await searchById(vehicleId);
 
-    $("#span-plate").html(vehicle.plate);
+    $(".span-plate").html(vehicle.plate);
     $("#vehicleId").val(vehicle.id);
     $("#vehiclePlate").val(vehicle.plate);
 
@@ -193,7 +193,7 @@ async function dynamicExitModal(vehicleId){
 const handleExitModal = async (event) => {
     event.preventDefault();
 
-    const plate = $("#span-plate").text()
+    const plate = $(".span-plate").text()
     const score = document.querySelector('input[name="scores"]:checked').value;
     const gateId = location.pathname.split('/')[2]; //Gate ID
 

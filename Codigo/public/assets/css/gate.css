@@ -21,38 +21,8 @@
     padding: 25px 15px;
 }
 
-#entrance-form input, #entrance-form select{
-    height: 50px;
-}
-#entrance-form label{
-    color: var(--color);
-    font-size: 1.3rem;
-}
-#entrance-form button{
-    background-color: var(--button);
-    color: var(--color);
-    font-size: 1.5rem;
-
-    border: 1px solid var(--color);
-
-    padding: 1rem 4.2rem;
-}
-#entrance-form button:hover{
-    background-color: var(--bg2);
-    border-color: var(--button);
-    color: var(--button);
-}
-.required{
-    color: red;
-}
-
-.square{
-    width: 15px;
-    height: 15px;
-    display: inline-block;
-}
-
-#exit-form input{
+#entrance-form input,
+#entrance-form select {
     height: 50px;
 }
 
@@ -61,17 +31,54 @@
     font-size: 1.3rem;
 }
 
-#exit-form label{
-    font-size: 1.3rem;
-}
-#exit-form button, #entrance-form button{
+#entrance-form button {
     background-color: var(--button);
     color: var(--color);
     font-size: 1.5rem;
     border: 1px solid var(--color);
     padding: 1rem 4.2rem;
 }
-#exit-form button:hover, #entrance-form button:hover{
+
+#entrance-form button:hover {
+    background-color: var(--bg2);
+    border-color: var(--button);
+    color: var(--button);
+}
+
+.required {
+    color: red;
+}
+
+.square {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+}
+
+#exit-form input {
+    height: 50px;
+}
+
+#entrance-form label {
+    color: var(--color);
+    font-size: 1.3rem;
+}
+
+#exit-form label {
+    font-size: 1.3rem;
+}
+
+#exit-form button,
+#entrance-form button {
+    background-color: var(--button);
+    color: var(--color);
+    font-size: 1.5rem;
+    border: 1px solid var(--color);
+    padding: 1rem 4.2rem;
+}
+
+#exit-form button:hover,
+#entrance-form button:hover {
     background-color: var(--bg2);
     border-color: var(--button);
     color: var(--button);
@@ -80,15 +87,17 @@
 .required {
     color: red !important;
 }
-.gate-select2{
+
+.gate-select2 {
     height: 50px !important;
     font-size: 1rem;
 }
-.gate-select2 > .select2-selection__rendered{
+
+.gate-select2>.select2-selection__rendered {
     line-height: 45px !important;
 }
 
-#input-plate{
+#input-plate {
     text-transform: uppercase;
 }
 
@@ -102,7 +111,7 @@
 
 /* vehicle list */
 
-#tabela > * {
+#tabela>* {
     color: #CCCCCC !important;
     font-size: large;
 }
@@ -142,6 +151,10 @@
 .form-control:hover .form-control:after {
     background-color: #333340;
     color: #B4B4B4;
+}
+
+.modal-header {
+    border: none !important;
 }
 
 #tabela {
@@ -202,30 +215,30 @@ td>button {
     p {
         display: inline-flex;
     }
-    #exit-form button{
+    #exit-form button {
         width: 100%;
         padding: 1rem 0;
     }
 }
 
-#modal-score i{
+#modal-score i {
     font-size: 1.4rem;
     cursor: pointer;
 }
 
-#modal-score input:checked ~ .goodcheckmark  {
+#modal-score input:checked~.goodcheckmark {
     color: lightgreen;
     font-size: 2rem;
 }
-#modal-score input:checked ~ .badcheckmark  {
+
+#modal-score input:checked~.badcheckmark {
     color: rgb(189, 36, 36);
     font-size: 2rem;
 }
+
 #modal-buttons button {
     padding: 1rem 1.2rem;
 }
-
-
 
 @media only screen and (max-width: 400px) {
     #entrance-exit-container {
@@ -234,7 +247,7 @@ td>button {
     #modal-score {
         display: block !important;
     }
-    #modal-score > label {
+    #modal-score>label {
         display: block;
     }
     #modal-buttons {
@@ -245,7 +258,7 @@ td>button {
         padding: 10px !important;
         margin-top: 16px;
     }
-    #close-modal{
+    #close-modal {
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
