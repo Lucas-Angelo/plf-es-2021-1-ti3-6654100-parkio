@@ -42,6 +42,7 @@ window.addEventListener("load", function () {
                     let gate = vehicle.gate.description;
 
                     var htmlSegment, htmlSegmentSm;
+                    console.log(vehicle)
 
                     htmlSegment =   `<tr>
                                         <td scope="row">${vehicle.plate}</th>
@@ -49,6 +50,7 @@ window.addEventListener("load", function () {
                                         <td><span class="color-cube" style="background-color: ${color.hex};"></span> ${color.name}</td>
                                         <td>${gate}</td>
                                         <td>${vehicle.user_in.name}</td>
+                                        <td>${vehicle.user_out_id?vehicle.user_out.name:'---'}</td>
                                         <td>${created_at_formatada}</td>
                                         <td>${left_at_formatada}</td>
                                         <td>
