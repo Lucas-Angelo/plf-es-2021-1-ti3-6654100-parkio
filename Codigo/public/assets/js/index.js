@@ -19,7 +19,7 @@ $.ajaxSetup({
 function logout(){
     delete_cookie('PARKIO_UIF')
     delete_cookie('X-token')
-    location.href = "./auth"
+    location.href = "/auth"
 }
 
 function getCookie(cname) {
