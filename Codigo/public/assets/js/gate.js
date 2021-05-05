@@ -289,7 +289,10 @@ const handleEntranceFormSubmit = (event) => {
             return false
         },
         error: function(data, status){
-            alert("Erro ao cadastrar");
+            if(data.responseJSON.error == "Vehicle already inside")
+                alert("Veículo já está registrado dentro do estacionamento! ");
+            else
+                alert("Erro ao cadastrar");
             return false
         },
     });

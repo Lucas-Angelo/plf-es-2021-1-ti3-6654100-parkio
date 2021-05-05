@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Services\DestinationService;
 use App\Services\VisitorCategoryService;
 use App\Models\Vehicle;
-
-
-
+use Exception;
 
 class VehicleService
 {
@@ -50,6 +48,13 @@ class VehicleService
     }
 
     public function create($driverName, $plate, int $time,int $destinationId,int $visitorCategoryId, int $gateId, int $userId, $color=null, $model=null, $cpf=null){
+
+        $vPlate = Vehicle::where('plate', trim(strtoupper($plate)))
+                            ->whereNull('left_at')
+                            ->first();
+        if(!empty($vPlate))
+            throw new Exception("Vehicle already inside");
+
 
         $vehicle = new Vehicle();
 
