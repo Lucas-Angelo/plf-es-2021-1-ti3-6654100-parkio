@@ -22,13 +22,17 @@ class VehicleController extends Controller
         $this->validate($request, [
             'plate' => 'nullable|max:8',
             'gate' => 'nullable|exists:gate,id',
-            'user_in' => 'nullable|max:255',
-            'inside' => 'nullable'
+            'user_in' => 'nullable',
+            'inside' => 'nullable',
+            'color' => 'nullable|max:8',
+            'driver_name' => 'nullable|max:255',
+            'in_time' => 'nullable|date_format:Y-m-d',
+            'out_time' => 'nullable|date_format:Y-m-d',
         ]);
 
         try {
             $v = new VehicleService();
-            return $v->getAll($request->plate, $request->gate, $request->user_in, $request->inside, $request->gate_id);
+            return $v->getAll($request->plate, $request->gate, $request->user_in, $request->inside, $request->color, $request->driver_name, $request->in_time, $request->out_time);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
