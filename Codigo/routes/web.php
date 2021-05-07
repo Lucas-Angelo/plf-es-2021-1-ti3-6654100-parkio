@@ -56,6 +56,10 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         $router->put('/vehicles/{id}', 'VehicleController@edit'); // Edit one vehicles entries
         $router->get('/vehicles/search', 'VehicleController@search'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
         $router->post('/vehicles', 'VehicleController@create'); // For saving incoming vehicles
+
+        //delays
+        $router->get('/delay', 'DelayController@getAll'); // Search for all vehicles delays
+        $router->post('/delay', 'DelayController@create'); // Create delay for a specific vehicle
     });
 });
 
