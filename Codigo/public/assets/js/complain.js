@@ -18,7 +18,7 @@ const updateComplainTable = () => {
                                     </td>
                                 </tr>`;
 
-                htmlSegmentSm = `<div class="componente mb-2">
+                htmlSegmentSm = `<div class="complainCard mb-2">
                                         <button class="btn btn-danger" onclick="removerComplain(${complain.id})"><i class="fas fa-trash-alt"></i></button>
                                         <div>
                                             <h6>Placa:</h6>
