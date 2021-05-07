@@ -35,9 +35,9 @@ class DelayController extends Controller {
      */
     public function create(Request $request) {
         $this->validate($request, [
-            'description' => 'required',
-            'time' => 'required',
-            'vehicleId' => 'required',
+            'description' => 'required|max:255',
+            'time' => 'required|min:1',
+            'vehicleId' => 'required|exists:vehicle,id',
         ]);
 
         $ds = new DelayService();
