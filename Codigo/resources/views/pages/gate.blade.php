@@ -66,7 +66,7 @@
                     <div class="button-div text-center mt-5">
                         <button class="btn" type="submit">Cadastrar</button>
                     </div>
-                    
+
                 </form>
             </div>
             <!--  Vehicle Output -->
@@ -77,7 +77,7 @@
                         <input type="text" class="form-control" id="input-plate-exit" required>
                     </div>
                     <div class="button-div text-center mt-5">
-                        <button id="button-att" class="btn" type="submit">Atualizar</button>
+                        <button id="button-att" class="btn" type="submit">Registrar Saída</button>
                     </div>
                 </form>
             </div>
@@ -110,7 +110,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Modal Exit -->
     <div class="modal fade" id="modalNovoUsuario" tabindex="-1" aria-labelledby="modalNovoUsuarioLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-md">
@@ -139,7 +139,7 @@
                             <div class="row">
                                 <div class="col-4">
                                     <button id="reportar" type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#reportModal">Reportar</button>
-                                    
+
                                 </div>
                                 <div class="col-4">
                                     <button id="close-modal" type="button" class="btn btn-secondary w-100 " data-bs-dismiss="modal">Não&nbsp;<small>(cancelar)</small></button>
@@ -200,7 +200,7 @@
             </div>
         </div>
     </div>
-    
+
 
 </div>
 

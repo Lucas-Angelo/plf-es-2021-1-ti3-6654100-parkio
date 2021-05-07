@@ -36,8 +36,13 @@ window.addEventListener("load", function () {
                     let created_at = new Date(vehicle.created_at);
                     let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
 
-                    let left_at = new Date(vehicle.left_at);
-                    let left_at_formatada = ((left_at.getDate().toString().padStart(2, "0"))) + "/" + ((left_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + left_at.getFullYear() + " " + (left_at.getHours().toString().padStart(2, "0")) + ":" + (left_at.getMinutes().toString().padStart(2, "0"));
+                    let left_at_formatada;
+                    if(vehicle.left_at) {
+                        let left_at = new Date(vehicle.left_at);
+                        left_at_formatada = ((left_at.getDate().toString().padStart(2, "0"))) + "/" + ((left_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + left_at.getFullYear() + " " + (left_at.getHours().toString().padStart(2, "0")) + ":" + (left_at.getMinutes().toString().padStart(2, "0"));
+                    } else
+                        left_at_formatada = '---'
+
 
                     let gate = vehicle.gate.description;
 
@@ -49,6 +54,7 @@ window.addEventListener("load", function () {
                                         <td><span class="color-cube" style="background-color: ${color.hex};"></span> ${color.name}</td>
                                         <td>${gate}</td>
                                         <td>${vehicle.user_in.name}</td>
+                                        <td>${vehicle.user_out_id?vehicle.user_out.name:'---'}</td>
                                         <td>${created_at_formatada}</td>
                                         <td>${left_at_formatada}</td>
                                         <td>
