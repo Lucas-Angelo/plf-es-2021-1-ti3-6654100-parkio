@@ -23,12 +23,12 @@ class DelayService {
         else {
             $user = User::find($userId);
             if($user->type == 'A' || $user->type == 'R') {
-                $v->time = $time;
+                $v->time = $v->time + $time;
                 $v->save();
 
                 $d = new Delay();
                 $d->description = strtoupper($description);
-                $d->time = $v->time + $time;
+                $d->time = $time;
                 $d->vehicle_id =  $vehicleId;
                 $d->user_id = $userId;
                 $d->save();
