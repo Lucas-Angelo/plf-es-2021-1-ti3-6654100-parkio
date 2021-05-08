@@ -28,7 +28,7 @@ class DelayService {
 
                 $d = new Delay();
                 $d->description = strtoupper($description);
-                $d->time = $d->time + $time;
+                $d->time = $v->time + $time;
                 $d->vehicle_id =  $vehicleId;
                 $d->user_id = $userId;
                 $d->save();
