@@ -277,11 +277,11 @@ const handleTimeExtenderModal = async (event) => {
         type: "POST",
         data: data,
         success:  function(result, status){
-            if(status==401)
+            if(parseInt(result.status)==401)
                 showToast("Somente administradores e porteiros podem alterar o tempo de um veículo");
-            else if(status==403)
+            else if(parseInt(result.status)==403)
                 showToast("O tempo de permanência deste veículo não pode ser alterado através deste portão");
-            else if(status==409)
+            else if(parseInt(result.status)==409)
                 showToast("O veículo já saiu");
             else
                 showToast(result.message);
