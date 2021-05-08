@@ -338,7 +338,7 @@ function resetExitForm() {
 // Capturar e renderizar veículos de visistantes cadastrados
 async function renderVehicles() {
     let gId = location.pathname.split('/')[2]; //Gate ID
-    document.querySelector('#table-body').innerHTML = '<tr><td colspan="5" class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></td></tr>'
+    document.querySelector('#table-body').innerHTML = '<tr><td colspan="5" class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Carregando...</span></div></td></tr>'
     $.ajax({
         url: `/api/vehicles?inside=1&gate=${gId}`,
         type: "GET",
