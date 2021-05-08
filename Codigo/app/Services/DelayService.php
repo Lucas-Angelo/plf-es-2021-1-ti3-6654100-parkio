@@ -14,15 +14,12 @@ class DelayService {
     public function create($description, $time, int $vehicleId, int $userId, int $gateId) {
         $v = Vehicle::find($vehicleId);
 
-        if($gateId != $v->gate_id) { // Cars can't leave on different gates
-            throw new \Exception("O tempo de permanência deste veículo não pode ser alterado através deste portão!", 403);
-        }
-        else if(!empty($v->left_at)) { // Cars can't leave if they already left
+        if(!empty($v->left_at)) { // Cars can't leave if they already left
             throw new \Exception("O veículo já saiu", 409);
         }
         else {
             $user = User::find($userId);
-            if($user->type == 'A' || $user->type == 'R') {
+            if($user->type == 'A' || $user->type == 'P') {
                 $v->time = $v->time + $time;
                 $v->save();
 
