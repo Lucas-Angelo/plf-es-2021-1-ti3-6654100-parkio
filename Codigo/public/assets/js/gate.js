@@ -1,5 +1,7 @@
 let colors = [];
 var defaultTime = 30;
+let currentPlate = ''
+let currentId = null
 
 const setTime = (time) => {
     document.querySelector('#input-time').value = time;
@@ -90,6 +92,8 @@ const handleExitFormSubmit = async (event) => {
     event.preventDefault();
     
     var vehicle = await search($("#input-plate-exit").val());
+
+    plate = vehicle.plate;
 
     $(".span-plate").html(vehicle.plate);
     $("#vehicleId").val(vehicle.id);
@@ -339,8 +343,8 @@ async function renderVehicles() {
     
                     htmlSegment = `<tr>
                                     <td scope="row">${vehicle.plate}</th>
-                                    <td>${vehicle.model}</td>
-                                    <td><span class="square" style="background-color: ${color.hex};"></span> ${color.name}</td>
+                                    <td>${vehicle.model ? vehicle.model: '---'}</td>
+                                    <td><span class="square" style="background-color: ${color.hex ? color.hex : '---'};"></span> ${color.name ? color.name: '---'}</td>
                                     <td>${created_at_formatada}</td>
                                     <td>
                                     <button disabled class="btn btn-secondary"><i class="fas fa-clock"></i></button>
