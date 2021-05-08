@@ -49,6 +49,27 @@ class ComplainController extends Controller
         );
     }
 
+    public function delete(Request $request, int $id){
+        if(!empty($id)){
+
+            try {
+                $cs = new ComplainService();
+                return response()->json(
+                    $cs->delete($id)
+                );
+            } catch (\Exception $e) {
+                return response()->json([
+                    'error' => $e->getMessage()
+                ], $this->treatCodeError($e));
+            }
+
+        }else return response()->json([
+            'error' => 'missing id', 400
+        ]);
+
+    }
+
+
 
     //
 }
