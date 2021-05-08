@@ -85,7 +85,28 @@ window.addEventListener("load", function() {
         });
         renderVehicles();
     });
+
+    
 });
+
+const handlePlateChange = async (event) =>{
+    let plate = $("#input-plate").val()
+    if(plate.length >= 6) {
+        let v = await search(plate)
+        if(v.last_complain) {
+            console.log(v.last_complain)
+            Swal.fire({
+                title: 'Aviso',
+                html: `Esse veículo possuí uma reclamação anterior:<br><br>
+                        <small>-${v.last_complain.description}</small><br>
+                        <small class='text-muted float-end'>${(new Date(v.last_complain.created_at)).toLocaleString('pt-br')}</small><br>
+                        <br>Deseja continuar ?`,
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            })
+        }
+    }
+}
 
 
 const handleExitFormSubmit = async (event) => {
@@ -148,7 +169,6 @@ const handleComplainModal = (event) => {
 async function dynamicExitModal(vehicleId){
 
     var vehicle = await searchById(vehicleId);
-
     $(".span-plate").html(vehicle.plate);
     $("#vehicleId").val(vehicle.id);
     $("#vehiclePlate").val(vehicle.plate);
@@ -159,14 +179,14 @@ async function dynamicExitModal(vehicleId){
 };
 
 
- function searchById(id){
+function searchById(id){
 
     return new Promise(resolve => {
         $.ajax({
             url: `/api/vehicles/${id}`,
             type: "GET",
             success:  function(result, status){
-                    resolve(result.items);
+                    resolve(result);
             },
             error:  function(err, status){
                 showToast(err);
@@ -176,15 +196,14 @@ async function dynamicExitModal(vehicleId){
     });
 };
 
- function search(plate){
+function search(plate){
 
     return new Promise(resolve => {
         $.ajax({
             url: `/api/vehicles/search?plate=${plate}`,
             type: "GET",
             success:  function(result, status){
-                    resolve(result.items);
-
+                resolve(result);
             },
             error:  function(err, status){
                 showToast(err);

@@ -9,8 +9,7 @@ use App\Services\DestinationService;
 use App\Services\VisitorCategoryService;
 use App\Models\Vehicle;
 use App\Models\User;
-
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class VehicleService
 {
@@ -82,18 +81,19 @@ class VehicleService
       $filtro = strtoupper($plate);
       $vehicle =Vehicle::where('plate','like', "%".$filtro."%")
                     ->orderByDesc('created_at')
+                    ->with('lastComplain')
                     ->first(['id','plate','model','color','created_at','left_at']);
 
-      return ['message'=> 'sucess', 'items'=>$vehicle] ;
+      return $vehicle;
     }
 
     public function get($id){
-      $message = 'sucess';
-      $vehicle = Vehicle::where('id',$id)->first(['id','plate','model','color','created_at','left_at','updated_at']);
-
-      if(empty($vehicle)) $message = "Vehicle not found";
-
-      return ['message'=> $message, 'items'=>$vehicle] ;
+        try {
+            $vehicle = Vehicle::findOrFail($id, ['id','plate','model','color','created_at','left_at','updated_at']);
+            return $vehicle;
+        } catch (ModelNotFoundException $e){
+            throw new ModelNotFoundException("Vehicle not found", 404);
+        }
     }
 
     /**
