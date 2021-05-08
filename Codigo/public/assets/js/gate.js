@@ -94,7 +94,6 @@ const handlePlateChange = async (event) =>{
     if(plate.length >= 6) {
         let v = await search(plate)
         if(v.last_complain) {
-            console.log(v.last_complain)
             Swal.fire({
                 title: 'Aviso',
                 html: `Esse veículo possuí uma reclamação anterior:<br><br>
