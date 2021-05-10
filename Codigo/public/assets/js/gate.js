@@ -93,12 +93,15 @@ const handlePlateChange = async (event) =>{
     let plate = $("#input-plate").val()
     if(plate.length >= 6) {
         let v = await search(plate)
-        if(v.last_complain) {
+        if(v.complaints) {
+            let complaints = ''
+            v.complaints.forEach(function (comp) {
+                complaints += `<small>-${comp.description}</small><br><small class='text-muted float-end'>${(new Date(comp.created_at)).toLocaleString('pt-br')}</small><br>`
+            })
             Swal.fire({
                 title: 'Aviso',
-                html: `Esse veículo possuí uma reclamação anterior:<br><br>
-                        <small>-${v.last_complain.description}</small><br>
-                        <small class='text-muted float-end'>${(new Date(v.last_complain.created_at)).toLocaleString('pt-br')}</small><br>
+                html: `Esse veículo possuí ${v.complaints.length > 1 ? 'reclamações anteriores' : 'uma reclamação anterior'} :<br><br>
+                        ${complaints}
                         <br>Deseja continuar ?`,
                 icon: 'warning',
                 confirmButtonText: 'OK'
