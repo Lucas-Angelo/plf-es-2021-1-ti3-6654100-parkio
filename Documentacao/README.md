@@ -118,6 +118,7 @@ Link para visualização dos wireframes no adobe XD: https://xd.adobe.com/view/7
 11 | A administração deverá possuir um relatório delimitado por um filtro de período de tempo, porteiro e/ou placa do veículo. | Informações: O relatório irá conter todas as informações que foram cadastradas na entrada de cada veículo e a quantidade de veículos visitantes cadastradas. | Baixa | Alta
 12 | O porteiro deverá reportar um veículo visitante, caso ocorra algum problema. | Caso algum veículo reportado volte a tentar entrar no estacionamento, deve aparecer um aviso de bloqueio. | Média | Média
 13 | O ronda poderá editar a cor, a placa e o modelo do veículo visitante. | Informações: Placa, Modelo e Cor. | Baixa | Baixa
+14 | O síndico poderá visualizar os veículos designados para o seu bloco. | Média | Baixa
 
 
 **3.4 - Diagrama de Entidade-Relacionamento** A fazer
