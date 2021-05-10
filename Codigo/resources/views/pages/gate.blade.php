@@ -3,8 +3,10 @@
 @section('extraassets')
     <link rel="stylesheet" href="{{ url('/assets/css/gate.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url('/assets/css/select2.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('/assets/css/sweetalert2dark.min.css') }}" type="text/css">
     <script src="{{ url('assets/js/gate.js') }}"></script>
     <script src="{{ url('assets/js/select2.min.js') }}"></script>
+    <script src="{{ url('assets/js/sweetalert2.min.js') }}"></script>
 @endsection
 
 @section('pagename')
@@ -29,7 +31,7 @@
                 <form onSubmit="handleEntranceFormSubmit(event)" class="row" id="entrance-form">
                     <div class="mb-3 col-12 col-md-4 col-lg-2">
                         <label for="input-plate" class="form-label">Placa <span class="required">*</span></label>
-                        <input minlength="7" maxlength="8" type="text" class="form-control" id="input-plate" required>
+                        <input minlength="7" maxlength="8" type="text" class="form-control" id="input-plate" required onblur="handlePlateChange(event)">
                     </div>
                     <div class="mb-3 col-12 col-md-8 col-lg-6">
                         <label for="input-name" class="form-label">Nome do condutor <span class="required">*</span></label>

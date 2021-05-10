@@ -1,5 +1,7 @@
 let colors = [];
 var defaultTime = 30;
+let currentPlate = ''
+let currentId = null
 
 const setTime = (time) => {
     document.querySelector('#input-time').value = time;
@@ -83,13 +85,38 @@ window.addEventListener("load", function() {
         });
         renderVehicles();
     });
+
+    
 });
+
+const handlePlateChange = async (event) =>{
+    let plate = $("#input-plate").val()
+    if(plate.length >= 6) {
+        let v = await search(plate)
+        if(v.complaints) {
+            let complaints = ''
+            v.complaints.forEach(function (comp) {
+                complaints += `<small>-${comp.description}</small><br><small class='text-muted float-end'>${(new Date(comp.created_at)).toLocaleString('pt-br')}</small><br>`
+            })
+            Swal.fire({
+                title: 'Aviso',
+                html: `Esse veículo possuí ${v.complaints.length > 1 ? 'reclamações anteriores' : 'uma reclamação anterior'} :<br><br>
+                        ${complaints}
+                        <br>Deseja continuar ?`,
+                icon: 'warning',
+                confirmButtonText: 'OK'
+            })
+        }
+    }
+}
 
 
 const handleExitFormSubmit = async (event) => {
     event.preventDefault();
 
     var vehicle = await search($("#input-plate-exit").val());
+
+    plate = vehicle.plate;
 
     $(".span-plate").html(vehicle.plate);
     $("#vehicleId").val(vehicle.id);
@@ -144,7 +171,6 @@ const handleComplainModal = (event) => {
 async function dynamicExitModal(vehicleId){
 
     var vehicle = await searchById(vehicleId);
-
     $(".span-plate").html(vehicle.plate);
     $("#vehicleId").val(vehicle.id);
     $("#vehiclePlate").val(vehicle.plate);
@@ -173,7 +199,7 @@ function searchById(id){
             url: `/api/vehicles/${id}`,
             type: "GET",
             success:  function(result, status){
-                    resolve(result.items);
+                    resolve(result);
             },
             error:  function(err, status){
                 showToast(err);
@@ -183,15 +209,14 @@ function searchById(id){
     });
 };
 
- function search(plate){
+function search(plate){
 
     return new Promise(resolve => {
         $.ajax({
             url: `/api/vehicles/search?plate=${plate}`,
             type: "GET",
             success:  function(result, status){
-                    resolve(result.items);
-
+                resolve(result);
             },
             error:  function(err, status){
                 showToast(err);
@@ -336,7 +361,10 @@ const handleEntranceFormSubmit = (event) => {
             return false
         },
         error: function(data, status){
-            alert("Erro ao cadastrar");
+            if(data.responseJSON.error == "Vehicle already inside")
+                alert("Veículo já está registrado dentro do estacionamento! ");
+            else
+                alert("Erro ao cadastrar");
             return false
         },
     });
@@ -359,7 +387,7 @@ function resetExitForm() {
 // Capturar e renderizar veículos de visistantes cadastrados
 async function renderVehicles() {
     let gId = location.pathname.split('/')[2]; //Gate ID
-    document.querySelector('#table-body').innerHTML = '<tr><td colspan="5" class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></td></tr>'
+    document.querySelector('#table-body').innerHTML = '<tr><td colspan="5" class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Carregando...</span></div></td></tr>'
     $.ajax({
         url: `/api/vehicles?inside=1&gate=${gId}`,
         type: "GET",
@@ -383,8 +411,8 @@ async function renderVehicles() {
 
                     htmlSegment = `<tr>
                                     <td scope="row">${vehicle.plate}</th>
-                                    <td>${vehicle.model}</td>
-                                    <td><span class="square" style="background-color: ${color.hex};"></span> ${color.name}</td>
+                                    <td>${vehicle.model ? vehicle.model: '---'}</td>
+                                    <td><span class="square" style="background-color: ${color.hex ? color.hex : '---'};"></span> ${color.name ? color.name: '---'}</td>
                                     <td>${created_at_formatada}</td>
                                     <td>
                                     <button class="btn btn-secondary" onclick="dynamicTimeExtenderModal(${vehicle.id})"><i class="fas fa-clock"></i></button>
