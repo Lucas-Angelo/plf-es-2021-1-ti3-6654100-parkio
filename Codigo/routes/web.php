@@ -75,11 +75,6 @@ $router->group(['middleware' => ['web.auth']], function() use ($router) {
         return view('pages.menu');
     });
 
-
-    $router->get('/test', function () use ($router) { // used in Browser URL
-        return view('pages.test'); // View Name (Same name as in resources/views), custom parameters
-    });
-
     $router->get('/gate/{id}', function () use ($router) {
         return view('pages.gate');
     });
