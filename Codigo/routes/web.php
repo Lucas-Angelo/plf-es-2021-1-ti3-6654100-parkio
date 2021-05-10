@@ -37,6 +37,7 @@ $router->group(['prefix' => '/api'], function () use ($router) {
 
         //complains
         $router->post('/complain', 'ComplainController@create');
+        $router->delete('/complain/{id}', 'ComplainController@delete');
         $router->get('/complain', 'ComplainController@getAll');
 
         //gates

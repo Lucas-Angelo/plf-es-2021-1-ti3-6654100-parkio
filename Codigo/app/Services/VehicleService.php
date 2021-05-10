@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Services\DestinationService;
 use App\Services\VisitorCategoryService;
 use App\Models\Vehicle;
-
+use App\Models\User;
 
 
 
@@ -82,7 +82,7 @@ class VehicleService
 
     public function get($id){
       $message = 'sucess';
-      $vehicle = Vehicle::where('id',$id)->first(['id','plate','model','color','created_at','left_at']);
+      $vehicle = Vehicle::where('id',$id)->first(['id','plate','model','color','created_at','left_at','updated_at']);
 
       if(empty($vehicle)) $message = "Vehicle not found";
 
@@ -120,7 +120,22 @@ class VehicleService
                     }
                 }
             } else if(!empty($plate) || !empty($model) || !empty($color)){
-                // Code for 'Ronda' edit function, yet to be done
+                $user = User::find($userId);
+                if($user->type == 'A' || $user->type == 'R'){
+
+                    $v->plate = (!empty($plate)) ? $plate : $v->plate;
+                    $v->color = (!empty($color)) ? $color : $v->color;
+                    $v->model = (!empty($model)) ? $model : $v->model;
+                    if($v->save()) {
+                        return ['updated' => true];
+                    } else {
+                        throw new \Exception("Update error!", 500);
+                    }
+
+                }else{
+                    throw new \Exception("Forbidden!", 403);
+                }
+
             } else {
                 throw new \Exception("No Action Done", 405);
             }
@@ -128,6 +143,8 @@ class VehicleService
             throw new \Exception("Vehicle Not Found", 404);
         }
     }
+
+
 
 
 

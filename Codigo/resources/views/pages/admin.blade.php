@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="{{ url('/assets/css/visitorCategory.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url('/assets/css/admin.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url('/assets/css/entrace.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('/assets/css/complain.css') }}" type="text/css">
 
 @endsection
 
