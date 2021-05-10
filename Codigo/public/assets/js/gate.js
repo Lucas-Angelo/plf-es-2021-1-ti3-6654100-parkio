@@ -34,7 +34,7 @@ window.addEventListener("load", function() {
             console.log(err)
         },
     });
-    
+
     $(".select2").select2({
         selectionCssClass: "gate-select2",
         ajax: {
@@ -88,7 +88,7 @@ window.addEventListener("load", function() {
 
 const handleExitFormSubmit = async (event) => {
     event.preventDefault();
-    
+
     var vehicle = await search($("#input-plate-exit").val());
 
     $(".span-plate").html(vehicle.plate);
@@ -151,11 +151,22 @@ async function dynamicExitModal(vehicleId){
 
     const modal = new bootstrap.Modal(document.getElementById('modalNovoUsuario'));
     modal.toggle();
-    
+
 };
 
+async function dynamicTimeExtenderModal(vehicleId) {
+    var vehicle = await searchById(vehicleId);
 
- function searchById(id){
+    $(".span-plate").html(vehicle.plate);
+    $("#inputDelayVehicleId").val(vehicle.id);
+
+    const modal = new bootstrap.Modal(document.getElementById('modalTimeExtender'));
+    modal.toggle();
+
+}
+
+
+function searchById(id){
 
     return new Promise(resolve => {
         $.ajax({
@@ -226,7 +237,7 @@ const handleExitModal = async (event) => {
                 error: function(err, status){
                     if(err.responseJSON.error == "Vehicle can't go out on this gate!")
                         document.getElementById("toast-msg").innerHTML = "O Veículo entrou por outra portaria.";
-                    else 
+                    else
                         document.getElementById("toast-msg").innerHTML = "Ocorreu um erro.";
                     resetExitForm();
                     console.log(err);
@@ -243,10 +254,46 @@ const handleExitModal = async (event) => {
         resetExitForm();
     }
 
-    
-
-        
 };
+
+const handleTimeExtenderModal = async (event) => {
+    event.preventDefault();
+
+    const description = $("#inputDelayDescription").val();
+    const vehicleId =  $("#inputDelayVehicleId").val();
+    const time = $("#inputDelayTime").val();
+
+    const gateId = location.pathname.split('/')[2]; //Gate ID
+
+    const data = {
+        description,
+        time,
+        vehicleId,
+        gateId,
+    }
+
+    $.ajax({
+        url: "/api/delay",
+        type: "POST",
+        data: data,
+        success:  function(result, status){
+            showToast(result.message);
+
+            var myModal = $("#modalTimeExtender");
+            myModal.find("#inputDelayTime").val("");
+            myModal.find("#inputDelayDescription").val("");
+            myModal.modal('hide');
+            renderVehicles();
+
+        },
+        error:  function(err, status){
+            showToast("O veículo já saiu");
+            renderVehicles();
+        },
+
+    });
+
+}
 
 const handleEntranceFormSubmit = (event) => {
     event.preventDefault();
@@ -306,7 +353,7 @@ function resetExitForm() {
         return new bootstrap.Toast(toastEl);
     });
     toastList.forEach((toast) => toast.show());
-   
+
 }
 
 // Capturar e renderizar veículos de visistantes cadastrados
@@ -331,23 +378,23 @@ async function renderVehicles() {
                     let plate = vehicle.plate;
                     let created_at = new Date(vehicle.created_at);
                     let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
-    
+
                     var htmlSegment, htmlSegmentSm;
-    
+
                     htmlSegment = `<tr>
                                     <td scope="row">${vehicle.plate}</th>
                                     <td>${vehicle.model}</td>
                                     <td><span class="square" style="background-color: ${color.hex};"></span> ${color.name}</td>
                                     <td>${created_at_formatada}</td>
                                     <td>
-                                    <button disabled class="btn btn-secondary"><i class="fas fa-clock"></i></button>
+                                    <button class="btn btn-secondary" onclick="dynamicTimeExtenderModal(${vehicle.id})"><i class="fas fa-clock"></i></button>
                                     <button class="btn btn-danger" onclick="dynamicExitModal(${vehicle.id})" ><i class="fas fa-sign-out-alt "></i></button>
                                     </td>
                                 </tr>`;
-    
+
                     htmlSegmentSm = `<div class="componente">
                                   <button class="btn btn-danger" onclick="dynamicExitModal(${vehicle.id})" ><i class="fas fa-sign-out-alt"></i></button>
-                                  <button disabled class="btn btn-secondary"><i class="fas fa-clock "></i></button>
+                                  <button class="btn btn-secondary" onclick="dynamicTimeExtenderModal(${vehicle.id})"><i class="fas fa-clock "></i></button>
                                     <div class="placa">
                                         <h6>Placa:</h6>
                                         <p>${vehicle.plate}</p>
@@ -366,7 +413,7 @@ async function renderVehicles() {
                                         <p>${created_at_formatada}</p>
                                     </div>
                                 </div>`;
-    
+
                     html += htmlSegment;
                     htmlSm += htmlSegmentSm;
                 });
@@ -382,9 +429,9 @@ async function renderVehicles() {
                 document.querySelector('#table-body').innerHTML = '<tr><td colspan="5" class="text-center">Nenhum visitante registado </td></tr>'
                 document.querySelector('#lista-veiculo').innerHTML = '<div class="componente"> Nenhum visitante registado </div>'
             }
-            
 
-            
+
+
         },
         error: function(err, status){
             console.error('Failed retrieving information', err);

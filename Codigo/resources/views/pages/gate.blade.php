@@ -156,7 +156,6 @@
     </div>
 
 <!-- Modal Report -->
-
     <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content">
@@ -165,7 +164,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form onSubmit="handleComplainModal(event)" class="row align-items-center justify-content-center" id="report-form" novalidate>
+                    <form onSubmit="dynamicTimeExtenderModal(event)" class="row align-items-center justify-content-center" id="report-form" novalidate>
 
                         <div class="mb-3 col-12 col-lg-12 d-none">
                             <label for="vehicleId" class="form-label">Id vehicle</label>
@@ -201,6 +200,44 @@
         </div>
     </div>
 
+    <!-- Modal TimeExtender -->
+    <div class="modal fade" id="modalTimeExtender" tabindex="-1" aria-labelledby="modalTimeExtenderLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+                <div class="modal-header justify-content-left border-0">
+                    <h5 class="modal-title" id="modalTimeExtenderLabel">Adiar permanência do veículo <span class="span-plate"></span></h5>
+                </div>
+                <div class="modal-body justify-content-center">
+                    <form onSubmit="handleTimeExtenderModal(event)" id="exit-modal" class="justify-content-center">
+                        <div class="mb-5">
+                            <div class="form-group mb-2 d-none">
+                                <label for="inputDelayVehicleId">VehicleId</label>
+                                <input class="form-control" id="inputDelayVehicleId" aria-describedby="inputDelayVehicleId">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="inputDelayTime">Tempo <span class="required">*</span></label>
+                                <input type="number" class="form-control" id="inputDelayTime" aria-describedby="inputDelayTime" placeholder="Informe o tempo em minutos" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputDelayDescription">Motivo <span class="required">*</span></label>
+                                <textarea class="form-control" id="inputDelayDescription" aria-describedby="inputDelayDescription" placeholder="Informe o motivo para extender o tempo de permanência desse veículo" required></textarea>
+                            </div>
+                        </div>
+                        <div id="modal-buttons" class="mb-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <button id="close-modal" type="button" class="btn btn-secondary w-100 " data-bs-dismiss="modal">Cancelar</button>
+                                </div>
+                                <div class="col-6">
+                                    <button id="reportar" type="submit" class="btn btn-primary w-100" >Adiar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
