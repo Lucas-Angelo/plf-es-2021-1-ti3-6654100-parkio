@@ -36,9 +36,9 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
 
         //complains
-        $router->post('/complain', 'ComplainController@create');
-        $router->delete('/complain/{id}', 'ComplainController@delete');
-        $router->get('/complain', 'ComplainController@getAll');
+        $router->post('/complain', 'ComplainController@create'); // Create a complain
+        $router->delete('/complain/{id}', 'ComplainController@delete'); //Delete a complain
+        $router->get('/complain', 'ComplainController@getAll');// Get all the complains
 
         //gates
         $router->get('/gate', 'GateController@getAll'); // Search for all gates

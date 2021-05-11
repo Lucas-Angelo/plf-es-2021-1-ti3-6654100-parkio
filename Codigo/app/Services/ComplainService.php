@@ -69,8 +69,14 @@ class ComplainService
         return [  'deleted' => true  ];
     }
 
-    public function getAll(){
+    public function getAll($plate = null){
         $c = new Complain();
+
+        //Vehicle plate filter
+        if(!empty($plate)){
+        $c = $c->where('plate','like', '%'.$plate.'%');
+        }
+            
         return $c
             ->orderByDesc('created_at')
             ->paginate();

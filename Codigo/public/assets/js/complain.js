@@ -1,6 +1,16 @@
 const updateComplainTable = () => {
+    let filter = '';
+
+    const plate = $('#txtPlateFilter').val();
+    $('#table-body').innerHTML = '<tr><td colspan="9" class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Carregando...</span></div></td></tr>';
+    $('#lista-veiculo').innerHTML = '';
+
+    if (plate) filter += `?plate=${plate}`;
+
+
+
     $.ajax({
-        url: "/api/complain",
+        url: "/api/complain" + filter,
         type: "GET",
         success: function(jsonRes) {
             const result = jsonRes.data;
@@ -74,4 +84,12 @@ function removerComplain(id) {
     }
 }
 
-window.addEventListener("load", updateComplainTable)
+
+
+
+window.addEventListener("load", function() {
+    updateComplainTable();
+    document.getElementById('btnFilterPlate').addEventListener("click", updateComplainTable);
+
+
+})

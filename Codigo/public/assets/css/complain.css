@@ -1,3 +1,7 @@
+#txtPlateFilter:not(:placeholder-shown) {
+    text-transform: uppercase;
+}
+
 @media (max-width: 800px) {
     .complainCard {
         margin-left: 1rem;
