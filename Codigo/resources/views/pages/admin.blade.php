@@ -138,7 +138,7 @@
                                 
                                     <div class="col d-inline">
                                         <label for="txtPlateFilter">Placa</label>
-                                        <input type="text" class="form-control" id="txtPlateFilter" placeholder="Placa" maxlength="8">
+                                        <input type="text" onchange="updateComplainTable()" class="form-control" id="txtPlateFilter" placeholder="Placa" maxlength="8">
                                     </div>
                                 
                                     <div class="col d-inline">
