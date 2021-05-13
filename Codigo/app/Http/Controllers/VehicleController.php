@@ -21,6 +21,7 @@ class VehicleController extends Controller
     public function getAll(Request $request){
         $this->validate($request, [
             'plate' => 'nullable|max:8',
+            'model' => 'nullable',
             'gate' => 'nullable|exists:gate,id',
             'user_in' => 'nullable',
             'inside' => 'nullable',
@@ -32,7 +33,7 @@ class VehicleController extends Controller
 
         try {
             $v = new VehicleService();
-            return $v->getAll($request->plate, $request->gate, $request->user_in, $request->inside, $request->color, $request->driver_name, $request->in_time, $request->out_time);
+            return $v->getAll($request->plate, $request->model, $request->gate, $request->user_in, $request->inside, $request->color, $request->driver_name, $request->in_time, $request->out_time);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
@@ -81,7 +82,7 @@ class VehicleController extends Controller
 
     public function get(Request $request, int $id)
     {
-  
+
       $vehicle = new VehicleService();
 
       return response()->json(

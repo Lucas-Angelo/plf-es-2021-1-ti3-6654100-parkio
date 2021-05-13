@@ -1,22 +1,53 @@
 window.addEventListener("load", function () {
     let colors = []
 
-    document.getElementById('btnFilter').addEventListener("click", renderVehicles);
+    document.getElementById('btnFilter').addEventListener("click", (evt) => renderVehicles("normal", evt));
+    document.getElementById('advancedBtnFilter').addEventListener("click", (evt) => renderVehicles("advanced", evt));
 
     // Capturar e renderizar veículos de visistantes cadastrados
-    function renderVehicles() {
+    function renderVehicles(search, evt) {
         let filter = '';
+        var plate, gate, user_in;
+        var model, color, driver;
 
-        const plate = document.getElementById('txtPlateFilter').value;
-        const gate = document.getElementById('gate').value;
-        const user_in = document.getElementById('user_in').value;
+        if(search=="normal") {
+            plate = document.getElementById('txtPlateFilter').value;
+            gate = document.getElementById('gate').value;
+            user_in = document.getElementById('user_in').value;
 
-        if(plate)
-            filter += `&plate=${plate}`
-        if(gate!=0)
-            filter += `&gate=${gate}`
-        if(user_in!=0)
-            filter += `&user_in=${user_in}`
+            if(plate)
+                filter += `&plate=${plate}`
+            if(gate!=0)
+                filter += `&gate=${gate}`
+            if(user_in!=0)
+                filter += `&user_in=${user_in}`
+        } else {
+            plate = document.getElementById('advancedInputPlate').value;
+            model = document.getElementById('advancedInputModel').value;
+            color = document.getElementById('input-color').value;
+            driver = document.getElementById('advancedInputName').value;
+            user_in = document.getElementById('advancedInputNameUserIn').value;
+            gate = document.getElementById('advancedInputGate').value;
+            dateIn = document.getElementById('advancedInputDateIn').value;
+            dateOut = document.getElementById('advancedInputDateOut').value;
+
+            if(plate)
+                filter += `&plate=${plate}`
+            if(model)
+                filter += `&model=${model}`
+            if(color!=0)
+                filter += `&color=${color}`
+            if(driver)
+                filter += `&driver_name=${driver}`
+            if(user_in!=0)
+                filter += `&user_in=${user_in}`
+            if(gate!=0)
+                filter += `&gate=${gate}`
+            if(dateIn)
+                filter += `&in_time=${dateIn}`
+            if(dateOut)
+                filter += `&out_time=${dateOut}`
+        }
 
         $.ajax({
             url: '/api/vehicles?1=1'+filter,
@@ -125,6 +156,8 @@ window.addEventListener("load", function () {
                 let container;
                 container = document.querySelector('#gate');
                 container.innerHTML = html;
+                container = document.querySelector("#advancedInputGate");
+                container.innerHTML = html;
             },
             error: function(err){
                 console.error('Failed retrieving information', err);
@@ -150,6 +183,8 @@ window.addEventListener("load", function () {
                 let container;
                 container = document.querySelector('#user_in');
                 container.innerHTML = html;
+                container = document.querySelector("#advancedInputNameUserIn");
+                container.innerHTML = html;
             },
             error: function(err){
                 console.error('Failed retrieving information', err);
@@ -162,8 +197,44 @@ window.addEventListener("load", function () {
         renderVehicles();
     });
 
+    $.getJSON("/assets/json/colors.json", function(json) {
+        colors = json;
+        let coloursArray = [];
+        json.forEach((item, index) => {
+            coloursArray.push({
+                id: item.hex,
+                text: item.name,
+            });
+        });
+        $('.gate-inputcolor').select2({
+            selectionCssClass: "gate-select2",
+            templateResult: (color) => {
+                var $color = $(
+                    '<span> <span class="square" style="background-color: '+color.id+'"></span> ' + color.text +' </span>'
+                );
+                return $color;
+            },
+            data: coloursArray
+        });
+    });
+
     renderVehicles();
     renderGates();
     renderUser_in();
 });
+
+function openNav() {
+    var largura = $(window).width();
+    if(largura>800) {
+        document.getElementById("mySidenav").style.width = "275px";
+        document.getElementById("main").style.marginRight = "275px";
+    } else {
+        document.getElementById("mySidenav").style.width = "100vw";
+    }
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginRight = "0";
+}
 

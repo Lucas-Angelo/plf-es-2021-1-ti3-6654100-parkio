@@ -20,7 +20,7 @@ class VehicleService
      * @param String|null $plate Vehicle's Plate Filter
      * @return Collection
      */
-    public function getAll($plate = null, $gate = null, $user = null, $inside = null, $color = null, $driverName = null, $inTime=null, $outTime=null){
+    public function getAll($plate = null, $model = null, $gate = null, $user = null, $inside = null, $color = null, $driverName = null, $inTime=null, $outTime=null){
         $v = new Vehicle();
         // Filters Begin
 
@@ -38,9 +38,12 @@ class VehicleService
             });
         }
         //Color Filter
-        
+
         if(!empty($color))
             $v = $v->where('color',$color);
+        //Model Filter
+        if(!empty($model))
+            $v = $v->where('model','LIKE','%'.$model.'%');
         //Driver Filter
         if(!empty($driverName))
             $v = $v->where('driver_name','LIKE','%'.$driverName.'%');
@@ -57,8 +60,8 @@ class VehicleService
         }
 
         // End Filters
-            
-        
+
+
         return $v
                 ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
                 ->orderByDesc('created_at')
