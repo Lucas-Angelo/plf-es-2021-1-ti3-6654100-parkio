@@ -1,5 +1,69 @@
 var colors = []
 
+window.addEventListener("load", function () {
+
+    document.getElementById('btnFilter').addEventListener("click", renderVehicles);
+    
+    renderVehicles();
+    renderGates();
+    renderUser_in();
+});
+
+$.getJSON("/assets/json/colors.json", function(json) {
+    colors = json;
+    renderVehicles();
+});
+
+function renderGates() {
+    $.ajax({
+        url: '/api/gate',
+        type: "GET",
+        success: function(result){
+            let html = `<option value="0" selected>Selecione</option>`;
+
+            result.forEach(gate => {
+                var htmlSegment;
+
+                htmlSegment =   `<option value="${gate.id}">${gate.description}</option>`;
+
+                html += htmlSegment;
+            });
+
+            let container;
+            container = document.querySelector('#gate');
+            container.innerHTML = html;
+        },
+        error: function(err){
+            console.error('Failed retrieving information', err);
+        },
+    });
+}
+
+function renderUser_in () {
+    $.ajax({
+        url: '/api/users/search?type=p',
+        type: "GET",
+        success: function(result){
+            let html = `<option value="0" selected>Selecione</option>`;
+
+            result.data.forEach(user_in => {
+                var htmlSegment;
+
+                htmlSegment =   `<option value="${user_in.id}">${user_in.name}</option>`;
+
+                html += htmlSegment;
+            });
+
+            let container;
+            container = document.querySelector('#user_in');
+            container.innerHTML = html;
+        },
+        error: function(err){
+            console.error('Failed retrieving information', err);
+        },
+    });
+}
+
 function showModal(id, plate, model, color){
     const colorOptions = colors.reduce((div, colorNow)=>{
         return div.concat(`
@@ -191,90 +255,3 @@ function renderVehicles() {
         },
     });
 }
-
-function renderGates() {
-    $.ajax({
-        url: '/api/gate',
-        type: "GET",
-        success: function(result){
-            let html = `<option value="0" selected>Selecione</option>`;
-
-            result.forEach(gate => {
-                var htmlSegment;
-
-                htmlSegment =   `<option value="${gate.id}">${gate.description}</option>`;
-
-                html += htmlSegment;
-            });
-
-            let container;
-            container = document.querySelector('#gate');
-            container.innerHTML = html;
-        },
-        error: function(err){
-            console.error('Failed retrieving information', err);
-        },
-    });
-}
-
-function renderUser_in () {
-    $.ajax({
-        url: '/api/users/search?type=p',
-        type: "GET",
-        success: function(result){
-            let html = `<option value="0" selected>Selecione</option>`;
-
-            result.data.forEach(user_in => {
-                var htmlSegment;
-
-                htmlSegment =   `<option value="${user_in.id}">${user_in.name}</option>`;
-
-                html += htmlSegment;
-            });
-
-            let container;
-            container = document.querySelector('#user_in');
-            container.innerHTML = html;
-        },
-        error: function(err){
-            console.error('Failed retrieving information', err);
-        },
-    });
-}
-
-window.addEventListener("load", function () {
-
-    document.getElementById('btnFilter').addEventListener("click", renderVehicles);
-/*
-    function showModal(id, plate, model, color){
-        
-    }*/
-    
-    $.getJSON("/assets/json/colors.json", function(json) {
-        colors = json;
-        let coloursArray = [];
-        json.forEach((item, index) => {
-            coloursArray.push({
-                id: item.hex,
-                text: item.name,
-            });
-        });
-
-        $('#vehiclelist-input-color').select2({
-            selectionCssClass: "gate-select2",
-            templateResult: (color) => {
-                var $color = $(
-                    '<span> <span class="square" style="background-color: '+color.id+'"></span> ' + color.text +' </span>'
-                );
-                return $color;
-            },
-            data: coloursArray
-        });
-        renderVehicles();
-    });
-
-    renderVehicles();
-    renderGates();
-    renderUser_in();
-});
-
