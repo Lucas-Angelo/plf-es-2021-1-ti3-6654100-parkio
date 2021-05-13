@@ -23,40 +23,39 @@ $router->group(['prefix' => '/api'], function () use ($router) {
 
     $router->group(['middleware' => ['jwt.auth']], function () use ($router) {
         //users
-        $router->post('/users', 'UserController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
-        $router->get('/users', 'UserController@getAll');
-        $router->get('/users/search', 'UserController@search');
-        $router->delete('/users/{id}', 'UserController@delete');
-
-        //vehicles
-        $router->get('/vehicles', 'VehicleController@getAll'); // Search for all vehicles entries
-        $router->put('/vehicles/{id}', 'VehicleController@edit'); // Edit one vehicles entries
-        $router->get('/vehicles/search', 'VehicleController@search'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
-        $router->get('/vehicles/{id}', 'VehicleController@get'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
-        $router->post('/vehicles/save', 'VehicleController@create'); // For saving incoming vehicles
+        $router->post('/users', ['uses' => 'UserController@create', 'auth' => ['A']]); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+        $router->get('/users', ['uses' => 'UserController@getAll', 'auth' => ['S','R','A']]);
+        $router->get('/users/search', ['uses' => 'UserController@search', 'auth' => ['S','R','A']]);
+        $router->delete('/users/{id}', ['uses' => 'UserController@delete', 'auth' => ['A']]);
 
         //complains
-        $router->post('/complain', 'ComplainController@create');
-        $router->delete('/complain/{id}', 'ComplainController@delete');
-        $router->get('/complain', 'ComplainController@getAll');
+        $router->post('/complain', ['uses' => 'ComplainController@create', 'auth' => ['A', 'P']]);
+        $router->delete('/complain/{id}', ['uses' => 'ComplainController@delete', 'auth' => ['A']]);
+        $router->get('/complain', ['uses' => 'ComplainController@getAll', 'auth' => ['A', 'P']]);
 
         //gates
-        $router->get('/gate', 'GateController@getAll'); // Search for all gates
-        $router->post('/gate', 'GateController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
-        $router->delete('/gate/{id}', 'GateController@delete');
-        $router->get('/gate/{id}', 'GateController@search'); // Find and return a gate
-        $router->put('/gate', 'GateController@update'); // Update a gate
+        $router->get('/gate', ['uses' => 'GateController@getAll', 'auth' => ['S','R','A', 'P']]); // Search for all gates
+        $router->post('/gate', ['uses' => 'GateController@create', 'auth' => ['A']]); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+        $router->delete('/gate/{id}', ['uses' => 'GateController@delete', 'auth' => ['A']]);
+        $router->get('/gate/{id}', ['uses' => 'GateController@search', 'auth' => ['A']]); // Find and return a gate
+        $router->put('/gate', ['uses' => 'GateController@update', 'auth' => ['A']]); // Update a gate
 
-        $router->get('/destinations', 'DestinationController@getAll');
+        $router->get('/destinations', ['uses' => 'DestinationController@getAll', 'auth' => ['A', 'P']]);
 
-        $router->get('/visitorCategory', 'VisitorCategoryController@getAll'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
-        $router->post('/visitorCategory', 'VisitorCategoryController@create'); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
-        $router->delete('/visitorCategory/{id}', 'VisitorCategoryController@delete');
+        $router->get('/visitorCategory', ['uses' => 'VisitorCategoryController@getAll', 'auth' => ['A', 'P']]); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+        $router->post('/visitorCategory', ['uses' => 'VisitorCategoryController@create', 'auth' => ['A']]); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
+        $router->delete('/visitorCategory/{id}', ['uses' => 'VisitorCategoryController@delete', 'auth' => ['A']]);
 
-        $router->get('/vehicles', 'VehicleController@getAll'); // Search for all vehicles entries
-        $router->put('/vehicles/{id}', 'VehicleController@edit'); // Edit one vehicles entries
-        $router->get('/vehicles/search', 'VehicleController@search'); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
-        $router->post('/vehicles', 'VehicleController@create'); // For saving incoming vehicles
+        //vehicles
+        $router->get('/vehicles', ['uses' => 'VehicleController@getAll', 'auth' => ['S','R','A', 'P']]); // Search for all vehicles entries
+        $router->put('/vehicles/{id}', ['uses' => 'VehicleController@edit', 'auth' => ['R','A']]); // Edit one vehicles entries
+        $router->get('/vehicles/search', ['uses' => 'VehicleController@search', 'auth' => ['A', 'P']]); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
+        $router->get('/vehicles/{id}', ['uses' => 'VehicleController@get', 'auth' => ['S','A', 'P']]); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
+        $router->post('/vehicles', ['uses' => 'VehicleController@create', 'auth' => ['S','R','A', 'P']]); // For saving incoming vehicles
+
+        //delays
+        $router->get('/delay', ['uses' => 'DelayController@getAll', 'auth' => ['A', 'P']]); // Search for all vehicles delays
+        $router->post('/delay', ['uses' => 'DelayController@create', 'auth' => ['A', 'P']]); // Create delay for a specific vehicle
     });
 });
 
@@ -74,11 +73,6 @@ $router->get('/auth', function () use ($router) {
 $router->group(['middleware' => ['web.auth']], function() use ($router) {
     $router->get('/', function () use ($router) {
         return view('pages.menu');
-    });
-
-
-    $router->get('/test', function () use ($router) { // used in Browser URL
-        return view('pages.test'); // View Name (Same name as in resources/views), custom parameters
     });
 
     $router->get('/gate/{id}', function () use ($router) {

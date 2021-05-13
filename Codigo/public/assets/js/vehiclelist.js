@@ -146,7 +146,8 @@ function updateVehicle(event, id){
     return false;
 }
 // Capturar e renderizar veículos de visistantes cadastrados
-function renderVehicles() {
+function renderVehicles(page) {
+    page=1
     let filter = '';
 
     const plate = document.getElementById('txtPlateFilter').value;
@@ -163,7 +164,7 @@ function renderVehicles() {
         filter += `&user_in=${user_in}`
 
     $.ajax({
-        url: '/api/vehicles?1=1'+filter,
+        url: '/api/vehicles?page='+page+'&'+filter,
         type: "GET",
         success: function(result){
             let html = '';
@@ -191,10 +192,11 @@ function renderVehicles() {
                 let gate = vehicle.gate.description;
 
                 var htmlSegment, htmlSegmentSm;
+
                 htmlSegment =   `<tr>
                                     <td scope="row">${vehicle.plate}</th>
-                                    <td>${vehicle.model}</td>
-                                    <td><span class="color-cube" style="background-color: ${color.hex};"></span> ${color.name}</td>
+                                    <td>${vehicle.model ? vehicle.model: '---'}</td>
+                                    <td style="min-width:100px"><span class="color-cube" style="background-color: ${color.hex ? color.hex: null};"></span> ${color.name ? color.name: '---'}</td>
                                     <td>${gate}</td>
                                     <td>${vehicle.user_in.name}</td>
                                     <td>${vehicle.user_out_id?vehicle.user_out.name:'---'}</td>
@@ -206,7 +208,7 @@ function renderVehicles() {
                                 </tr>`;
 
                 htmlSegmentSm =   `<div class="card-veiculo">
-                                    <button class="btn btn-secondary float-end data-bs-toggle="modal" data-bs-target="#EditVehicleModal""><i class="fas fa-edit botoes"></i></button>
+                                    <button onClick="showModal(${vehicle.id}, \`${vehicle.plate}\`, \`${vehicle.model?vehicle.model:''}\`, \`${vehicle.color?vehicle.color:''}\`)" class="btn btn-secondary float-end"><i class="fas fa-edit botoes"></i></button>
                                     <div class="placa">
                                         <h6>Placa:</h6>
                                         <p>${vehicle.plate}</p>
@@ -241,6 +243,10 @@ function renderVehicles() {
                 html += htmlSegment;
                 htmlSm += htmlSegmentSm;
             });
+            $(".vehiclelist-pagination").html('')
+            for(let i=0;i<result.last_page;i++){
+                $(".vehiclelist-pagination").append(`<li onclick="renderVehicles(${i+1})" class="page-item ${(i+1)==page?'active':''}"><a class="page-link" href="#">${i+1}</a></li>`);
+            }
 
             let container;
 

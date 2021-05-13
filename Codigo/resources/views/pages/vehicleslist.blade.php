@@ -74,6 +74,13 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <ul class="vehiclelist-pagination pagination float-end">
+                        
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
