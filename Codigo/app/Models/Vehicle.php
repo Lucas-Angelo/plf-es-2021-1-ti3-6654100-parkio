@@ -67,4 +67,8 @@ class Vehicle extends Model implements AuthenticatableContract, AuthorizableCont
     public function destination(){
         return $this->belongsTo('App\Models\Destination');
     }
+
+    public function lastComplain(){
+        return $this->hasOne('App\Models\Complain')->orderByDesc('created_at');
+    }
 }
