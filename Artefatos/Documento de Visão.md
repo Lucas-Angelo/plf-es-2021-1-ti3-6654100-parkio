@@ -50,7 +50,7 @@ Desenvolver um sistema web que consiga controlar a entrada e saída dos veículo
 10 | Os usuários devem poder consultar a lista de veículos. | Baixa | Média
 11 | A administração deverá possuir um relatório delimitado por um filtro de período de tempo, porteiro e/ou placa do veículo. | Baixa | Alta
 12 | O porteiro deverá reportar um veículo visitante, caso ocorra algum problema. | Média | Média
-13 | O ronda poderá editar a cor, a placa e o modelo do veículo visitante. | Baixa | Baixa
+13 | O ronda poderá editar placa, modelo e cor de veículos que ainda estão dentro do condomínio. | Baixa | Baixa
 14 | O síndico poderá visualizar os veículos designados para o seu bloco. | Média | Baixa
 
 ### Requisitos Não Funcionais
