@@ -65,4 +65,20 @@ class VisitorCategoryController extends Controller
 
     }
 
+    public function update(Request $request){
+        //validate essencials fields
+        $this->validate($request, [
+            'id' => 'required',
+            'description' => 'required|max:255',
+            'time' => 'required'
+        ]);
+
+        //calls the service and the function create passing datas
+        $vc = new VisitorCategoryService();
+
+        return response()->json(
+            $vc->update($request->id, $request->description, $request->time)
+        );
+    }
+
 }

@@ -45,6 +45,7 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         $router->get('/visitorCategory', ['uses' => 'VisitorCategoryController@getAll', 'auth' => ['A', 'P']]); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
         $router->post('/visitorCategory', ['uses' => 'VisitorCategoryController@create', 'auth' => ['A']]); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
         $router->delete('/visitorCategory/{id}', ['uses' => 'VisitorCategoryController@delete', 'auth' => ['A']]);
+        $router->put('/visitorCategory', ['uses' => 'VisitorCategoryController@update', 'auth' => ['A']]);
 
         //vehicles
         $router->get('/vehicles', ['uses' => 'VehicleController@getAll', 'auth' => ['S','R','A', 'P']]); // Search for all vehicles entries
