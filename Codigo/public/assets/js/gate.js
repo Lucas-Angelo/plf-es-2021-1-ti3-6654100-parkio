@@ -14,11 +14,11 @@ const handleSelectChange = (event) => {
 
 window.addEventListener("load", function() {
             $.ajax({
-                url: "/api/visitorCategory",
-                type: "GET",
-                success: function(jsonRes) {
-                    if (jsonRes) {
-                        const HTMLOptions = `
+                        url: "/api/visitorCategory",
+                        type: "GET",
+                        success: function(jsonRes) {
+                                if (jsonRes) {
+                                    const HTMLOptions = `
                         ${
                             jsonRes.map(category=>{
                                 return(
@@ -118,11 +118,11 @@ const handleExitFormSubmit = async (event) => {
 
     plate = vehicle.plate;
 
-    $(".span-plate").html(vehicle.plate);
+    $(".span-plate-out").html(vehicle.plate);
     $("#vehicleId").val(vehicle.id);
     $("#vehiclePlate").val(vehicle.plate);
 
-    const modal = new bootstrap.Modal(document.getElementById('modalNovoUsuario'));
+    const modal = new bootstrap.Modal(document.getElementById('modalSaidaVeiculo'));
     modal.toggle();
 };
 
@@ -130,7 +130,7 @@ const handleComplainModal = (event) => {
 
     event.preventDefault();
 
-    const plate = $("#vehiclePlate").val();
+    const plate = $(".span-plate-report").val();
     const vehicleId =  $("#vehicleId").val();
     const description = $("#report-description").val();
     const gateId = location.pathname.split('/')[2]; //Gate ID
@@ -154,7 +154,7 @@ const handleComplainModal = (event) => {
                 myModal.find("#vehiclePlate").val("");
                 myModal.find("#report-description").val("");
                 myModal.modal('hide');
-                $("#modalNovoUsuario").modal('hide');
+                $("#modalSaidaVeiculo").modal('hide');
                 renderVehicles();
 
             },
@@ -171,11 +171,11 @@ const handleComplainModal = (event) => {
 async function dynamicExitModal(vehicleId){
 
     var vehicle = await searchById(vehicleId);
-    $(".span-plate").html(vehicle.plate);
+    $(".span-plate-out").html(vehicle.plate);
     $("#vehicleId").val(vehicle.id);
     $("#vehiclePlate").val(vehicle.plate);
 
-    const modal = new bootstrap.Modal(document.getElementById('modalNovoUsuario'));
+    const modal = new bootstrap.Modal(document.getElementById('modalSaidaVeiculo'));
     modal.toggle();
 
 };
@@ -183,7 +183,7 @@ async function dynamicExitModal(vehicleId){
 async function dynamicTimeExtenderModal(vehicleId) {
     var vehicle = await searchById(vehicleId);
 
-    $(".span-plate").html(vehicle.plate);
+    $(".span-plate-delay").html(vehicle.plate);
     $("#inputDelayVehicleId").val(vehicle.id);
 
     const modal = new bootstrap.Modal(document.getElementById('modalTimeExtender'));
@@ -229,7 +229,7 @@ function search(plate){
 const handleExitModal = async (event) => {
     event.preventDefault();
 
-    const plate = $(".span-plate").text()
+    const plate = $(".span-plate-out").text()
     const score = document.querySelector('input[name="scores"]:checked').value;
     const gateId = location.pathname.split('/')[2]; //Gate ID
 
