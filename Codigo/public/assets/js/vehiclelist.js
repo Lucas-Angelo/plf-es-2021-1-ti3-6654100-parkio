@@ -36,7 +36,7 @@ window.addEventListener("load", function () {
             if(model)
                 filter += `&model=${model}`
             if(color!=0)
-                filter += `&color=${color}`
+                filter += `&color=${color.replace('#','%23')}`
             if(driver)
                 filter += `&driver_name=${driver}`
             if(user_in!=0)
@@ -195,10 +195,6 @@ window.addEventListener("load", function () {
     $.getJSON("/assets/json/colors.json", function(json) {
         colors = json;
         renderVehicles();
-    });
-
-    $.getJSON("/assets/json/colors.json", function(json) {
-        colors = json;
         let coloursArray = [];
         json.forEach((item, index) => {
             coloursArray.push({
@@ -207,6 +203,7 @@ window.addEventListener("load", function () {
             });
         });
         $('.gate-inputcolor').select2({
+            width: "100%",
             selectionCssClass: "gate-select2",
             templateResult: (color) => {
                 var $color = $(
