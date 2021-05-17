@@ -192,7 +192,7 @@
                     </div>
                     <div class="modal-body">
                         <form onSubmit="handleVisitorCategoryFormSubmit(event)" class="row" id="visitorCategory-form">
-
+                            <input type="number" class="d-none" value="" id="categoryId">
                             <div class="mb-3 col-12">
                                 <label for="input-description" class="form-label">Descrição<span class="required">*</span></label>
                                 <input type="text" class="form-control" id="input-description" required autocomplete="false">

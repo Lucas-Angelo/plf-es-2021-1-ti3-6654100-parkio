@@ -16,13 +16,29 @@ class WebMiddleware
             // Unauthorized response if token not there
             return redirect('/auth');
         }
+        $pages = [
+            '/' => ['A','S','P','R'],
+            '/gate/{id}' => ['A','P'],
+            '/vehiclelist' => ['A','S','R'],
+            '/userlist' => ['A'],
+            '/admin' => ['A'],
+        ];
+        
+        $url = $request->getPathInfo();
+        $url = preg_replace('/[0-9]+/', '{id}', $url);
+
         try {
             $decode = JWT::decode($token, env('JWTSECRET'), ['HS256']);
-            $res = $next($request);
-            return $res->withCookie(new Cookie('PARKIO_UIF', json_encode([
-                't' => $decode->tip,
-                'n' => $decode->nm
-            ]), 0, '/', null, null, false));
+            if(in_array($decode->tip, $pages[$url])) {
+                $res = $next($request);
+                return $res->withCookie(new Cookie('PARKIO_UIF', json_encode([
+                    't' => $decode->tip,
+                    'n' => $decode->nm
+                ]), 0, '/', null, null, false));
+            } else {
+                return redirect('/'); //Permission Denied
+            }
+
         } catch(ExpiredException $e) {
             return redirect('/auth'); //Expired Token
         } catch(Exception $e) {
