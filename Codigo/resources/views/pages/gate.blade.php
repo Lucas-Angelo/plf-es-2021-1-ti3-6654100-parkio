@@ -114,11 +114,11 @@
     </div>
 
     <!-- Modal Exit -->
-    <div class="modal fade" id="modalNovoUsuario" tabindex="-1" aria-labelledby="modalNovoUsuarioLabel" aria-hidden="true">
+    <div class="modal fade" id="modalSaidaVeiculo" tabindex="-1" aria-labelledby="modalSaidaVeiculoLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content">
                 <div class="modal-header justify-content-left border-0">
-                    <h5 class="modal-title" id="modalNovoUsuarioLabel"><i class="fas fa-exclamation-triangle"></i>&nbsp;Confirmar saída do veículo <span class="span-plate"></span>?</h5>
+                    <h5 class="modal-title" id="modalSaidaVeiculoLabel"><i class="fas fa-exclamation-triangle"></i>&nbsp;Confirmar saída do veículo <span class="span-plate-out"></span>?</h5>
                 </div>
                 <div class="modal-body justify-content-center">
                     <form onSubmit="handleExitModal(event)" id="exit-modal" class="justify-content-center">
@@ -162,7 +162,7 @@
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="reportModalLabel">Reportar veículo <span class="span-plate"></span> </h5>
+                    <h5 class="modal-title" id="reportModalLabel">Reportar veículo <span class="span-plate-report"></span> </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -171,11 +171,6 @@
                         <div class="mb-3 col-12 col-lg-12 d-none">
                             <label for="vehicleId" class="form-label">Id vehicle</label>
                             <input type="text" class="form-control" value="" id="vehicleId" required autocomplete="false">
-                        </div>
-
-                        <div class="mb-3 col-12 col-lg-12 d-none">
-                            <label for="vehiclePlate" class="form-label">Plate</label>
-                            <input type="text" class="form-control" value="" id="vehiclePlate" required autocomplete="false">
                         </div>
 
                          <div class="mb-3 col-12 col-lg-12">
@@ -207,7 +202,7 @@
         <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content">
                 <div class="modal-header justify-content-left border-0">
-                    <h5 class="modal-title" id="modalTimeExtenderLabel">Adiar permanência do veículo <span class="span-plate"></span></h5>
+                    <h5 class="modal-title" id="modalTimeExtenderLabel">Adiar permanência do veículo <span class="span-plate-delay"></span></h5>
                 </div>
                 <div class="modal-body justify-content-center">
                     <form onSubmit="handleTimeExtenderModal(event)" id="exit-modal" class="justify-content-center">
