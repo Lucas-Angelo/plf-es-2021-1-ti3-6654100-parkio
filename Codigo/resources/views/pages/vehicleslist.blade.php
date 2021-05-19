@@ -112,7 +112,8 @@
                                     <th scope="col">Modelo</th>
                                     <th scope="col">Cor</th>
                                     <th scope="col">Portaria</th>
-                                    <th scope="col">Porteiro</th>
+                                    <th scope="col">Porteiro Entrada</th>
+                                    <th scope="col">Porteiro Saída</th>
                                     <th scope="col">Hora de Entrada</th>
                                     <th scope="col">Hora de Saída</th>
                                     <th scope="col">Ações</th>
@@ -123,7 +124,15 @@
                         </table>
                     </div>
                     <div id="lista-veiculo" class="d-inline d-md-none">
+
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <ul class="vehiclelist-pagination pagination float-end">
+
+                    </ul>
                 </div>
             </div>
         </div>

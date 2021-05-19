@@ -1,142 +1,9 @@
+let colors = []
+
 window.addEventListener("load", function () {
-    let colors = []
 
     document.getElementById('btnFilter').addEventListener("click", (evt) => renderVehicles("normal", evt));
     document.getElementById('advancedBtnFilter').addEventListener("click", (evt) => renderVehicles("advanced", evt));
-
-    // Capturar e renderizar veículos de visistantes cadastrados
-    function renderVehicles(search, evt) {
-        let filter = '';
-        var plate, gate, user_in;
-        var model, color, driver;
-
-        if(search=="normal") {
-            plate = document.getElementById('txtPlateFilter').value;
-            gate = document.getElementById('gate').value;
-            user_in = document.getElementById('user_in').value;
-
-            if(plate)
-                filter += `&plate=${plate}`
-            if(gate!=0)
-                filter += `&gate=${gate}`
-            if(user_in!=0)
-                filter += `&user_in=${user_in}`
-        } else {
-            plate = document.getElementById('advancedInputPlate').value;
-            model = document.getElementById('advancedInputModel').value;
-            color = document.getElementById('input-color').value;
-            driver = document.getElementById('advancedInputName').value;
-            user_in = document.getElementById('advancedInputNameUserIn').value;
-            gate = document.getElementById('advancedInputGate').value;
-            dateIn = document.getElementById('advancedInputDateIn').value;
-            dateOut = document.getElementById('advancedInputDateOut').value;
-
-            if(plate)
-                filter += `&plate=${plate}`
-            if(model)
-                filter += `&model=${model}`
-            if(color!=0)
-                filter += `&color=${color.replace('#','%23')}`
-            if(driver)
-                filter += `&driver_name=${driver}`
-            if(user_in!=0)
-                filter += `&user_in=${user_in}`
-            if(gate!=0)
-                filter += `&gate=${gate}`
-            if(dateIn)
-                filter += `&in_time=${dateIn}`
-            if(dateOut)
-                filter += `&out_time=${dateOut}`
-        }
-
-        $.ajax({
-            url: '/api/vehicles?1=1'+filter,
-            type: "GET",
-            success: function(result){
-                let html = '';
-                let htmlSm = '';
-                result.data.forEach(vehicle => {
-                    let color = colors.find(function(c){ return c.hex == vehicle.color})
-                    if(!color) {
-                        color = {
-                            hex: vehicle.color,
-                            name: vehicle.color,
-                        }
-                    }
-
-                    let created_at = new Date(vehicle.created_at);
-                    let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
-
-                    let left_at = new Date(vehicle.left_at);
-                    let left_at_formatada = ((left_at.getDate().toString().padStart(2, "0"))) + "/" + ((left_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + left_at.getFullYear() + " " + (left_at.getHours().toString().padStart(2, "0")) + ":" + (left_at.getMinutes().toString().padStart(2, "0"));
-
-                    let gate = vehicle.gate.description;
-
-                    var htmlSegment, htmlSegmentSm;
-
-                    htmlSegment =   `<tr>
-                                        <td scope="row">${vehicle.plate}</th>
-                                        <td>${vehicle.model}</td>
-                                        <td><span class="color-cube" style="background-color: ${color.hex};"></span> ${color.name}</td>
-                                        <td>${gate}</td>
-                                        <td>${vehicle.user_in.name}</td>
-                                        <td>${created_at_formatada}</td>
-                                        <td>${left_at_formatada}</td>
-                                        <td>
-                                            <button disabled class="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
-                                        </td>
-                                    </tr>`;
-
-                    htmlSegmentSm =   `<div class="card-veiculo">
-                                        <button disabled class="btn btn-secondary float-end"><i class="fas fa-edit botoes"></i></button>
-                                        <div class="placa">
-                                            <h6>Placa:</h6>
-                                            <p>${vehicle.plate}</p>
-                                        </div>
-                                        <div class="modelo">
-                                            <h6>Modelo:</h6>
-                                            <p>${vehicle.model}</p>
-                                        </div>
-                                        <div>
-                                            <h6>Cor:</h6>
-                                            <span class="color-cube" style="background-color: ${color.hex};"></span>
-                                            <p>${color.name}</p>
-                                        </div>
-                                        <div class="portaria">
-                                            <h6>Portaria:</h6>
-                                            <p>${gate}</p>
-                                        </div>
-                                        <div class="porteiro">
-                                            <h6>Porteiro:</h6>
-                                            <p>${vehicle.user_in.name}</p>
-                                        </div>
-                                        <div class="criadoHora">
-                                            <h6>Horário de entrada:</h6>
-                                            <p>${created_at_formatada}</p>
-                                        </div>
-                                        <div class="atualizadoHora">
-                                            <h6>Horário de saída:</h6>
-                                            <p>${left_at_formatada}</p>
-                                        </div>
-                                    </div>`;
-
-                    html += htmlSegment;
-                    htmlSm += htmlSegmentSm;
-                });
-
-                let container;
-
-                container = document.querySelector('#table-body');
-                container.innerHTML = html;
-
-                container = document.querySelector('#lista-veiculo');
-                container.innerHTML = htmlSm;
-            },
-            error: function(err){
-                console.error('Failed retrieving information', err);
-            },
-        });
-    }
 
     function renderGates() {
         $.ajax({
@@ -215,10 +82,162 @@ window.addEventListener("load", function () {
         });
     });
 
-    renderVehicles();
     renderGates();
     renderUser_in();
 });
+
+
+// Capturar e renderizar veículos de visistantes cadastrados
+function renderVehicles(search, evt, page = 1) {
+
+    document.querySelector('#table-body').innerHTML = '<tr><td colspan="9" class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Carregando...</span></div></td></tr>';
+    document.querySelector('#lista-veiculo').innerHTML = '';
+
+    let filter = '';
+    var plate, gate, user_in;
+    var model, color, driver;
+
+    if(search=="normal") {
+        plate = document.getElementById('txtPlateFilter').value;
+        gate = document.getElementById('gate').value;
+        user_in = document.getElementById('user_in').value;
+
+        if(plate)
+            filter += `&plate=${plate}`
+        if(gate!=0)
+            filter += `&gate=${gate}`
+        if(user_in!=0)
+            filter += `&user_in=${user_in}`
+    } else {
+        plate = document.getElementById('advancedInputPlate').value;
+        model = document.getElementById('advancedInputModel').value;
+        color = document.getElementById('input-color').value;
+        driver = document.getElementById('advancedInputName').value;
+        user_in = document.getElementById('advancedInputNameUserIn').value;
+        gate = document.getElementById('advancedInputGate').value;
+        dateIn = document.getElementById('advancedInputDateIn').value;
+        dateOut = document.getElementById('advancedInputDateOut').value;
+
+        if(plate)
+            filter += `&plate=${plate}`
+        if(model)
+            filter += `&model=${model}`
+        if(color!=0)
+            filter += `&color=${color.replace('#','%23')}`
+        if(driver)
+            filter += `&driver_name=${driver}`
+        if(user_in!=0)
+            filter += `&user_in=${user_in}`
+        if(gate!=0)
+            filter += `&gate=${gate}`
+        if(dateIn)
+            filter += `&in_time=${dateIn}`
+        if(dateOut)
+            filter += `&out_time=${dateOut}`
+    }
+
+    $.ajax({
+        url: '/api/vehicles?page='+page+'&'+filter,
+        type: "GET",
+        success: function(result){
+            let html = '';
+            let htmlSm = '';
+            result.data.forEach(vehicle => {
+                let color = colors.find(function(c){ return c.hex == vehicle.color})
+                if(!color) {
+                    color = {
+                        hex: vehicle.color,
+                        name: vehicle.color,
+                    }
+                }
+
+                let created_at = new Date(vehicle.created_at);
+                let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
+
+                let left_at_formatada;
+                if(vehicle.left_at) {
+                    let left_at = new Date(vehicle.left_at);
+                    left_at_formatada = ((left_at.getDate().toString().padStart(2, "0"))) + "/" + ((left_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + left_at.getFullYear() + " " + (left_at.getHours().toString().padStart(2, "0")) + ":" + (left_at.getMinutes().toString().padStart(2, "0"));
+                } else
+                    left_at_formatada = '---'
+
+
+                let gate = vehicle.gate.description;
+
+                var htmlSegment, htmlSegmentSm;
+
+                htmlSegment =   `<tr>
+                                    <td scope="row">${vehicle.plate}</th>
+                                    <td>${vehicle.model ? vehicle.model: '---'}</td>
+                                    <td style="min-width:100px"><span class="color-cube" style="background-color: ${color.hex ? color.hex: null};"></span> ${color.name ? color.name: '---'}</td>
+                                    <td>${gate}</td>
+                                    <td>${vehicle.user_in.name}</td>
+                                    <td>${vehicle.user_out_id?vehicle.user_out.name:'---'}</td>
+                                    <td>${created_at_formatada}</td>
+                                    <td>${left_at_formatada}</td>
+                                    <td>
+                                        <button disabled class="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
+                                    </td>
+                                </tr>`;
+
+                htmlSegmentSm =   `<div class="card-veiculo">
+                                    <button disabled class="btn btn-secondary float-end"><i class="fas fa-edit botoes"></i></button>
+                                    <div class="placa">
+                                        <h6>Placa:</h6>
+                                        <p>${vehicle.plate}</p>
+                                    </div>
+                                    <div class="modelo">
+                                        <h6>Modelo:</h6>
+                                        <p>${vehicle.model}</p>
+                                    </div>
+                                    <div>
+                                        <h6>Cor:</h6>
+                                        <span class="color-cube" style="background-color: ${color.hex};"></span>
+                                        <p>${color.name}</p>
+                                    </div>
+                                    <div class="portaria">
+                                        <h6>Portaria:</h6>
+                                        <p>${gate}</p>
+                                    </div>
+                                    <div class="porteiro">
+                                        <h6>Porteiro Entrada:</h6>
+                                        <p>${vehicle.user_in.name}</p>
+                                    </div>
+                                    <div class="porteiro">
+                                        <h6>Porteiro Saída:</h6>
+                                        <p>${vehicle.user_out_id?vehicle.user_out.name:'---'}</p>
+                                    </div>
+                                    <div class="criadoHora">
+                                        <h6>Horário de entrada:</h6>
+                                        <p>${created_at_formatada}</p>
+                                    </div>
+                                    <div class="atualizadoHora">
+                                        <h6>Horário de saída:</h6>
+                                        <p>${left_at_formatada}</p>
+                                    </div>
+                                </div>`;
+
+                html += htmlSegment;
+                htmlSm += htmlSegmentSm;
+            });
+            $(".vehiclelist-pagination").html('')
+            for(let i=0;i<result.last_page;i++){
+                $(".vehiclelist-pagination").append(`<li onclick="renderVehicles(${null}, ${null}, ${i+1})" class="page-item ${(i+1)==page?'active':''}"><a class="page-link" href="#">${i+1}</a></li>`);
+            }
+
+            let container;
+
+            container = document.querySelector('#table-body');
+            container.innerHTML = html;
+
+            container = document.querySelector('#lista-veiculo');
+            container.innerHTML = htmlSm;
+        },
+        error: function(err){
+            console.error('Failed retrieving information', err);
+        },
+    });
+}
 
 function openNav() {
     var largura = $(window).width();
@@ -234,4 +253,3 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginRight = "0";
 }
-
