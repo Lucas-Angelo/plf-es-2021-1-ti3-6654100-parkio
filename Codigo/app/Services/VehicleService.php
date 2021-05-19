@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\DB;
 use App\Services\DestinationService;
 use App\Services\VisitorCategoryService;
 use App\Models\Vehicle;
-
-
-
+use App\Models\User;
+use App\Models\Complain;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class VehicleService
 {
@@ -70,6 +70,13 @@ class VehicleService
 
     public function create($driverName, $plate, int $time,int $destinationId,int $visitorCategoryId, int $gateId, int $userId, $color=null, $model=null, $cpf=null){
 
+        $vPlate = Vehicle::where('plate', trim(strtoupper($plate)))
+                            ->whereNull('left_at')
+                            ->first();
+        if(!empty($vPlate))
+            throw new \Exception("Vehicle already inside");
+
+
         $vehicle = new Vehicle();
 
         $vehicle->driver_name = strtoupper($driverName);
@@ -91,21 +98,23 @@ class VehicleService
     }
 
     public function search($plate){
-      $filtro = strtoupper($plate);
-      $vehicle =Vehicle::where('plate','like', "%".$filtro."%")
+        $filtro = strtoupper($plate);
+        $complaints = Complain::where('plate', $filtro)->limit(3)->get();
+        $vehicle =Vehicle::where('plate','like', "%".$filtro."%")
                     ->orderByDesc('created_at')
                     ->first(['id','plate','model','color','created_at','left_at']);
-
-      return ['message'=> 'sucess', 'items'=>$vehicle] ;
+    
+        $vehicle->complaints = $complaints;
+        return $vehicle;
     }
 
     public function get($id){
-      $message = 'sucess';
-      $vehicle = Vehicle::where('id',$id)->first(['id','plate','model','color','created_at','left_at']);
-
-      if(empty($vehicle)) $message = "Vehicle not found";
-
-      return ['message'=> $message, 'items'=>$vehicle] ;
+        try {
+            $vehicle = Vehicle::findOrFail($id, ['id','plate','model','color','created_at','left_at','updated_at']);
+            return $vehicle;
+        } catch (ModelNotFoundException $e){
+            throw new ModelNotFoundException("Vehicle not found", 404);
+        }
     }
 
     /**
@@ -139,7 +148,22 @@ class VehicleService
                     }
                 }
             } else if(!empty($plate) || !empty($model) || !empty($color)){
-                // Code for 'Ronda' edit function, yet to be done
+                $user = User::find($userId);
+                if($user->type == 'A' || $user->type == 'R'){
+
+                    $v->plate = (!empty($plate)) ? $plate : $v->plate;
+                    $v->color = (!empty($color)) ? $color : $v->color;
+                    $v->model = (!empty($model)) ? $model : $v->model;
+                    if($v->save()) {
+                        return ['updated' => true];
+                    } else {
+                        throw new \Exception("Update error!", 500);
+                    }
+
+                }else{
+                    throw new \Exception("Forbidden!", 403);
+                }
+
             } else {
                 throw new \Exception("No Action Done", 405);
             }
@@ -147,6 +171,8 @@ class VehicleService
             throw new \Exception("Vehicle Not Found", 404);
         }
     }
+
+
 
 
 

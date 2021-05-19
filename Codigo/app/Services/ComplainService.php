@@ -52,8 +52,31 @@ class ComplainService
         
     }
 
-    public function getAll(){
+
+    public function delete(int $id){    
+        $complain = Complain::find($id);
+        
+        if(!empty($complain)){
+
+            $complain->delete();
+
+        }else {
+
+            throw new \Exception("Complain Not Found!", 404);
+
+        }
+
+        return [  'deleted' => true  ];
+    }
+
+    public function getAll($plate = null){
         $c = new Complain();
+
+        //Vehicle plate filter
+        if(!empty($plate)){
+        $c = $c->where('plate','like', '%'.$plate.'%');
+        }
+            
         return $c
             ->orderByDesc('created_at')
             ->paginate();

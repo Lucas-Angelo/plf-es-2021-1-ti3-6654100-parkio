@@ -53,16 +53,23 @@ class VehicleController extends Controller
 
         ]);
 
-        //calls the service and the function create passing datas
-        $vehicle = new VehicleService();
+        try {
+            //calls the service and the function create passing datas
+            $vehicle = new VehicleService();
+            return response()->json(
+                $vehicle->create($request->driverName, $request->plate, $request->time,
+                  $request->destinationId, $request->categoryId, $request->gateId, $request->auth->id,
+                  $request->color, $request->model, $request->cpf
+                 )
+            );
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], $this->treatCodeError($e));
+        }
 
 
-        return response()->json(
-            $vehicle->create($request->driverName, $request->plate, $request->time,
-              $request->destinationId, $request->categoryId, $request->gateId, $request->auth->id,
-              $request->color, $request->model, $request->cpf
-             )
-        );
+        
     }
 
     public function search(Request $request)

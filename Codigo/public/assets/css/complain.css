@@ -1,0 +1,23 @@
+#txtPlateFilter:not(:placeholder-shown) {
+    text-transform: uppercase;
+}
+#txtPlateFilter{
+    width: 10rem;
+}
+
+@media (max-width: 800px) {
+    .complainCard {
+        margin-left: 1rem;
+        padding: 15px;
+        border: 1px solid #62628B;
+    }
+    .complainCard p {
+        display: inline-flex;
+    }
+    .complainCard button {
+        float: right;
+    }
+    .complainCard>button:nth-child(2) {
+        margin-right: 5px;
+    }
+}

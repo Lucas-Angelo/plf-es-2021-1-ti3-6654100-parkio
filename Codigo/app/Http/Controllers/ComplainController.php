@@ -23,8 +23,18 @@ class ComplainController extends Controller
      * @return void
      */
     public function getAll(Request $request){
+        $this->validate($request, [
+            'plate' => 'nullable|max:8'
+        ]);
+        try {
         $cs = new ComplainService();
-        return $cs->getAll();
+        return $cs->getAll($request->plate);
+        } 
+        catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], $this->treatCodeError($e));
+        }
     }
 
     /**
@@ -48,6 +58,27 @@ class ComplainController extends Controller
             $cs->create($request->description, $request->plate,$request->vehicleId, $request->auth->id, $request->gateId)
         );
     }
+
+    public function delete(Request $request, int $id){
+        if(!empty($id)){
+
+            try {
+                $cs = new ComplainService();
+                return response()->json(
+                    $cs->delete($id)
+                );
+            } catch (\Exception $e) {
+                return response()->json([
+                    'error' => $e->getMessage()
+                ], $this->treatCodeError($e));
+            }
+
+        }else return response()->json([
+            'error' => 'missing id', 400
+        ]);
+
+    }
+
 
 
     //
