@@ -57,6 +57,9 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         //delays
         $router->get('/delay', ['uses' => 'DelayController@getAll', 'auth' => ['A', 'P']]); // Search for all vehicles delays
         $router->post('/delay', ['uses' => 'DelayController@create', 'auth' => ['A', 'P']]); // Create delay for a specific vehicle
+
+        //report
+        $router->get('/reportVisitor', ['uses'=> 'ReportController@getVisitorByDate', 'auth' => ['A']]);
     });
 });
 
