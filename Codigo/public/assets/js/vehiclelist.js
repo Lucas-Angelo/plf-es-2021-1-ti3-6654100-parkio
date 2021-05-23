@@ -19,7 +19,9 @@ $.getJSON("/assets/json/colors.json", function(json) {
         });
     });
     $('#vehiclelist-input-color').select2({
-        //selectionCssClass: "vehiclelist-select2",
+        selectionCssClass: "vehiclelist-select2",
+        width: "100%",
+        dropdownParent: $('#EditVehicleModal'),
         templateResult: (color) => {
             var $color = $(
                 '<span class="w-100"> <span class="square" style="background-color: '+color.id+'"></span> ' + color.text +' </span>'
@@ -85,7 +87,8 @@ function showModal(id, plate, model, color){
     document.querySelector('#EditVehicleModal .modal-title').textContent = `Atualizar Dados do Veículo ${plate}`
     document.querySelector('#EditVehicleModal #input-plate').value = plate
     document.querySelector('#EditVehicleModal #input-model').value = model || ''
-    document.querySelector('#EditVehicleModal #vehiclelist-input-color').value = color
+    $('#vehiclelist-input-color').val(color);
+    $('#vehiclelist-input-color').trigger('change');
     document.querySelector('#EditVehicleModal form').onSubmit = (event) => updateVehicle(event,id)
     
     new bootstrap.Modal(document.getElementById('EditVehicleModal')).show()

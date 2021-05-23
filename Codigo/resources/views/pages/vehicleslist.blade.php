@@ -107,11 +107,8 @@
                     </div>
                     <div class="mb-3 col-12">
                         <label for="vehiclelist-input-color" class="form-label d-block">Cor</label>
-                        <select class="form-select d-block w-100" id="vehiclelist-input-color" >
-                            <option value="a">valor1</option>
-                            <option value="b">valor2</option>
-                            <option value="c">valor3</option>
-                            <option value="d">valor4</option>
+                        <select class="form-select" id="vehiclelist-input-color">
+                            <option value="">Indefinido</option>
                         </select>
                     </div>
                     
