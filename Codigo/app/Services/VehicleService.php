@@ -20,29 +20,48 @@ class VehicleService
      * @param String|null $plate Vehicle's Plate Filter
      * @return Collection
      */
-    public function getAll($plate = null, $gate = null, $user = null, $inside = null){
+    public function getAll($plate = null, $model = null, $gate = null, $user = null, $inside = null, $color = null, $driverName = null, $inTime=null, $outTime=null){
         $v = new Vehicle();
+        // Filters Begin
 
         // Vehicle Plate Filter
         if(!empty($plate))
             $v = $v->where('plate','like','%'.$plate.'%');
-
+        // Gate Filter
         if(!empty($gate))
             $v = $v->where('gate_id',$gate);
-
+        // User in and Out Filter
         if(!empty($user)) {
             $v = $v->where(function ($v) use($user) {
                 $v->where('user_in_id', $user)
                     ->orWhere('user_out_id', $user);
             });
         }
+        //Color Filter
 
+        if(!empty($color))
+            $v = $v->where('color',$color);
+        //Model Filter
+        if(!empty($model))
+            $v = $v->where('model','LIKE','%'.$model.'%');
+        //Driver Filter
+        if(!empty($driverName))
+            $v = $v->where('driver_name','LIKE','%'.$driverName.'%');
+        //Created at filter
+        if(!empty($inTime))
+            $v = $v->where('created_at','>=', $inTime);
+        //Left at filter
+        if(!empty($outTime))
+            $v = $v->where('left_at','<=', $outTime.' 23:59:59');
+        // Inside Vehicles Filter
         if(!empty($inside)) {
             if($inside)
                 $v = $v->whereNull('left_at');
         }
-            
-        
+
+        // End Filters
+
+
         return $v
                 ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
                 ->orderByDesc('created_at')
