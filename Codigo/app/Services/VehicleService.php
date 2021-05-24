@@ -10,6 +10,7 @@ use App\Services\VisitorCategoryService;
 use App\Models\Vehicle;
 use App\Models\User;
 use App\Models\Complain;
+use App\Models\BlockManagerHasDestination;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class VehicleService
@@ -20,7 +21,7 @@ class VehicleService
      * @param String|null $plate Vehicle's Plate Filter
      * @return Collection
      */
-    public function getAll($plate = null, $gate = null, $user = null, $inside = null){
+    public function getAll($plate = null, $gate = null, $user = null, $inside = null, int $userId){
         $v = new Vehicle();
 
         // Vehicle Plate Filter
@@ -41,7 +42,16 @@ class VehicleService
             if($inside)
                 $v = $v->whereNull('left_at');
         }
-            
+        
+        $user = User::find($userId);
+        if($user->type == 'S'){
+            $destinations = BlockManagerHasDestination::select(DB::raw("CONCAT(destination_id) as destinations"))
+                                        ->where("user_id", $userId)
+                                        ->get()
+                                        ->toArray();
+            $v = $v->whereIn('destination_id', $destinations);
+        }
+
         
         return $v
                 ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])

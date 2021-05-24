@@ -28,7 +28,7 @@ class VehicleController extends Controller
 
         try {
             $v = new VehicleService();
-            return $v->getAll($request->plate, $request->gate, $request->user_in, $request->inside, $request->gate_id);
+            return $v->getAll($request->plate, $request->gate, $request->user_in, $request->inside, $request->auth->id);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
