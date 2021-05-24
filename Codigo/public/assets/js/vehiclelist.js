@@ -89,7 +89,7 @@ function showModal(id, plate, model, color){
     document.querySelector('#EditVehicleModal #input-model').value = model || ''
     $('#vehiclelist-input-color').val(color);
     $('#vehiclelist-input-color').trigger('change');
-    document.querySelector('#EditVehicleModal form').onSubmit = (event) => updateVehicle(event,id)
+    document.querySelector('#EditVehicleModal form').onsubmit = (event) => updateVehicle(event,id)
     
     new bootstrap.Modal(document.getElementById('EditVehicleModal')).show()
 }
