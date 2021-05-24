@@ -10,6 +10,7 @@ use App\Services\VisitorCategoryService;
 use App\Models\Vehicle;
 use App\Models\User;
 use App\Models\Complain;
+use App\Models\BlockManagerHasDestination;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class VehicleService
@@ -20,7 +21,7 @@ class VehicleService
      * @param String|null $plate Vehicle's Plate Filter
      * @return Collection
      */
-    public function getAll($plate = null, $gate = null, $user = null, $inside = null){
+    public function getAll($plate = null, $gate = null, $user = null, $inside = null, int $userId, $userType = null){
         $v = new Vehicle();
 
         // Vehicle Plate Filter
@@ -41,12 +42,24 @@ class VehicleService
             if($inside)
                 $v = $v->whereNull('left_at');
         }
-            
         
-        return $v
-                ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
-                ->orderByDesc('created_at')
-                ->paginate();
+        $filter = 'destination';
+
+        if($userType == 'S'){
+            $destinations = BlockManagerHasDestination::select(DB::raw("CONCAT(destination_id) as destinations"))
+                                        ->where("user_id", $userId)
+                                        ->get()
+                                        ->toArray();
+            $v = $v->whereIn('destination_id', $destinations);
+            $filter = 'destination:id,block';
+
+        }
+        
+
+        return $v   ->with(['gate:id,description', 'userIn:id,name','userOut:id,name', $filter])
+                    ->orderByDesc('created_at')
+                    ->paginate();
+                 
     }
 
     public function create($driverName, $plate, int $time,int $destinationId,int $visitorCategoryId, int $gateId, int $userId, $color=null, $model=null, $cpf=null){
