@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class DestinationService
 {
-    
-  /** 
+
+  /**
    * Search for all gates (with pagination)
    *
    * @param String $search Search filter string to find in blocks and/or apartments
@@ -29,9 +29,10 @@ class DestinationService
     $destination = new Destination();
     $destination->block = strtoupper($block);
     $destination->apartament = $apartament;
+    $destination->deleted_at = null;
     $destination->save();
 
-    return $destination->id;
+    return ['id'=>$destination->id];
   }
 
   public function update(int $id, $block, $apartament){
@@ -49,14 +50,14 @@ class DestinationService
 
 
 }
-  
+
   public function delete(int $id)
   {
       $message = 'Destino removido com sucesso';
       $this->search($id)->delete();
       return [
           'message' => $message,
-          'deleted' => true 
+          'deleted' => true
       ];
 
 
@@ -66,7 +67,7 @@ class DestinationService
   public function search(int $id)
   {
       $destination = Destination::find($id);
-      
+
       if(!empty($destination)){
 
           return $destination;
