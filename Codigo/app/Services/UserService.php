@@ -99,4 +99,27 @@ class UserService
         ];
 
     }
+
+    /**
+     * Edit User
+     *
+     * @param integer $userId User ID
+     * @param String $password
+     * @return array
+     */
+    public function edit(int $userId, String $password){
+        $u = User::find($userId);
+        if(!empty($u)) { // If exists a user with this id
+            if(!empty($password)) { // If password isn't empty
+                $u->password = md5($password);
+            }
+            if($u->save()) { // Save user after changes
+                return ['updated' => true];
+            } else {
+                throw new \Exception("Update error!", 500);
+            }
+        } else {
+            throw new \Exception("User Not Found", 404);
+        }
+    }
 }
