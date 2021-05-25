@@ -65,14 +65,14 @@ async function renderUsers() {
                                     <td>${user.login}</td>
                                     <td>${type}</td>
                                     <td class="acoes">
-                                        <button disabled class="btn btn-secondary"><i class="fas fa-lock"></i></button>
-                                        <button class="btn btn-danger" onclick="remover(${user.id})"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-secondary" onclick="userUpdate(${user.id},\`${user.login}\`)"><i class="fas fa-lock"></i></button>
+                                        <button class="btn btn-danger" onclick="userDelete(${user.id})"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`;
 
                 htmlSegmentSm = `<div class="usercard mb-2">
-                                        <button class="btn btn-danger" onclick="remover(${user.id})"><i class="fas fa-trash-alt"></i></button>
-                                        <button disabled class="btn btn-secondary"><i class="fas fa-lock"></i></button>
+                                        <button class="btn btn-danger" onclick="userDelete(${user.id})"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-secondary" onclick="userUpdate(${user.id},\`${user.login}\`)"><i class="fas fa-lock"></i></button>
                                         <div class="usuario">
                                             <h6>Usuário:</h6>
                                             <p>${user.name}</p>
@@ -106,7 +106,7 @@ async function renderUsers() {
     });
 }
 
-function remover(user) {
+function userDelete(user) {
 
     var result = confirm("Você deseja excluir este usuário ? Essa ação é irreversível!");
 
@@ -123,6 +123,39 @@ function remover(user) {
             },
         });
     }
+}
+
+function userUpdate(userId, login) {
+    var myModal = $("#trocarSenha");
+    myModal.find("#trocarSenhaLabel").text(`Trocar senha do usuário: ${login}`);
+    myModal.find('#idUserPass').val(userId);
+    myModal.modal('show');
+}
+
+const handleChangePassFormSubmit = (event) => {
+    event.preventDefault();
+
+    const id = document.querySelector('#idUserPass').value;
+    const password = document.querySelector('#novaSenha').value
+
+    const data = {
+        password
+    }
+
+    $.ajax({
+        url: `/api/users/${id}`,
+        type: "PUT",
+        data: data,
+        success: function(data, status) {
+            document.getElementById('trocaSenha').reset();
+            document.getElementById('close-modal-np').click();
+            renderUsers();
+            showToast("Senha alterada com sucesso!");
+        },
+        error: function(data, status) {
+            console.log(err)
+        },
+    });
 }
 
 renderUsers();
