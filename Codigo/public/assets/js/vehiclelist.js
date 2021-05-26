@@ -1,9 +1,9 @@
 var colors = []
 
 window.addEventListener("load", function () {
+    document.getElementById('btnFilter').addEventListener("click", (evt) => renderVehicles("normal", evt));
+    document.getElementById('advancedBtnFilter').addEventListener("click", (evt) => renderVehicles("advanced", evt));
 
-    document.getElementById('btnFilter').addEventListener("click", renderVehicles);
-    
     renderVehicles();
     renderGates();
     renderUser_in();
@@ -47,16 +47,18 @@ function renderGates() {
 
                 html += htmlSegment;
             });
+                let container;
+                container = document.querySelector('#gate');
+                container.innerHTML = html;
+                container = document.querySelector("#advancedInputGate");
+                container.innerHTML = html;
+            },
+            error: function(err){
+                console.error('Failed retrieving information', err);
+            },
+        });
+    }
 
-            let container;
-            container = document.querySelector('#gate');
-            container.innerHTML = html;
-        },
-        error: function(err){
-            console.error('Failed retrieving information', err);
-        },
-    });
-}
 
 function renderUser_in () {
     $.ajax({
@@ -76,6 +78,8 @@ function renderUser_in () {
             let container;
             container = document.querySelector('#user_in');
             container.innerHTML = html;
+            container = document.querySelector("#advancedInputNameUserIn");
+            container.innerHTML = html;
         },
         error: function(err){
             console.error('Failed retrieving information', err);
@@ -90,7 +94,7 @@ function showModal(id, plate, model, color){
     $('#vehiclelist-input-color').val(color);
     $('#vehiclelist-input-color').trigger('change');
     document.querySelector('#EditVehicleModal form').onsubmit = (event) => updateVehicle(event,id)
-    
+
     new bootstrap.Modal(document.getElementById('EditVehicleModal')).show()
 }
 
@@ -121,25 +125,83 @@ function updateVehicle(event, id){
 
     });
 
+
+//     $.getJSON("/assets/json/colors.json", function(json) {
+//         colors = json;
+//         renderVehicles();
+//         let coloursArray = [];
+//         json.forEach((item, index) => {
+//             coloursArray.push({
+//                 id: item.hex,
+//                 text: item.name,
+//             });
+//         });
+//         $('.gate-inputcolor').select2({
+//             width: "100%",
+//             selectionCssClass: "gate-select2",
+//             templateResult: (color) => {
+//                 var $color = $(
+//                     '<span> <span class="square" style="background-color: '+color.id+'"></span> ' + color.text +' </span>'
+//                 );
+//                 return $color;
+//             },
+//             data: coloursArray
+//         });
+//     });
+
+//     renderGates();
+//     renderUser_in();
+// });
+
     return false;
 }
 // Capturar e renderizar veículos de visistantes cadastrados
-function renderVehicles(page) {
-    page=1
+function renderVehicles(search, evt, page = 1) {
+
+
+
     let filter = '';
+    var plate, gate, user_in;
+    var model, color, driver;
 
-    const plate = document.getElementById('txtPlateFilter').value;
-    const gate = document.getElementById('gate').value;
-    const user_in = document.getElementById('user_in').value;
+    if(search=="normal") {
+        plate = document.getElementById('txtPlateFilter').value;
+        gate = document.getElementById('gate').value;
+        user_in = document.getElementById('user_in').value;
 
-    
+        if(plate)
+            filter += `&plate=${plate}`
+        if(gate!=0)
+            filter += `&gate=${gate}`
+        if(user_in!=0)
+            filter += `&user_in=${user_in}`
+    } else {
+        plate = document.getElementById('advancedInputPlate').value;
+        model = document.getElementById('advancedInputModel').value;
+        color = document.getElementById('input-color').value;
+        driver = document.getElementById('advancedInputName').value;
+        user_in = document.getElementById('advancedInputNameUserIn').value;
+        gate = document.getElementById('advancedInputGate').value;
+        dateIn = document.getElementById('advancedInputDateIn').value;
+        dateOut = document.getElementById('advancedInputDateOut').value;
 
-    if(plate)
-        filter += `&plate=${plate}`
-    if(gate!=0)
-        filter += `&gate=${gate}`
-    if(user_in!=0)
-        filter += `&user_in=${user_in}`
+        if(plate)
+            filter += `&plate=${plate}`
+        if(model)
+            filter += `&model=${model}`
+        if(color!=0)
+            filter += `&color=${color.replace('#','%23')}`
+        if(driver)
+            filter += `&driver_name=${driver}`
+        if(user_in!=0)
+            filter += `&user_in=${user_in}`
+        if(gate!=0)
+            filter += `&gate=${gate}`
+        if(dateIn)
+            filter += `&in_time=${dateIn}`
+        if(dateOut)
+            filter += `&out_time=${dateOut}`
+    }
 
     $.ajax({
         url: '/api/vehicles?page='+page+'&'+filter,
@@ -205,8 +267,12 @@ function renderVehicles(page) {
                                         <p>${gate}</p>
                                     </div>
                                     <div class="porteiro">
-                                        <h6>Porteiro:</h6>
+                                        <h6>Porteiro Entrada:</h6>
                                         <p>${vehicle.user_in.name}</p>
+                                    </div>
+                                    <div class="porteiro">
+                                        <h6>Porteiro Saída:</h6>
+                                        <p>${vehicle.user_out_id?vehicle.user_out.name:'---'}</p>
                                     </div>
                                     <div class="criadoHora">
                                         <h6>Horário de entrada:</h6>
@@ -223,7 +289,7 @@ function renderVehicles(page) {
             });
             $(".vehiclelist-pagination").html('')
             for(let i=0;i<result.last_page;i++){
-                $(".vehiclelist-pagination").append(`<li onclick="renderVehicles(${i+1})" class="page-item ${(i+1)==page?'active':''}"><a class="page-link" href="#">${i+1}</a></li>`);
+                $(".vehiclelist-pagination").append(`<li onclick="renderVehicles(${null}, ${null}, ${i+1})" class="page-item ${(i+1)==page?'active':''}"><a class="page-link" href="#">${i+1}</a></li>`);
             }
 
             let container;
@@ -238,4 +304,19 @@ function renderVehicles(page) {
             console.error('Failed retrieving information', err);
         },
     });
+}
+
+function openNav() {
+    var largura = $(window).width();
+    if(largura>800) {
+        document.getElementById("mySidenav").style.width = "275px";
+        document.getElementById("main").style.marginRight = "275px";
+    } else {
+        document.getElementById("mySidenav").style.width = "100vw";
+    }
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginRight = "0";
 }

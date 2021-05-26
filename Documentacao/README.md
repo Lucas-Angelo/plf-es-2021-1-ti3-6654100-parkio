@@ -119,13 +119,22 @@ Link para visualização dos wireframes no adobe XD: https://xd.adobe.com/view/7
 12 | O porteiro deverá escrever o motivo do bloqueio de um veículo visitante, caso ocorra algum problema com a visita. | Caso algum veículo reportado volte a tentar entrar no estacionamento, deve aparecer um aviso de bloqueio. | Média | Média
 13 | O ronda poderá editar certas informações do veículo do visitante. | Informações: Placa, Modelo e Cor. | Baixa | Baixa
 
-
-**3.4 - Diagrama de Entidade-Relacionamento** A fazer
-| ![Imagem12](https://exemple.com/img.png "Imagem12") |
+**3.4 - Diagrama de Caso de Uso**
+| ![Imagem5](https://i.imgur.com/Xx9pRcY.jpg "Imagem5") |
 |:--:| 
-| *<sub>Imagem 5 - Diagrama de Entidade e Relacionamento ParkIO.</sub>* |
+| *<sub>Imagem 5 - Diagrama de Caso de Uso ParkIO.</sub>* |
 
-***3.5. Tecnologias***
+**3.5 - Diagrama de Caso de Classes**
+| ![Imagem6](https://i.imgur.com/vu6QIbI.jpg "Imagem6") |
+|:--:| 
+| *<sub>Imagem 6 - Diagrama de Caso de Classes ParkIO.</sub>* |
+
+**3.6 - Diagrama de Entidade-Relacionamento**
+| ![Imagem7](https://i.imgur.com/idH7I0wh.jpg "Imagem7") |
+|:--:| 
+| *<sub>Imagem 7 - Diagrama de Entidade e Relacionamento ParkIO.</sub>* |
+
+***3.8. Tecnologias***
 Será desenvolvida uma aplicação web, diante disso, é necessário definir linguagens de marcação, estilização, de programação e um sistema de gerenciamento de banco de dados para suprir toda essa aplicação do ParkIO. Os wireframes foram desenvolvidos utilizando o programa Adobe XD. Como linguagem de marcação de hipertexto foi escolhido o HTML5 para construção estrutural do site, para estilização utilizaremos CSS3, com auxílio do framework Bootstrap 4.6. Para programação será utilizado JavaScript no frontend e no backend PHP com auxílio do framework Lumen, e o SGBD selecionado foi o MySQL por ser relacional e gratuito. A IDE de desenvolvimento escolhida foi o Visual Studio Code. A empresa de hospedagem para a aplicação foi escolhida a SanInternet.com, para hospedar a aplicação. A hospedagem utilizada será com o gerencimento da ferramenta cPanel.
 - Diante disso, as tecnologias definidas foram: 
     - HTML, CSS, JavaScript e Bootstrap para o Frontend.
@@ -140,9 +149,9 @@ Será desenvolvida uma aplicação web, diante disso, é necessário definir lin
     - IDE Visual Studio Code.
     - Servidor Apache e MySQL local Wamp ou XAMPP para desenvolvimento.
 
-| ![Imagem13](https://i.imgur.com/mYCFwLB.png "Imagem13") |
+| ![Imagem8](https://i.imgur.com/mYCFwLB.png "Imagem8") |
 |:--:| 
-| *<sub>Imagem 6 - Interações entre usuário e tecnologia.</sub>* |
+| *<sub>Imagem 8 - Interações entre usuário e tecnologia.</sub>* |
 
 ***4. Uso Software***
 

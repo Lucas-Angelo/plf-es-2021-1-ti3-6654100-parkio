@@ -23,8 +23,18 @@ class ComplainController extends Controller
      * @return void
      */
     public function getAll(Request $request){
+        $this->validate($request, [
+            'plate' => 'nullable|max:8'
+        ]);
+        try {
         $cs = new ComplainService();
-        return $cs->getAll();
+        return $cs->getAll($request->plate);
+        } 
+        catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], $this->treatCodeError($e));
+        }
     }
 
     /**

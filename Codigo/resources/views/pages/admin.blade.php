@@ -130,10 +130,30 @@
                 </div>
 
                 <div class="tab-pane fade" id="reported" role="tabpanel" aria-labelledby="reported-tab">
+
                     <div class="row">
                         <div class="col-11 p-0 m-0">
-                            <div class="d-none d-md-block">
-                                <table class="table sortable">
+
+                                <div class="row g-3 p-2">
+                                
+                                    <div class="col d-inline">
+                                        <label for="txtPlateFilter">Placa</label>
+                                        <input type="text" onchange="updateComplainTable()" class="form-control" id="txtPlateFilter" placeholder="Placa" maxlength="8">
+                                    </div>
+                                
+                                    <div class="col d-inline">
+                                        <div class="float-end">
+                                            <label>&nbsp;</label>
+                                            <button id="btnFilterPlate" class="btn btn-secondary d-block">
+                                                <i class="fas fa-search botoes d-inline"></i>
+                                                <b class="d-inline">Buscar</b>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <table class="d-none d-md-table table sortable">
                                     <colgroup>
                                         <col span="1" style="width: 20%;">
                                         <col span="1" style="width: 70%;">
@@ -149,7 +169,7 @@
                                     <tbody id="complain-table-body">
                                     </tbody>
                                 </table>
-                            </div>
+
                             <div id="lista-complain" class="d-md-none mt-3">
                             </div>
                         </div>
@@ -172,7 +192,7 @@
                     </div>
                     <div class="modal-body">
                         <form onSubmit="handleVisitorCategoryFormSubmit(event)" class="row" id="visitorCategory-form">
-
+                            <input type="number" class="d-none" value="" id="categoryId">
                             <div class="mb-3 col-12">
                                 <label for="input-description" class="form-label">Descrição<span class="required">*</span></label>
                                 <input type="text" class="form-control" id="input-description" required autocomplete="false">

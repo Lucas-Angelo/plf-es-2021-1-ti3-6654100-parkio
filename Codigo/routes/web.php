@@ -29,9 +29,9 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         $router->delete('/users/{id}', ['uses' => 'UserController@delete', 'auth' => ['A']]);
 
         //complains
-        $router->post('/complain', ['uses' => 'ComplainController@create', 'auth' => ['A', 'P']]);
-        $router->delete('/complain/{id}', ['uses' => 'ComplainController@delete', 'auth' => ['A']]);
-        $router->get('/complain', ['uses' => 'ComplainController@getAll', 'auth' => ['A', 'P']]);
+        $router->post('/complain', ['uses' => 'ComplainController@create', 'auth' => ['A', 'P']]); // Create a complain
+        $router->delete('/complain/{id}', ['uses' => 'ComplainController@delete', 'auth' => ['A']]); //Delete a complain
+        $router->get('/complain', ['uses' => 'ComplainController@getAll', 'auth' => ['A', 'P']]); // Get all the complains
 
         //gates
         $router->get('/gate', ['uses' => 'GateController@getAll', 'auth' => ['S','R','A', 'P']]); // Search for all gates
@@ -45,6 +45,7 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         $router->get('/visitorCategory', ['uses' => 'VisitorCategoryController@getAll', 'auth' => ['A', 'P']]); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
         $router->post('/visitorCategory', ['uses' => 'VisitorCategoryController@create', 'auth' => ['A']]); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
         $router->delete('/visitorCategory/{id}', ['uses' => 'VisitorCategoryController@delete', 'auth' => ['A']]);
+        $router->put('/visitorCategory', ['uses' => 'VisitorCategoryController@update', 'auth' => ['A']]);
 
         //vehicles
         $router->get('/vehicles', ['uses' => 'VehicleController@getAll', 'auth' => ['S','R','A', 'P']]); // Search for all vehicles entries

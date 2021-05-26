@@ -1,6 +1,9 @@
 const handleVisitorCategoryFormSubmit = (event) => {
     event.preventDefault();
-
+    
+    var request = 'POST'
+    // by default request is POST unless the modal has id of any category
+    const id = $("#categoryId").val();
     const description = document.querySelector('#input-description').value
     const time = document.querySelector('#input-time').value
 
@@ -9,15 +12,20 @@ const handleVisitorCategoryFormSubmit = (event) => {
         time
     }
 
+    if (id != null && id != "") {
+        request = 'PUT';
+        data.id = id;
+    }
+
     $.ajax({
         url: "/api/visitorCategory",
-        type: "POST",
+        type: request,
         data: data,
         success: function(res) {
             document.getElementById('visitorCategory-form').reset();
             updateVisitorCategoryTable();
             ModalVisitors.hide();
-            showToast("Categoria de Visitante cadastrada com sucesso!")
+            showToast(res.message)
         },
         error: function(err, status) {
             console.log(err)
@@ -64,14 +72,14 @@ const updateVisitorCategoryTable = () => {
                                     <td>${category.description}</th>
                                     <td>${category.time} min</td>
                                     <td class="acoes">
-                                        <button class="btn btn-secondary"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-secondary"><i class="fas fa-edit" onclick="modalEditCategory(${category.id},\`${category.description}\`,\`${category.time}\`)"></i></button>
                                         <button class="btn btn-danger" onclick="removerCategoria(${category.id})"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`;
 
                 htmlSegmentSm = `<div class="visitorCategoryCard mb-2">
                                         <button class="btn btn-danger" onclick="removerCategoria(${category.id})"><i class="fas fa-trash-alt"></i></button>
-                                        <button class="btn btn-secondary"><i class="fas fa-edit"></i></button>
+                                        <button class="btn btn-secondary" onclick="modalEditCategory(${category.id},\`${category.description}\`,\`${category.time}\`)"><i class="fas fa-edit"></i></button>
                                         <div class="type">
                                             <h6>Tipo:</h6>
                                             <p>${category.description}</p>
@@ -100,4 +108,25 @@ const updateVisitorCategoryTable = () => {
     });
 }
 
-window.onload = updateVisitorCategoryTable;
+function modalEditCategory(id, description, time) {
+    var myModal = $("#CreateCategoryModal");
+    myModal.find(".modal-title").text("Editar Categoria");
+    myModal.find('#categoryId').val(id);
+    myModal.find('#input-description').val(description);
+    myModal.find('#input-time').val(time);
+    myModal.find(".btn").text("Editar");
+    myModal.modal('show');
+};
+
+$(document).ready(()=>{
+    updateVisitorCategoryTable();
+
+    $('#CreateCategoryModal').on('hidden.bs.modal', function(e) {
+        $(this).find(".modal-title").text("Cadastro de Categoria de Visitantes");
+        $(this).find(".btn").text("Cadastrar");
+        $("#categoryId").val("");
+        $("#input-description").val("");
+        $("#input-time").val("");
+    })
+
+})
