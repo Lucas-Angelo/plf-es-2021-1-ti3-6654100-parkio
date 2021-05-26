@@ -125,36 +125,35 @@ function updateVehicle(event, id){
 
     });
 
-
-//     $.getJSON("/assets/json/colors.json", function(json) {
-//         colors = json;
-//         renderVehicles();
-//         let coloursArray = [];
-//         json.forEach((item, index) => {
-//             coloursArray.push({
-//                 id: item.hex,
-//                 text: item.name,
-//             });
-//         });
-//         $('.gate-inputcolor').select2({
-//             width: "100%",
-//             selectionCssClass: "gate-select2",
-//             templateResult: (color) => {
-//                 var $color = $(
-//                     '<span> <span class="square" style="background-color: '+color.id+'"></span> ' + color.text +' </span>'
-//                 );
-//                 return $color;
-//             },
-//             data: coloursArray
-//         });
-//     });
-
-//     renderGates();
-//     renderUser_in();
-// });
+    renderGates();
+    renderUser_in();
 
     return false;
 }
+
+    $.getJSON("/assets/json/colors.json", function(json) {
+        colors = json;
+        renderVehicles();
+        let coloursArray = [];
+        json.forEach((item, index) => {
+            coloursArray.push({
+                id: item.hex,
+                text: item.name,
+            });
+        });
+        $('.gate-inputcolor').select2({
+            width: "100%",
+            selectionCssClass: "gate-select2",
+            templateResult: (color) => {
+                var $color = $(
+                    '<span> <span class="square" style="background-color: '+color.id+'"></span> ' + color.text +' </span>'
+                );
+                return $color;
+            },
+            data: coloursArray
+        });
+    });
+
 // Capturar e renderizar veículos de visistantes cadastrados
 function renderVehicles(search, evt, page = 1) {
 
