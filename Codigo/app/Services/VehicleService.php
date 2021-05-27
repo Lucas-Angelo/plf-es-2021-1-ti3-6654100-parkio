@@ -17,7 +17,9 @@ class VehicleService
      * @param String|null $plate Vehicle's Plate Filter
      * @return Collection
      */
-    public function getAll($plate = null, $model = null, $gate = null, $user = null, $inside = null, $color = null, $driverName = null, $inTime=null, $outTime=null){
+    public function getAll(int $userId, $plate = null, $model = null, $gate = null, $user = null, $inside = null, $color = null, $driverName = null, $inTime=null, $outTime=null){
+        $u = User::find($userId);
+
         $v = new Vehicle();
         // Filters Begin
 
@@ -55,8 +57,12 @@ class VehicleService
             if($inside)
                 $v = $v->whereNull('left_at');
         }
-
         // End Filters
+
+        // If type of user is Ronda and the vehicle has left, he can no longer edit
+        if($u->type=='R') {
+            $v = $v->whereNull('left_at'); // Show only that they are still inside
+        }
 
 
         return $v
@@ -100,7 +106,7 @@ class VehicleService
         $vehicle =Vehicle::where('plate','like', "%".$filtro."%")
                     ->orderByDesc('created_at')
                     ->first(['id','plate','model','color','created_at','left_at']);
-    
+
         $vehicle->complaints = $complaints;
         return $vehicle;
     }
