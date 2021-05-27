@@ -138,5 +138,43 @@
         </div>
     </div>
 </div>
+
+<!--Modais-->
+<div id="modalEdit"></div>
+<div class="modal fade" id="EditVehicleModal" tabindex="-1" aria-labelledby="EditVehicleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditVehicleModalLabel">Atualizar Dados do Veículo ${plate}</h5>
+                <button id="closeEditVehicleModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row" id="visitorCategory-form">
+
+                    <div class="mb-3 col-12">
+                        <label for="input-plate" class="form-label">Placa<span class="required">*</span></label>
+                        <input type="text" class="form-control" id="input-plate" autocomplete="false">
+                    </div>
+                    <div class="mb-3 col-12">
+                        <label for="input-time" class="form-label">Modelo</label>
+                        <input type="text" min="0" class="form-control" id="input-model">
+                    </div>
+                    <div class="mb-3 col-12">
+                        <label for="vehiclelist-input-color" class="form-label d-block">Cor</label>
+                        <select class="form-select" id="vehiclelist-input-color">
+                            <option value="">Indefinido</option>
+                        </select>
+                    </div>
+
+
+                    <div class="button-div text-center mt-3">
+                        <button class="btn btn-secondary" type="submit">Atualizar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 

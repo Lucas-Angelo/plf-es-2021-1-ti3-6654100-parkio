@@ -1,25 +1,64 @@
-let colors = []
+var colors = []
 
 window.addEventListener("load", function () {
-
     document.getElementById('btnFilter').addEventListener("click", (evt) => renderVehicles("normal", evt));
     document.getElementById('advancedBtnFilter').addEventListener("click", (evt) => renderVehicles("advanced", evt));
 
-    function renderGates() {
-        $.ajax({
-            url: '/api/gate',
-            type: "GET",
-            success: function(result){
-                let html = `<option value="0" selected>Selecione</option>`;
+    renderVehicles();
+    renderGates();
+    renderUser_in();
+});
 
-                result.forEach(gate => {
-                    var htmlSegment;
+$.getJSON("/assets/json/colors.json", function(json) {
+    colors = json;
+    let coloursArray = [];
+    json.forEach((item, index) => {
+        coloursArray.push({
+            id: item.hex,
+            text: item.name,
+        });
+    });
+    $('#vehiclelist-input-color').select2({
+        selectionCssClass: "vehiclelist-select2",
+        width: "100%",
+        dropdownParent: $('#EditVehicleModal'),
+        templateResult: (color) => {
+            var $color = $(
+                '<span class="w-100"> <span class="square" style="background-color: '+color.id+'"></span> ' + color.text +' </span>'
+            );
+            return $color;
+        },
+        data: coloursArray
+    });
 
-                    htmlSegment =   `<option value="${gate.id}">${gate.description}</option>`;
+    $('.gate-inputcolor').select2({
+        width: "100%",
+        selectionCssClass: "gate-select2",
+        templateResult: (color) => {
+            var $color = $(
+                '<span> <span class="square" style="background-color: '+color.id+'"></span> ' + color.text +' </span>'
+            );
+            return $color;
+        },
+        data: coloursArray
+    });
+    renderVehicles();
+});
 
-                    html += htmlSegment;
-                });
+function renderGates() {
+    $.ajax({
+        url: '/api/gate',
+        type: "GET",
+        success: function(result){
+            let html = `<option value="0" selected>Selecione</option>`;
 
+            result.forEach(gate => {
+                var htmlSegment;
+
+                htmlSegment =   `<option value="${gate.id}">${gate.description}</option>`;
+
+                html += htmlSegment;
+            });
                 let container;
                 container = document.querySelector('#gate');
                 container.innerHTML = html;
@@ -30,69 +69,82 @@ window.addEventListener("load", function () {
                 console.error('Failed retrieving information', err);
             },
         });
-    }
+}
 
-    function renderUser_in () {
-        $.ajax({
-            url: '/api/users/search?type=p',
-            type: "GET",
-            success: function(result){
-                let html = `<option value="0" selected>Selecione</option>`;
 
-                result.data.forEach(user_in => {
-                    var htmlSegment;
+function renderUser_in () {
+    $.ajax({
+        url: '/api/users/search?type=p',
+        type: "GET",
+        success: function(result){
+            let html = `<option value="0" selected>Selecione</option>`;
 
-                    htmlSegment =   `<option value="${user_in.id}">${user_in.name}</option>`;
+            result.data.forEach(user_in => {
+                var htmlSegment;
 
-                    html += htmlSegment;
-                });
+                htmlSegment =   `<option value="${user_in.id}">${user_in.name}</option>`;
 
-                let container;
-                container = document.querySelector('#user_in');
-                container.innerHTML = html;
-                container = document.querySelector("#advancedInputNameUserIn");
-                container.innerHTML = html;
-            },
-            error: function(err){
-                console.error('Failed retrieving information', err);
-            },
-        });
-    }
-
-    $.getJSON("/assets/json/colors.json", function(json) {
-        colors = json;
-        renderVehicles();
-        let coloursArray = [];
-        json.forEach((item, index) => {
-            coloursArray.push({
-                id: item.hex,
-                text: item.name,
+                html += htmlSegment;
             });
-        });
-        $('.gate-inputcolor').select2({
-            width: "100%",
-            selectionCssClass: "gate-select2",
-            templateResult: (color) => {
-                var $color = $(
-                    '<span> <span class="square" style="background-color: '+color.id+'"></span> ' + color.text +' </span>'
-                );
-                return $color;
-            },
-            data: coloursArray
-        });
+
+            let container;
+            container = document.querySelector('#user_in');
+            container.innerHTML = html;
+            container = document.querySelector("#advancedInputNameUserIn");
+            container.innerHTML = html;
+        },
+        error: function(err){
+            console.error('Failed retrieving information', err);
+        },
+    });
+}
+
+function showModal(id, plate, model, color){
+    document.querySelector('#EditVehicleModal .modal-title').textContent = `Atualizar Dados do Veículo ${plate}`
+    document.querySelector('#EditVehicleModal #input-plate').value = plate
+    document.querySelector('#EditVehicleModal #input-model').value = model || ''
+    $('#vehiclelist-input-color').val(color);
+    $('#vehiclelist-input-color').trigger('change');
+    document.querySelector('#EditVehicleModal form').onsubmit = (event) => updateVehicle(event,id)
+
+    new bootstrap.Modal(document.getElementById('EditVehicleModal')).show()
+}
+
+function updateVehicle(event, id){
+    event.preventDefault();
+    const data = {
+        plate: document.getElementById('input-plate').value,
+        model: document.getElementById('input-model').value,
+        color: document.getElementById('vehiclelist-input-color').value
+    }
+    console.log(data)
+
+    $.ajax({
+        url: `/api/vehicles/${id}`,
+        type: "PUT",
+        data: data,
+        success:  function(result, status){
+            showToast("Veículo atualizado com sucesso!");
+            $("#EditVehicleModal").modal('hide');
+            renderVehicles();
+
+        },
+        error:  function(err, status){
+            showToast(err.statusText);
+            renderVehicles();
+
+        },
+
     });
 
     renderGates();
     renderUser_in();
-});
 
+    return false;
+}
 
 // Capturar e renderizar veículos de visistantes cadastrados
 function renderVehicles(search, evt, page = 1) {
-
-    document.querySelector('#table-body').innerHTML = '<tr><td colspan="9" class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Carregando...</span></div></td></tr>';
-    document.querySelector('#lista-veiculo').innerHTML = '';
-
     let filter = '';
     var plate, gate, user_in;
     var model, color, driver;
@@ -176,12 +228,12 @@ function renderVehicles(search, evt, page = 1) {
                                     <td>${created_at_formatada}</td>
                                     <td>${left_at_formatada}</td>
                                     <td>
-                                        <button disabled class="btn btn-secondary"><i class="fas fa-edit botoes"></i></button>
+                                        <button onClick="showModal(${vehicle.id}, \`${vehicle.plate}\`, \`${vehicle.model?vehicle.model:''}\`, \`${vehicle.color?vehicle.color:''}\`)" class="btn btn-secondary"><i class="fas fa-edit botoes" ></i></button>
                                     </td>
                                 </tr>`;
 
                 htmlSegmentSm =   `<div class="card-veiculo">
-                                    <button disabled class="btn btn-secondary float-end"><i class="fas fa-edit botoes"></i></button>
+                                    <button onClick="showModal(${vehicle.id}, \`${vehicle.plate}\`, \`${vehicle.model?vehicle.model:''}\`, \`${vehicle.color?vehicle.color:''}\`)" class="btn btn-secondary float-end"><i class="fas fa-edit botoes"></i></button>
                                     <div class="placa">
                                         <h6>Placa:</h6>
                                         <p>${vehicle.plate}</p>
