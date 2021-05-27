@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="{{ url('/assets/css/vehiclelist.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url('/assets/css/select2.css') }}" type="text/css">
     <script src="{{ url('/assets/js/sorttable.js') }}"></script> <!-- To sort table by headers -->
-    <script src="{{ url('assets/js/select2.min.js') }}"></script>
     <script src="{{ url('/assets/js/vehiclelist.js') }}"></script>
     <script src="{{ url('assets/js/select2.min.js') }}"></script>
 @endsection
@@ -154,11 +153,11 @@
 
                     <div class="mb-3 col-12">
                         <label for="input-plate" class="form-label">Placa<span class="required">*</span></label>
-                        <input type="text"  value="${plate}" class="form-control" id="input-plate" autocomplete="false">
+                        <input type="text" class="form-control" id="input-plate" autocomplete="false">
                     </div>
                     <div class="mb-3 col-12">
                         <label for="input-time" class="form-label">Modelo</label>
-                        <input type="text" value="${model?model:''}" min="0" class="form-control" id="input-model">
+                        <input type="text" min="0" class="form-control" id="input-model">
                     </div>
                     <div class="mb-3 col-12">
                         <label for="vehiclelist-input-color" class="form-label d-block">Cor</label>
@@ -177,40 +176,5 @@
         </div>
     </div>
 </div>
-<!--div class="modal fade" id="EditVehicleModal" tabindex="-1" aria-labelledby="EditVehicleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="EditVehicleModalLabel">Atualização de Veículo</h5>
-                <button id="closeCategoryRegisterModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form onSubmit="handleVehicleEditFormSubmit(event)" class="row" id="visitorCategory-form">
-
-                    <div class="mb-3 col-12">
-                        <label for="input-plate" class="form-label">Placa<span class="required">*</span></label>
-                        <input type="text" class="form-control" id="input-plate" autocomplete="false">
-                    </div>
-                    <div class="mb-3 col-12">
-                        <label for="input-time" class="form-label">Modelo</label>
-                        <input type="text" min="0" class="form-control" id="input-model">
-                    </div>
-                    <div class="mb-3 col-12">
-                        <label for="vehiclelist-input-color" class="form-label">Cor</label>
-                        <select class="form-select d-block" id="vehiclelist-input-color">
-                            <option selected value="">Indefinido</option>
-                        </select>
-                    </div>
-
-
-                    <div class="button-div text-center mt-3">
-                        <button class="btn btn-secondary" type="submit">Atualizar</button>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </div>
-</div-->
 @endsection
 
