@@ -36,6 +36,16 @@ jobs:
             echo TELEGRAMBOTTOKEN=${{ secrets.telegram_bottoken }} >> .env
             echo TELEGRAMGROUPID=${{ secrets.telegram_groupid }} >> .env
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.3
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --working-dir=./Codigo/
+
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
