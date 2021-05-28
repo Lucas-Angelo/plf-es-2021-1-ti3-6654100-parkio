@@ -2,16 +2,13 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-use App\Services\DestinationService;
-use App\Services\VisitorCategoryService;
 use App\Models\Vehicle;
 use App\Models\User;
 use App\Models\Complain;
 use App\Models\BlockManagerHasDestination;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Http;
 
 class VehicleService
 {
@@ -21,27 +18,45 @@ class VehicleService
      * @param String|null $plate Vehicle's Plate Filter
      * @return Collection
      */
-    public function getAll($plate = null, $gate = null, $user = null, $inside = null, int $userId, $userType = null){
+    public function getAll($plate = null, $model = null, $gate = null, $user = null, $inside = null, $color = null, $driverName = null, $inTime=null, $outTime=null, int $userId, $userType = null){
         $v = new Vehicle();
+        // Filters Begin
 
         // Vehicle Plate Filter
         if(!empty($plate))
             $v = $v->where('plate','like','%'.$plate.'%');
-
+        // Gate Filter
         if(!empty($gate))
             $v = $v->where('gate_id',$gate);
-
+        // User in and Out Filter
         if(!empty($user)) {
             $v = $v->where(function ($v) use($user) {
                 $v->where('user_in_id', $user)
                     ->orWhere('user_out_id', $user);
             });
         }
+        //Color Filter
 
+        if(!empty($color))
+            $v = $v->where('color',$color);
+        //Model Filter
+        if(!empty($model))
+            $v = $v->where('model','LIKE','%'.$model.'%');
+        //Driver Filter
+        if(!empty($driverName))
+            $v = $v->where('driver_name','LIKE','%'.$driverName.'%');
+        //Created at filter
+        if(!empty($inTime))
+            $v = $v->where('created_at','>=', $inTime);
+        //Left at filter
+        if(!empty($outTime))
+            $v = $v->where('left_at','<=', $outTime.' 23:59:59');
+        // Inside Vehicles Filter
         if(!empty($inside)) {
             if($inside)
                 $v = $v->whereNull('left_at');
         }
+        // End Filters
         
 
         $filter = 'destination';
@@ -55,12 +70,16 @@ class VehicleService
             $filter = 'destination:id,block';
 
         }
-        
 
-        return $v   ->with(['gate:id,description', 'userIn:id,name','userOut:id,name', $filter])
-                    ->orderByDesc('created_at')
-                    ->paginate();
-                 
+        // If type of user is Ronda and the vehicle has left, he can no longer edit
+        if($userType =='R') {
+            $v = $v->whereNull('left_at'); // Show only that they are still inside
+        }
+
+
+        return $v->with(['gate:id,description', 'userIn:id,name','userOut:id,name', $filter])
+                 ->orderByDesc('created_at')
+                 ->paginate();
     }
 
     public function create($driverName, $plate, int $time,int $destinationId,int $visitorCategoryId, int $gateId, int $userId, $color=null, $model=null, $cpf=null){
@@ -98,7 +117,7 @@ class VehicleService
         $vehicle =Vehicle::where('plate','like', "%".$filtro."%")
                     ->orderByDesc('created_at')
                     ->first(['id','plate','model','color','created_at','left_at']);
-    
+
         $vehicle->complaints = $complaints;
         return $vehicle;
     }
@@ -164,6 +183,44 @@ class VehicleService
             }
         } else {
             throw new \Exception("Vehicle Not Found", 404);
+        }
+    }
+
+
+    /**
+     * Get inside vehicles that did not leave before planned
+     *
+     * @return void
+     */
+    public function findDelayed(){
+        // Get vehicles that was supposed to have left until the minute running this event
+        $vehicles = Vehicle::where(DB::raw("DATE_FORMAT((created_at + INTERVAL `time` MINUTE), '%Y-%m-%d %H:%i')"), DB::raw("DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i')"))
+                                ->whereNull('left_at')
+                                ->get(['plate','model','driver_name']);
+        foreach($vehicles as $v){
+            $text = "Veículo de placa ".$v->plate." ultrapassou o horário limite (Horário previsto: ".date("H:i").")";
+
+            if(!empty($v->model) || !empty($v->driver_name))
+                $text .= "\n\nInformações adicionais:";
+
+            if(!empty($v->model))
+                $text .= "\nModelo: ".$v->model;
+
+            if(!empty($v->driver_name))
+                $text .= "\nMotorista: ".$v->driver_name;
+
+            //Encode characters and spaces for request
+            $text = urlencode($text);
+
+            //Telegram send message endpoint
+            $ch = curl_init("https://api.telegram.org/bot".env('TELEGRAMBOTTOKEN')."/sendMessage?chat_id=".env('TELEGRAMGROUPID')."&text=$text");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            if(env('APP_DEBUG')) { // Desabilitar verificação de SSL
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            }
+            $result = curl_exec($ch);
+            curl_close($ch);
         }
     }
 
