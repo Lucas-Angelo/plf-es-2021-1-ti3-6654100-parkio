@@ -42,8 +42,11 @@ jobs:
             echo TELEGRAMBOTTOKEN=${{ secrets.telegram_bottoken }} >> .env
             echo TELEGRAMGROUPID=${{ secrets.telegram_groupid }} >> .env
 
+      - name: Update composer.json directory
+          run: php composer.phar --working-dir=./Codigo/ update
+
       - name: Install Composer Dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: composer install --prefer-dist --no-progress
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
