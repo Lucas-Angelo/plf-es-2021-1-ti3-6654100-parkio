@@ -1,0 +1,60 @@
+on:
+  release:
+    types: [published]
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-composer-${{ hashFiles('composer.json') }}
+
+      - name: Create env file
+        run: |
+            touch .env
+            echo APP_NAME=ParkIO >> .env
+            echo APP_ENV=production >> .env
+            echo APP_KEY= >> .env
+            echo APP_DEBUG=false >> .env
+            echo APP_URL=${{ secrets.app_url }} >> .env
+            echo APP_TIMEZONE=America/Sao_Paulo >> .env
+            echo LOG_CHANNEL=stack >> .env
+            echo LOG_SLACK_WEBHOOK_URL= >> .env
+            echo DB_CONNECTION=${{ secrets.db_connection }} >> .env
+            echo DB_HOST=${{ secrets.db_host }} >> .env
+            echo DB_PORT=${{ secrets.db_port }} >> .env
+            echo DB_DATABASE=${{ secrets.db_database }} >> .env
+            echo DB_USERNAME=${{ secrets.db_user }} >> .env
+            echo DB_PASSWORD=${{ secrets.db_password }} >> .env
+            echo DB_TIMEZONE='-03:00' >> .env
+            echo CACHE_DRIVER=file >> .env
+            echo QUEUE_CONNECTION=sync >> .env
+            echo JWTSECRET=${{ secrets.jwt_secret }} >> .env
+            echo TELEGRAMBOTTOKEN=${{ secrets.telegram_bottoken }} >> .env
+            echo TELEGRAMGROUPID=${{ secrets.telegram_groupid }} >> .env
+
+      - name: Install Composer Dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.ftp_host }}
+          username: ${{ secrets.ftp_user }}
+          password: ${{ secrets.ftp_password }}
+          local-dir: ./Codigo/
+          exclude: .git*
+            - **.git*
+            - .git*/**
+            -  **/.git*/**
+            - vendor/**
+            - vendor/**/*
