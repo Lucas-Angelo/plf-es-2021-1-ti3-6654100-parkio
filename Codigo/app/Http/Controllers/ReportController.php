@@ -7,10 +7,10 @@ use App\Services\ReportService;
 
 class ReportController extends Controller
 {
-    public function getVisitorByDate(Request $request){
+    public function getQtdVisitorByDate(Request $request){
         try {
             $r = new ReportService();
-            return $r->getVisitorByDate();
+            return $r->getQtdVisitorByDate($request->dates); //pass initial date
 
         } catch (\Exception $e) {
             return response()->json([
@@ -20,10 +20,10 @@ class ReportController extends Controller
     }
 
 
-    public function getVehiclesByGateKeeper(Request $request){
+    public function getQtdVehiclesByGateKeeper(Request $request){
         try {
             $r = new ReportService();
-            return $r->getAll($request->search);
+            return $r->getQtdVehiclesByGateKeeper($request->search);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()

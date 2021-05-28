@@ -59,7 +59,9 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         $router->post('/delay', ['uses' => 'DelayController@create', 'auth' => ['A', 'P']]); // Create delay for a specific vehicle
 
         //report
-        $router->get('/reportVisitor', ['uses'=> 'ReportController@getVisitorByDate', 'auth' => ['A']]);
+        $router->get('/reportVisitor', ['uses'=> 'ReportController@getQtdVisitorByDate', 'auth' => ['A']]);
+        $router->get('/reportGateKeeper', ['uses'=> 'ReportController@getQtdVehiclesByGateKeeper', 'auth' => ['A']]);
+
     });
 });
 

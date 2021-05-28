@@ -6,6 +6,7 @@ use App\Models\Gate;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use DateTime;
 
 class ReportService
 {
@@ -18,28 +19,71 @@ class ReportService
         return Gate::all();
     }
     
-    public function getVisitorByDate()
+    public function getQtdVisitorByDate($date)
     {
         $list = new Vehicle();
+        $arrayday = array();
+        $arrayhour = array();
+        //dd(strtotime("+7 day", strtotime($date)));
+        //dd(date("Y-m-d", strtotime("+7 day", strtotime($date) )));
 
-        //$list = Vehicle::where()
-        //if()
-//        SELECT
-  //      date(created_at),
-      //  COUNT(id)
-    // FROM vehicle
-     //GROUP BY 1;
+        $begin = new DateTime( $date );
+        $end   = new DateTime( date("Y-m-d", strtotime("+7 day", strtotime($date))) );
+        
+        for($i = $begin; $i < $end; $i->modify('+1 day')){
 
-        $list->where('created_at','>=','2021-05-10 12-00');
-        return $list
-                    //->count('id')
-                    ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
-                    ->orderByDesc('created_at')
-                    ->paginate();
-                //->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
-                //->orderByDesc('created_at')
-                //->paginate();
+                $x = 0;
+                $vehicles = new Vehicle();
+                $arrayhour = [];
+                for($x = 0; $x < 8 ; $x++){
+                    $vehicles = Vehicle::
+                              whereRaw('date(created_at) = ?', $i->format("Y-m-d"))
+                            ->whereRaw('hour(created_at) >= ?', $x)
+                            ->whereRaw('hour(created_at) <= ?', $x+3)
+                            ->count('id');
+
+                    array_push($arrayhour, $vehicles);
+            }
+
+            array_push($arrayday,  $arrayhour);
+
+         }
+
+        return $arrayday;
 
     }
+
+
+    public function getQtdVehiclesByGateKeeper($date)
+    {
+        $list = new Vehicle();
+        $arrayday = array();
+        $arrayhour = array();
+        //dd(strtotime("+7 day", strtotime($date)));
+        //dd(date("Y-m-d", strtotime("+7 day", strtotime($date) )));
+
+        $begin = new DateTime( $date );
+        $end   = new DateTime( date("Y-m-d", strtotime("+7 day", strtotime($date))) );
+        
+        for($i = $begin; $i < $end; $i->modify('+1 day')){
+//             select count(id), user_in_id as g
+// from vehicle v 
+// group by 2
+                    $gateKeeper = Vehicle::
+                              Select(DB::raw("count(id), user_in_id "))
+                            ->whereRaw('date(created_at) = ?', $i->format("Y-m-d"))
+                            ->groupBy('user_in_id')
+                            ->get()
+                            ->toArray();
+            
+                    dd($gateKeeper);
+            array_push($arrayday,  $gateKeeper);
+
+         }
+
+        return $arrayday;
+
+    }
+
 
 }
