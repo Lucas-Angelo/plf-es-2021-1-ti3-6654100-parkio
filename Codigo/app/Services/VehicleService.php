@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Vehicle;
 use App\Models\User;
 use App\Models\Complain;
+use App\Models\BlockManagerHasDestination;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Http;
 
@@ -17,9 +18,7 @@ class VehicleService
      * @param String|null $plate Vehicle's Plate Filter
      * @return Collection
      */
-    public function getAll(int $userId, $plate = null, $model = null, $gate = null, $user = null, $inside = null, $color = null, $driverName = null, $inTime=null, $outTime=null){
-        $u = User::find($userId);
-
+    public function getAll($plate = null, $model = null, $gate = null, $user = null, $inside = null, $color = null, $driverName = null, $inTime=null, $outTime=null, int $userId, $userType = null){
         $v = new Vehicle();
         // Filters Begin
 
@@ -58,17 +57,29 @@ class VehicleService
                 $v = $v->whereNull('left_at');
         }
         // End Filters
+        
+
+        $filter = 'destination';
+
+        if($userType == 'S'){
+            $destinations = BlockManagerHasDestination::select(DB::raw("CONCAT(destination_id) as destinations"))
+                                        ->where("user_id", $userId)
+                                        ->get()
+                                        ->toArray();
+            $v = $v->whereIn('destination_id', $destinations);
+            $filter = 'destination:id,block';
+
+        }
 
         // If type of user is Ronda and the vehicle has left, he can no longer edit
-        if($u->type=='R') {
+        if($userType =='R') {
             $v = $v->whereNull('left_at'); // Show only that they are still inside
         }
 
 
-        return $v
-                ->with(['gate:id,description','userIn:id,name','userOut:id,name', 'destination'])
-                ->orderByDesc('created_at')
-                ->paginate();
+        return $v->with(['gate:id,description', 'userIn:id,name','userOut:id,name', $filter])
+                 ->orderByDesc('created_at')
+                 ->paginate();
     }
 
     public function create($driverName, $plate, int $time,int $destinationId,int $visitorCategoryId, int $gateId, int $userId, $color=null, $model=null, $cpf=null){
