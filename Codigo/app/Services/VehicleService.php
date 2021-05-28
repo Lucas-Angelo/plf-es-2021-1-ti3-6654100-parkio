@@ -43,6 +43,7 @@ class VehicleService
                 $v = $v->whereNull('left_at');
         }
         
+
         $filter = 'destination';
 
         if($userType == 'S'){
