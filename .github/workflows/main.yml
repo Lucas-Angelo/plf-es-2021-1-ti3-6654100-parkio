@@ -43,7 +43,7 @@ jobs:
             echo TELEGRAMGROUPID=${{ secrets.telegram_groupid }} >> .env
 
       - name: Update composer.json directory
-          run: php composer.phar --working-dir=./Codigo/ update
+        run: php composer.phar --working-dir=./Codigo/ update
 
       - name: Install Composer Dependencies
         run: composer install --prefer-dist --no-progress
