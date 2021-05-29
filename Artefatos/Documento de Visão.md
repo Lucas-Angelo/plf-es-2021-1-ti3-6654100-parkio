@@ -65,6 +65,7 @@ ID | Descrição do Requisito | Prioridade | Complexidade
 6 | O sistema deve ser dimensionada para suportar até 20 usuários conectados ao mesmo tempo. | Média |Baixa
 7 | O sistema deve garantir a segurança das senhas dos usuários, criptografando-as ao serem inseridas no banco de dados. | Alta | Baixa
 8 | O sistema deve garantir a integridade do registro simultâneo de veículos por mais de um usuário ao mesmo tempo, por meio do padrão de Int com auto increment como chave primária na tabela do banco de dado que recebe os veículos visitantes cadastrados. | Média | Baixa
+9 | A aplicação deve estar disponível nos modos claro e escuro, possibilitando maior conforto para o usuário. | Média | Baixa
 
 ### Técnica(s) de Elicitação utilizada(s)
 
