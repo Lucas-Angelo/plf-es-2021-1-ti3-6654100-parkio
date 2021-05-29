@@ -26,6 +26,7 @@ $router->group(['prefix' => '/api'], function () use ($router) {
         $router->post('/users', ['uses' => 'UserController@create', 'auth' => ['A']]); // Route path (used for requests), Controller (Same name as in folder)@Public_function_name
         $router->get('/users', ['uses' => 'UserController@getAll', 'auth' => ['S','R','A']]);
         $router->get('/users/search', ['uses' => 'UserController@search', 'auth' => ['S','R','A']]);
+        $router->put('/users/{id}', ['uses' => 'UserController@edit', 'auth' => ['A']]);
         $router->delete('/users/{id}', ['uses' => 'UserController@delete', 'auth' => ['A']]);
 
         //complains

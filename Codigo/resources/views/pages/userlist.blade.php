@@ -82,6 +82,27 @@
         </div>
     </div>
 
+    <div class="modal fade" id="trocarSenha" tabindex="-1" aria-labelledby="trocarSenhaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h5 class="modal-title" id="trocarSenhaLabel">Trocar senha do usuário: </h5>
+                </div>
+                <div class="modal-body justify-content-center">
+                    <form onSubmit="handleChangePassFormSubmit(event)" id="trocaSenha" class="justify-content-center">
+                        <input id="idUserPass" class="d-none">
+                        <div class="mb-3">
+                            <label for="novaSenha" class="form-label">Senha <span class="required">*</span></label>
+                            <input for="novaSenha" type="password" class="form-control" id="novaSenha" required>
+                        </div>
+                        <button id="close-modal-np" type="button" class="btn btn-secondary d-none" data-bs-dismiss="modal">Close</button>
+                        <button id="btn-trocaSenha" type="submit" class="btn btn-secondary w-100 mt-2 mb-3">Trocar senha</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 @endsection

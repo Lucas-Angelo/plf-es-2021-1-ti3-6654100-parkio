@@ -90,5 +90,20 @@ class UserController extends Controller
 
     }
 
-    //
+    public function edit(Request $request, int $id){
+        $this->validate($request, [
+            'password' => 'required'
+        ]);
+
+        try {
+            $u = new UserService();
+            return response()->json(
+                $u->edit($id, $request->password)
+            );
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], $this->treatCodeError($e));
+        }
+    }
 }
