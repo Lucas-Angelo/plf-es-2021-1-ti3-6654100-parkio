@@ -23,7 +23,7 @@ class ReportController extends Controller
     public function getQtdVehiclesByGateKeeper(Request $request){
         try {
             $r = new ReportService();
-            return $r->getQtdVehiclesByGateKeeper($request->search);
+            return $r->getQtdVehiclesByGateKeeper($request->dates); //pass initial date
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()

@@ -59,24 +59,20 @@ class ReportService
         $list = new Vehicle();
         $arrayday = array();
         $arrayhour = array();
-        //dd(strtotime("+7 day", strtotime($date)));
-        //dd(date("Y-m-d", strtotime("+7 day", strtotime($date) )));
 
         $begin = new DateTime( $date );
         $end   = new DateTime( date("Y-m-d", strtotime("+7 day", strtotime($date))) );
         
         for($i = $begin; $i < $end; $i->modify('+1 day')){
-//             select count(id), user_in_id as g
-// from vehicle v 
-// group by 2
+
                     $gateKeeper = Vehicle::
-                              Select(DB::raw("count(id), user_in_id "))
-                            ->whereRaw('date(created_at) = ?', $i->format("Y-m-d"))
-                            ->groupBy('user_in_id')
+                              Select(DB::raw("count(vehicle.id), user_in_id, name"))
+                              ->join('user', 'user.id', '=', 'user_in_id')
+                            ->whereRaw('date(vehicle.created_at) = ?', $i->format("Y-m-d"))
+                            ->groupBy('user_in_id', 'name')
                             ->get()
                             ->toArray();
             
-                    dd($gateKeeper);
             array_push($arrayday,  $gateKeeper);
 
          }
