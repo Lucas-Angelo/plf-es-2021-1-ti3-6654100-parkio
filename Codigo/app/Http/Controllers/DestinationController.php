@@ -10,7 +10,7 @@ class DestinationController extends Controller
     public function getAll(Request $request){
         try {
             $d = new DestinationService();
-            return $d->getAll($request->search);
+            return $d->getAll($request->block, $request->apartament);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
