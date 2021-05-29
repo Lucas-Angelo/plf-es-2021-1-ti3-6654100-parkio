@@ -19,7 +19,7 @@ class DestinationService
     $d = new Destination();
 
     if(!empty($block)){
-      
+
     $d = $d->where('block', $block);
 
     }
@@ -30,7 +30,10 @@ class DestinationService
 
     }
 
-    return $d//->orderByDesc('created_at')
+    //$d = $d->orderByRaw('substr(block from 1 for 2) cast(substr(block from 2) AS UNSIGNED)');
+    //$d->orderByRaw('substr(apartament from 1 for 2) cast(substr(apartament from 2) AS UNSIGNED)');
+
+    return $d
                 ->paginate();
   }
 
