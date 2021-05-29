@@ -30,7 +30,7 @@ class DestinationService
 
     }
 
-    return $d->orderByDesc('created_at')
+    return $d//->orderByDesc('created_at')
                 ->paginate();
   }
 
