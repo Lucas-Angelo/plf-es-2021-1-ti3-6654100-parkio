@@ -26,6 +26,7 @@ window.addEventListener("load", function () {
     if(['A'].includes(uinfo.t)) {
         $('#btnConfig').removeClass('d-none')
         $('#btnUsers').removeClass('d-none')
+        $('#btnReport').removeClass('d-none')
     }
     if(['A','R','S'].includes(uinfo.t))
         $('#btnList').removeClass('d-none')
