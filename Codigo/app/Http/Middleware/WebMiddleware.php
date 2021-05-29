@@ -22,6 +22,7 @@ class WebMiddleware
             '/vehiclelist' => ['A','S','R'],
             '/userlist' => ['A'],
             '/admin' => ['A'],
+            '/report' => ['A'],
         ];
         
         $url = $request->getPathInfo();

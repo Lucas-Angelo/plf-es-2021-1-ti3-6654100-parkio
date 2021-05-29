@@ -29,6 +29,12 @@
                         <p class="w-100 d-block text-center">Lista De Veículos</p>
                     </div>
                 </a>
+                <a href="/report" class="col-12 col-sm-6 col-lg-2 menu-container-item rounded text-decoration-none d-none" id="btnReport">
+                    <div class="px-3 py-2">
+                        <i class="far fa-chart-bar menu-icon d-block text-center"></i>
+                        <p class="w-100 d-block text-center">Relatórios</p>
+                    </div>
+                </a>
                 <a href="/userlist" class="col-12 col-sm-6 col-lg-2 menu-container-item rounded text-decoration-none d-none" id="btnUsers">
                     <div class="px-3 py-2">
                         <i class="far fa-user-circle menu-icon d-block text-center"></i>
