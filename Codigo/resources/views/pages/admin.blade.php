@@ -328,11 +328,11 @@ Configurações
                         <input type="number" class="d-none" value="" id="destinationId">
                         <div class="mb-3 col-12 col-lg-12">
                             <label for="destination-block" class="form-label">Bloco<span class="required">*</span></label>
-                            <input type="text" class="form-control" id="destination-block" required autocomplete="false" maxlength="6">
+                            <input type="text" class="form-control" id="destination-block" required autocomplete="false" minlength="1" maxlength="20">
                         </div>
                         <div class="mb-3 col-12 col-lg-12">
                             <label for="destination-ap" class="form-label">Apartamento<span class="required">*</span></label>
-                            <input type="text" class="form-control" id="destination-ap" required autocomplete="false" maxlength="6">
+                            <input type="text" class="form-control" id="destination-ap" required autocomplete="false" minlength="1" maxlength="20">
                         </div>
                         <div class="button-div text-center mt-3">
                             <button class="btn btn-secondary" type="submit">Cadastrar</button>

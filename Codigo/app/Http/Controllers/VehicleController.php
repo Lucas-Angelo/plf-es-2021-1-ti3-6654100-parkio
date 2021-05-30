@@ -45,12 +45,14 @@ class VehicleController extends Controller
         //validate essencials fields
         $this->validate($request, [
             'driverName' => 'required|max:255',
+            'cpf' => 'min:11|max:14',
             'plate' => 'required|min:7|max:8',
-            'time' => 'required|numeric',
+            'model' => 'min:1|max:80',
+            'color' => 'max:45',
+            'time' => 'required|numeric|min:1|max:65535',
             'categoryId' => 'required|exists:visitor_category,id',
             'destinationId' => 'required|exists:destination,id',
             'gateId' => 'required|exists:gate,id'
-
         ]);
 
         try {
@@ -99,7 +101,9 @@ class VehicleController extends Controller
 
     public function edit(Request $request, int $id){
         $this->validate($request, [
-            'plate' => 'nullable|max:8',
+            'plate' => 'nullable|min:7|max:8',
+            'model' => 'max:80',
+            'color' => '45',
             'gateId' => 'required_with:score|exists:gate,id',
             'score' => 'required_with:gateId|in:G,B'
         ]);

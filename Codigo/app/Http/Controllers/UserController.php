@@ -38,9 +38,9 @@ class UserController extends Controller
      */
     public function create(Request $request){
         $this->validate($request, [
-            'name' => 'required',
-            'login' => 'required|unique:user',
-            'password' => 'required',
+            'name' => 'required|min:1|max:255',
+            'login' => 'required|unique:user|min:1|max:40',
+            'password' => 'required|min:1|max:32',
             'type' => 'required|in:A,S,R,P'
         ]);
 
@@ -92,7 +92,7 @@ class UserController extends Controller
 
     public function edit(Request $request, int $id){
         $this->validate($request, [
-            'password' => 'required'
+            'password' => 'required|min:1|max:32'
         ]);
 
         try {

@@ -62,7 +62,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="input-password" class="form-label">Senha <span class="required">*</span></label>
-                            <input for="input-password" type="password" class="form-control" id="input-password" required>
+                            <input for="input-password" type="password" class="form-control" id="input-password" minlength="1" maxlength="32" required>
                         </div>
                         <div class="mb-3">
                             <label for="input-type" class="form-label">Tipo <span class="required">*</span></label>

@@ -49,11 +49,11 @@
                     </div>
                     <div class="mb-3 col-12 col-md-3 col-lg-2">
                         <label for="input-time" class="form-label">Tempo (minutos)</label>
-                        <input type="number" min="0" class="form-control" id="input-time">
+                        <input type="number" min="1" max="65535" class="form-control" id="input-time">
                     </div>
                     <div class="mb-3 col-12 col-md-6 col-lg-4">
                         <label for="input-cpf" class="form-label">CPF</label>
-                        <input type="text" class="form-control" id="input-cpf" maxlength="14">
+                        <input type="text" class="form-control" id="input-cpf" minlength="11" maxlength="14">
                     </div>
                     <div class="mb-3 col-12 col-md-4 col-lg-2">
                         <label for="input-model" class="form-label">Modelo</label>
@@ -213,7 +213,7 @@
                             </div>
                             <div class="form-group mb-2">
                                 <label for="inputDelayTime">Tempo <span class="required">*</span></label>
-                                <input type="number" class="form-control" id="inputDelayTime" aria-describedby="inputDelayTime" placeholder="Informe o tempo em minutos" min="1" required>
+                                <input type="number" class="form-control" id="inputDelayTime" aria-describedby="inputDelayTime" placeholder="Informe o tempo em minutos" min="1" max="65535" required>
                             </div>
                             <div class="form-group">
                                 <label for="inputDelayDescription">Motivo <span class="required">*</span></label>
