@@ -23,11 +23,11 @@
         <form>
             <div class="mb-3">
                 <label for="advancedInputPlate" class="form-label">Placa</label>
-                <input class="form-control" id="advancedInputPlate">
+                <input class="form-control" id="advancedInputPlate" maxlength="8">
             </div>
             <div class="mb-3">
                 <label for="advancedInputModel" class="form-label">Modelo</label>
-                <input class="form-control" id="advancedInputModel">
+                <input class="form-control" id="advancedInputModel" maxlength="80">
             </div>
             <div class="mb-3">
                 <label for="input-color" class="form-label d-block">Cor</label>
@@ -37,7 +37,7 @@
             </div>
             <div class="mb-3">
                 <label for="advancedInputName" class="form-label">Nome do Condutor</label>
-                <input class="form-control" id="advancedInputName">
+                <input class="form-control" id="advancedInputName" maxlength="255">
             </div>
             <div class="mb-3">
                 <label for="advancedInputNameUserIn" class="form-label">Porteiro</label>
@@ -153,11 +153,11 @@
 
                     <div class="mb-3 col-12">
                         <label for="input-plate" class="form-label">Placa<span class="required">*</span></label>
-                        <input type="text" class="form-control" id="input-plate" autocomplete="false">
+                        <input minlength="7" maxlength="8" type="text" class="form-control" id="input-plate" autocomplete="false" required>
                     </div>
                     <div class="mb-3 col-12">
                         <label for="input-time" class="form-label">Modelo</label>
-                        <input type="text" min="0" class="form-control" id="input-model">
+                        <input type="text" min="0" class="form-control" id="input-model" minlength="1" maxlength="80" required>
                     </div>
                     <div class="mb-3 col-12">
                         <label for="vehiclelist-input-color" class="form-label d-block">Cor</label>

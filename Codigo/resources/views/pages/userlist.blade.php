@@ -54,11 +54,11 @@
                     <form onSubmit="handleEntranceFormSubmit(event)" id="cadastro" class="justify-content-center">
                         <div class="mb-3">
                             <label for="input-name" class="form-label">Nome <span class="required">*</span></label>
-                            <input for="input-name" type="text" class="form-control" id="input-name" required>
+                            <input for="input-name" type="text" class="form-control" id="input-name" minlength="1" maxlength="255" required>
                         </div>
                         <div class="mb-3">
                             <label for="input-user" class="form-label">Usuário <span class="required">*</span></label>
-                            <input for="input-user" type="text" class="form-control" id="input-user" required>
+                            <input for="input-user" type="text" class="form-control" id="input-user" minlength="1" maxlength="40" required>
                         </div>
                         <div class="mb-3">
                             <label for="input-password" class="form-label">Senha <span class="required">*</span></label>

@@ -35,7 +35,7 @@
                     </div>
                     <div class="mb-3 col-12 col-md-8 col-lg-6">
                         <label for="input-name" class="form-label">Nome do condutor <span class="required">*</span></label>
-                        <input type="text" class="form-control" id="input-name" required>
+                        <input type="text" class="form-control" id="input-name" minlength="1" maxlength="255" required>
                     </div>
                     <div class="mb-3 col-12 col-md-6 col-lg-4">
                         <label for="txtDestination" class="form-label d-block">Destino <span class="required">*</span></label>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="mb-3 col-12 col-md-4 col-lg-2">
                         <label for="input-model" class="form-label">Modelo</label>
-                        <input type="text" class="form-control" id="input-model">
+                        <input type="text" class="form-control" id="input-model" minlength="1" maxlength="80">
                     </div>
                     <div class="mb-3 col-12 col-md-2 col-lg-2">
                         <label for="input-color" class="form-label">Cor</label>
@@ -175,7 +175,7 @@
 
                          <div class="mb-3 col-12 col-lg-12">
                             <label for="report-description" class="form-label">Motivo<span class="required">*</span></label>
-                            <textarea  cols="10" rows="4" type="text" class="form-control" id="report-description"> </textarea>
+                            <textarea cols="10" rows="4" type="text" class="form-control" id="report-description" minlength="1" maxlength="255" required> </textarea>
                         </div>
 
 
@@ -217,7 +217,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="inputDelayDescription">Motivo <span class="required">*</span></label>
-                                <textarea class="form-control" id="inputDelayDescription" aria-describedby="inputDelayDescription" placeholder="Informe o motivo para extender o tempo de permanência desse veículo" required></textarea>
+                                <textarea class="form-control" id="inputDelayDescription" aria-describedby="inputDelayDescription" placeholder="Informe o motivo para extender o tempo de permanência desse veículo" minlength="1" maxlength="255" required></textarea>
                             </div>
                         </div>
                         <div id="modal-buttons" class="mb-3">
