@@ -21,8 +21,8 @@ class DestinationController extends Controller
     public function create(Request $request){
         //validate essencials fields
         $this->validate($request, [
-            'block' => 'required|max:6',
-            'apt' => 'required|max:6'
+            'block' => 'required|min:1|max:20',
+            'apt' => 'required|min:1|max:20'
         ]);
         try {
         //calls the service and the function create passing datas
@@ -36,13 +36,13 @@ class DestinationController extends Controller
             ], $this->treatCodeError($e));
         }
     }
-    
+
     public function update(Request $request, int $id)
     {
         if(!empty($id)){
             $this->validate($request, [
-                'block' => 'required|max:6',
-                'apt'   => 'required|max:6'
+                'block' => 'required|min:1|max:20',
+                'apt'   => 'required|min:1|max:20'
             ]);
 
             try {
@@ -51,7 +51,7 @@ class DestinationController extends Controller
                     return response()->json(
                         $d->update($id, $request->block, $request->apt)
                     );
-            } 
+            }
             catch (\Exception $e) {
                     return response()->json([
                         'error' => $e->getMessage()

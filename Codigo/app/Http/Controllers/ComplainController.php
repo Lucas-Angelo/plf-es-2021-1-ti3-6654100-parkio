@@ -13,7 +13,7 @@ class ComplainController extends Controller
      */
     public function __construct()
     {
-        
+
     }
 
     /**
@@ -29,7 +29,7 @@ class ComplainController extends Controller
         try {
         $cs = new ComplainService();
         return $cs->getAll($request->plate);
-        } 
+        }
         catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
@@ -47,12 +47,12 @@ class ComplainController extends Controller
      */
     public function create(Request $request){
         $this->validate($request, [
-            'plate' => 'required',
-            'description' => 'required',
+            'plate' => 'required|min:7|max:8',
+            'description' => 'required|min:1|max:255',
             'vehicleId' => 'required',
         ]);
 
-        $cs = new ComplainService();      
+        $cs = new ComplainService();
 
         return response()->json(
             $cs->create($request->description, $request->plate,$request->vehicleId, $request->auth->id, $request->gateId)

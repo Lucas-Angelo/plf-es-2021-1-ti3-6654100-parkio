@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\GateService;
 
 class GateController extends Controller{
-  
+
     public function getAll(Request $request){
         try {
             $v = new GateService();
@@ -21,7 +21,7 @@ class GateController extends Controller{
     public function create(Request $request){
         //validate essencials fields
         $this->validate($request, [
-            'description' => 'required|max:255',
+            'description' => 'required|min:1|max:45',
         ]);
 
         //calls the service and the function create passing datas
@@ -59,7 +59,7 @@ class GateController extends Controller{
             try {
                 $g = new GateService();
                 return response()->json($g->search($id));
-                
+
             } catch (\Exception $e) {
                 return response()->json([
                     'error' => $e->getMessage()
@@ -76,7 +76,7 @@ class GateController extends Controller{
         //validate essencials fields
         $this->validate($request, [
             'id' => 'required',
-            'description' => 'required|max:255'
+            'description' => 'required|min:1|max:45'
         ]);
 
         //calls the service and the function create passing datas

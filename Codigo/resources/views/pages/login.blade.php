@@ -17,13 +17,13 @@
         <div id="line" class="row">
 
             <div class="col-12 col-md-4 p-0">
-                
+
                 <form onSubmit="handleSubmit(event)" id="form">
-                    <h1 class="login">Log in</h1>  
+                    <h1 class="login">Log in</h1>
                     <div class="row">
                         <div class="col-12">
                             <div id="user" class="inputWithIcon">
-                                <input type="text" placeholder="Usuário" id="input-user">
+                                <input type="text" placeholder="Usuário" id="input-user" minlength="1" maxlength="40">
                                 <i class="fas fa-user-circle"></i>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                     <div class="row mt-3">
                         <div class="col-12">
                             <div id="pass" class="inputWithIcon">
-                                <input type="password" placeholder="Senha"v id="input-pass">
+                                <input type="password" placeholder="Senha"v id="input-pass" minlength="1">
                                 <i class="fas fa-lock"></i>
                             </div>
                         </div>

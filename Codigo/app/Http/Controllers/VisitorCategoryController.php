@@ -21,8 +21,8 @@ class VisitorCategoryController extends Controller
     public function create(Request $request){
         //validate essencials fields
         $this->validate($request, [
-            'description' => 'required|max:45',
-            'time' => 'required|numeric'
+            'description' => 'required|min:1|max:45',
+            'time' => 'required|numeric|min:1|max:65535'
         ]);
 
         //calls the service and the function create passing datas
@@ -69,8 +69,8 @@ class VisitorCategoryController extends Controller
         //validate essencials fields
         $this->validate($request, [
             'id' => 'required',
-            'description' => 'required|max:255',
-            'time' => 'required'
+            'description' => 'required|min:1|max:45',
+            'time' => 'required|min:1|max:65535'
         ]);
 
         //calls the service and the function create passing datas

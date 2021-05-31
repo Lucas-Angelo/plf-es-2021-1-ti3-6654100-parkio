@@ -38,8 +38,8 @@ class UserController extends Controller
      */
     public function create(Request $request){
         $this->validate($request, [
-            'name' => 'required',
-            'login' => 'required|unique:user',
+            'name' => 'required|max:255',
+            'login' => 'required|unique:user|max:40',
             'password' => 'required',
             'type' => 'required|in:A,S,R,P'
         ]);
