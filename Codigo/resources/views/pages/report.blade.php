@@ -15,9 +15,9 @@
         <div class="col-4 d-none d-md-inline">
             <label for="txtPlateFilter">Data</label>
             <div class="input-group mb-3">
-                <input type="date" class="form-control" aria-label="A partir">
+                <input type="date" class="form-control reportDatePicker" id="txtDateBegin" aria-label="A partir">
                 <span class="input-group-text bg-transparent">e</span>
-                <input type="date" class="form-control" aria-label="Até">
+                <input type="date" class="form-control reportDatePicker" id="txtDateEnd" aria-label="Até">
             </div>
         </div>
         <div class="col d-none d-md-inline">

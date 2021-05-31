@@ -28,7 +28,7 @@ class ReportController extends Controller
     public function getQtdVehiclesByGateKeeper(Request $request){
 
         $this->validate($request, [
-            'dates' => 'required|max:12',
+            'dates' => 'nullable|date_format:Y-m-d',
         ]);
 
         try {

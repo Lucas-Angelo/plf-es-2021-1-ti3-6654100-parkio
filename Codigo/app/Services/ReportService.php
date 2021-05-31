@@ -60,19 +60,20 @@ class ReportService
     }
 
 
-    public function getQtdVehiclesByGateKeeper($date, $gate = null, $doorMen = null)
-    {
-        $list = new Vehicle();
+    public function getQtdVehiclesByGateKeeper($date = null, $gate = null, $doorMen = null) {
         $arrayday = array();
-        $arrayhour = array();
 
-        $begin = new DateTime( $date );
+        if(!empty($date))
+            $begin = new DateTime( $date );
+        else
+            $begin = new DateTime(date('Y-m-d'));
+
         $end   = new DateTime( date("Y-m-d", strtotime("+7 day", strtotime($date))) );
         
         for($i = $begin; $i < $end; $i->modify('+1 day')){
 
                     $gateKeeper = Vehicle::
-                              Select(DB::raw("count(vehicle.id), user_in_id, name"))
+                              select(DB::raw("count(vehicle.id) AS cnt, user_in_id AS uid, name"))
                               ->join('user', 'user.id', '=', 'user_in_id')
                             ->whereRaw('date(vehicle.created_at) = ?', $i->format("Y-m-d"))
                             ->groupBy('user_in_id', 'name');
