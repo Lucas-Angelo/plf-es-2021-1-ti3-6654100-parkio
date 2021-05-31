@@ -1,7 +1,8 @@
 #txtPlateFilter:not(:placeholder-shown) {
     text-transform: uppercase;
 }
-#txtPlateFilter{
+
+#txtPlateFilter {
     width: 10rem;
 }
 
@@ -10,6 +11,10 @@
         margin-left: 1rem;
         padding: 15px;
         border: 1px solid #62628B;
+    }
+    #searchReportedVehicle {
+        margin-top: 1rem !important;
+        margin-left: 2rem !important;
     }
     .complainCard p {
         display: inline-flex;
