@@ -32,7 +32,7 @@
                     <div class="row mt-3">
                         <div class="col-12">
                             <div id="pass" class="inputWithIcon">
-                                <input type="password" placeholder="Senha"v id="input-pass" minlength="1" maxlength="32">
+                                <input type="password" placeholder="Senha"v id="input-pass" minlength="1">
                                 <i class="fas fa-lock"></i>
                             </div>
                         </div>

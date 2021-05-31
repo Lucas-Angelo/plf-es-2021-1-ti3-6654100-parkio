@@ -175,7 +175,7 @@
 
                          <div class="mb-3 col-12 col-lg-12">
                             <label for="report-description" class="form-label">Motivo<span class="required">*</span></label>
-                            <textarea cols="10" rows="4" type="text" class="form-control" id="report-description" minlength="1" maxlength="255" required> </textarea>
+                            <textarea cols="10" rows="4" type="text" class="form-control" id="report-description" minlength="1" maxlength="2000" required> </textarea>
                         </div>
 
 
@@ -217,7 +217,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="inputDelayDescription">Motivo <span class="required">*</span></label>
-                                <textarea class="form-control" id="inputDelayDescription" aria-describedby="inputDelayDescription" placeholder="Informe o motivo para extender o tempo de permanência desse veículo" minlength="1" maxlength="255" required></textarea>
+                                <textarea class="form-control" id="inputDelayDescription" aria-describedby="inputDelayDescription" placeholder="Informe o motivo para extender o tempo de permanência desse veículo" minlength="1" maxlength="2000" required></textarea>
                             </div>
                         </div>
                         <div id="modal-buttons" class="mb-3">
