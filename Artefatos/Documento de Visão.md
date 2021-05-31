@@ -36,21 +36,22 @@ Desenvolver um sistema web que consiga controlar a entrada e saída dos veículo
 
 ### Requisitos Funcionais
 
-ID | Descrição do Requisito | Prioridade | Complexidade
+| No.    | Descrição do Requisito | Prioridade | Complexidade |
 :-:|:-:|:-:|:-:
-1 | O porteiro deve cadastrar os veículos no sistema.| Alta | Média
-2 | O porteiro deve definir o Status do veículo visitante para 'Saiu' e marcar uma avaliação de como foi comportamento do condutor quando o veículo visitante sair. | Alta | Média
-3 | O administrador do sistema deve cadastrar tipos de visitantes (Ex: Entrega dos Correios, Técnico de Banda Larga, etc...), e definir um tempo recomendado que o visitante fique dentro do condomínio. | Alta | Baixa
-4 | O porteiro poderá aumentar o tempo de permanência do visitante após fazer contato com o morador para verificar o motivo do atraso. | Baixa | Média
-5 | O sistema deve emitir um alerta para um grupo no Telegram contendo os porteiros e os rondas no caso de algum veículo ficar determinado tempo dentro do condomínio. | Alta | Alta
+1 | O porteiro deve cadastrar os veículos no sistema. | Alta | Média
+2 | O porteiro deve remover o veículo quando o visitante sair. | Alta | Média
+3 | O administrador do sistema deve cadastrar tipos de visitantes. | Alta | Baixa
+4 | O porteiro poderá aumentar o tempo de permanência do visitante. | Baixa | Média
+5 | O sistema deve emitir um alerta para um grupo no Telegram quando algum veículo ultrapassar o tempo máximo no condomínio. | Alta | Alta
 6 | O administrador do sistema poderá criar usuários com diferentes permissões. | Média | Alta
 7 | O administrador do sistema poderá criar diferentes portarias dentro do sistema. | Média | Baixa
-8 | Os usuários de qualquer tipo devem ser capazes de fazer login. | Média | Média
+8 | Os usuários de qualquer tipo devem ser capazes de fazer login. | Alta | Baixa
 9 | Os usuários de qualquer tipo devem selecionar uma portaria para utilizar o sistema. | Média | Média
 10 | Os usuários devem poder consultar a lista de veículos. | Baixa | Média
 11 | A administração deverá possuir um relatório delimitado por um filtro de período de tempo, porteiro e/ou placa do veículo. | Baixa | Alta
-12 | O porteiro deverá escrever o motivo do bloqueio de um veículo visitante, caso ocorra algum problema com a visita. | Média | Média
-13 | O ronda poderá editar certas informações do veículo do visitante. | Baixa | Baixa
+12 | O porteiro deverá reportar um veículo visitante, caso ocorra algum problema. | Média | Média
+13 | O ronda poderá editar placa, modelo e cor de veículos que ainda estão dentro do condomínio. | Baixa | Baixa
+14 | O síndico poderá visualizar os veículos designados para o seu bloco. | Média | Baixa
 
 ### Requisitos Não Funcionais
 
@@ -64,6 +65,7 @@ ID | Descrição do Requisito | Prioridade | Complexidade
 6 | O sistema deve ser dimensionada para suportar até 20 usuários conectados ao mesmo tempo. | Média |Baixa
 7 | O sistema deve garantir a segurança das senhas dos usuários, criptografando-as ao serem inseridas no banco de dados. | Alta | Baixa
 8 | O sistema deve garantir a integridade do registro simultâneo de veículos por mais de um usuário ao mesmo tempo, por meio do padrão de Int com auto increment como chave primária na tabela do banco de dado que recebe os veículos visitantes cadastrados. | Média | Baixa
+9 | A aplicação deve estar disponível nos modos claro e escuro, possibilitando maior conforto para o usuário. | Média | Baixa
 
 ### Técnica(s) de Elicitação utilizada(s)
 
