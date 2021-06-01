@@ -37,7 +37,7 @@ class GateService
         $deleted = true;
         $gate = $this->search($id);
 
-        if(empty($category)){
+        if(empty($gate)){
             $message = "Portaria não encontrada";
             $deleted = false;
         } else {
