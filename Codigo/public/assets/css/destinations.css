@@ -49,7 +49,7 @@
             margin-left: 1rem !important;
             margin-bottom: 1rem !important;
         }
-        searchDestination .destinationCard {
+        .destinationCard {
             margin-left: 1rem;
             padding: 15px;
             border: 1px solid #62628B;
