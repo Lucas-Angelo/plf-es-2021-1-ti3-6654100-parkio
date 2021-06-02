@@ -140,48 +140,59 @@ Configurações
             <div class="tab-pane fade" id="reported" role="tabpanel" aria-labelledby="reported-tab">
 
                 <div class="row">
-                    <div class="col-11 p-0 m-0">
+                    <div class="col-11 p-0 " id ="searchReportedVehicle">
 
-                        <div class="row g-3 p-2">
-
-                            <div class="col d-inline">
-                                <label for="txtPlateFilter">Placa</label>
-                                <input type="text" onchange="updateComplainTable()" class="form-control" id="txtPlateFilter" placeholder="Placa" maxlength="8">
-                            </div>
-
-                            <div class="col d-inline">
-                                <div class="float-end">
-                                    <label>&nbsp;</label>
-                                    <button id="btnFilterPlate" class="btn btn-secondary d-block">
-                                        <i class="fas fa-search botoes d-inline"></i>
-                                        <b class="d-inline">Buscar</b>
-                                    </button>
+                                <div class="d-inline-block me-4">
+                                    <label for="txtPlateFilter">Placa</label>
+                                    <input type="text" onchange="updateComplainTable()" class="form-control" id="txtPlateFilter" placeholder="Placa" maxlength="8">
                                 </div>
-                            </div>
+
+                                <div class="d-md-inline">
+                                        <div id="divButtonSearchVehicle" class="float-end">
+                                            <label></label>
+                                            <button id="btnFilterPlate" class="btn btn-secondary d-block">
+                                                <i class="fas fa-search botoes d-inline"></i>
+                                                <b class="d-inline">Buscar</b>
+                                            </button>
+                                        </div>
+                                </div>
+
+                    </div>
+
+                 </div>
+
+                <div class="row">
+                    <div class="col-11 p-0 m-0">
+                        <div class="d-none d-md-block">
+
+                            <table class="table sortable">
+                                <colgroup>
+                                    <col span="1" style="width: 20%;">
+                                    <col span="1" style="width: 70%;">
+                                    <col span="1" style="width: 10%;">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>Placa</th>
+                                        <th>Motivo</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="complain-table-body">
+                                </tbody>
+                            </table>
 
                         </div>
-
-                        <table class="d-none d-md-table table sortable">
-                            <colgroup>
-                                <col span="1" style="width: 20%;">
-                                <col span="1" style="width: 70%;">
-                                <col span="1" style="width: 10%;">
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th>Placa</th>
-                                    <th>Motivo</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody id="complain-table-body">
-                            </tbody>
-                        </table>
 
                         <div id="lista-complain" class="d-md-none mt-3">
+
                         </div>
+
+
                     </div>
                 </div>
+
+
             </div>
 
             <div id="destination" class="tab-pane fade" role="tabpanel" aria-labelledby="destination-tab">
@@ -194,7 +205,7 @@ Configurações
                 </div>
                 <br class="d-none d-md-block">
                 <div class="row">
-                    <div class="col-11 p-0 offset-0 offset-md-0">
+                    <div class="col-11 p-0">
                         <form id="searchDestination">
                             <div class="d-inline-block me-4">
                                 <label class="d-block" for="inputSearchBlock" class="form-label">Bloco</label>
@@ -204,11 +215,11 @@ Configurações
                                 <label class="d-block" for="inputSearchApartament" class="form-label">Apartamento</label>
                                 <input type="text" class="form-control d-inline-block" id="inputSearchApartament">
                             </div>
-                            <div class="d-none d-md-inline">
-                                <div class="float-end">
-                                    <label>&nbsp;</label>
+                            <div class="d-md-inline">
+                                <div id="divButtonSearch" class="float-end">
+                                    <label></label>
                                     <button id="btnFilterDestination" class="btn btn-secondary d-block" type="button">
-                                        <i class="fas fa-search d-inline"></i>
+                                        <i class="fas fa-search botoes d-inline"></i>
                                         <b class="d-inline">Buscar</b>
                                     </button>
                                 </div>
