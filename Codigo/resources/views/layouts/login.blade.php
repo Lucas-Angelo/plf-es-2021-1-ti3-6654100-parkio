@@ -5,5 +5,7 @@
 <body>
     <!-- Will be replaced with file content from pages folder /resources/views/pages -->
     @yield('content')
+    @include('includes.toast')
+
 </body>
 </html>
