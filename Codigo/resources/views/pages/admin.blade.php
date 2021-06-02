@@ -146,7 +146,7 @@ Configurações
                                     <label for="txtPlateFilter">Placa</label>
                                     <input type="text" onchange="updateComplainTable()" class="form-control" id="txtPlateFilter" placeholder="Placa" maxlength="8">
                                 </div>
-                            
+
                                 <div class="d-md-inline">
                                     <div class="float-end">
                                         <label>&nbsp;</label>
@@ -187,7 +187,7 @@ Configurações
                         </div>
 
                         <div id="lista-complain" class="d-md-none mt-3">
-                            
+
                         </div>
 
 
@@ -218,8 +218,8 @@ Configurações
                                 <input type="text" class="form-control d-inline-block" id="inputSearchApartament">
                             </div>
                             <div class="d-md-inline">
-                                <div class="float-end">
-                                    <label>&nbsp;</label>
+                                <div id="divButtonSearch" class="float-end">
+                                    <label></label>
                                     <button id="btnFilterDestination" class="btn btn-secondary d-block" type="button">
                                         <i class="fas fa-search botoes d-inline"></i>
                                         <b class="d-inline">Buscar</b>
