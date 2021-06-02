@@ -148,25 +148,18 @@ Configurações
                                 </div>
 
                                 <div class="d-md-inline">
-
-                                    <div class="float-end">
-                                        
                                         <div id="divButtonSearchVehicle" class="float-end">
-                                            <label>&nbsp;</label>
+                                            <label></label>
                                             <button id="btnFilterPlate" class="btn btn-secondary d-block">
                                                 <i class="fas fa-search botoes d-inline"></i>
                                                 <b class="d-inline">Buscar</b>
                                             </button>
                                         </div>
-
-                                    </div>
                                 </div>
 
                     </div>
 
                  </div>
-
-                 <br>
 
                 <div class="row">
                     <div class="col-11 p-0 m-0">
