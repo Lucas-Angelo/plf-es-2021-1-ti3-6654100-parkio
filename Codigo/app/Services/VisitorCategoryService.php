@@ -11,7 +11,7 @@ class VisitorCategoryService
 
 
     public function create($description,int $time){
-      
+
       $message = "Categoria de Visitante cadastrada com sucesso!";
 
       $visitorCategory = new VisitorCategory();
@@ -27,40 +27,34 @@ class VisitorCategoryService
 
     public function getAll(){
       $v = VisitorCategory::all();
-      
+
       return $v;/*
       return $vvisitorCategory
             ->orderByDesc('id');*/
   }
 
-  public function delete(int $id){    
+  public function delete(int $id){
     $category = VisitorCategory::find($id);
     $message = "Categoria deletada com sucesso!";
     $deleted = true;
-    
-    if(empty($category)){
+
+    if(empty($category)) {
       $deleted = false;
       $message = "Categoria não encontrada";
-
-    }else if( Vehicle::where('visitor_category_id', $id)->get()->count() > 0  ){
-            $message = 'Remoção não concluída, possui veículos nessa categoria.';
-            $deleted = false;
-    }else {
-
+    } else {
        $category->delete();
-
     }
 
-        return [
-            'message' => $message,
-            'deleted' => $deleted 
-        ];
+    return [
+        'message' => $message,
+        'deleted' => $deleted
+    ];
   }
 
   public function search(int $id)
     {
         $category = VisitorCategory::find($id);
-        
+
         if(!empty($category)){
 
             return $category;
