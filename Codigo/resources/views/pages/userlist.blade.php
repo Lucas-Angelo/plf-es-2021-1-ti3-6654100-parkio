@@ -103,6 +103,31 @@
         </div>
     </div>
 
+    <div class="modal fade" id="blocksModal" tabindex="-1" aria-labelledby="blocksModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h5 class="modal-title" id="blocksModalLabel">Destinos vinculados ao síndico /*tal*/</h5>
+                </div>
+                <div class="modal-body justify-content-center d-flex flex-column px-5" id="linkblocks">
+                    <h5>
+                        <input type="checkbox" name="bl1" id="bl1">
+                        <label for="bl1">Bloco 1</label>
+                    </h5>
+                    <h5>
+                        <input type="checkbox" name="bl2" id="bl2">
+                        <label for="bl2">Bloco 2</label>
+                    </h5>
+                    <h5>
+                        <input type="checkbox" name="bl3" id="bl3">
+                        <label for="bl3">Bloco 3</label>
+                    </h5>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 @endsection

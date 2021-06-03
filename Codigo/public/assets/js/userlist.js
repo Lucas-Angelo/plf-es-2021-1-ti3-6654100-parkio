@@ -1,4 +1,5 @@
 const url = '/api/users';
+var blocks = []
 
 // Cadastrar usuário
 const handleEntranceFormSubmit = (event) => {
@@ -66,12 +67,14 @@ async function renderUsers() {
                                     <td>${type}</td>
                                     <td class="acoes">
                                         <button class="btn btn-secondary" onclick="userUpdate(${user.id},\`${user.login}\`)"><i class="fas fa-lock"></i></button>
+                                        ${ user.type === 'S'?`<button class="btn btn-success" onclick="openBlockModal(${user.id}, \`${user.name}\`)"><i class="fas fa-home"></i></button>`:''}
                                         <button class="btn btn-danger" onclick="userDelete(${user.id})"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`;
 
                 htmlSegmentSm = `<div class="usercard mb-2">
                                         <button class="btn btn-danger" onclick="userDelete(${user.id})"><i class="fas fa-trash-alt"></i></button>
+                                        ${ user.type === 'S'?`<button class="btn btn-success" onclick="openBlockModal(${user.id}, \`${user.name}\`)"><i class="fas fa-home"></i></button>`:''}
                                         <button class="btn btn-secondary" onclick="userUpdate(${user.id},\`${user.login}\`)"><i class="fas fa-lock"></i></button>
                                         <div class="usuario">
                                             <h6>Usuário:</h6>
@@ -152,10 +155,60 @@ const handleChangePassFormSubmit = (event) => {
             renderUsers();
             showToast("Senha alterada com sucesso!");
         },
-        error: function(data, status) {
+        error: function(err, status) {
             console.log(err)
         },
     });
 }
 
-renderUsers();
+function openBlockModal(id, name){
+
+    $.ajax({
+        url: `/api/blocks/${id}`,
+        type: "GET",
+        success: function(data, status) {
+            console.log(data)
+            document.getElementById('trocaSenha').reset();
+            document.getElementById('close-modal-np').click();
+            renderUsers();
+            showToast("Senha alterada com sucesso!");
+        },
+        error: function(err, status) {
+            console.log(err)
+        },
+    });
+
+    var myModal = $("#blocksModal");
+    
+    myModal.find("#blocksModalLabel").text(`Blocos vinculados ao síndico ${name}`);
+    myModal.find('#idUserPass').val(id);
+    myModal.modal('show');
+}
+
+
+addEventListener('load', ()=>{
+
+    
+    $.ajax({
+        url: `/api/destinations/`,
+        type: "GET",
+        success: function(res, status) {
+            const destinations = res.data;
+            blocks = destinations.reduce((blocks, destination)=>{
+                console.log(blocks)
+                if (!blocks.find((block)=>block===destination.block))
+                    blocks.push(destination.block)
+                return blocks;
+            }, [])
+            console.log(blocks)
+
+        },
+        error: function(err, status) {
+            console.log(err)
+        },
+    });
+
+
+    renderUsers();
+
+})
