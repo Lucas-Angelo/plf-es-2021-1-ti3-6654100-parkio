@@ -30,10 +30,7 @@ class DestinationService
 
     }
 
-    //$d = $d->orderByRaw('substr(block from 1 for 2) cast(substr(block from 2) AS UNSIGNED)');
-    //$d->orderByRaw('substr(apartament from 1 for 2) cast(substr(apartament from 2) AS UNSIGNED)');
-
-    return $d
+    return $d   ->orderByRaw('block, apartament')
                 ->paginate();
   }
 
