@@ -20,13 +20,13 @@ class DestinationService
 
     if(!empty($block)){
 
-    $d = $d->where('block', $block);
+    $d = $d->where('block','like','%'.$block.'%');
 
     }
 
     if(!empty($apartament)){
 
-    $d = $d->where('apartament', $apartament);
+    $d = $d->where('apartament', 'like', '%'.$apartament.'%');
 
     }
 
