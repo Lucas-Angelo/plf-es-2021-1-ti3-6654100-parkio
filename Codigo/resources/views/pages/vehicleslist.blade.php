@@ -114,8 +114,8 @@
                                     <th scope="col">Portaria</th>
                                     <th scope="col">Porteiro Entrada</th>
                                     <th scope="col">Porteiro Saída</th>
-                                    <th scope="col">Hora de Entrada</th>
-                                    <th scope="col">Hora de Saída</th>
+                                    <th scope="col">Tempo</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Ações</th>
                                 </tr>
                             </thead>
