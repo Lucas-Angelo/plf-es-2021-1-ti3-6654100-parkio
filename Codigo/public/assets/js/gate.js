@@ -13,6 +13,9 @@ const handleSelectChange = (event) => {
 }
 
 window.addEventListener("load", function() {
+            $('#input-cpf').mask('000.000.000-00');
+            console.log($('#input-cpf'), $('#input-cpf').mask, $('#input-cpf').mask('000.000.000-00'))
+        
             $.ajax({
                         url: "/api/visitorCategory",
                         type: "GET",
