@@ -294,8 +294,8 @@ function renderVehicles(search, evt, page = 1) {
                             document.getElementById(`time-vehicle-${index}`).innerText = `${negative?'-':'+'}${hours}:${minutes}` ;
                             document.getElementById(`time-vehicle-mobile-${index}`).innerText = `Tempo: ${negative?'-':'+'}${hours}:${minutes}` ;
                             if (negative){
-                                document.getElementById(`status-vehicle-${index}`).innerText = '<i class="fas fa-exclamation"></i>';
-                                document.getElementById(`status-vehicle-mobile-${index}`).innerText = '<i class="fas fa-exclamation"></i>';
+                                document.getElementById(`status-vehicle-${index}`).innerHTML = '<i class="fas fa-exclamation"></i>';
+                                document.getElementById(`status-vehicle-mobile-${index}`).innerHTML = '<i class="fas fa-exclamation"></i>';
                             }
                     }, 1000 * 60)
                 
