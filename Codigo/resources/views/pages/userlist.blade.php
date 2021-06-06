@@ -2,8 +2,10 @@
 
 @section('extraassets')
 <link rel="stylesheet" href="{{ url('/assets/css/userlist.css') }}" type="text/css">
+<link rel="stylesheet" href="{{ url('/assets/css/sweetalert2dark.min.css') }}" type="text/css">
 <script src="{{ url('/assets/js/userlist.js') }}"></script>
 <script src="{{ url('/assets/js/sorttable.js') }}"></script> <!-- To sort table by headers -->
+<script src="{{ url('assets/js/sweetalert2.min.js') }}"></script>
 @endsection
 
 @section('pagename')
@@ -70,7 +72,7 @@ Usuários
                                 minlength="1" maxlength="32" required placeholder="Senha">
                         </div>
                         <div class="mb-3">
-                            <label for="confirm-input-password" class="form-label">Senha <span class="required">*</span></label>
+                            <label for="confirm-input-password" class="form-label">Confirme a senha <span class="required">*</span></label>
                             <input for="confirm-input-password" type="password" class="form-control" id="confirm-input-password"
                                 minlength="1" maxlength="32" required placeholder="Repita a senha">
                         </div>
@@ -108,13 +110,12 @@ Usuários
                             <input for="novaSenha" type="password" class="form-control" id="novaSenha" placeholder="Senha" required>
                         </div>
                         <div class="mb-3">
-                            <label for="confirmarNovaSenha" class="form-label">Senha <span class="required">*</span></label>
+                            <label for="confirmarNovaSenha" class="form-label">Confirme a senha <span class="required">*</span></label>
                             <input for="confirmarNovaSenha" type="password" class="form-control" id="confirmarNovaSenha" placeholder="Repita a senha" required>
                         </div>
                         <button id="close-modal-np" type="button" class="btn btn-secondary d-none"
                             data-bs-dismiss="modal">Close</button>
-                        <button id="btn-trocaSenha" type="submit" class="btn btn-secondary w-100 mt-2 mb-3">Trocar
-                            senha</button>
+                        <button id="btn-trocaSenha" type="submit" class="btn btn-secondary w-100 mt-2 mb-3">Trocar senha</button>
                     </form>
                 </div>
             </div>

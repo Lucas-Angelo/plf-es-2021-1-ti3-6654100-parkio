@@ -32,6 +32,10 @@ const handleEntranceFormSubmit = (event) => {
                 console.log(err)
             },
         });
+    } else {
+        document.getElementById('input-password').reset();
+        document.getElementById('confirm-input-password').reset();
+        showToast(data.message);
     }
 }
 
@@ -69,14 +73,14 @@ async function renderUsers() {
                                     <td>${user.login}</td>
                                     <td>${type}</td>
                                     <td class="acoes">
-                                        <button class="btn btn-secondary" onclick="userUpdate(${user.id},\`${user.login}\`)"><i class="fas fa-lock"></i></button>
+                                        <button class="btn btn-secondary changePass" onclick="userUpdate(${user.id},\`${user.login}\`)"><i class="fas fa-lock"></i></button>
                                         <button class="btn btn-danger" onclick="userDelete(${user.id})"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`;
 
                 htmlSegmentSm = `<div class="usercard mb-2">
                                         <button class="btn btn-danger" onclick="userDelete(${user.id})"><i class="fas fa-trash-alt"></i></button>
-                                        <button class="btn btn-secondary" onclick="userUpdate(${user.id},\`${user.login}\`)"><i class="fas fa-lock"></i></button>
+                                        <button class="btn btn-secondary changePass" onclick="userUpdate(${user.id},\`${user.login}\`)"><i class="fas fa-lock"></i></button>
                                         <div class="usuario">
                                             <h6>Usuário:</h6>
                                             <p>${user.name}</p>
@@ -169,10 +173,25 @@ const handleChangePassFormSubmit = (event) => {
 function validatePassword(password, confirmPassword) {
     var equal = true;
     if(password.value != confirmPassword.value) {
-      confirmPassword.setCustomValidity("Senha está diferente!");
-      equal = false;
+        Swal.fire({
+            title: 'Aviso',
+            html: `As senhas inseridas são diferentes!`,
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        })
+        equal = false;
     }
     return equal;
 }
+
+window.addEventListener("load", function () {
+    const btns = document.querySelectorAll(".changePass");
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].addEventListener("click", function() {
+            document.getElementById('novaSenha').value = "";
+            document.getElementById('confirmarNovaSenha').value = "";
+        });
+    }
+});
 
 renderUsers();
