@@ -219,7 +219,7 @@ function search(plate){
                 resolve(result);
             },
             error:  function(err, status){
-                showToast("Veículo não encontrado.");
+                
             },
         });
 
