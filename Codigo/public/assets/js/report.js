@@ -56,23 +56,6 @@ $(function () {
         }
     }
 
-    
-
-    function generateData(count, yrange) {
-        var i = 0;
-        var series = [];
-        while (i < count) {
-            var x = (i + 1).toString();
-            var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-            series.push({
-                x: x,
-                y: y
-            });
-            i++;
-        }
-        return series;
-    }
-
     function randomDarkColor() {
         const x = Math.floor(Math.random() * 256);
         const y = 100 + Math.floor(Math.random() * 256);
@@ -275,6 +258,9 @@ $(function () {
                     },
                     fill: {
                         opacity: 1
+                    },
+                    title: {
+                        text: 'Visitantes por porteiro'
                     },
                     theme: {
                         mode: 'dark'

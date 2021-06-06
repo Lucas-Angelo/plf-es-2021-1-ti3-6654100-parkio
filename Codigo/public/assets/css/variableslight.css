@@ -1,0 +1,18 @@
+:root{
+    --bg: #1F1F26;
+    --color: #CCCCCC;
+    --bg2: transparent;
+    --input: #333340;
+    --tab: #3d3d4e;
+    --border: #616163;
+    --button: #5c5c68;
+    --activeTab: #411357;
+}
+
+.parkio-header-light{
+    background-color: rgb(128, 128, 128);
+}
+
+.parkio-header-light .btnDropMenuParkIO > *{
+    color: white !important;
+}

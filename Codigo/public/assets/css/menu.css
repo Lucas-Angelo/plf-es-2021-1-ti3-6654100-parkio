@@ -8,8 +8,13 @@
 .gate-items p {
     transform: translateX(-16px);
 }
-.menu-container-item:hover{
+.parkio-dark .menu-container-item:hover{
     background-color: rgb(71, 5, 102);
+    cursor: pointer;
+}
+
+.parkio-light .menu-container-item{
+    background-color: rgb(140, 75, 170);
     cursor: pointer;
 }
 

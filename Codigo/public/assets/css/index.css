@@ -1,22 +1,5 @@
 /* BE CAREFUL THIS STYLESHEET IS SET ON ALL PAGES */
 
-:root{
-    --bg: #1F1F26;
-    --color: #CCCCCC;
-    --bg2: #252531;
-    --input: #333340;
-    --tab: #3d3d4e;
-    --border: #616163;
-    --button: #5c5c68;
-    --activeTab: #411357;
-}
-
-html, body, .container-fluid{
-    background-color: var(--bg);
-    background: var(--bg);
-    color: var(--color);
-}
-
 table {
     border: 0.5px solid #62628B !important;
     vertical-align: middle !important;
@@ -35,4 +18,7 @@ tbody > tr > td {
 
 .cursor-pointer{
     cursor: pointer;
+}
+#switchColorMode{
+    margin-left: 0;
 }

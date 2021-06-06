@@ -66,7 +66,7 @@
                         </select>
                     </div>
                     <div class="button-div text-center mt-5">
-                        <button class="btn" type="submit">Cadastrar</button>
+                        <button class="btn btn-primary" type="submit">Cadastrar</button>
                     </div>
 
                 </form>
@@ -79,7 +79,7 @@
                         <input type="text" class="form-control" id="input-plate-exit" required>
                     </div>
                     <div class="button-div text-center mt-5">
-                        <button id="button-att" class="btn" type="submit">Registrar Saída</button>
+                        <button id="button-att" class="btn btn-primary" type="submit">Registrar Saída</button>
                     </div>
                 </form>
             </div>

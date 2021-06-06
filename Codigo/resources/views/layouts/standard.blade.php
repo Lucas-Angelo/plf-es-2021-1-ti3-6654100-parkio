@@ -7,7 +7,10 @@
     @include('includes.header')
 
     <!-- Will be replaced with file content from pages folder /resources/views/pages -->
-    @yield('content')
+    <div class="{{($colormode == 'light') ? 'parkio-light': 'parkio-dark'}}">
+        @yield('content')
+    </div>
+
     @include('includes.toast')
 
 </body>
