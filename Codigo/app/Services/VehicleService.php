@@ -112,11 +112,16 @@ class VehicleService
     }
 
     public function search($plate){
+        try{
         $filtro = strtoupper($plate);
-        $complaints = Complain::where('plate', $filtro)->limit(3)->get();
         $vehicle =Vehicle::where('plate','like', "%".$filtro."%")
-                    ->orderByDesc('created_at')
-                    ->first(['id','plate','model','color','created_at','left_at']);
+            ->orderByDesc('created_at')
+            ->firstOrFail(['id','plate','model','color','created_at','left_at']);
+        $complaints = Complain::where('plate', $filtro)->limit(3)->get();
+
+        }catch (ModelNotFoundException $e){
+            throw new ModelNotFoundException("Vehicle not found", 404);
+        }
 
         $vehicle->complaints = $complaints;
         return $vehicle;

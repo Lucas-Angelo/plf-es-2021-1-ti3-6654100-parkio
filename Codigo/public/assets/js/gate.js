@@ -211,7 +211,7 @@ function searchById(id){
 
 function search(plate){
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         $.ajax({
             url: `/api/vehicles/search?plate=${plate}`,
             type: "GET",
@@ -219,7 +219,7 @@ function search(plate){
                 resolve(result);
             },
             error:  function(err, status){
-                showToast(err);
+                
             },
         });
 
