@@ -100,6 +100,8 @@
                                 <th class="col">Modelo</th>
                                 <th class="col">Cor</th>
                                 <th class="col">Hora de Entrada</th>
+                                <th scope="col">Tempo</th>
+                                <th scope="col">Status</th>
                                 <th class="col-2">Ações</th>
                             </tr>
                         </thead>
