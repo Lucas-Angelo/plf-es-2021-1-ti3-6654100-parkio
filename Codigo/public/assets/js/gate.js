@@ -7,7 +7,20 @@ function TestaCPF(strCPF) {
     var Soma;
     var Resto;
     Soma = 0;
-  if (strCPF == "00000000000") return false;
+    if (
+        strCPF.length != 11 || 
+		strCPF == "00000000000" || 
+		strCPF == "11111111111" || 
+		strCPF == "22222222222" || 
+		strCPF == "33333333333" || 
+		strCPF == "44444444444" || 
+		strCPF == "55555555555" || 
+		strCPF == "66666666666" || 
+		strCPF == "77777777777" || 
+		strCPF == "88888888888" || 
+		strCPF == "99999999999"
+    )
+        return false;
 
   for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
   Resto = (Soma * 10) % 11;
@@ -35,8 +48,7 @@ const handleSelectChange = (event) => {
 
 window.addEventListener("load", function() {
             $('#input-cpf').mask('000.000.000-00');
-            console.log($('#input-cpf'), $('#input-cpf').mask, $('#input-cpf').mask('000.000.000-00'))
-        
+            
             $.ajax({
                         url: "/api/visitorCategory",
                         type: "GET",
