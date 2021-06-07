@@ -371,8 +371,7 @@ const handleEntranceFormSubmit = (event) => {
     const color = document.querySelector("#input-color").value;
     const gateId = location.pathname.split('/')[2]; //Gate ID
 
-    const cpfOnlyNumbers = cpf.replaceAll('.', '').replaceAll('-', '') 
-    console.log(cpfOnlyNumbers)
+    const cpfOnlyNumbers = cpf.replaceAll('.', '').replaceAll('-', '')
     if(cpf && !TestaCPF(cpfOnlyNumbers)){
         Swal.fire({
             title: 'Aviso',
