@@ -20,20 +20,17 @@ class DestinationService
 
     if(!empty($block)){
 
-    $d = $d->where('block', $block);
+    $d = $d->where('block','like','%'.$block.'%');
 
     }
 
     if(!empty($apartament)){
 
-    $d = $d->where('apartament', $apartament);
+    $d = $d->where('apartament', 'like', '%'.$apartament.'%');
 
     }
 
-    //$d = $d->orderByRaw('substr(block from 1 for 2) cast(substr(block from 2) AS UNSIGNED)');
-    //$d->orderByRaw('substr(apartament from 1 for 2) cast(substr(apartament from 2) AS UNSIGNED)');
-
-    return $d
+    return $d   ->orderByRaw('block, apartament')
                 ->paginate();
   }
 

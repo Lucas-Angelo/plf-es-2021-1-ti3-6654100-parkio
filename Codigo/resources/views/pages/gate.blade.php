@@ -53,7 +53,7 @@
                     </div>
                     <div class="mb-3 col-12 col-md-6 col-lg-4">
                         <label for="input-cpf" class="form-label">CPF</label>
-                        <input type="text" class="form-control" id="input-cpf" minlength="11" maxlength="14">
+                        <input type="text" class="form-control" id="input-cpf" minlength="14" maxlength="14" autocomplete="off">
                     </div>
                     <div class="mb-3 col-12 col-md-4 col-lg-2">
                         <label for="input-model" class="form-label">Modelo</label>

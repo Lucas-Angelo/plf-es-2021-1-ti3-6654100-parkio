@@ -3,6 +3,40 @@ var defaultTime = 30;
 let currentPlate = ''
 let currentId = null
 
+function TestaCPF(strCPF) {
+    var Soma;
+    var Resto;
+    Soma = 0;
+    if (
+        strCPF.length != 11 || 
+		strCPF == "00000000000" || 
+		strCPF == "11111111111" || 
+		strCPF == "22222222222" || 
+		strCPF == "33333333333" || 
+		strCPF == "44444444444" || 
+		strCPF == "55555555555" || 
+		strCPF == "66666666666" || 
+		strCPF == "77777777777" || 
+		strCPF == "88888888888" || 
+		strCPF == "99999999999"
+    )
+        return false;
+
+  for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+  Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+
+  Soma = 0;
+    for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+    return true;
+}
+
 const setTime = (time) => {
     document.querySelector('#input-time').value = time;
 }
@@ -13,6 +47,8 @@ const handleSelectChange = (event) => {
 }
 
 window.addEventListener("load", function() {
+            $('#input-cpf').mask('000.000.000-00');
+            
             $.ajax({
                         url: "/api/visitorCategory",
                         type: "GET",
@@ -211,7 +247,7 @@ function searchById(id){
 
 function search(plate){
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         $.ajax({
             url: `/api/vehicles/search?plate=${plate}`,
             type: "GET",
@@ -219,7 +255,7 @@ function search(plate){
                 resolve(result);
             },
             error:  function(err, status){
-                showToast(err);
+                
             },
         });
 
@@ -334,6 +370,18 @@ const handleEntranceFormSubmit = (event) => {
     const cpf = document.querySelector("#input-cpf").value;
     const color = document.querySelector("#input-color").value;
     const gateId = location.pathname.split('/')[2]; //Gate ID
+
+    const cpfOnlyNumbers = cpf.replaceAll('.', '').replaceAll('-', '')
+    if(cpf && !TestaCPF(cpfOnlyNumbers)){
+        Swal.fire({
+            title: 'Aviso',
+            html: `O CPF ${cpf} é inválido<br><br>
+                    Corrija-o ou deixe o campo vazio`,
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        })
+        return
+    }
 
 
     const data = {
