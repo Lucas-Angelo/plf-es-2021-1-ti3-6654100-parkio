@@ -443,7 +443,7 @@ async function renderVehicles() {
             let html = '';
             let htmlSm = '';
             if(result.data.length > 0) {
-                result.data.forEach(vehicle => {
+                result.data.forEach((vehicle, index) => {
                     let color = colors.find(function(c){ return c.hex == vehicle.color})
                     if(!color) {
                         color = {
@@ -455,6 +455,12 @@ async function renderVehicles() {
                     let created_at = new Date(vehicle.created_at);
                     let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
 
+                    let limit_time = created_at.setMinutes( created_at.getMinutes() + vehicle.time );
+                    let time_past =  ( limit_time - Date.now() ) / (1000 * 60);
+                    let negative = time_past < 0;
+                    let hours = ( ((negative?-1:1) * time_past) / 60) .toFixed( 0 );
+                    let minutes = ( ((negative?-1:1) * time_past) % 60) .toFixed( 0 );
+
                     var htmlSegment, htmlSegmentSm;
 
                     htmlSegment = `<tr>
@@ -462,6 +468,10 @@ async function renderVehicles() {
                                     <td>${vehicle.model ? vehicle.model: '---'}</td>
                                     <td><span class="square" style="background-color: ${color.hex ? color.hex : '---'};"></span> ${color.name ? color.name: '---'}</td>
                                     <td>${created_at_formatada}</td>
+                                    <td id="time-vehicle-${index}">
+                                    ${negative?'-':'+'}${hours}:${minutes}
+                                    </td>
+                                    <td id="status-vehicle-${index}">${negative?'<i class="fas fa-exclamation"></i>':''}</td>
                                     <td>
                                     <button class="btn btn-secondary" onclick="dynamicTimeExtenderModal(${vehicle.id})"><i class="fas fa-clock"></i></button>
                                     <button class="btn btn-danger" onclick="dynamicExitModal(${vehicle.id})" ><i class="fas fa-sign-out-alt "></i></button>
@@ -488,10 +498,31 @@ async function renderVehicles() {
                                         <h6>Horário de entrada:</h6>
                                         <p>${created_at_formatada}</p>
                                     </div>
+                                    <span id='status-vehicle-mobile-${index}'>
+                                        ${negative?'<i class="fas fa-exclamation"></i>':''}
+                                    </span>
+                                    <span id="time-vehicle-mobile-${index}">
+                                    Tempo: ${negative?'-':'+'}${hours}:${minutes}
+                                    </span>
                                 </div>`;
 
                     html += htmlSegment;
                     htmlSm += htmlSegmentSm;
+
+                    if (!vehicle.left_at)
+                    setInterval(()=>{
+                            time_past -= 1;
+                            let negative = time_past < 0;
+                            let hours = ( (negative?-1:1) * time_past / 60) .toFixed( 0 );
+                            let minutes = ( (negative?-1:1) * time_past % 60) .toFixed( 0 );
+                            document.getElementById(`time-vehicle-${index}`).innerText = `${negative?'-':'+'}${hours}:${minutes}` ;
+                            document.getElementById(`time-vehicle-mobile-${index}`).innerText = `Tempo: ${negative?'-':'+'}${hours}:${minutes}` ;
+                            if (negative){
+                                document.getElementById(`status-vehicle-${index}`).innerHTML = '<i class="fas fa-exclamation"></i>';
+                                document.getElementById(`status-vehicle-mobile-${index}`).innerHTML = '<i class="fas fa-exclamation"></i>';
+                            }
+                    }, 1000 * 60)
+
                 });
 
                 let container;
