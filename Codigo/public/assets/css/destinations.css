@@ -23,29 +23,35 @@
         width: 100%;
         padding: 1rem 0;
     }
-    @media (max-width: 800px) {
-        #searchDestination {
-            width: 100%;
-            margin-left: 1rem !important;
-        }
-        #createDestination {
-            margin-top: 1rem !important;
-            margin-left: 1rem !important;
-            margin-bottom: 1rem !important;
-        }
-        .destinationCard {
-            margin-left: 1rem;
-            padding: 15px;
-            border: 1px solid #62628B;
-        }
-        .destinationCard p {
-            display: inline-flex;
-        }
-        .destinationCard button {
-            float: right;
-        }
-        .destinationCard>button:nth-child(2) {
-            margin-right: 5px;
-        }
+    #searchDestination {
+        width: 100%;
+        margin-left: 1rem !important;
+    }
+    #searchDestination div:last-child {
+        margin-right: 1rem !important;
+    }
+    #divButtonSearch {
+        float: left !important;
+        display: flex;
+        margin-top: 10px;
+    }
+    #createDestination {
+        margin-top: 1rem !important;
+        margin-left: 1rem !important;
+        margin-bottom: 1rem !important;
+    }
+    .destinationCard {
+        margin-left: 1rem;
+        padding: 15px;
+        border: 1px solid #62628B;
+    }
+    .destinationCard p {
+        display: inline-flex;
+    }
+    .destinationCard button {
+        float: right;
+    }
+    .destinationCard>button:nth-child(2) {
+        margin-right: 5px;
     }
 }
