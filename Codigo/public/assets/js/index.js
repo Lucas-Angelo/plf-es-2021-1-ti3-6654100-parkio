@@ -44,6 +44,6 @@ function delete_cookie( name, path ) {
 
 function changeColorMode(elem) {
     const mode = (elem.checked) ? 'dark': 'light';
-    document.cookie = "X-colormode=" + mode;
+    document.cookie = "X-colormode=" + mode + '; path=/';
     location.reload()
 }

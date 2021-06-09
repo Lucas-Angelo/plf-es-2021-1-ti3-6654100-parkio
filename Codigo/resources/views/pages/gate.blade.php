@@ -93,7 +93,7 @@
             </div>
             <div id="tabela" class="row">
                 <div class="col-12">
-                    <table id="tabela-veiculo" class="table table-dark sortable">
+                    <table id="tabela-veiculo" class="table sortable {{ ($colormode == 'light')? '': 'table-dark'}}">
                         <thead>
                             <tr>
                                 <th class="col">Placa</th>
@@ -157,7 +157,7 @@
         </div>
     </div>
 
-<!-- Modal Report -->
+    <!-- Modal Report -->
     <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content">

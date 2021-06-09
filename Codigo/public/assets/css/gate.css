@@ -10,14 +10,25 @@
     background-color: var(--tab);
 }
 
-#gateTab .nav-link.active {
+.parkio-dark #gateTab .nav-link.active {
     background-color: var(--bg2);
     border-color: transparent;
 }
 
+.parkio-light #gateTab .nav-link.active {
+    background-color: #fff;
+}
+
 #entrance-exit-container {
-    background-color: var(--bg2);
     padding: 25px 15px;
+}
+
+.parkio-dark #entrance-exit-container {
+    background-color: var(--bg2);
+}
+
+.parkio-light #entrance-exit-container {
+    background-color: #fff;
 }
 
 #entrance-form input,
@@ -96,7 +107,6 @@
 }
 
 table {
-    border: 0.5px solid #62628B !important;
     vertical-align: middle !important;
 }
 
@@ -104,20 +114,14 @@ thead,
 th {
     padding-left: 0;
     text-align: left;
-    background-color: #252531 !important;
 }
 
 tbody>tr>td {
     text-align: left;
     padding: 10px !important;
     font-size: large;
-    background-color: #1F1F26 !important;
 }
 
-th,
-td {
-    border-bottom: 0.5px solid #62628B !important;
-}
 
 td>button {
     width: 3vw !important;

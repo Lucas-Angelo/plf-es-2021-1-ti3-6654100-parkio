@@ -3,26 +3,38 @@
 }
 .menu-container p{
     text-align: center;
-    color: #fff;
 }
 .gate-items p {
     transform: translateX(-16px);
 }
 .parkio-dark .menu-container-item:hover{
     background-color: rgb(71, 5, 102);
+    color: var(--color);
     cursor: pointer;
 }
 
 .parkio-light .menu-container-item{
-    background-color: rgb(140, 75, 170);
+    background-color: #fff;
+    margin-right: 5px;
     cursor: pointer;
 }
 
 .gate-icon{
-    filter: invert(100%);
     width: 100px;
 }
+
+.parkio-dark .gate-icon{
+    filter: invert(100%);
+}
+
 .menu-icon{
-    color: #fff;
     font-size: 4rem;
+}
+
+.parkio-dark .menu-icon{
+    color: #fff;
+}
+
+.menu-container-item{
+    color: inherit;
 }

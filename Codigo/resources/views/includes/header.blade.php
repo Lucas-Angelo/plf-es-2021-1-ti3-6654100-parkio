@@ -1,18 +1,17 @@
 <div class="container-fluid {{ ($colormode == 'light')? 'parkio-header-light': 'parkio-header-dark'}}">
-    <div class="row">
+    <div class="row parkio-breadcrumb">
         <div class="col-4">
             <button type="button" class="btn btn-dark d-block d-md-none p-2 m-1">
                 <i class="fas fa-bars text-muted"></i>
             </button>
 
-            <a href="/" id="backButton" class="p-2 mt-1 d-none text-decoration-none text-white">
+            <a href="/" id="backButton" class="p-2 mt-1 d-none text-decoration-none">
                 <i class="fas fa-angle-left"></i>
                 @yield('pagename')
             </a>
         </div>
         <div class="col-4">
-            <img src="{{ url("/assets/img/parkiowhite.png") }}" alt="ParkIO Logo" width="200px" class="m-auto d-md-block d-none">
-            <img src="{{ url("/assets/img/parkiowhite.png") }}" alt="ParkIO Logo" width="130px" class="m-auto d-block d-md-none">
+            <img src="{{ ($colormode == 'dark') ? url("/assets/img/parkiowhite.png"): url("/assets/img/parkio.png") }}" alt="ParkIO Logo" width="170px" class="m-auto d-block">
         </div>
         <div class="col-4">
             <span class="float-end p-2 d-none d-md-block">
@@ -51,7 +50,6 @@
 
 <style>
     #dropMenuParkIOMode {
-        background: red !important;
         pointer-events: none;
     }
 </style>

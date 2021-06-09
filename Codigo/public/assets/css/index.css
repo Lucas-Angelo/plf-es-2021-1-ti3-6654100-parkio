@@ -1,24 +1,11 @@
 /* BE CAREFUL THIS STYLESHEET IS SET ON ALL PAGES */
-
-table {
-    border: 0.5px solid #62628B !important;
-    vertical-align: middle !important;
-}
-
-thead, th {
-    padding-left: 0;
-    background-color: #252531 !important;
-    border-bottom: 0.5px solid #62628B !important;
-}
-
-tbody > tr > td {
-    background-color: #1F1F26 !important;
-    border-bottom: 0.5px solid #62628B !important;
-}
-
 .cursor-pointer{
     cursor: pointer;
 }
 #switchColorMode{
     margin-left: 0;
+}
+
+.parkio-breadcrumb a{
+    color: inherit;
 }

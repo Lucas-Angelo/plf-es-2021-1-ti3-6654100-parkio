@@ -2,6 +2,8 @@ $(function () {
     const week = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']
     let chart, chart2;
     $(".reportDatePicker").attr('max',new Date().toISOString().split('T')[0])
+    const colorm = getCookie('X-colormode')
+    const bgColor = (colorm == 'light') ? '#eee': '#252531'
 
     //Set date (today - 7 days)
     let dt = new Date();
@@ -150,7 +152,7 @@ $(function () {
                     chart: {
                         height: 350,
                         type: 'heatmap',
-                        background: '#252531',
+                        background: bgColor,
                         locales: [localeopt],
                         defaultLocale: "pt-br"
                     },
@@ -171,7 +173,7 @@ $(function () {
                         text: 'Visitantes por Hora'
                     },
                     theme: {
-                        mode: 'dark'
+                        mode: colorm == 'light'? 'light' : 'dark'
                     }
                 };
             
@@ -228,7 +230,7 @@ $(function () {
                         zoom: {
                             enabled: true
                         },
-                        background: '#252531',
+                        background: bgColor,
                         locales: [localeopt],
                         defaultLocale: "pt-br"
                     },
@@ -263,7 +265,7 @@ $(function () {
                         text: 'Visitantes por porteiro'
                     },
                     theme: {
-                        mode: 'dark'
+                        mode: colorm == 'light'? 'light' : 'dark'
                     },
                     colors: colors,
                 };
