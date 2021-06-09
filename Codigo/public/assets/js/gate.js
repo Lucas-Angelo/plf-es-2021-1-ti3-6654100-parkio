@@ -74,6 +74,7 @@ window.addEventListener("load", function() {
     });
 
     $(".select2").select2({
+        width: '100%',
         selectionCssClass: "gate-select2",
         ajax: {
             url: "/api/destinations",
@@ -110,6 +111,7 @@ window.addEventListener("load", function() {
             });
         });
         $('.gate-inputcolor').select2({
+            width: '100%',
             selectionCssClass: "gate-select2",
             templateResult: (color) => {
                 var $color = $(
