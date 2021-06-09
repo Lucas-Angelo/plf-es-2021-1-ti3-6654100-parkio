@@ -9,3 +9,9 @@
 .parkio-breadcrumb a{
     color: inherit;
 }
+
+@media (max-width: 767px) {
+    #dropdownMenuButton1::after{
+        display: none;
+    }
+}

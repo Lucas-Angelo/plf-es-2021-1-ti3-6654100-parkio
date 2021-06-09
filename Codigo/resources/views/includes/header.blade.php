@@ -1,24 +1,23 @@
 <div class="container-fluid {{ ($colormode == 'light')? 'parkio-header-light': 'parkio-header-dark'}}">
     <div class="row parkio-breadcrumb">
         <div class="col-4">
-            <button type="button" class="btn btn-dark d-block d-md-none p-2 m-1">
-                <i class="fas fa-bars text-muted"></i>
-            </button>
-
-            <a href="/" id="backButton" class="p-2 mt-1 d-none text-decoration-none">
+            <a href="/" id="backButton" class="p-2 mt-2 d-block mt-md-1 text-decoration-none">
                 <i class="fas fa-angle-left"></i>
-                @yield('pagename')
+                <span class="d-none d-md-inline-block">
+                    @yield('pagename')
+                </span>
             </a>
         </div>
         <div class="col-4">
             <img src="{{ ($colormode == 'dark') ? url("/assets/img/parkiowhite.png"): url("/assets/img/parkio.png") }}" alt="ParkIO Logo" width="170px" class="m-auto d-block">
         </div>
         <div class="col-4">
-            <span class="float-end p-2 d-none d-md-block">
+            <span class="float-end p-2 d-block">
                 <div class="dropdown">
                     <button class="btn dropdown-toggle btnDropMenuParkIO" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                        <i class="far fa-user-circle text-muted"></i>
-                        <span id="userName"></span>
+                        <i class="far fa-user-circle text-muted d-none d-md-inline-block"></i>
+                        <span class="d-none d-md-inline-block" id="userName"></span>
+                        <i class="d-block d-md-none fas fa-bars text-muted"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1" id="dropMenuParkIO">
                         <li>
