@@ -12,7 +12,7 @@ class GateService
      *
      * @return void
      */
-    
+
     public function getAll(){
         return Gate::all();
     }
@@ -37,26 +37,24 @@ class GateService
         $deleted = true;
         $gate = $this->search($id);
 
-        if( Vehicle::where('gate_id', $id)->get()->count() > 0  ){
-            $message = 'Remoção não concluída, essa portaria ainda contém veículos.';
+        if(empty($gate)){
+            $message = "Portaria não encontrada";
             $deleted = false;
+        } else {
+            $gate->delete();
         }
-        else $gate->delete();
 
         return [
             'message' => $message,
-            'deleted' => $deleted 
+            'deleted' => $deleted
         ];
-
-
-
     }
 
 
     public function search(int $id)
     {
         $gate = Gate::find($id);
-        
+
         if(!empty($gate)){
 
             return $gate;
@@ -69,7 +67,7 @@ class GateService
 
     public function update(int $id, String $description){
         $message = 'Portaria editada com sucesso';
-    
+
         $gate = $this->search($id);
 
         $gate->description = strtoupper($description);
@@ -78,7 +76,7 @@ class GateService
             'message' => $message,
             'updated' => true
         ];
-    
+
 
     }
 }

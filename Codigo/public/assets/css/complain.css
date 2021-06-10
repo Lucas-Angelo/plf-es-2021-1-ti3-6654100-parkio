@@ -1,8 +1,13 @@
 #txtPlateFilter:not(:placeholder-shown) {
     text-transform: uppercase;
 }
-#txtPlateFilter{
+
+#txtPlateFilter {
     width: 10rem;
+}
+
+#searchReportedVehicle {
+    margin: 10px 0 20px 0;
 }
 
 @media (max-width: 800px) {
@@ -11,6 +16,20 @@
         padding: 15px;
         border: 1px solid #62628B;
     }
+    #searchReportedVehicle {
+        width: 100%;
+        margin-left: 1rem !important;
+    }
+    #searchReportedVehicle div:last-child {
+        margin-right: 1rem !important;
+    }
+
+    #divButtonSearchVehicle {
+        margin-top: 10px;
+        display: flex;
+        float: left !important;
+    }
+
     .complainCard p {
         display: inline-flex;
     }

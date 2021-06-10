@@ -3,6 +3,40 @@ var defaultTime = 30;
 let currentPlate = ''
 let currentId = null
 
+function TestaCPF(strCPF) {
+    var Soma;
+    var Resto;
+    Soma = 0;
+    if (
+        strCPF.length != 11 || 
+		strCPF == "00000000000" || 
+		strCPF == "11111111111" || 
+		strCPF == "22222222222" || 
+		strCPF == "33333333333" || 
+		strCPF == "44444444444" || 
+		strCPF == "55555555555" || 
+		strCPF == "66666666666" || 
+		strCPF == "77777777777" || 
+		strCPF == "88888888888" || 
+		strCPF == "99999999999"
+    )
+        return false;
+
+  for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+  Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+
+  Soma = 0;
+    for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+    return true;
+}
+
 const setTime = (time) => {
     document.querySelector('#input-time').value = time;
 }
@@ -13,6 +47,8 @@ const handleSelectChange = (event) => {
 }
 
 window.addEventListener("load", function() {
+            $('#input-cpf').mask('000.000.000-00');
+            
             $.ajax({
                         url: "/api/visitorCategory",
                         type: "GET",
@@ -211,7 +247,7 @@ function searchById(id){
 
 function search(plate){
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         $.ajax({
             url: `/api/vehicles/search?plate=${plate}`,
             type: "GET",
@@ -219,7 +255,7 @@ function search(plate){
                 resolve(result);
             },
             error:  function(err, status){
-                showToast(err);
+                
             },
         });
 
@@ -335,6 +371,18 @@ const handleEntranceFormSubmit = (event) => {
     const color = document.querySelector("#input-color").value;
     const gateId = location.pathname.split('/')[2]; //Gate ID
 
+    const cpfOnlyNumbers = cpf.replaceAll('.', '').replaceAll('-', '')
+    if(cpf && !TestaCPF(cpfOnlyNumbers)){
+        Swal.fire({
+            title: 'Aviso',
+            html: `O CPF ${cpf} é inválido<br><br>
+                    Corrija-o ou deixe o campo vazio`,
+            icon: 'warning',
+            confirmButtonText: 'OK'
+        })
+        return
+    }
+
 
     const data = {
         plate,
@@ -395,7 +443,7 @@ async function renderVehicles() {
             let html = '';
             let htmlSm = '';
             if(result.data.length > 0) {
-                result.data.forEach(vehicle => {
+                result.data.forEach((vehicle, index) => {
                     let color = colors.find(function(c){ return c.hex == vehicle.color})
                     if(!color) {
                         color = {
@@ -407,6 +455,12 @@ async function renderVehicles() {
                     let created_at = new Date(vehicle.created_at);
                     let created_at_formatada = ((created_at.getDate().toString().padStart(2, "0"))) + "/" + ((created_at.getMonth() + 1).toString().padStart(2, "0")) + "/" + created_at.getFullYear() + " " + (created_at.getHours().toString().padStart(2, "0")) + ":" + (created_at.getMinutes().toString().padStart(2, "0"));
 
+                    let limit_time = created_at.setMinutes( created_at.getMinutes() + vehicle.time );
+                    let time_past =  ( limit_time - Date.now() ) / (1000 * 60);
+                    let negative = time_past < 0;
+                    let hours = ( ((negative?-1:1) * time_past) / 60) .toFixed( 0 );
+                    let minutes = ( ((negative?-1:1) * time_past) % 60) .toFixed( 0 );
+
                     var htmlSegment, htmlSegmentSm;
 
                     htmlSegment = `<tr>
@@ -414,6 +468,10 @@ async function renderVehicles() {
                                     <td>${vehicle.model ? vehicle.model: '---'}</td>
                                     <td><span class="square" style="background-color: ${color.hex ? color.hex : '---'};"></span> ${color.name ? color.name: '---'}</td>
                                     <td>${created_at_formatada}</td>
+                                    <td id="time-vehicle-${index}">
+                                    ${negative?'-':'+'}${hours}:${minutes}
+                                    </td>
+                                    <td id="status-vehicle-${index}">${negative?'<i class="fas fa-exclamation"></i>':''}</td>
                                     <td>
                                     <button class="btn btn-secondary" onclick="dynamicTimeExtenderModal(${vehicle.id})"><i class="fas fa-clock"></i></button>
                                     <button class="btn btn-danger" onclick="dynamicExitModal(${vehicle.id})" ><i class="fas fa-sign-out-alt "></i></button>
@@ -440,10 +498,31 @@ async function renderVehicles() {
                                         <h6>Horário de entrada:</h6>
                                         <p>${created_at_formatada}</p>
                                     </div>
+                                    <span id='status-vehicle-mobile-${index}'>
+                                        ${negative?'<i class="fas fa-exclamation"></i>':''}
+                                    </span>
+                                    <span id="time-vehicle-mobile-${index}">
+                                    Tempo: ${negative?'-':'+'}${hours}:${minutes}
+                                    </span>
                                 </div>`;
 
                     html += htmlSegment;
                     htmlSm += htmlSegmentSm;
+
+                    if (!vehicle.left_at)
+                    setInterval(()=>{
+                            time_past -= 1;
+                            let negative = time_past < 0;
+                            let hours = ( (negative?-1:1) * time_past / 60) .toFixed( 0 );
+                            let minutes = ( (negative?-1:1) * time_past % 60) .toFixed( 0 );
+                            document.getElementById(`time-vehicle-${index}`).innerText = `${negative?'-':'+'}${hours}:${minutes}` ;
+                            document.getElementById(`time-vehicle-mobile-${index}`).innerText = `Tempo: ${negative?'-':'+'}${hours}:${minutes}` ;
+                            if (negative){
+                                document.getElementById(`status-vehicle-${index}`).innerHTML = '<i class="fas fa-exclamation"></i>';
+                                document.getElementById(`status-vehicle-mobile-${index}`).innerHTML = '<i class="fas fa-exclamation"></i>';
+                            }
+                    }, 1000 * 60)
+
                 });
 
                 let container;
