@@ -3,7 +3,7 @@ $(function () {
     let chart, chart2;
     $(".reportDatePicker").attr('max',new Date().toISOString().split('T')[0])
     const colorm = getCookie('X-colormode')
-    const bgColor = (colorm == 'light') ? '#eee': '#252531'
+    const bgColor = (colorm == 'light') ? '#d9d9d9': '#252531'
 
     //Set date (today - 7 days)
     let dt = new Date();
@@ -136,7 +136,11 @@ $(function () {
             success: function (result) {
                 let series = []
                 let ndt = new Date(dat + ' 00:00:00')
+                let bigVal = 0;
+                
                 for(let i=0;i<7;i++) {
+                    var max = Math.max.apply(Math, result[i]);
+                    if(max > bigVal) bigVal = max
                     series[i] = {
                         name: null,
                         data: result[i]
@@ -162,13 +166,32 @@ $(function () {
                     colors: ["#662E91"],
                     plotOptions: {
                         heatmap: {
-                            reverseNegativeShade: false
+                            reverseNegativeShade: true,
+                            colorScale: {
+                                ranges: [{
+                                    from: 0,
+                                    to: 0,
+                                    color: '#e8e8e8',
+                                    name: ''
+                                  },
+                                  {
+                                    from: 1,
+                                    to: bigVal,
+                                    color: '#662E91',
+                                    name: ''
+                                  }
+                                ]
+                            }
                         },
+                    },
+                    grid: {
+                        borderColor: '#000',
                     },
                     xaxis: {
                         type: 'text',
                         categories: ['01-03','03-06','06-09','09-12','12-15','15-18','18-21','21-00'],
                     },
+                    
                     title: {
                         text: 'Visitantes por Hora'
                     },

@@ -93,7 +93,7 @@
             </div>
             <div id="tabela" class="row">
                 <div class="col-12">
-                    <table id="tabela-veiculo" class="table sortable {{ ($colormode == 'light')? '': 'table-dark'}}">
+                    <table id="tabela-veiculo" class="table sortable table-bordered {{ ($colormode == 'light')? '': 'table-dark'}}">
                         <thead>
                             <tr>
                                 <th class="col">Placa</th>

@@ -12,3 +12,7 @@
 .parkio-header-light{
     border-bottom: 3px solid #333;
 }
+
+.table.table-bordered{
+    border-color: #bbbec2;
+}

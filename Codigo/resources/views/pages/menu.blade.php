@@ -7,7 +7,7 @@
 @section('content')
 <div class="container-fluid p-4">
     <div class="row gate d-none">
-        <div class="col-12">
+        <div class="col-11 menu-subtitle">
             Portarias
         </div>
         <div class="col-12 py-3 px-5 rounded menu-container">
@@ -18,7 +18,7 @@
     </div>
     <br>
     <div class="row">
-        <div class="col-12">
+        <div class="col-11 menu-subtitle">
             Menu
         </div>
         <div class="col-12 py-3 px-5 rounded menu-container">

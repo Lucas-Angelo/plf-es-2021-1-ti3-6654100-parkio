@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-12 p-0 m-0">
             <div id="tabela-usuario">
-                <table class="table sortable {{ ($colormode == 'light')? '': 'table-dark'}}">
+                <table class="table sortable table-bordered {{ ($colormode == 'light')? '': 'table-dark'}}">
                     <colgroup>
                         <col span="1" style="width: 45%;">
                         <col span="1" style="width: 20%;">

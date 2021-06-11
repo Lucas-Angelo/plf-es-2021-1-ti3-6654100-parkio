@@ -76,7 +76,7 @@ Configurações
                 <div class="row">
                     <div class="col-11 p-0 m-0">
                         <div id="tabela-gate" class="d-none d-md-block">
-                            <table class="table sortable {{ ($colormode == 'light')? '': 'table-dark'}}">
+                            <table class="table sortable table-bordered {{ ($colormode == 'light')? '': 'table-dark'}}">
                                 <colgroup>
                                     <col span="1" style="width: 40%;">
                                     <col span="1" style="width: 40%;">
@@ -113,7 +113,7 @@ Configurações
                 <div class="row">
                     <div class="col-11 p-0 m-0">
                         <div class="d-none d-md-block">
-                            <table class="table sortable {{ ($colormode == 'light')? '': 'table-dark'}}">
+                            <table class="table sortable table-bordered {{ ($colormode == 'light')? '': 'table-dark'}}">
                                 <colgroup>
                                     <col span="1" style="width: 40%;">
                                     <col span="1" style="width: 40%;">
@@ -165,7 +165,7 @@ Configurações
                     <div class="col-11 p-0 m-0">
                         <div class="d-none d-md-block">
 
-                            <table class="table sortable {{ ($colormode == 'light')? '': 'table-dark'}}">
+                            <table class="table sortable table-bordered {{ ($colormode == 'light')? '': 'table-dark'}}">
                                 <colgroup>
                                     <col span="1" style="width: 20%;">
                                     <col span="1" style="width: 70%;">
@@ -231,7 +231,7 @@ Configurações
                 <div class="row">
                     <div class="col-11 p-0 m-0">
                         <div class="d-none d-md-block">
-                            <table class="table sortable {{ ($colormode == 'light')? '': 'table-dark'}}">
+                            <table class="table sortable table-bordered {{ ($colormode == 'light')? '': 'table-dark'}}">
                                 <colgroup>
                                     <col span="1" style="width: 20%;">
                                     <col span="1" style="width: 60%;">

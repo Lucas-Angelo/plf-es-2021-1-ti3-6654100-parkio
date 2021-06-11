@@ -105,7 +105,7 @@
             <div id="tabela" class="row mt-3">
                 <div class="col-12">
                     <div class="d-none d-md-inline">
-                        <table id="tabela-veiculo" class="table sortable {{ ($colormode == 'light')? '': 'table-dark'}}">
+                        <table id="tabela-veiculo" class="table sortable table-bordered {{ ($colormode == 'light')? '': 'table-dark'}}">
                             <thead>
                                 <tr>
                                     <th scope="col">Placa</th>
