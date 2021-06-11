@@ -55,11 +55,5 @@
 }
 
 #btn-cadastrar {
-    background-color: var(--button);
-    border: 1px solid var(--border);
-    color: var(--color);
     font-size: medium;
-}
-#btn-cadastrar:hover, #btn-cadastrar:focus {
-    background-color: #5c5c6885 !important;
 }

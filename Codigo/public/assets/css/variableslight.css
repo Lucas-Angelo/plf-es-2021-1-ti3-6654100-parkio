@@ -1,0 +1,18 @@
+:root{
+    --bg: #e9ecef;
+    --color: #333;
+    --bg2: transparent;
+    --input: #333340;
+    --tab: #eee;
+    --border: #dadada;
+    --button: #ced4da;
+    --activeTab: #a5a5a5;
+}
+
+.parkio-header-light{
+    border-bottom: 3px solid #333;
+}
+
+.table.table-bordered{
+    border-color: #bbbec2;
+}

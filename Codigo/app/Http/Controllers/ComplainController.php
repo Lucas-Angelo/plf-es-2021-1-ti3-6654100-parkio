@@ -27,8 +27,8 @@ class ComplainController extends Controller
             'plate' => 'nullable|max:8'
         ]);
         try {
-        $cs = new ComplainService();
-        return $cs->getAll($request->plate);
+            $cs = new ComplainService();
+            return $cs->getAll($request->input('plate'));
         }
         catch (\Exception $e) {
             return response()->json([
@@ -55,7 +55,7 @@ class ComplainController extends Controller
         $cs = new ComplainService();
 
         return response()->json(
-            $cs->create($request->description, $request->plate,$request->vehicleId, $request->auth->id, $request->gateId)
+            $cs->create($request->input('description'), $request->input('plate'),$request->input('vehicleId'), $request->auth->id, $request->input('gateId'))
         );
     }
 

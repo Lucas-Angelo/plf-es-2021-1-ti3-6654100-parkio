@@ -16,13 +16,10 @@ function updateDestinationsTable(page = 1) {
     var apartamento = document.getElementById('inputSearchApartament').value;
 
     var filter = '';
-    if(bloco)
-        filter += `&block=${bloco}`
-    if(apartamento)
-        filter += `&apartament=${apartamento}`
+    if(bloco || apartamento)
+        filter = `search=${bloco} ${apartamento}`
 
     $.ajax({
-        //url: `/api/destinations?page=${page}`,
         url: '/api/destinations?page='+page+'&'+filter,
         type: "GET",
         success: function(jsonRes) {

@@ -29,7 +29,7 @@ class GateController extends Controller{
 
 
         return response()->json(
-            $g->create($request->description)
+            $g->create($request->input('description'))
         );
     }
 
@@ -83,7 +83,7 @@ class GateController extends Controller{
         $g = new GateService();
 
         return response()->json(
-            $g->update($request->id, $request->description)
+            $g->update($request->input('id'), $request->input('description'))
         );
     }
 

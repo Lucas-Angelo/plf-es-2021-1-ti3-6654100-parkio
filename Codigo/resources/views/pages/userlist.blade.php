@@ -14,7 +14,7 @@ Usuários
 
 @section('content')
 <div class="container-fluid">
-    <div class="row">
+    <div class="row mt-3">
         <div class="col-12 p-0 m-0">
             <button id="btn-NovoUsuario" class="btn btn-secondary" data-bs-toggle="modal"
                 data-bs-target="#modalNovoUsuario"><i class="fas fa-plus"></i>&nbsp;Novo Usuário</button>
@@ -23,7 +23,7 @@ Usuários
     <div class="row">
         <div class="col-12 p-0 m-0">
             <div id="tabela-usuario">
-                <table class="table sortable">
+                <table class="table sortable table-bordered {{ ($colormode == 'light')? '': 'table-dark'}}">
                     <colgroup>
                         <col span="1" style="width: 45%;">
                         <col span="1" style="width: 20%;">

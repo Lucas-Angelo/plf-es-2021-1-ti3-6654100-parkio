@@ -10,7 +10,7 @@ class DestinationController extends Controller
     public function getAll(Request $request){
         try {
             $d = new DestinationService();
-            return $d->getAll($request->block, $request->apartament);
+            return $d->getAll($request->input('search'));
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
@@ -25,10 +25,9 @@ class DestinationController extends Controller
             'apt' => 'required|min:1|max:20'
         ]);
         try {
-        //calls the service and the function create passing datas
             $d = new DestinationService();
             return response()->json(
-                $d->create($request->block, $request->apt)
+                $d->create($request->input('block'), $request->input('apt'))
             );
         } catch (\Exception $e) {
             return response()->json([
@@ -49,7 +48,7 @@ class DestinationController extends Controller
                 //calls the service and the function create passing datas
                     $d = new DestinationService();
                     return response()->json(
-                        $d->update($id, $request->block, $request->apt)
+                        $d->update($id, $request->input('block'), $request->input('apt'))
                     );
             }
             catch (\Exception $e) {

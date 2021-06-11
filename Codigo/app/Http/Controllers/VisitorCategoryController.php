@@ -30,7 +30,7 @@ class VisitorCategoryController extends Controller
 
 
         return response()->json(
-            $visitor->create( $request->description, $request->time )
+            $visitor->create( $request->input('description'), $request->input('time') )
         );
     }
 
@@ -77,7 +77,7 @@ class VisitorCategoryController extends Controller
         $vc = new VisitorCategoryService();
 
         return response()->json(
-            $vc->update($request->id, $request->description, $request->time)
+            $vc->update($request->input('id'), $request->input('description'), $request->input('time'))
         );
     }
 
