@@ -43,7 +43,7 @@ class DelayController extends Controller {
         $ds = new DelayService();
 
         return response()->json(
-            $ds->create($request->description, $request->time, $request->vehicleId, $request->auth->id, $request->gateId)
+            $ds->create($request->input('description'), $request->input('time'), $request->input('vehicleId'), $request->auth->id, $request->input('gateId'))
         );
     }
 

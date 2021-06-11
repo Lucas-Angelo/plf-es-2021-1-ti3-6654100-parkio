@@ -5,12 +5,14 @@ use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\ExpiredException;
 use Symfony\Component\HttpFoundation\Cookie;
+use Illuminate\Support\Facades\View;
 
 class WebMiddleware
 {
     public function handle($request, Closure $next, $guard = null)
     {
         $token = $request->cookie('X-token');
+        View::share('colormode', $request->cookie('X-colormode'));
         
         if(!$token) {
             // Unauthorized response if token not there

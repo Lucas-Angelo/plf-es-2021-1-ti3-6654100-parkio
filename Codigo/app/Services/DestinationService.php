@@ -15,23 +15,14 @@ class DestinationService
    * @param String $search Search filter string to find in blocks and/or apartments
    * @return Collection
    */
-  public function getAll($block = null, $apartament = null){
+  public function getAll($search = null){
     $d = new Destination();
 
-    if(!empty($block)){
+    if(!empty($search))
+      $d = $d->where(DB::raw("CONCAT(block,' ',apartament)"), 'LIKE' , '%'.$search.'%');
 
-    $d = $d->where('block','like','%'.$block.'%');
-
-    }
-
-    if(!empty($apartament)){
-
-    $d = $d->where('apartament', 'like', '%'.$apartament.'%');
-
-    }
-
-    return $d   ->orderByRaw('block, apartament')
-                ->paginate();
+    return $d->orderByRaw('block, apartament')
+              ->paginate();
   }
 
   public function create($block, $apartament){

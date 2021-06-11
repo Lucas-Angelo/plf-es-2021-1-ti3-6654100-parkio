@@ -142,7 +142,7 @@
                         <div id="modal-buttons" class="mb-3">
                             <div class="row">
                                 <div class="col-4">
-                                    <button id="reportar" type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#reportModal">Reportar</button>
+                                    <button id="btnReportar" type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#reportModal">Reportar</button>
 
                                 </div>
                                 <div class="col-4">
@@ -168,7 +168,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form onSubmit="dynamicTimeExtenderModal(event)" class="row align-items-center justify-content-center" id="report-form" novalidate>
+                    <form onSubmit="handleComplainModal(event)" class="row align-items-center justify-content-center" id="report-form" novalidate>
 
                         <div class="mb-3 col-12 col-lg-12 d-none">
                             <label for="vehicleId" class="form-label">Id vehicle</label>
@@ -207,7 +207,7 @@
                     <h5 class="modal-title" id="modalTimeExtenderLabel">Adiar permanência do veículo <span class="span-plate-delay"></span></h5>
                 </div>
                 <div class="modal-body justify-content-center">
-                    <form onSubmit="handleTimeExtenderModal(event)" id="exit-modal" class="justify-content-center">
+                    <form onSubmit="handleTimeExtenderModal(event)" id="delay-modal" class="justify-content-center">
                         <div class="mb-5">
                             <div class="form-group mb-2 d-none">
                                 <label for="inputDelayVehicleId">VehicleId</label>
@@ -228,7 +228,7 @@
                                     <button id="close-modal" type="button" class="btn btn-secondary w-100 " data-bs-dismiss="modal">Cancelar</button>
                                 </div>
                                 <div class="col-6">
-                                    <button id="reportar" type="submit" class="btn btn-primary w-100" >Adiar</button>
+                                    <button id="btnAdiar" type="submit" class="btn btn-primary w-100" >Adiar</button>
                                 </div>
                             </div>
                         </div>

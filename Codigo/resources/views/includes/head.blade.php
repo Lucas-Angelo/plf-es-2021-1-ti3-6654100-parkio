@@ -5,9 +5,9 @@
 	<meta name="description" content="@yield('meta-description', 'An app to simplify your life.')"/>
 	<meta name="robots" content="@yield('meta-robots','follow')"/>
     <title>@yield('title', config('app.name'))</title>
-	<link rel="stylesheet" href="{{ ($colormode == 'light') ? url('/assets/css/variableslight.css') : url('/assets/css/variablesdark.css') }}" type="text/css">
+	<link rel="stylesheet" href="{{ (isset($colormode) && $colormode == 'light') ? url('/assets/css/variableslight.css') : url('/assets/css/variablesdark.css') }}" type="text/css">
 	<link rel="stylesheet" href="{{ url('/assets/css/index.css') }}" type="text/css">
-	<link rel="stylesheet" href="{{ ($colormode == 'light') ? url('/assets/css/bootstraplight.min.css') : url('/assets/css/bootstrap.min.css') }}" type="text/css">
+	<link rel="stylesheet" href="{{ (isset($colormode) && $colormode == 'light') ? url('/assets/css/bootstraplight.min.css') : url('/assets/css/bootstrap.min.css') }}" type="text/css">
 	<link rel="stylesheet" href="{{ url('/assets/css/fontawesome.min.css') }}" type="text/css">
 	<script src="{{ url('/assets/js/popper.min.js') }}"></script>
 	<script src="{{ url('/assets/js/bootstrap.min.js') }}"></script>

@@ -157,6 +157,7 @@ const handleExitFormSubmit = async (event) => {
     plate = vehicle.plate;
 
     $(".span-plate-out").html(vehicle.plate);
+    $(".span-plate-report").html(vehicle.plate);
     $("#vehicleId").val(vehicle.id);
     $("#vehiclePlate").val(vehicle.plate);
 
@@ -165,10 +166,9 @@ const handleExitFormSubmit = async (event) => {
 };
 
 const handleComplainModal = (event) => {
-
     event.preventDefault();
 
-    const plate = $(".span-plate-report").val();
+    const plate = $(".span-plate-report").html();
     const vehicleId =  $("#vehicleId").val();
     const description = $("#report-description").val();
     const gateId = location.pathname.split('/')[2]; //Gate ID
@@ -189,7 +189,7 @@ const handleComplainModal = (event) => {
 
                 var myModal = $("#reportModal");
                 myModal.find("#vehicleId").val("");
-                myModal.find("#vehiclePlate").val("");
+                $(".span-plate-report").html("")
                 myModal.find("#report-description").val("");
                 myModal.modal('hide');
                 $("#modalSaidaVeiculo").modal('hide');
@@ -207,9 +207,9 @@ const handleComplainModal = (event) => {
 }
 
 async function dynamicExitModal(vehicleId){
-
     var vehicle = await searchById(vehicleId);
     $(".span-plate-out").html(vehicle.plate);
+    $(".span-plate-report").html(vehicle.plate);
     $("#vehicleId").val(vehicle.id);
     $("#vehiclePlate").val(vehicle.plate);
 

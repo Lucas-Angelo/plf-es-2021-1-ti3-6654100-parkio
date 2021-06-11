@@ -33,7 +33,7 @@ class VehicleController extends Controller
 
         try {
             $v = new VehicleService();
-            return $v->getAll($request->plate, $request->model, $request->gate, $request->user_in, $request->inside, $request->color, $request->driver_name, $request->in_time, $request->out_time, $request->auth->id, $request->auth->type);
+            return $v->getAll($request->input('plate'), $request->input('model'), $request->input('gate'), $request->input('user_in'), $request->input('inside'), $request->input('color'), $request->input('driver_name'), $request->input('in_time'), $request->input('out_time'), $request->auth->id, $request->auth->type);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
@@ -59,9 +59,9 @@ class VehicleController extends Controller
             //calls the service and the function create passing datas
             $vehicle = new VehicleService();
             return response()->json(
-                $vehicle->create($request->driverName, $request->plate, $request->time,
-                  $request->destinationId, $request->categoryId, $request->gateId, $request->auth->id,
-                  $request->color, $request->model, $request->cpf
+                $vehicle->create($request->input('driverName'), $request->input('plate'), $request->input('time'),
+                  $request->input('destinationId'), $request->input('categoryId'), $request->input('gateId'), $request->auth->id,
+                  $request->input('color'), $request->input('model'), $request->input('cpf')
                  )
             );
         } catch (\Exception $e) {
@@ -84,7 +84,7 @@ class VehicleController extends Controller
       $vehicle = new VehicleService();
 
       return response()->json(
-          $vehicle->search($request->plate)
+          $vehicle->search($request->input('plate'))
       );
     }
 
@@ -111,7 +111,7 @@ class VehicleController extends Controller
         try {
             $v = new VehicleService();
             return response()->json(
-                $v->edit($id, $request->auth->id, $request->score, $request->gateId, $request->plate, $request->model, $request->color)
+                $v->edit($id, $request->auth->id, $request->input('score'), $request->input('gateId'), $request->input('plate'), $request->input('model'), $request->input('color'))
             );
         } catch (\Exception $e) {
             return response()->json([

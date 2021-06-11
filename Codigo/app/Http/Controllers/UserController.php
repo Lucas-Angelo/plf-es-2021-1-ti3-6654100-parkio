@@ -47,7 +47,7 @@ class UserController extends Controller
         $us = new UserService();
 
         return response()->json(
-            $us->create($request->name, $request->login,$request->password, $request->type)
+            $us->create($request->input('name'), $request->input('login'),$request->input('password'), $request->input('type'))
         );
     }
 
@@ -60,13 +60,13 @@ class UserController extends Controller
         $us = new UserService();
 
         return response()->json(
-            $us->auth($request->login,$request->password)
+            $us->auth($request->input('login'),$request->input('password'))
         );
     }
 
     public function search(Request $request) {
         $us = new UserService();
-        return $us->search($request->login, $request->type);
+        return $us->search($request->input('login'), $request->input('type'));
     }
 
     public function delete(Request $request, int $id) {
@@ -98,7 +98,7 @@ class UserController extends Controller
         try {
             $u = new UserService();
             return response()->json(
-                $u->edit($id, $request->password)
+                $u->edit($id, $request->input('password'))
             );
         } catch (\Exception $e) {
             return response()->json([

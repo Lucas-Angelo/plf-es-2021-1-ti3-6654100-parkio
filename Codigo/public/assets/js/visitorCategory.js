@@ -72,7 +72,7 @@ const updateVisitorCategoryTable = () => {
                                     <td>${category.description}</th>
                                     <td>${category.time} min</td>
                                     <td class="acoes">
-                                        <button class="btn btn-secondary"><i class="fas fa-edit" onclick="modalEditCategory(${category.id},\`${category.description}\`,\`${category.time}\`)"></i></button>
+                                        <button class="btn btn-secondary" onclick="modalEditCategory(${category.id},\`${category.description}\`,\`${category.time}\`)"><i class="fas fa-edit"></i></button>
                                         <button class="btn btn-danger" onclick="removerCategoria(${category.id})"><i class="fas fa-trash-alt"></i></button>
                                     </td>
                                 </tr>`;

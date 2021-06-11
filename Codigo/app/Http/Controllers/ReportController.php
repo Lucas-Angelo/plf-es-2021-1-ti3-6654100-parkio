@@ -15,7 +15,7 @@ class ReportController extends Controller
 
         try {
             $r = new ReportService();
-            return $r->getQtdVisitorByDate($request->dates, $request->gate, $request->doorMen); //pass initial date
+            return $r->getQtdVisitorByDate($request->input('dates'), $request->input('gate'), $request->input('doorMen')); //pass initial date
 
         } catch (\Exception $e) {
             return response()->json([
@@ -33,7 +33,7 @@ class ReportController extends Controller
 
         try {
             $r = new ReportService();
-            return $r->getQtdVehiclesByGateKeeper($request->dates, $request->gate, $request->doorMen); //pass initial date
+            return $r->getQtdVehiclesByGateKeeper($request->input('dates'), $request->input('gate'), $request->input('doorMen')); //pass initial date
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
