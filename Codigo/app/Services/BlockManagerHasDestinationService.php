@@ -17,8 +17,7 @@ where md.user_id = 13*/
     $mhd = BlockManagerHasDestination::select(DB::raw("distinct block"))
     ->join('destination', 'destination_id','id')
     ->where('user_id',$userId)
-    ->first()
-    ->distinct('block');
+    ->first();
     return $mhd;
   }
 
