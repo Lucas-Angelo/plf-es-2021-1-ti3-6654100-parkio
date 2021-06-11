@@ -2,6 +2,8 @@ $(function () {
     const week = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']
     let chart, chart2;
     $(".reportDatePicker").attr('max',new Date().toISOString().split('T')[0])
+    const colorm = getCookie('X-colormode')
+    const bgColor = (colorm == 'light') ? '#d9d9d9': '#252531'
 
     //Set date (today - 7 days)
     let dt = new Date();
@@ -54,23 +56,6 @@ $(function () {
                 "reset": "Reiniciar Zoom"
             }
         }
-    }
-
-    
-
-    function generateData(count, yrange) {
-        var i = 0;
-        var series = [];
-        while (i < count) {
-            var x = (i + 1).toString();
-            var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-            series.push({
-                x: x,
-                y: y
-            });
-            i++;
-        }
-        return series;
     }
 
     function randomDarkColor() {
@@ -151,7 +136,11 @@ $(function () {
             success: function (result) {
                 let series = []
                 let ndt = new Date(dat + ' 00:00:00')
+                let bigVal = 0;
+                
                 for(let i=0;i<7;i++) {
+                    var max = Math.max.apply(Math, result[i]);
+                    if(max > bigVal) bigVal = max
                     series[i] = {
                         name: null,
                         data: result[i]
@@ -167,7 +156,7 @@ $(function () {
                     chart: {
                         height: 350,
                         type: 'heatmap',
-                        background: '#252531',
+                        background: bgColor,
                         locales: [localeopt],
                         defaultLocale: "pt-br"
                     },
@@ -177,18 +166,37 @@ $(function () {
                     colors: ["#662E91"],
                     plotOptions: {
                         heatmap: {
-                            reverseNegativeShade: false
+                            reverseNegativeShade: true,
+                            colorScale: {
+                                ranges: [{
+                                    from: 0,
+                                    to: 0,
+                                    color: '#e8e8e8',
+                                    name: ''
+                                  },
+                                  {
+                                    from: 1,
+                                    to: bigVal,
+                                    color: '#662E91',
+                                    name: ''
+                                  }
+                                ]
+                            }
                         },
+                    },
+                    grid: {
+                        borderColor: '#000',
                     },
                     xaxis: {
                         type: 'text',
                         categories: ['01-03','03-06','06-09','09-12','12-15','15-18','18-21','21-00'],
                     },
+                    
                     title: {
                         text: 'Visitantes por Hora'
                     },
                     theme: {
-                        mode: 'dark'
+                        mode: colorm == 'light'? 'light' : 'dark'
                     }
                 };
             
@@ -245,7 +253,7 @@ $(function () {
                         zoom: {
                             enabled: true
                         },
-                        background: '#252531',
+                        background: bgColor,
                         locales: [localeopt],
                         defaultLocale: "pt-br"
                     },
@@ -276,8 +284,11 @@ $(function () {
                     fill: {
                         opacity: 1
                     },
+                    title: {
+                        text: 'Visitantes por porteiro'
+                    },
                     theme: {
-                        mode: 'dark'
+                        mode: colorm == 'light'? 'light' : 'dark'
                     },
                     colors: colors,
                 };

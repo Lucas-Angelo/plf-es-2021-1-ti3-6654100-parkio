@@ -105,7 +105,7 @@
             <div id="tabela" class="row mt-3">
                 <div class="col-12">
                     <div class="d-none d-md-inline">
-                        <table id="tabela-veiculo" class="table table-dark sortable">
+                        <table id="tabela-veiculo" class="table sortable table-bordered {{ ($colormode == 'light')? '': 'table-dark'}}">
                             <thead>
                                 <tr>
                                     <th scope="col">Placa</th>
@@ -168,7 +168,7 @@
 
 
                     <div class="button-div text-center mt-3">
-                        <button class="btn btn-secondary" type="submit">Atualizar</button>
+                        <button class="btn btn-primary" type="submit">Atualizar</button>
                     </div>
 
                 </form>

@@ -19,16 +19,16 @@ Configurações
 <script src="{{ url('/assets/js/destinations.js') }}"></script>
 <script src="{{ url('/assets/js/sorttable.js') }}"></script> <!-- To sort table by headers -->
 
-<div class="container-fluid" id="admin">
+<div class="container-fluid mt-3" id="admin">
 
 </div>
-<div class="container-fluid">
+<div class="container-fluid mt-3">
 
     <button class="mobile-menu-button d-flex d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMenu" aria-expanded="false" aria-controls="collapseMenu">
         <i class="fas fa-align-justify"></i>Menu
     </button>
     <div class="collapse d-md-none" id="collapseMenu">
-        <ul class="nav nav-tabs flex-column" id="adminMenuTab" role="tablist">
+        <ul class="nav nav-tabs flex-column border" id="adminMenuTab" role="tablist">
             <li class="admin-nav-item" role="presentation">
                 <button class="active" id="gates-tab" data-bs-toggle="tab" data-bs-target="#gates" type="button" role="tab" aria-controls="gates" aria-selected="true">Portarias</button>
             </li>
@@ -69,14 +69,14 @@ Configurações
             <div class="tab-pane fade show active" id="gates" role="tabpanel" aria-labelledby="gates-tab">
                 <div class="row">
                     <div class="col-12 p-0 ms-0" id="newGateDivButton">
-                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateGateModal"><i class="fas fa-plus"></i> Nova Portaria</button>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#CreateGateModal"><i class="fas fa-plus"></i> Nova Portaria</button>
                     </div>
                 </div>
                 <br>
                 <div class="row">
                     <div class="col-11 p-0 m-0">
                         <div id="tabela-gate" class="d-none d-md-block">
-                            <table class="table sortable">
+                            <table class="table sortable table-bordered {{ ($colormode == 'light')? '': 'table-dark'}}">
                                 <colgroup>
                                     <col span="1" style="width: 40%;">
                                     <col span="1" style="width: 40%;">
@@ -105,7 +105,7 @@ Configurações
                 <div class="row">
                     <div class="col-12 p-0 mt-md-0">
                         <div id="createGate">
-                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#CreateCategoryModal"><i class="fas fa-plus"></i> Nova Categoria</button>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#CreateCategoryModal"><i class="fas fa-plus"></i> Nova Categoria</button>
                         </div>
                     </div>
                 </div>
@@ -113,7 +113,7 @@ Configurações
                 <div class="row">
                     <div class="col-11 p-0 m-0">
                         <div class="d-none d-md-block">
-                            <table class="table sortable">
+                            <table class="table sortable table-bordered {{ ($colormode == 'light')? '': 'table-dark'}}">
                                 <colgroup>
                                     <col span="1" style="width: 40%;">
                                     <col span="1" style="width: 40%;">
@@ -165,7 +165,7 @@ Configurações
                     <div class="col-11 p-0 m-0">
                         <div class="d-none d-md-block">
 
-                            <table class="table sortable">
+                            <table class="table sortable table-bordered {{ ($colormode == 'light')? '': 'table-dark'}}">
                                 <colgroup>
                                     <col span="1" style="width: 20%;">
                                     <col span="1" style="width: 70%;">
@@ -199,7 +199,7 @@ Configurações
                 <div class="row">
                     <div class="col-12 p-0 mt-md-0">
                         <div id="createDestination">
-                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#destinationModal"><i class="fas fas fa-plus"></i>&nbsp;Novo Destino</button>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#destinationModal"><i class="fas fas fa-plus"></i>&nbsp;Novo Destino</button>
                         </div>
                     </div>
                 </div>
@@ -231,7 +231,7 @@ Configurações
                 <div class="row">
                     <div class="col-11 p-0 m-0">
                         <div class="d-none d-md-block">
-                            <table class="table sortable">
+                            <table class="table sortable table-bordered {{ ($colormode == 'light')? '': 'table-dark'}}">
                                 <colgroup>
                                     <col span="1" style="width: 20%;">
                                     <col span="1" style="width: 60%;">
@@ -287,7 +287,7 @@ Configurações
                         </div>
 
                         <div class="button-div text-center mt-3">
-                            <button class="btn" type="submit">Cadastrar</button>
+                            <button class="btn btn-primary" type="submit">Cadastrar</button>
                         </div>
 
                     </form>
@@ -318,7 +318,7 @@ Configurações
                         </div>
 
                         <div class="button-div text-center mt-3">
-                            <button class="btn" type="submit">Cadastrar</button>
+                            <button class="btn btn-primary" type="submit">Cadastrar</button>
                         </div>
 
                     </form>
@@ -346,7 +346,7 @@ Configurações
                             <input type="text" class="form-control" id="destination-ap" required autocomplete="false" minlength="1" maxlength="20">
                         </div>
                         <div class="button-div text-center mt-3">
-                            <button class="btn btn-secondary" type="submit">Cadastrar</button>
+                            <button class="btn btn-primary" type="submit">Cadastrar</button>
                         </div>
                     </form>
                 </div>

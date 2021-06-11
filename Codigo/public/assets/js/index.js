@@ -41,3 +41,9 @@ function delete_cookie( name, path ) {
         ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
     }
 }
+
+function changeColorMode(elem) {
+    const mode = (elem.checked) ? 'dark': 'light';
+    document.cookie = "X-colormode=" + mode + '; path=/';
+    location.reload()
+}

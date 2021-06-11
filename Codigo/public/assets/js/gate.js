@@ -74,6 +74,7 @@ window.addEventListener("load", function() {
     });
 
     $(".select2").select2({
+        width: '100%',
         selectionCssClass: "gate-select2",
         ajax: {
             url: "/api/destinations",
@@ -110,6 +111,7 @@ window.addEventListener("load", function() {
             });
         });
         $('.gate-inputcolor').select2({
+            width: '100%',
             selectionCssClass: "gate-select2",
             templateResult: (color) => {
                 var $color = $(
@@ -129,7 +131,7 @@ const handlePlateChange = async (event) =>{
     let plate = $("#input-plate").val()
     if(plate.length >= 6) {
         let v = await search(plate)
-        if(v.complaints) {
+        if(v.complaints && v.complaints.length > 0) {
             let complaints = ''
             v.complaints.forEach(function (comp) {
                 complaints += `<small>-${comp.description}</small><br><small class='text-muted float-end'>${(new Date(comp.created_at)).toLocaleString('pt-br')}</small><br>`
