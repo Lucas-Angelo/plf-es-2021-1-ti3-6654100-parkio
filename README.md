@@ -73,10 +73,6 @@ $ php artisan db:seed
 $ php -S 0.0.0.0:80 -t public
 ```
 
-Instalando dependências
-
-
-
 ## 🔗 Links do projeto
 
 - [Artefatos](Artefatos)
