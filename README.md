@@ -29,11 +29,11 @@ Com esta aplicação vai ser possível realizar um gerenciamento mais amplo do c
 
 ## 👨‍💻 Alunos integrantes da equipe
 
-* Guilherme Gabriel Silva Pereira
-* Henrique Penna Forte Monteiro
-* José Maurício Guimarães França
-* Lucas Angelo Oliveira Martins Rocha
-* Victor Boaventura Goes Campos
+* [Guilherme Gabriel Silva Pereira](https://github.com/guizombas)
+* [Henrique Penna Forte Monteiro](https://github.com/Henrikkee)
+* [José Maurício Guimarães França](https://www.linkedin.com/in/josemauriciogf/)
+* [Lucas Ângelo Oliveira Martins Rocha](https://lucasangelo.com/links)
+* [Victor Boaventura Goes Campos](https://github.com/777-victor)
 
 ## 👩‍🏫 Professoras responsáveis
 
