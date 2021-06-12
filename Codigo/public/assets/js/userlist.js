@@ -82,15 +82,15 @@ async function renderUsers() {
                                         <button class="btn btn-danger" onclick="userDelete(${user.id})"><i class="fas fa-trash-alt"></i></button>
                                         <button class="btn btn-secondary changePass" onclick="userUpdate(${user.id},\`${user.login}\`)"><i class="fas fa-lock"></i></button>
                                         <div class="usuario">
-                                            <h6>Usuário:</h6>
+                                            <h6>Nome:</h6>
                                             <p>${user.name}</p>
                                         </div>
                                         <div class="tipo">
-                                            <h6>Tipo:</h6>
+                                            <h6>Login:</h6>
                                             <p>${user.login}</p>
                                         </div>
                                         <div class="ultima">
-                                            <h6>Última vez visto:</h6>
+                                            <h6>Tipo:</h6>
                                             <p>${type}</p>
                                         </div>
                                     </div>`;
