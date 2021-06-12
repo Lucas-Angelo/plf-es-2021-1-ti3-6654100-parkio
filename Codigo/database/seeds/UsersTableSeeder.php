@@ -14,32 +14,11 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();
         DB::table('user')->insert([[
             'name' => 'Administrator',
             'login' => 'admin',
             'type' => 'A',
             'password' => md5('admin')
-        ],[
-            'name' => $faker->name,
-            'login' => $faker->userName,
-            'type' => 'A',
-            'password' => md5($faker->password)
-        ],[
-            'name' => $faker->name,
-            'login' => $faker->userName,
-            'type' => 'A',
-            'password' => md5($faker->password)
-        ],[
-            'name' => $faker->name,
-            'login' => $faker->userName,
-            'type' => 'A',
-            'password' => md5($faker->password)
-        ],[
-            'name' => $faker->name,
-            'login' => $faker->userName,
-            'type' => 'A',
-            'password' => md5($faker->password)
         ]]);
     }
 }

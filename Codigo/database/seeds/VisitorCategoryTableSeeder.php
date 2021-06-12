@@ -14,14 +14,8 @@ class VisitorCategoryTableSeeder extends Seeder
     {
         DB::table('visitor_category')->insert([
             [
-                'description' => 'Parente',
-                'time' => 320
-            ],[
-                'description' => 'Entregador',
-                'time' => 30
-            ],[
-                'description' => 'Obra',
-                'time' => 500
+                'description' => 'Visitante Comum',
+                'time' => 20
             ]
         ]);
     }
