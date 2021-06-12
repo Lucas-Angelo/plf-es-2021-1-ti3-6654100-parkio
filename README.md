@@ -42,9 +42,10 @@ Com esta aplicação vai ser possível realizar um gerenciamento mais amplo do c
 
 ## 🚀 Tecnologias
 
-* [PHP 7.2](https://www.php.net/releases/7_2_0.php)
+* [PHP 7.2](https://www.php.net/)
 * [Lumen](https://lumen.laravel.com/)
 * [MySQL](https://www.mysql.com/)
+* [Boostrap 5](https://getbootstrap.com/)
 
 ## ⤵ Instruções de utilização
 
@@ -53,6 +54,23 @@ Essas instruções vão te levar a uma cópia do projeto rodando em sua máquina
 ```bash
 - git clone https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2021-1-ti3-6654100-parkio.git
 - cd plf-es-2021-1-ti3-6654100-parkio
+```
+#### Altere as informações de autenticação do banco
+``` bash
+$ mv .env.example .env
+```
+#### Instalar atualizações
+``` bash
+$ composer update
+```
+#### Instalar banco de dados
+``` bash
+$ php artisan migrate
+$ php artisan db:seed
+```
+#### Rodar a aplicação localmente
+``` bash
+$ php -S 0.0.0.0:80 -t public
 ```
 
 Instalando dependências
