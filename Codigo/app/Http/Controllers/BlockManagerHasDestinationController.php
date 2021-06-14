@@ -28,19 +28,15 @@ class BlockManagerHasDestinationController extends Controller
             ], $this->treatCodeError($e));
         }
     }
-/*
-    public function create(Request $request){
-        //validate essencials fields
+
+    public function link(Request $request){
         $this->validate($request, [
-            'block' => 'required|min:1|max:20',
-            'apt' => 'required|min:1|max:20'
+            'block' => 'required',
+            'userId' => 'required'
         ]);
         try {
-        //calls the service and the function create passing datas
-            $d = new BlockManagerHasDestinationService();
-            return response()->json(
-                $d->create($request->block, $request->apt)
-            );
+            $mhd = new BlockManagerHasDestinationService();
+            return $mhd->link($request->block, $request->userId);
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage()
@@ -48,48 +44,18 @@ class BlockManagerHasDestinationController extends Controller
         }
     }
 
-    public function update(Request $request, int $id)
-    {
-        if(!empty($id)){
-            $this->validate($request, [
-                'block' => 'required|min:1|max:20',
-                'apt'   => 'required|min:1|max:20'
-            ]);
-
-            try {
-                //calls the service and the function create passing datas
-                    $d = new BlockManagerHasDestinationService();
-                    return response()->json(
-                        $d->update($id, $request->block, $request->apt)
-                    );
-            }
-            catch (\Exception $e) {
-                    return response()->json([
-                        'error' => $e->getMessage()
-                    ], $this->treatCodeError($e));
-            }
-
-        }else{
-            return response()->json(['error' => 'missing id' ]);
+    public function unlink(Request $request){
+        $this->validate($request, [
+            'block' => 'required',
+            'userId' => 'required'
+        ]);
+        try {
+            $mhd = new BlockManagerHasDestinationService();
+            return $mhd->unlink($request->block, $request->userId);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], $this->treatCodeError($e));
         }
     }
-
-    public function delete(Request $request, int $id){
-        if(!empty($id)){
-            try {
-                $d = new BlockManagerHasDestinationService();
-                return response()->json(
-                    $d->delete($id)
-                );
-            } catch (\Exception $e) {
-                return response()->json([
-                    'error' => $e->getMessage()
-                ], $this->treatCodeError($e));
-            }
-
-        }else return response()->json([
-            'error' => 'missing id'
-        ]);
-
-    }*/
 }
