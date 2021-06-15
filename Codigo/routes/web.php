@@ -53,7 +53,7 @@ $router->group(['prefix' => '/api'], function () use ($router) {
 
         //vehicles
         $router->get('/vehicles', ['uses' => 'VehicleController@getAll', 'auth' => ['S','R','A', 'P']]); // Search for all vehicles entries
-        $router->put('/vehicles/{id}', ['uses' => 'VehicleController@edit', 'auth' => ['R','A']]); // Edit one vehicles entries
+        $router->put('/vehicles/{id}', ['uses' => 'VehicleController@edit', 'auth' => ['R','A','P']]); // Edit one vehicles entries
         $router->get('/vehicles/search', ['uses' => 'VehicleController@search', 'auth' => ['A', 'P']]); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
         $router->get('/vehicles/{id}', ['uses' => 'VehicleController@get', 'auth' => ['S','A', 'P']]); // If exists, searches for the last row filtered by the vehicle plate (for autocomplete)
         $router->post('/vehicles', ['uses' => 'VehicleController@create', 'auth' => ['S','R','A', 'P']]); // For saving incoming vehicles

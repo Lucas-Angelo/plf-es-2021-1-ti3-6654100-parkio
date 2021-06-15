@@ -47,9 +47,9 @@ const handleSelectChange = (event) => {
 }
 
 window.addEventListener("load", function() {
-            $('#input-cpf').mask('000.000.000-00');
+    $('#input-cpf').mask('000.000.000-00');
 
-            $.ajax({
+    $.ajax({
                         url: "/api/visitorCategory",
                         type: "GET",
                         success: function(jsonRes) {
@@ -72,6 +72,9 @@ window.addEventListener("load", function() {
             console.log(err)
         },
     });
+
+    var tooltipTime = document.getElementById('lblTimeTooltip')
+    var tooltip = new bootstrap.Tooltip(tooltipTime)
 
     $(".select2").select2({
         width: '100%',
