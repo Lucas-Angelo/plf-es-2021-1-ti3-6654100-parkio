@@ -1,8 +1,3 @@
-window.addEventListener("load", function () {
-    updateDestinationsTable();
-    document.getElementById('btnFilterDestination').addEventListener("click", (evt) => updateDestinationsTable());
-})
-
 function updateDestinationsTable(page = 1) {
     var bloco = document.getElementById('inputSearchBlock').value;
     var apartamento = document.getElementById('inputSearchApartament').value;
@@ -134,3 +129,19 @@ function handleDestinationFormSubmit(event) {
         },
     });
 }
+
+$(document).ready(()=>{
+    updateDestinationsTable();
+    $("#btnFilterDestination").click(function(){
+        updateDestinationsTable()
+    });
+
+    $('#destinationModal').on('hidden.bs.modal', function(e) {
+        $(this).find(".modal-title").text("Cadastro de Destino");
+        $(this).find(".btn").text("Cadastrar");
+        $("#destinationId").val("");
+        $("#destination-block").val("");
+        $("#destination-ap").val("");
+    })
+
+})
