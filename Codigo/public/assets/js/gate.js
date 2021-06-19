@@ -457,7 +457,7 @@ function resetExitForm() {
 // Capturar e renderizar veículos de visistantes cadastrados
 async function renderVehicles() {
     let gId = location.pathname.split('/')[2]; //Gate ID
-    document.querySelector('#table-body').innerHTML = '<tr><td colspan="5" class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Carregando...</span></div></td></tr>'
+    document.querySelector('#table-body').innerHTML = '<tr><td colspan="6" class="text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Carregando...</span></div></td></tr>'
     $.ajax({
         url: `/api/vehicles?inside=1&gate=${gId}`,
         type: "GET",
@@ -492,11 +492,11 @@ async function renderVehicles() {
                                     <td>${created_at_formatada}</td>
                                     <td id="time-vehicle-${index}">
                                     ${negative?'-':'+'}${hours}:${minutes}
+                                    ${negative?'<i class="fas fa-exclamation text-danger"></i>':''}
                                     </td>
-                                    <td id="status-vehicle-${index}">${negative?'<i class="fas fa-exclamation"></i>':''}</td>
                                     <td>
-                                    <button class="btn btn-secondary" onclick="dynamicTimeExtenderModal(${vehicle.id})"><i class="fas fa-clock"></i></button>
-                                    <button class="btn btn-danger" onclick="dynamicExitModal(${vehicle.id})" ><i class="fas fa-sign-out-alt "></i></button>
+                                        <button class="btn btn-secondary" onclick="dynamicTimeExtenderModal(${vehicle.id})"><i class="fas fa-clock"></i></button>
+                                        <button class="btn btn-danger" onclick="dynamicExitModal(${vehicle.id})" ><i class="fas fa-sign-out-alt "></i></button>
                                     </td>
                                 </tr>`;
 
