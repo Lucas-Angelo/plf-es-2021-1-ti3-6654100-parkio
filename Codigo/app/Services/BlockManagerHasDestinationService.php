@@ -19,6 +19,7 @@ class BlockManagerHasDestinationService
     $mhd = BlockManagerHasDestination::select(DB::raw("distinct block"))
         ->join('destination', 'destination_id','id')
         ->where('user_id',$userId)
+        ->whereNull('destination.deleted_at')
         ->get();
     return $mhd;
   }

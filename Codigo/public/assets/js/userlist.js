@@ -83,7 +83,7 @@ async function renderUsers() {
                 htmlSegmentSm = `<div class="usercard mb-2">
                                         ${ user.type === 'S'?`<button class="btn btn-success" onclick="openBlockModal(${user.id}, \`${user.name}\`)"><i class="fas fa-home"></i></button>`:''}
                                         <button class="btn btn-secondary" onclick="userUpdate(${user.id},\`${user.login}\`)"><i class="fas fa-lock"></i></button>
-                                        <button class="btn btn-secondary changePass" onclick="userUpdate(${user.id},\`${user.login}\`)"><i class="fas fa-lock"></i></button>
+                                        <button class="btn btn-danger changePass mx-1" onclick="userDelete(${user.id})"><i class="fas fa-trash"></i></button>
                                         <div class="usuario">
                                             <h6>Nome:</h6>
                                             <p>${user.name}</p>
