@@ -12,12 +12,10 @@ class GateTableSeeder extends Seeder
      */
     public function run()
     {
-        $fields = [];
-        for($i=0;$i<4;$i++) {
-            array_push($fields, [
-                "description" => "Portaria ".($i+1)
-            ]);
-        }
-        DB::table('gate')->insert($fields);
+        DB::table('gate')->insert([
+            [
+                "description" => "Portaria 1"
+            ]
+        ]);
     }
 }
