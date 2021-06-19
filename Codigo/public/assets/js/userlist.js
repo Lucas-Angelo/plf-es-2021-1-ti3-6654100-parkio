@@ -189,7 +189,71 @@ function updateBlocks(id){
         url: `/api/blocks/${id}`,
         type: "GET",
         success: function(res, status) {
-            console.log(res)
+            console.log(blocks, res)
+            const linkedBlocks = res.map((block)=>{
+                return block.block;
+            })
+            console.log(linkedBlocks)
+            
+            let html = ''
+            blocks.forEach((block)=>{
+                const linked = linkedBlocks.find((bl)=>(bl===block)) != undefined;
+                html += `
+                    <h5>
+                        <input type="checkbox" ${linked ? 'checked' : ''} id="bl${block}">
+                        <label for="bl${block}">Bloco ${block}</label>
+                    </h5>
+                `
+            })
+            document.getElementById('linkblocks').innerHTML = html
+            blocks.forEach((block)=>{
+                const linked = linkedBlocks.find((bl)=>(bl===block)) != undefined;
+                document.getElementById(`bl${block}`).onclick = () =>{
+                    if (!linked){
+                        linkBlock(id, block);
+                    }
+                    else{
+                        unlinkBlock(id, block);
+                    }
+                }
+            })
+
+        },
+        error: function(err, status) {
+            console.error(err)
+        },
+    });
+}
+
+function linkBlock(userId, block){
+    console.log('arroz')
+    $.ajax({
+        url: `/api/blocks`,
+        type: "POST",
+        data: {
+            userId,
+            block
+        },
+        success: function(res, status) {
+            showToast(res.message);
+            updateBlocks(userId);
+        },
+        error: function(err, status) {
+            console.error(err)
+        },
+    });
+}
+function unlinkBlock(userId, block){
+    $.ajax({
+        url: `/api/blocks`,
+        type: "DELETE",
+        data: {
+            userId,
+            block
+        },
+        success: function(res, status) {
+            showToast(res.message);
+            updateBlocks(userId);
         },
         error: function(err, status) {
             console.error(err)
@@ -230,6 +294,7 @@ window.addEventListener("load", function () {
                     blocks.push(destination.block)
                 return blocks;
             }, [])
+
         },
         error: function(err, status) {
             console.log(err)
