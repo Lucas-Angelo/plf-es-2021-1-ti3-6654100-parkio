@@ -122,6 +122,19 @@ Usuários
         </div>
     </div>
 
+    <div class="modal fade" id="blocksModal" tabindex="-1" aria-labelledby="blocksModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h5 class="modal-title" id="blocksModalLabel">Destinos vinculados ao síndico /*tal*/</h5>
+                </div>
+                <div class="modal-body justify-content-center d-flex flex-column px-5" id="linkblocks">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 @endsection
